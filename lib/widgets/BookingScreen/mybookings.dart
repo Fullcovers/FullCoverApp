@@ -202,11 +202,11 @@ class mybookings extends StatelessWidget {
                   ),
                 ),
               ),
-              FooterButtons(
-                width: width,
-                colorb: Color(0xFF2C2F33),
-                textcolor: Colors.white,
-              )
+              // FooterButtons(
+              //   width: width,
+              //   colorb: Color(0xFF2C2F33),
+              //   textcolor: Colors.white,
+              // )
             ],
           ),
         ),

@@ -213,6 +213,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                     return Padding(
                                       padding: const EdgeInsets.all(0.0),
                                       child: Card(
+                                        color: const Color(0xFFD9D9D9),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0)),
@@ -228,15 +229,18 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
-                                            children: const [
-                                              Text("Orillia Coins"),
+                                            children: [
                                               Text(
-                                                "300",
-                                                style: TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
+                                                "Orillia Coins",
+                                                style: GoogleFonts.mavenPro(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16,
                                                 ),
-                                              )
+                                              ),
+                                              Text("300",
+                                                  style: GoogleFonts.bebasNeue(
+                                                    fontSize: 32,
+                                                  ))
                                             ],
                                           ),
                                         ),
@@ -247,28 +251,27 @@ class _BookingsScreenState extends State<BookingsScreen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(top: 10.0),
                               child: Container(
                                 height: height / 23,
                                 width: width / 2,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 191, 150, 26),
+                                  color:
+                                      const Color.fromARGB(255, 191, 150, 26),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: const Center(
-                                  child: Text(
-                                    "Redeem",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    ),
-                                  ),
+                                child: Center(
+                                  child: Text("Redeem",
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                      )),
                                 ),
                               ),
                             ),
                             Flexible(
                               child: Padding(
-                                padding: const EdgeInsets.all(2.0),
+                                padding: const EdgeInsets.only(top: 15.0),
                                 child: Container(
                                   width: double.maxFinite,
                                   decoration: const BoxDecoration(
@@ -354,7 +357,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                           Align(
                                             alignment: const Alignment(0, 1),
                                             child: FractionalTranslation(
-                                              translation: const Offset(0, 1),
+                                              translation: const Offset(0, 1.1),
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     top: 0.0),
