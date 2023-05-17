@@ -282,77 +282,86 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                     children: [
                                       Stack(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 30),
-                                                child: Center(
-                                                  child: Text(
-                                                    "MY BOOKINGS",
-                                                    style:
-                                                        GoogleFonts.bebasNeue(
-                                                            fontSize: 35),
+                                          Container(
+                                            height: 90,
+                                            color: Colors.white,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 30),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "MY BOOKINGS",
+                                                      style:
+                                                          GoogleFonts.bebasNeue(
+                                                              fontSize: 35),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 0),
-                                                child: Container(
-                                                  height: 90,
-                                                  width: 90,
-                                                  decoration:
-                                                      const ShapeDecoration(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(
-                                                                20.0),
-                                                      ),
-                                                    ),
-                                                    color: Color(0xFF2C2F33),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Container(
-                                                      height: 10,
-                                                      width: 5,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Colors.white,
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0),
+                                                  child: Container(
+                                                    height: 90,
+                                                    width: 90,
+                                                    decoration:
+                                                        const ShapeDecoration(
+                                                      shape:
+                                                          RoundedRectangleBorder(
                                                         borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    25.0)),
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                        ),
                                                       ),
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            check = !check;
-                                                          });
-                                                        },
-                                                        icon: const Icon(
-                                                          CryptoFontIcons.BTC,
-                                                          size: 50,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              191,
-                                                              150,
-                                                              26),
+                                                      color: Color(0xFF2C2F33),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Container(
+                                                        height: 10,
+                                                        width: 5,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          25.0)),
+                                                        ),
+                                                        child: IconButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              check = !check;
+                                                            });
+                                                          },
+                                                          icon: const Icon(
+                                                            CryptoFontIcons.BTC,
+                                                            size: 50,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    191,
+                                                                    150,
+                                                                    26),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              )
-                                            ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                           Align(
                                             alignment: const Alignment(0, 1),
