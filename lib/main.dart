@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:venq_assessment/screens/ClubDetail.dart';
 import 'package:venq_assessment/screens/DetailedEvent.dart';
+import 'package:venq_assessment/screens/TicketConfirming.dart';
+import 'package:venq_assessment/screens/TicketSending.dart';
 import 'package:venq_assessment/screens/bookings_screen.dart';
 import 'package:venq_assessment/screens/clubs_screen.dart';
 import 'package:venq_assessment/screens/events_screen.dart';
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ClubDetail(),
+      home: TicketSending(),
     );
   }
 }
