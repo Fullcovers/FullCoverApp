@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import 'BookingsFooterButtons.dart';
 import 'FooterButtons.dart';
 
 class NewBookings extends StatelessWidget {
@@ -188,7 +189,7 @@ class NewBookings extends StatelessWidget {
               ),
             ),
           ),
-          FooterButtons(
+          BookingsFooterButtons(
             width: width,
             colorb: const Color(0xFF2C2F33),
             textcolor: Colors.white,

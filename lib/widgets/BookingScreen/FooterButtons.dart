@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,11 +32,28 @@ class FooterButtons extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(right: 30.0),
                 child: Center(
-                    child: Text("CLUBS",
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Image.asset(
+                          'assets/images/clubsicon.png',
+                          width: 48.0, // Customize the width as desired
+                          height: 48.0, // Customize the height as desired
+                        ),
+                      ),
+                      SizedBox(
+                          height: 8.0), // Add spacing between icon and text
+                      Text(
+                        "CLUBS",
                         style: GoogleFonts.bebasNeue(
-                          fontSize: 30,
+                          fontSize: 18,
                           color: textcolor,
-                        ))),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -54,14 +69,26 @@ class FooterButtons extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 30.0),
-                child: Center(
-                    child: Text(
-                  "EVENTS",
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 30,
-                    color: textcolor,
-                  ),
-                )),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Image.asset(
+                        'assets/images/eventsicon.png',
+                        width: 48.0, // Customize the width as desired
+                        height: 48.0, // Customize the height as desired
+                      ),
+                    ),
+                    SizedBox(height: 8.0), // Add spacing between icon and text
+                    Text(
+                      "EVENTS",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 18,
+                        color: textcolor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )

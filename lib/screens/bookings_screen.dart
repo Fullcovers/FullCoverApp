@@ -8,6 +8,8 @@ import '../widgets/BookingScreen/Balancecard.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/BookingScreen/BookingsFooterButtons.dart';
+
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
 
@@ -407,7 +409,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                           ),
                                         ],
                                       ),
-                                      FooterButtons(
+                                      BookingsFooterButtons(
                                         width: width,
                                         colorb: const Color(0xFF2C2F33),
                                         textcolor: Colors.white,

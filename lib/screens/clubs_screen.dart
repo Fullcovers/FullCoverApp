@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
+import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
+
+import '../widgets/ClubsScreen/ClubsFooterButtons.dart';
 
 class ClubsScreen extends StatelessWidget {
   const ClubsScreen({Key? key}) : super(key: key);
@@ -10,11 +13,12 @@ class ClubsScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5; // Adjust the overlap fraction as desired
-
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFF2C2F33),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: height / 10,
@@ -128,100 +132,107 @@ class ClubsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Center(
-                child: Text("ALL CLUBS",
-                    style: GoogleFonts.bebasNeue(
-                      fontSize: 30,
-                      color: Colors.white,
-                    )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                height: 4.8 * height / 10,
-                width: width,
-                decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Card(
-                        color: const Color(0xFF2C2F33),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: height / 10,
-                              width: 4 * width / 10,
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFFD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0))),
-                            ),
-                            Container(
-                              height: height / 10,
-                              width: 4 * width / 10,
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFFD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0))),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+            FractionalTranslation(
+              translation: const Offset(0, -1),
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Center(
+                  child: Text("ALL CLUBS",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 30,
+                        color: Colors.white,
+                      )),
                 ),
               ),
             ),
-            Align(
-              alignment: const Alignment(0, 0.5),
-              child: FractionalTranslation(
-                translation: const Offset(0, 0.5),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Container(
-                    height: 60,
-                    width: 60,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF2C2F33),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(25),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 124, 120, 120),
-                          blurRadius: 10,
-                          spreadRadius: -2,
-                          offset: Offset(-2, -2),
+            FractionalTranslation(
+              translation: const Offset(0, -0.09),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
+                child: Container(
+                  height: 4.8 * height / 10,
+                  width: width,
+                  decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Card(
+                          color: const Color(0xFF2C2F33),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                height: height / 10,
+                                width: 4 * width / 10,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFFD9D9D9),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                              ),
+                              Container(
+                                height: height / 10,
+                                width: 4 * width / 10,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFFD9D9D9),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                              ),
+                            ],
+                          ),
                         ),
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 20,
-                          spreadRadius: -2,
-                          offset: Offset(2, 2),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.qr_code_scanner,
-                          size: 45,
-                          color: Colors.white,
-                        )),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
-            FooterButtons(
+            // Align(
+            //   alignment: const Alignment(0, 0.5),
+            //   child: FractionalTranslation(
+            //     translation: const Offset(0, 0.5),
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(top: 10.0),
+            //       child: Container(
+            //         height: 60,
+            //         width: 60,
+            //         decoration: const BoxDecoration(
+            //           color: Color(0xFF2C2F33),
+            //           borderRadius: BorderRadius.all(
+            //             Radius.circular(25),
+            //           ),
+            //           boxShadow: [
+            //             BoxShadow(
+            //               color: Color.fromARGB(255, 124, 120, 120),
+            //               blurRadius: 10,
+            //               spreadRadius: -2,
+            //               offset: Offset(-2, -2),
+            //             ),
+            //             BoxShadow(
+            //               color: Colors.black,
+            //               blurRadius: 20,
+            //               spreadRadius: -2,
+            //               offset: Offset(2, 2),
+            //             ),
+            //           ],
+            //         ),
+            //         child: IconButton(
+            //             onPressed: () {},
+            //             icon: const Icon(
+            //               Icons.qr_code_scanner,
+            //               size: 45,
+            //               color: Colors.white,
+            //             )),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            ClubsFooterButtons(
                 width: width,
                 colorb: Colors.white,
                 textcolor: const Color(0xFF2C2F33)),
