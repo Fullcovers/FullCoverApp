@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import 'BookingsFooterButtons.dart';
 import 'FooterButtons.dart';
 
 class NewBookings extends StatelessWidget {
@@ -150,50 +149,6 @@ class NewBookings extends StatelessWidget {
               ),
             ],
           ),
-          Align(
-            alignment: const Alignment(0, 0.5),
-            child: FractionalTranslation(
-              translation: const Offset(0, 0.5),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 0.0),
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFFBFBFB),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(25),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 10,
-                        spreadRadius: -2,
-                        offset: Offset(-2, -2),
-                      ),
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 5,
-                        spreadRadius: -2,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.qr_code_scanner,
-                        size: 45,
-                      )),
-                ),
-              ),
-            ),
-          ),
-          BookingsFooterButtons(
-            width: width,
-            colorb: const Color(0xFF2C2F33),
-            textcolor: Colors.white,
-          )
         ],
       ),
     );

@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FooterButtons extends StatelessWidget {
-  const FooterButtons(
-      {Key? key,
-      required this.width,
-      required this.colorb,
-      required this.textcolor})
-      : super(key: key);
-
-  final double width;
-  final Color colorb;
   final Color textcolor;
+  final Color colorb;
+  const FooterButtons(
+      {super.key, required this.colorb, required this.textcolor});
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Flexible(
+    return Container(
+      height: height / 8,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(top: BorderSide(color: Colors.white))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -26,33 +25,57 @@ class FooterButtons extends StatelessWidget {
               width: 2 * width / 5,
               decoration: BoxDecoration(
                 color: colorb,
-                borderRadius:
-                    const BorderRadius.only(topRight: Radius.circular(100)),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(100),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(right: 30.0),
                 child: Center(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Image.asset(
-                          'assets/images/clubsicon.png',
-                          width: 48.0, // Customize the width as desired
-                          height: 48.0, // Customize the height as desired
-                        ),
-                      ),
-                      SizedBox(
-                          height: 8.0), // Add spacing between icon and text
-                      Text(
-                        "CLUBS",
+                    child: Text("CLUBS",
                         style: GoogleFonts.bebasNeue(
-                          fontSize: 18,
+                          fontSize: 30,
                           color: textcolor,
-                        ),
+                        ))),
+              ),
+            ),
+          ),
+          Align(
+            alignment: const Alignment(0, -0.5),
+            child: FractionalTranslation(
+              translation: const Offset(0, -0.5),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: textcolor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(25),
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 124, 120, 120),
+                        blurRadius: 10,
+                        spreadRadius: -2,
+                        offset: Offset(-2, -2),
                       ),
+                      // BoxShadow(
+                      //   color: Colors.black,
+                      //   blurRadius: 20,
+                      //   spreadRadius: -2,
+                      //   offset: Offset(2, 2),
+                      // ),
                     ],
                   ),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.qr_code_scanner,
+                        size: 45,
+                        color: colorb,
+                      )),
                 ),
               ),
             ),
@@ -69,31 +92,20 @@ class FooterButtons extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 30.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Image.asset(
-                        'assets/images/eventsicon.png',
-                        width: 48.0, // Customize the width as desired
-                        height: 48.0, // Customize the height as desired
-                      ),
-                    ),
-                    SizedBox(height: 8.0), // Add spacing between icon and text
-                    Text(
-                      "EVENTS",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 18,
-                        color: textcolor,
-                      ),
-                    ),
-                  ],
-                ),
+                child: Center(
+                    child: Text(
+                  "EVENTS",
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 30,
+                    color: textcolor,
+                  ),
+                )),
               ),
             ),
           )
         ],
       ),
     );
+    ;
   }
 }
