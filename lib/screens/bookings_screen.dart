@@ -29,7 +29,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
             (3 * height / 10) +
             (height / 5) +
             (height / 23) +
-            2.4 * height / 10);
+            3.5 * height / 10);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -207,165 +207,155 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     : Flexible(
                         key: UniqueKey(),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            FractionalTranslation(
-                              translation: const Offset(0, 0.05),
-                              child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: Container(
-                                  height: 3 * height / 10,
-                                  width: 8 * width / 10,
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFF2C2F33)),
-                                  child: ListView.builder(
-                                    itemCount: 10,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(0.0),
-                                        child: Card(
-                                          color: const Color(0xFFD9D9D9),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0)),
-                                          child: Container(
-                                            height: height / 20,
-                                            width: width / 5,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFFD9D9D9),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(20.0),
-                                              ),
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  "Orillia Coins",
-                                                  style: GoogleFonts.mavenPro(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text("300",
-                                                    style:
-                                                        GoogleFonts.bebasNeue(
-                                                      fontSize: 32,
-                                                    ))
-                                              ],
+                            Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Container(
+                                height: 3 * height / 10,
+                                width: 8 * width / 10,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFF2C2F33)),
+                                child: ListView.builder(
+                                  itemCount: 10,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Card(
+                                        color: const Color(0xFFD9D9D9),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        child: Container(
+                                          height: height / 20,
+                                          width: width / 5,
+                                          decoration: const BoxDecoration(
+                                            color: Color(0xFFD9D9D9),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                            FractionalTranslation(
-                              translation: const Offset(0, 0.5),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Container(
-                                  height: height / 23,
-                                  width: width / 2,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(255, 191, 150, 26),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Center(
-                                    child: Text("Redeem",
-                                        style: GoogleFonts.sairaCondensed(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 24,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            FractionalTranslation(
-                              translation: const Offset(0, 0.05),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 50.0),
-                                child: Container(
-                                  width: double.maxFinite,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 90,
-                                        color: Colors.white,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30),
-                                              child: Center(
-                                                child: Text(
-                                                  "MY BOOKINGS",
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                "Orillia Coins",
+                                                style: GoogleFonts.mavenPro(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text("300",
                                                   style: GoogleFonts.bebasNeue(
-                                                      fontSize: 35),
+                                                    fontSize: 32,
+                                                  ))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                height: height / 23,
+                                width: width / 2,
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 191, 150, 26),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Center(
+                                  child: Text("Redeem",
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                      )),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 0.0),
+                              child: Container(
+                                width: double.maxFinite,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 90,
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 30),
+                                            child: Center(
+                                              child: Text(
+                                                "MY BOOKINGS",
+                                                style: GoogleFonts.bebasNeue(
+                                                    fontSize: 35),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            padding:
+                                                const EdgeInsets.only(top: 0),
+                                            child: Container(
+                                              height: 90,
+                                              width: 90,
+                                              decoration: const ShapeDecoration(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(20.0),
+                                                  ),
+                                                ),
+                                                color: Color(0xFF2C2F33),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Container(
+                                                  height: 10,
+                                                  width: 5,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                25.0)),
+                                                  ),
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        check = !check;
+                                                      });
+                                                    },
+                                                    icon: const Icon(
+                                                      CryptoFontIcons.BTC,
+                                                      size: 50,
+                                                      color: Color.fromARGB(
+                                                          255, 191, 150, 26),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.only(top: 0),
-                                              child: Container(
-                                                height: 90,
-                                                width: 90,
-                                                decoration:
-                                                    const ShapeDecoration(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(20.0),
-                                                    ),
-                                                  ),
-                                                  color: Color(0xFF2C2F33),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Container(
-                                                    height: 10,
-                                                    width: 5,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  25.0)),
-                                                    ),
-                                                    child: IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          check = !check;
-                                                        });
-                                                      },
-                                                      icon: const Icon(
-                                                        CryptoFontIcons.BTC,
-                                                        size: 50,
-                                                        color: Color.fromARGB(
-                                                            255, 191, 150, 26),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                          )
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
