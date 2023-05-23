@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/BookingScreen/FooterButtons.dart';
-import '../widgets/ClubsScreen/ClubsFooterButtons.dart';
-import '../widgets/EventsScreen/EventsFooterButtons.dart';
+import '../../widgets/BookingScreen/FooterButtons.dart';
+import '../../widgets/ClubsScreen/ClubsFooterButtons.dart';
+import '../../widgets/EventsScreen/EventsFooterButtons.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({super.key});

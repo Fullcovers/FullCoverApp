@@ -7,7 +7,7 @@ import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 import 'package:venq_assessment/widgets/ClubsScreen/ClubsFooterButtons.dart';
 
-import '../widgets/BookingScreen/Balancecard.dart';
+import '../../widgets/BookingScreen/Balancecard.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
 
-import '../widgets/ClubsScreen/ClubsFooterButtons.dart';
+import '../../widgets/ClubsScreen/ClubsFooterButtons.dart';
 
 class ClubsScreen extends StatelessWidget {
   const ClubsScreen({Key? key}) : super(key: key);
