@@ -23,7 +23,7 @@ class _PeopleListState extends State<PeopleList> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
       child: Container(
         height: 4 * height / 10,
         width: width,

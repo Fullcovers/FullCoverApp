@@ -44,7 +44,7 @@ class TicketMoneyStatus extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Totat Tickets Sold",
+                    "Total Tickets Sold",
                     style: GoogleFonts.sairaCondensed(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -87,11 +87,11 @@ class TicketMoneyStatus extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Totat Tickets Sold",
+                    "Total Money Collected",
                     style: GoogleFonts.sairaCondensed(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: Color(0XFFD9D9D9),
+                      color: const Color(0XFFD9D9D9),
                     ),
                   ),
                 ],

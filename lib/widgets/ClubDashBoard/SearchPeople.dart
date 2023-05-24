@@ -9,7 +9,7 @@ class SearchPeople extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.only(top: 2, left: 40, right: 40),
+      padding: EdgeInsets.only(top: 20, left: 40, right: 40),
       child: Container(
         height: height / 20,
         width: double.maxFinite,
