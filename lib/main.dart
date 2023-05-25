@@ -3,6 +3,7 @@ import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Walkins.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Tickets(),
+      home: Walkins(),
     );
   }
 }

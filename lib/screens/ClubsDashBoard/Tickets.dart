@@ -16,9 +16,9 @@ class Tickets extends StatefulWidget {
 }
 
 class _TicketsState extends State<Tickets> {
-  bool oshow = false;
+  bool oshow = true;
   bool wshow = false;
-  bool show = false;
+  bool show = true;
   DateTime? selectedDate; // Track the selected date
 
   Future<void> _selectDate(BuildContext context) async {

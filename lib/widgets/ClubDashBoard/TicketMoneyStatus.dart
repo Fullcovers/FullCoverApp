@@ -46,7 +46,7 @@ class TicketMoneyStatus extends StatelessWidget {
                   Text(
                     "Total Tickets Sold",
                     style: GoogleFonts.sairaCondensed(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: const Color(0XFFD9D9D9),
                     ),
@@ -89,7 +89,7 @@ class TicketMoneyStatus extends StatelessWidget {
                   Text(
                     "Total Money Collected",
                     style: GoogleFonts.sairaCondensed(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: const Color(0XFFD9D9D9),
                     ),

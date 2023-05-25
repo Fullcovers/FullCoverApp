@@ -69,6 +69,9 @@ flutter:
   assets:
     - assets/images/clubsicon.png
     - assets/images/eventsicon2.png
+    - assets/images/woman1.png
+    - assets/images/male1.png
+    - assets/images/couple1.png
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
