@@ -3,10 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../widgets/ClubDashBoard/HeaderContent.dart';
-import '../../widgets/ClubDashBoard/PeopleList.dart';
-import '../../widgets/ClubDashBoard/SearchPeople.dart';
-import '../../widgets/ClubDashBoard/TicketMoneyStatus.dart';
+import '../../../widgets/ClubDashBoard/HeaderContent.dart';
+import '../../../widgets/ClubDashBoard/PeopleList.dart';
+import '../../../widgets/ClubDashBoard/SearchPeople.dart';
+import '../../../widgets/ClubDashBoard/TicketMoneyStatus.dart';
 
 class Tickets extends StatefulWidget {
   const Tickets({super.key});
@@ -193,7 +193,11 @@ class _TicketsState extends State<Tickets> {
               ),
             ),
           ),
-          show ? const SearchPeople() : Container(),
+          show
+              ? const SearchPeople(
+                  title: 'Search People',
+                )
+              : Container(),
           show
               ? PeopleList(
                   sdate: formatDate(selectedDate),

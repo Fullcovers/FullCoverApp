@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/SearchPeople.dart';
 
-import '../../widgets/ClubDashBoard/HeaderContent.dart';
-import '../../widgets/ClubDashBoard/PeopleList.dart';
-import '../../widgets/ClubDashBoard/SearchPeople.dart';
-import '../../widgets/ClubDashBoard/TicketMoneyStatus.dart';
+import '../../../widgets/ClubDashBoard/HeaderContent.dart';
+import '../../../widgets/ClubDashBoard/PeopleList.dart';
+import '../../../widgets/ClubDashBoard/TicketMoneyStatus.dart';
 
-class Promoters2 extends StatefulWidget {
-  const Promoters2({super.key});
+class Events2 extends StatefulWidget {
+  const Events2({super.key});
 
   @override
-  State<Promoters2> createState() => _Promoters2State();
+  State<Events2> createState() => _Events2State();
 }
 
-class _Promoters2State extends State<Promoters2> {
+class _Events2State extends State<Events2> {
   DateTime? selectedDate; // Track the selected date
 
   Future<void> _selectDate(BuildContext context) async {
@@ -52,11 +52,10 @@ class _Promoters2State extends State<Promoters2> {
         children: [
           const Padding(
             padding: EdgeInsets.all(10.0),
-            child: HeaderContent(title: "PROMOTERS"),
+            child: HeaderContent(title: "EVENTS"),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
+            padding: EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
             child: Container(
               height: height / 20,
               width: double.maxFinite,
@@ -111,7 +110,9 @@ class _Promoters2State extends State<Promoters2> {
               thickness: 1,
             ),
           ),
-          const SearchPeople(),
+          const SearchPeople(
+            title: "Search People",
+          ),
           PeopleList(
             sdate: formatDate(selectedDate),
           ),

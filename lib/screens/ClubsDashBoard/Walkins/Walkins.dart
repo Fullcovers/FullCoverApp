@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../widgets/ClubDashBoard/HeaderContentWalkins.dart';
+import '../../../widgets/ClubDashBoard/HeaderContentWalkins.dart';
 
 class Walkins extends StatefulWidget {
   const Walkins({super.key});
@@ -363,7 +363,7 @@ class _WalkinsState extends State<Walkins> {
               padding:
                   const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
               child: Container(
-                height: height / 5,
+                height: height / 4,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   color: const Color(0XFF6C6C6C),
@@ -453,7 +453,7 @@ class _WalkinsState extends State<Walkins> {
                         Column(
                           children: [
                             FractionalTranslation(
-                              translation: const Offset(0, 0.13),
+                              translation: const Offset(0, 0.10),
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(left: 20.0, top: 10),
@@ -503,24 +503,29 @@ class _WalkinsState extends State<Walkins> {
                         ),
                         Column(
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 20.0, top: 10),
-                              child: Image.asset(
-                                'assets/images/couple1.png',
-                                width: 75.0,
-                                height: 55.0,
-                                color: Colors.white,
+                            FractionalTranslation(
+                              translation: const Offset(0, 0.05),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20.0, top: 10),
+                                child: Image.asset(
+                                  'assets/images/couple1.png',
+                                  width: 75.0,
+                                  height: 55.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 20.0, top: 10),
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
+                                top: 10,
+                              ),
                               child: Container(
                                 height: 30,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                    color: Color(0XFFD9D9D9),
+                                    color: const Color(0XFFD9D9D9),
                                     borderRadius: BorderRadius.circular(10.0)),
                                 child: Flexible(
                                   child: Center(

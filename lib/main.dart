@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Events2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Promoters2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Tickets.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Walkins.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
@@ -21,9 +23,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Walkins(),
+      routes: {
+        '/barmenu': (context) => const BarMenu(),
+      },
+      home: const BarMain(),
     );
   }
 }
