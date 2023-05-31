@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:venq_assessment/screens/Auth/SignUp.dart';
+import 'package:venq_assessment/Services/Auth_Services.dart';
+import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +14,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -77,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: TextField(
+                                  controller: emailController,
                                   style: TextStyle(color: Colors.white),
                                   onChanged: (String value) {},
                                   decoration: InputDecoration(
@@ -110,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: TextField(
+                                  controller: passwordController,
                                   style: TextStyle(color: Colors.white),
                                   obscureText: true,
                                   onChanged: (String value) {},
@@ -164,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
-                                      children: const [
+                                      children: [
                                         Text(
                                           "Don’t have an account?",
                                           style: TextStyle(
@@ -173,13 +178,20 @@ class _LoginPageState extends State<LoginPage> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Text(
-                                          "Sign UP",
-                                          style: TextStyle(
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                       
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .pushNamedAndRemoveUntil(
+                                                    '/register',
+                                                    (route) => false);
+                                          },
+                                          child: Text(
+                                            "Sign Up",
+                                            style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blue,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -217,13 +229,13 @@ class _LoginPageState extends State<LoginPage> {
                                     Radius.circular(20.0),
                                   ),
                                 ),
-                                child: InkWell(
+                                child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BookingsScreen()));
+                                    AuthService().signInUser(
+                                        context: context,
+                                        email: emailController.text.trim(),
+                                        password:
+                                            passwordController.text.trim());
                                   },
                                   child: Column(
                                     children: [

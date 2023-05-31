@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Services/Auth_Services.dart';
 
 import '../Bookings/bookings_screen.dart';
 
@@ -16,6 +17,12 @@ class _SignUpState extends State<SignUp> {
   bool isChecked = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController confirmpasswordController =
+      TextEditingController();
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
@@ -82,11 +89,16 @@ class _SignUpState extends State<SignUp> {
                         ),
                         child: Column(
                           children: [
-                            customtextfield("First Name", Colors.green),
-                            customtextfield("Last Name", Colors.green),
-                            customtextfield("Email", Colors.green),
-                            customtextfield("Password", Colors.red),
-                            customtextfield("Confirm Password", Colors.red),
+                            customtextfield(firstnameController, "First Name",
+                                Colors.green),
+                            customtextfield(
+                                lastnameController, "Last Name", Colors.green),
+                            customtextfield(
+                                emailController, "Email", Colors.green),
+                            customtextfield(
+                                passwordController, "Password", Colors.red),
+                            customtextfield(confirmpasswordController,
+                                "Confirm Password", Colors.red),
                             Row(
                               children: [
                                 Checkbox(
@@ -190,14 +202,18 @@ class _SignUpState extends State<SignUp> {
                                 )
                               ],
                             ),
-                            InkWell(
+                            GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BookingsScreen()),
-                                );
+                                AuthService().signUpUser(
+                                    context: context,
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                    name: {
+                                      "firstName":
+                                          firstnameController.text.trim(),
+                                      "lastName":
+                                          lastnameController.text.trim(),
+                                    });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -268,13 +284,15 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-Widget customtextfield(String hintText, Color color) {
+Widget customtextfield(
+    TextEditingController cont, String hintText, Color color) {
   return Padding(
     padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
     child: Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
         child: TextField(
+          controller: cont,
           style: TextStyle(color: Colors.white),
           onChanged: (String value) {},
           decoration: InputDecoration(

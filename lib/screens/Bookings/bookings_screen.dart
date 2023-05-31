@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Coins.dart';
@@ -7,6 +8,7 @@ import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 import 'package:venq_assessment/widgets/ClubsScreen/ClubsFooterButtons.dart';
 
+import '../../Providers/UserProvider.dart';
 import '../../widgets/BookingScreen/Balancecard.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
