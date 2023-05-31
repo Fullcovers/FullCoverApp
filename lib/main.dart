@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/barmenu': (context) => const BarMenu(),
       },
-      home: const BarMain(),
+      home: const Walkins(),
     );
   }
 }

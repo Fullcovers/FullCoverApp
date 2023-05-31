@@ -192,7 +192,7 @@ class _WalkinsState extends State<Walkins> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(34, 34, 34, 0.37),
+                        color: const Color.fromRGBO(108, 108, 108, 0.37),
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
                           color: Colors.black,
@@ -265,7 +265,7 @@ class _WalkinsState extends State<Walkins> {
                 height: height / 20,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF2C2F33),
+                    color: const Color.fromRGBO(108, 108, 108, 0.37),
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                       color: Colors.black,
@@ -300,7 +300,7 @@ class _WalkinsState extends State<Walkins> {
                 height: height / 20,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF2C2F33),
+                    color: const Color.fromRGBO(108, 108, 108, 0.37),
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                       color: Colors.black,
@@ -335,7 +335,7 @@ class _WalkinsState extends State<Walkins> {
                 height: height / 20,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF2C2F33),
+                    color: const Color.fromRGBO(108, 108, 108, 0.37),
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                       color: Colors.black,
@@ -366,7 +366,7 @@ class _WalkinsState extends State<Walkins> {
                 height: height / 4,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
-                  color: const Color(0XFF6C6C6C),
+                  color: const Color.fromRGBO(108, 108, 108, 0.37),
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(color: Colors.black, width: 2),
                 ),
