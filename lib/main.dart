@@ -4,6 +4,8 @@ import 'package:venq_assessment/screens/Auth/SignUp.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
@@ -14,6 +16,8 @@ import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
+
+import 'screens/ClubsDashBoard/Promoters/Promoters.dart';
 
 void main() {
   runApp(const MyApp());

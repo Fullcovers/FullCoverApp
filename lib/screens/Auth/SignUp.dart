@@ -29,6 +29,17 @@ class _SignUpState extends State<SignUp> {
   }
 
   @override
+  var fncont = TextEditingController();
+  var lncont = TextEditingController();
+  var mcont = TextEditingController();
+  var econt = TextEditingController();
+  var pcont = TextEditingController();
+  var cpcont = TextEditingController();
+  final _formKeyp = GlobalKey<FormState>();
+  final _formKeycp = GlobalKey<FormState>();
+  Color colorp = Colors.green;
+  Color colorcp = Colors.green;
+
   Widget build(BuildContext context) {
     var widthofs = MediaQuery.of(context).size.width;
     var heightofs = MediaQuery.of(context).size.height;
@@ -70,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.white),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
@@ -82,11 +93,271 @@ class _SignUpState extends State<SignUp> {
                         ),
                         child: Column(
                           children: [
-                            customtextfield("First Name", Colors.green),
-                            customtextfield("Last Name", Colors.green),
-                            customtextfield("Email", Colors.green),
-                            customtextfield("Password", Colors.red),
-                            customtextfield("Confirm Password", Colors.red),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 22, right: 22),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Container(
+                                  height: 40,
+                                  child: TextField(
+                                    controller: fncont,
+                                    onSubmitted: (value) {
+                                      if (value.isEmpty) {
+                                        // color = Colors.red;
+                                      }
+                                    },
+                                    style: TextStyle(color: Colors.white),
+                                    onChanged: (String value) {
+                                      // cont.value.text.isEmpty ?  color = Colors.red : Null;
+                                    },
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        fillColor: Colors.white,
+                                        hintText: "First Name",
+                                        hintStyle: TextStyle(
+                                            color: Colors.white, fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 22, right: 22),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Container(
+                                  height: 40,
+                                  child: TextField(
+                                    controller: lncont,
+                                    style: TextStyle(color: Colors.white),
+                                    onChanged: (String value) {},
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        fillColor: Colors.white,
+                                        hintText: "Last Name",
+                                        hintStyle: TextStyle(
+                                            color: Colors.white, fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 22, right: 22),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Container(
+                                  height: 40,
+                                  child: TextField(
+                                    controller: mcont,
+                                    style: TextStyle(color: Colors.white),
+                                    onChanged: (String value) {},
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        fillColor: Colors.white,
+                                        hintText: "Mobile Number",
+                                        hintStyle: TextStyle(
+                                            color: Colors.white, fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 22, right: 22),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Container(
+                                  height: 40,
+                                  child: TextField(
+                                    controller: econt,
+                                    style: TextStyle(color: Colors.white),
+                                    onChanged: (String value) {},
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        fillColor: Colors.white,
+                                        hintText: "Email",
+                                        hintStyle: TextStyle(
+                                            color: Colors.white, fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Form(
+                                key: _formKeyp,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 22, right: 22),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: Container(
+                                          height: 40,
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                setState(() {
+                                                  colorp = Colors.red;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  colorp = Colors.green;
+                                                });
+                                              }
+                                            },
+                                            controller: pcont,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            onChanged: (String value) {},
+                                            
+                                            decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 3, color: colorp),
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide:
+                                                      BorderSide(color: colorp),
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                fillColor: Colors.white,
+                                                hintText: "Password",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 22, right: 22),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: Container(
+                                          height: 40,
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                setState(() {
+                                                  colorcp = Colors.red;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  colorcp = Colors.green;
+                                                });
+                                              }
+                                            },
+                                            controller: cpcont,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                            onChanged: (String value) {},
+                                            decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 3, color: colorcp),
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: colorcp),
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                fillColor: Colors.white,
+                                                hintText: "Confirm Password",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                             Row(
                               children: [
                                 Checkbox(
@@ -111,11 +382,11 @@ class _SignUpState extends State<SignUp> {
                                             color: Colors.white, fontSize: 10),
                                         children: <TextSpan>[
                                           TextSpan(
-                                              text: ' Terms of Service',
+                                              text: ' Terms of Service ',
                                               style: TextStyle(
                                                   color: Colors.blue)),
                                           TextSpan(
-                                              text: ' and',
+                                              text: 'and',
                                               style: TextStyle(
                                                   color: Colors.white)),
                                           TextSpan(
@@ -192,12 +463,13 @@ class _SignUpState extends State<SignUp> {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BookingsScreen()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const BookingsScreen()),
+                                // );
+                                _formKeyp.currentState!.validate();
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -268,13 +540,21 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-Widget customtextfield(String hintText, Color color) {
+Widget customtextfield(
+    String hintText, Color color, TextEditingController cont) {
   return Padding(
-    padding: const EdgeInsets.only(left: 22, right: 22, top: 8),
+    padding: const EdgeInsets.only(left: 22, right: 22),
     child: Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
+        height: 40,
         child: TextField(
+          controller: cont,
+          onSubmitted: (value) {
+            if (value.isEmpty) {
+              color = Colors.red;
+            }
+          },
           style: TextStyle(color: Colors.white),
           onChanged: (String value) {},
           decoration: InputDecoration(
@@ -291,7 +571,7 @@ Widget customtextfield(String hintText, Color color) {
               ),
               fillColor: Colors.white,
               hintText: hintText,
-              hintStyle: TextStyle(color: Colors.white)),
+              hintStyle: TextStyle(color: Colors.white, fontSize: 10)),
         ),
       ),
     ),
