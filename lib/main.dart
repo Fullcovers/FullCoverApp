@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/barmenu': (context) => const BarMenu(),
       },
-      home: const SignUp(),
+      home: const LoginPage(),
     );
   }
 }
