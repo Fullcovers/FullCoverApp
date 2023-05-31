@@ -95,11 +95,11 @@ class _SignUpState extends State<SignUp> {
                                             color: Colors.black, fontSize: 10),
                                         children: <TextSpan>[
                                           TextSpan(
-                                              text: ' Terms of Service',
+                                              text: ' Terms of Service ',
                                               style: TextStyle(
                                                   color: Colors.blue)),
                                           TextSpan(
-                                              text: ' and',
+                                              text: 'and',
                                               style: TextStyle(
                                                   color: Colors.black)),
                                           TextSpan(
