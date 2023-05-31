@@ -24,17 +24,20 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  scale: 3,
+                ),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height / 1.1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/images/logo.png",
-                      scale: 0.5,
-                    ),
                     SizedBox(
                       height: height / 40,
                     ),
@@ -58,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
                       child: Card(
-                        color: Colors.white,
+                        color: const Color(0xFF2C2F33),
                         elevation: 30,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
@@ -74,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: TextField(
+                                  style: TextStyle(color: Colors.white),
                                   onChanged: (String value) {},
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
@@ -90,7 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       fillColor: Colors.white,
-                                      hintText: "Email"),
+                                      focusColor: Colors.white,
+                                      hintText: "Email",
+                                      hintStyle:
+                                          TextStyle(color: Colors.white)),
                                 ),
                               ),
                             ),
@@ -103,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: TextField(
+                                  style: TextStyle(color: Colors.white),
                                   obscureText: true,
                                   onChanged: (String value) {},
                                   decoration: InputDecoration(
@@ -120,7 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       fillColor: Colors.white,
-                                      hintText: "Password"),
+                                      hintText: "Password",
+                                      hintStyle:
+                                          TextStyle(color: Colors.white)),
                                 ),
                               ),
                             ),
@@ -146,11 +156,10 @@ class _LoginPageState extends State<LoginPage> {
                                   InkWell(
                                     onTap: () {
                                       Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignUp()));
-                           
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SignUp()));
                                     },
                                     child: Column(
                                       crossAxisAlignment:
@@ -160,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                           "Don’t have an account?",
                                           style: TextStyle(
                                             fontSize: 12.0,
-                                            color: Colors.black,
+                                            color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -181,44 +190,40 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const BookingsScreen()));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    left: 50,
-                                    right: 50,
-                                    bottom: 20.0),
-                                child: Container(
-                                  height: height / 20,
-                                  width: double.maxFinite,
-                                  decoration: const BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            Color.fromARGB(255, 202, 196, 196),
-                                        blurRadius: 10,
-                                        spreadRadius: -2,
-                                        offset: Offset(-2, -2),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 20,
-                                        spreadRadius: -2,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                    color: Color(0xFF2D3135),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20.0),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 0.0, left: 50, right: 50, bottom: 20.0),
+                              child: Container(
+                                height: height / 20,
+                                width: double.maxFinite,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 202, 196, 196),
+                                      blurRadius: 10,
+                                      spreadRadius: -2,
+                                      offset: Offset(-2, -2),
                                     ),
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurRadius: 20,
+                                      spreadRadius: -2,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                  color: Color(0xFF2D3135),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20.0),
                                   ),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BookingsScreen()));
+                                  },
                                   child: Column(
                                     children: [
                                       Padding(

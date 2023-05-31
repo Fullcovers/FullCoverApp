@@ -16,6 +16,17 @@ class _SignUpState extends State<SignUp> {
   bool isChecked = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.white;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +39,19 @@ class _SignUpState extends State<SignUp> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  scale: 3,
+                ),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/images/logo.png",
-                      scale: 0.5,
-                    ),
                     SizedBox(
                       height: heightofs / 40,
                     ),
@@ -61,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
                       child: Card(
-                        color: Colors.white,
+                        color: const Color(0xFF2C2F33),
                         elevation: 30,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
@@ -76,7 +90,9 @@ class _SignUpState extends State<SignUp> {
                             Row(
                               children: [
                                 Checkbox(
-                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  checkColor: Colors.black,
                                   value: isChecked,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -92,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                                         text:
                                             "I certify I am 18 years of age or older, and agree to the.",
                                         style: TextStyle(
-                                            color: Colors.black, fontSize: 10),
+                                            color: Colors.white, fontSize: 10),
                                         children: <TextSpan>[
                                           TextSpan(
                                               text: ' Terms of Service',
@@ -101,7 +117,7 @@ class _SignUpState extends State<SignUp> {
                                           TextSpan(
                                               text: ' and',
                                               style: TextStyle(
-                                                  color: Colors.black)),
+                                                  color: Colors.white)),
                                           TextSpan(
                                               text: ' Privacy Policy',
                                               style: TextStyle(
@@ -116,7 +132,9 @@ class _SignUpState extends State<SignUp> {
                             Row(
                               children: [
                                 Checkbox(
-                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  checkColor: Colors.black,
                                   value: isChecked2,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -131,7 +149,7 @@ class _SignUpState extends State<SignUp> {
                                       text: const TextSpan(
                                         text: "I have read and understood the",
                                         style: TextStyle(
-                                            color: Colors.black, fontSize: 10),
+                                            color: Colors.white, fontSize: 10),
                                         children: <TextSpan>[
                                           TextSpan(
                                               text: ' Risk Warnings.',
@@ -147,7 +165,9 @@ class _SignUpState extends State<SignUp> {
                             Row(
                               children: [
                                 Checkbox(
-                                  checkColor: Colors.white,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  checkColor: Colors.black,
                                   value: isChecked3,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -163,7 +183,7 @@ class _SignUpState extends State<SignUp> {
                                         text:
                                             "I would like to receive news, updates and announcements from VENQ.",
                                         style: TextStyle(
-                                            color: Colors.black, fontSize: 10),
+                                            color: Colors.white, fontSize: 10),
                                       ),
                                     ),
                                   ]),
@@ -255,6 +275,7 @@ Widget customtextfield(String hintText, Color color) {
       padding: const EdgeInsets.all(8),
       child: Container(
         child: TextField(
+          style: TextStyle(color: Colors.white),
           onChanged: (String value) {},
           decoration: InputDecoration(
               border: OutlineInputBorder(
@@ -269,7 +290,8 @@ Widget customtextfield(String hintText, Color color) {
                 borderRadius: BorderRadius.circular(15),
               ),
               fillColor: Colors.white,
-              hintText: hintText),
+              hintText: hintText,
+              hintStyle: TextStyle(color: Colors.white)),
         ),
       ),
     ),
