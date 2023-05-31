@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:venq_assessment/screens/Auth/Login.dart';
+import 'package:venq_assessment/screens/Auth/SignUp.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/barmenu': (context) => const BarMenu(),
       },
-      home: const Walkins(),
+      home: const LoginPage(),
     );
   }
 }
