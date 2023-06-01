@@ -17,6 +17,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
+import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
     final userprovider = Provider.of<UserProvider>(context);
     userprovider.deleteToken();
     String userDetails = userprovider.getId();
-    print(userDetails);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
@@ -54,9 +55,10 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const SignUp(),
         '/login': (context) => const LoginPage(),
       },
-      home: userprovider.token.isEmpty
-          ? const LoginPage()
-          : const BookingsScreen(),
+      // home: userprovider.token.isEmpty
+      //     ? const LoginPage()
+      //     : const BookingsScreen(),
+      home: QrScanner(),
     );
   }
 }
