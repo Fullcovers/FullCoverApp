@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
-import 'package:venq_assessment/screens/Auth/SignUp.dart';
+import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
@@ -17,10 +18,21 @@ import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 
-import 'screens/ClubsDashBoard/Promoters/Promoters.dart';
+import 'Providers/UserProvider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final userProvider = UserProvider();
+  await userProvider.loadToken();
+  await userProvider.loadId();
+
+  runApp(
+    ChangeNotifierProvider.value(
+      value: userProvider,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -29,12 +41,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final userprovider = Provider.of<UserProvider>(context);
+    userprovider.deleteToken();
+    String userDetails = userprovider.getId();
+    print(userDetails);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
         '/barmenu': (context) => const BarMenu(),
+        '/register': (context) => const SignUp(),
+        '/login': (context) => const LoginPage(),
       },
-      home: const LoginPage(),
+      home: userprovider.token.isEmpty
+          ? const LoginPage()
+          : const BookingsScreen(),
     );
   }
 }
