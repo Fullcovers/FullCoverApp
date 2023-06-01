@@ -12,6 +12,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
@@ -44,9 +45,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    userprovider.deleteToken();
-    String userDetails = userprovider.getId();
-    print(userDetails);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
