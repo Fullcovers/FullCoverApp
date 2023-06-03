@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:venq_assessment/Services/Order_Services.dart';
 
 class QrScanner extends StatefulWidget {
   const QrScanner({Key? key}) : super(key: key);
@@ -46,6 +47,20 @@ class _QrScannerState extends State<QrScanner> {
               Text(
                 qrData ?? 'Scan a QR code',
                 style: TextStyle(fontSize: 16),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  OrderServices().checkvalidateQrCode(
+                      id: '647b29e48fa9a33b0d7e7472', context: context);
+                },
+                child: Text("check qr code status"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  OrderServices().validateQrCode(
+                      id: '647b29e48fa9a33b0d7e7472', context: context);
+                },
+                child: Text("change qrcode status"),
               ),
             ],
           ),

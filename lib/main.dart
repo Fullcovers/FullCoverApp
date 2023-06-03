@@ -17,6 +17,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
+import 'package:venq_assessment/screens/QrScanner/Demo.dart';
 import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
@@ -45,8 +46,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    userprovider.deleteToken();
-    String userDetails = userprovider.getId();
+    // userprovider.deleteToken();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -54,11 +54,13 @@ class MyApp extends StatelessWidget {
         '/barmenu': (context) => const BarMenu(),
         '/register': (context) => const SignUp(),
         '/login': (context) => const LoginPage(),
+        '/qrscanner': (context) => const QrScanner(),
       },
-      // home: userprovider.token.isEmpty
-      //     ? const LoginPage()
-      //     : const BookingsScreen(),
-      home: QrScanner(),
+      // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+      home: userprovider.token.isEmpty
+          ? const LoginPage()
+          : const BookingsScreen(),
+      // home: QrScanner(),
     );
   }
 }

@@ -61,22 +61,22 @@ class AuthService {
   }) async {
     try {
       var userprovider = Provider.of<UserProvider>(context, listen: false);
-      print("hello2");
       print(email);
       final navigator = Navigator.of(context);
       http.Response res = await http.post(
         Uri.parse('${Constants.uri}auth/login'),
         body: jsonEncode(
           {
-            'email': email,
-            'password': password,
+            'email': email.trim(),
+            'password': password.trim(),
           },
         ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-
+      print(res.body);
+      print(userprovider.token);
       httpErrorHandle(
         response: res,
         context: context,
@@ -87,6 +87,7 @@ class AuthService {
                 builder: (context) => const BookingsScreen(),
               ),
               (route) => false);
+          // navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
         },
       );
     } catch (e) {
