@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
-
-  @override
-  State<SearchBar> createState() => _SearchBarState();
-}
-
-class _SearchBarState extends State<SearchBar> {
+class SearchBar extends StatelessWidget {
+   SearchBar({Key? key,required this.searchtext}) : super(key: key);
+String searchtext;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -39,7 +34,7 @@ class _SearchBarState extends State<SearchBar> {
                     padding: EdgeInsets.only(left: 10),
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Search Promoters",
+                          hintText: searchtext,
                           hintStyle: TextStyle(color: Colors.white),
                           border: InputBorder.none),
                     ),
