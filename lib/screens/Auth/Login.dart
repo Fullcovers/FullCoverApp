@@ -233,9 +233,8 @@ class _LoginPageState extends State<LoginPage> {
                                   onTap: () {
                                     AuthService().signInUser(
                                         context: context,
-                                        email: emailController.text.trim(),
-                                        password:
-                                            passwordController.text.trim());
+                                        email: emailController.text,
+                                        password: passwordController.text);
                                   },
                                   child: Column(
                                     children: [
