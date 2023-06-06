@@ -75,19 +75,17 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print(res.body);
-      print(userprovider.token);
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () async {
           userprovider.setToken(jsonDecode(res.body)['token']);
-          navigator.pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const BookingsScreen(),
-              ),
-              (route) => false);
-          // navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
+          // navigator.pushAndRemoveUntil(
+          //     MaterialPageRoute(
+          //       builder: (context) => const BookingsScreen(),
+          //     ),
+          //     (route) => false);
+          navigator.pushNamedAndRemoveUntil('/allclubs', (route) => false);
         },
       );
     } catch (e) {

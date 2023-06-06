@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:venq_assessment/Providers/ClubProvider.dart';
+
+import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
 
+import '../../Models/Clubs.dart';
+import '../../Providers/ClubProvider.dart';
 import '../../widgets/ClubsScreen/ClubsFooterButtons.dart';
 
-class ClubsScreen extends StatelessWidget {
+class ClubsScreen extends StatefulWidget {
   const ClubsScreen({Key? key}) : super(key: key);
 
   @override
+  State<ClubsScreen> createState() => _ClubsScreenState();
+}
+
+class _ClubsScreenState extends State<ClubsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ClubServices().getAllClubs(context: context);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5; // Adjust the overlap fraction as desired
@@ -155,8 +174,9 @@ class ClubsScreen extends StatelessWidget {
                   width: width,
                   decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: clubprovider.clubsData.length,
                     itemBuilder: (context, index) {
+                      final ClubModel club = clubprovider.clubsData[index];
                       return Padding(
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Card(
@@ -171,17 +191,23 @@ class ClubsScreen extends StatelessWidget {
                                 height: height / 10,
                                 width: 4 * width / 10,
                                 decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0))),
+                                  color: Color(0xFFD9D9D9),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                ),
+                                // Display club name
+                                child: Center(child: Text(club.name)),
                               ),
                               Container(
                                 height: height / 10,
                                 width: 4 * width / 10,
                                 decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0))),
+                                  color: Color(0xFFD9D9D9),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                ),
+                                // Display club description
+                                child: Center(child: Text(club.description)),
                               ),
                             ],
                           ),
@@ -192,46 +218,6 @@ class ClubsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // Align(
-            //   alignment: const Alignment(0, 0.5),
-            //   child: FractionalTranslation(
-            //     translation: const Offset(0, 0.5),
-            //     child: Padding(
-            //       padding: const EdgeInsets.only(top: 10.0),
-            //       child: Container(
-            //         height: 60,
-            //         width: 60,
-            //         decoration: const BoxDecoration(
-            //           color: Color(0xFF2C2F33),
-            //           borderRadius: BorderRadius.all(
-            //             Radius.circular(25),
-            //           ),
-            //           boxShadow: [
-            //             BoxShadow(
-            //               color: Color.fromARGB(255, 124, 120, 120),
-            //               blurRadius: 10,
-            //               spreadRadius: -2,
-            //               offset: Offset(-2, -2),
-            //             ),
-            //             BoxShadow(
-            //               color: Colors.black,
-            //               blurRadius: 20,
-            //               spreadRadius: -2,
-            //               offset: Offset(2, 2),
-            //             ),
-            //           ],
-            //         ),
-            //         child: IconButton(
-            //             onPressed: () {},
-            //             icon: const Icon(
-            //               Icons.qr_code_scanner,
-            //               size: 45,
-            //               color: Colors.white,
-            //             )),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             ClubsFooterButtons(
                 width: width,
                 colorb: Colors.white,
