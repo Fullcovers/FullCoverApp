@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +22,12 @@ class ClubsScreen extends StatefulWidget {
 
 class _ClubsScreenState extends State<ClubsScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    ClubServices().getAllClubs(context: context);
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Future.delayed(Duration(milliseconds: 500), () {
+      ClubServices().getAllClubs(context: context);
+    });
   }
 
   @override
@@ -170,52 +174,75 @@ class _ClubsScreenState extends State<ClubsScreen> {
                 padding:
                     const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
                 child: Container(
-                  height: 4.8 * height / 10,
-                  width: width,
-                  decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                  child: ListView.builder(
-                    itemCount: clubprovider.clubsData.length,
-                    itemBuilder: (context, index) {
-                      final ClubModel club = clubprovider.clubsData[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Card(
-                          color: const Color(0xFF2C2F33),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: height / 10,
-                                width: 4 * width / 10,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
+                    height: 4.8 * height / 10,
+                    width: width,
+                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                    child: FutureBuilder<List<ClubModel>>(
+                      future: ClubServices().getAllClubs(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ); // Show a loading indicator while data is being fetched
+                        } else if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
+                        } else {
+                          // Data retrieval is successful
+                          final clubsData = snapshot.data!;
+
+                          return ListView.builder(
+                            itemCount: clubsData.length,
+                            itemBuilder: (context, index) {
+                              final ClubModel club = clubsData[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 5.0),
+                                child: Card(
+                                  color: const Color(0xFF2C2F33),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        height: height / 10,
+                                        width: 4 * width / 10,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFD9D9D9),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        ),
+                                        // Display club name
+                                        child: Center(child: Text(club.name)),
+                                      ),
+                                      Container(
+                                        height: height / 10,
+                                        width: 4 * width / 10,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFD9D9D9),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        ),
+                                        // Display club description
+                                        child: Center(
+                                            child: Text(club.description)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                // Display club name
-                                child: Center(child: Text(club.name)),
-                              ),
-                              Container(
-                                height: height / 10,
-                                width: 4 * width / 10,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                ),
-                                // Display club description
-                                child: Center(child: Text(club.description)),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    )),
               ),
             ),
             ClubsFooterButtons(

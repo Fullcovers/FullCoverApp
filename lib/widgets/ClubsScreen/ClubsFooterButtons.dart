@@ -19,11 +19,9 @@ class ClubsFooterButtons extends StatefulWidget {
 
 class _ClubsFooterButtonsState extends State<ClubsFooterButtons> {
   // bool _isFirstButtonTapped = false;
-  // void _onFirstButtonTap() {
-  //   setState(() {
-  //     _isFirstButtonTapped = !_isFirstButtonTapped;
-  //   });
-  // }
+  void _onFirstButtonTap() {
+    Navigator.of(context).pushReplacementNamed('/allevents');
+  }
 
   bool _isSecondButtonTapped = false;
   void _onSecondButtonTap() {
@@ -129,45 +127,48 @@ class _ClubsFooterButtonsState extends State<ClubsFooterButtons> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 2.0),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(100),
-              ),
-              child: Container(
-                width: 2 * widget.width / 5,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 5,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(140),
-                  ),
+            child: GestureDetector(
+              onTap: _onFirstButtonTap,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(100),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Image.asset(
-                            'assets/images/eventsicon2.png',
-                            width: 48.0,
-                            height: 48.0,
+                child: Container(
+                  width: 2 * widget.width / 5,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 5,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(140),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Image.asset(
+                              'assets/images/eventsicon2.png',
+                              width: 48.0,
+                              height: 48.0,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                            height: 8.0), // Add spacing between icon and text
-                        Text(
-                          "EVENTS",
-                          style: GoogleFonts.bebasNeue(
-                            fontSize: 18,
-                            color: widget.textcolor,
+                          const SizedBox(
+                              height: 8.0), // Add spacing between icon and text
+                          Text(
+                            "EVENTS",
+                            style: GoogleFonts.bebasNeue(
+                              fontSize: 18,
+                              color: widget.textcolor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

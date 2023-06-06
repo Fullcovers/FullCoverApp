@@ -86,19 +86,6 @@ class OrderServices {
         response: res,
         context: context,
         onSuccess: () {
-          // Map<String, dynamic> responseJson = json.decode(res.body);
-
-          // bool isValid = responseJson['isValid'];
-          // message = responseJson['message'];
-
-          // if (responseJson.containsKey('data')) {
-          //   Map<String, dynamic> data = responseJson['data'];
-
-          //   ticketId = data['_id'];
-          //   quantity = data['items'][0]['quantity'];
-          //   // String ticket = data['items'][0]['ticket'];
-          // }
-
           showSnackBar(context, "Ticket has been Validated");
         },
       );

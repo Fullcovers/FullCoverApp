@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:venq_assessment/Services/Order_Services.dart';
+
+import '../../Providers/UserProvider.dart';
 
 class QrScanner extends StatefulWidget {
   const QrScanner({Key? key}) : super(key: key);
@@ -11,21 +14,22 @@ class QrScanner extends StatefulWidget {
 }
 
 class _QrScannerState extends State<QrScanner> {
-  String? qrData;
+  String qrData = '';
 
   Future<void> _qrScanner() async {
     var cameraStatus = await Permission.camera.status;
     if (cameraStatus.isGranted) {
       String? scannedData = await scanner.scan();
       setState(() {
-        qrData = scannedData;
+        qrData = scannedData!;
       });
+      // userprovider.deleteToken();
     } else {
       var isGranted = await Permission.camera.request();
       if (isGranted.isGranted) {
         String? scannedData = await scanner.scan();
         setState(() {
-          qrData = scannedData;
+          qrData = scannedData!;
         });
       }
     }
@@ -33,6 +37,7 @@ class _QrScannerState extends State<QrScanner> {
 
   @override
   Widget build(BuildContext context) {
+    final userprovider = Provider.of<UserProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -45,22 +50,29 @@ class _QrScannerState extends State<QrScanner> {
               ),
               SizedBox(height: 20),
               Text(
-                qrData ?? 'Scan a QR code',
+                qrData,
                 style: TextStyle(fontSize: 16),
               ),
               ElevatedButton(
                 onPressed: () {
-                  OrderServices().checkvalidateQrCode(
-                      id: '647b29e48fa9a33b0d7e7472', context: context);
+                  OrderServices()
+                      .checkvalidateQrCode(id: qrData, context: context);
                 },
                 child: Text("check qr code status"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  OrderServices().validateQrCode(
-                      id: '647b29e48fa9a33b0d7e7472', context: context);
+                  OrderServices().validateQrCode(id: qrData, context: context);
                 },
                 child: Text("change qrcode status"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  userprovider.deleteToken();
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('/login', (route) => false);
+                },
+                child: const Text("logout"),
               ),
             ],
           ),

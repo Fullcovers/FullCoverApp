@@ -23,6 +23,7 @@ class _EventsFooterButtonsState extends State<EventsFooterButtons> {
     // setState(() {
     //   _isFirstButtonTapped = !_isFirstButtonTapped;
     // });
+    Navigator.of(context).pushReplacementNamed('/allclubs');
   }
 
   bool _isSecondButtonTapped = true;

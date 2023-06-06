@@ -15,9 +15,12 @@ class EventsScreen extends StatefulWidget {
 
 class _EventsScreenState extends State<EventsScreen> {
   @override
-  void initState() {
-    super.initState();
-    EventsServices().getAllEvents(context: context);
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Future.delayed(Duration(milliseconds: 500), () {
+      EventsServices().getAllEvents(context: context);
+    });
   }
 
   @override
@@ -123,34 +126,58 @@ class _EventsScreenState extends State<EventsScreen> {
                 padding:
                     const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                 child: Container(
-                  height: 4.8 * height / 10,
-                  width: width,
-                  decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                  child: ListView.builder(
-                    itemCount: eventprovider.events.length,
-                    itemBuilder: (context, index) {
-                      final Event club = eventprovider.events[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Container(
-                            height: height / 10,
-                            width: width / 2,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFD9D9D9),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            child: Center(
-                              child: Text(club.name),
+                    height: 4.8 * height / 10,
+                    width: width,
+                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                    child: FutureBuilder<List<Event>>(
+                      future: EventsServices().getAllEvents(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircularProgressIndicator(),
                             ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                          );
+                          ; // Show a loading indicator while data is being fetched
+                        } else if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
+                        } else {
+                          // Data retrieval is successful
+                          final eventsData = snapshot.data!;
+
+                          return ListView.builder(
+                            itemCount: eventsData.length,
+                            itemBuilder: (context, index) {
+                              final Event event = eventsData[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    height: height / 10,
+                                    width: width / 2,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFD9D9D9),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0)),
+                                    ),
+                                    child: Center(
+                                      child: Text(event.name),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    )),
               ),
             ),
             Container(

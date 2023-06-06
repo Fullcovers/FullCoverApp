@@ -75,21 +75,28 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () async {
-          userprovider.setToken(jsonDecode(res.body)['token']);
-          // navigator.pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //       builder: (context) => const BookingsScreen(),
-          //     ),
-          //     (route) => false);
-          navigator.pushNamedAndRemoveUntil('/allclubs', (route) => false);
-        },
-      );
+      // httpErrorHandle(
+      //   response: res,
+      //   context: context,
+      //   onSuccess: () async {
+      //     userprovider.setToken(jsonDecode(res.body)['token']);
+      //     navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
+      //   },
+      // );
+      if (res.statusCode == 200) {
+        // Successful login
+        userprovider.setToken(jsonDecode(res.body)['token']);
+        navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
+      } else if (res.statusCode == 400) {
+        // Invalid email or password
+        showSnackBar(context, 'Invalid email or password');
+      } else {
+        // Other error occurred
+        showSnackBar(context, 'An error occurred. Please try again later.');
+      }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      // showSnackBar(context, e.toString());
+      print(e.toString());
     }
   }
 
