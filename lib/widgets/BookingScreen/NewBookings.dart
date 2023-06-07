@@ -42,11 +42,11 @@ class NewBookings extends StatelessWidget {
                             ),
                             child: Center(
                               child: Center(
-                                child: QrImage(
-                                  data: "Hello World",
-                                  version: QrVersions.auto,
-                                  size: height / 7,
-                                ),
+                                // child: QrImage(
+                                //   data: "Hello World",
+                                //   version: QrVersions.auto,
+                                //   size: height / 7,
+                                // ),
                               ),
                             ),
                           ),

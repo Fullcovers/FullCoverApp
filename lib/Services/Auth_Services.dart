@@ -85,7 +85,7 @@ class AuthService {
           //       builder: (context) => const BookingsScreen(),
           //     ),
           //     (route) => false);
-          navigator.pushNamedAndRemoveUntil('/allclubs', (route) => false);
+          navigator.pushNamedAndRemoveUntil('/clubs', (route) => false);
         },
       );
     } catch (e) {

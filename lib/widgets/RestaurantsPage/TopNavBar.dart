@@ -7,7 +7,7 @@ Widget topnavigationbar(double height, double width) {
     children: [
       Column(children: [
         Container(
-          height: height / 10,
+          height: height / 12,
           width: double.maxFinite,
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -78,7 +78,7 @@ Widget topnavigationbar(double height, double width) {
                       width: 11,
                     ),
                     Container(
-                      height: height / 10,
+                      height: height / 12,
                       width: width / 6.5,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -95,7 +95,7 @@ Widget topnavigationbar(double height, double width) {
                       width: 11,
                     ),
                     Container(
-                      height: height / 10,
+                      height: height / 12,
                       width: width / 6.5,
                       decoration: const BoxDecoration(
                         color: Colors.white,
