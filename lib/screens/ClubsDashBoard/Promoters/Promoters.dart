@@ -35,7 +35,7 @@ class _PromotersState extends State<Promoters> {
             Container(
                 height: height /15,
                 width: width / 1.15,
-                child: SearchBar()),
+                child: SearchBar(searchtext: 'Search Promoters',)),
             SizedBox(
               height: height / 50,
             ),

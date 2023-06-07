@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
+import 'package:venq_assessment/Providers/FetchUserProvider.dart';
+import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
@@ -11,13 +13,16 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Loyalty/Loyalty.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/QrScanner/Demo.dart';
 import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
+import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
 
@@ -52,6 +57,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
         ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+        ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
+        ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
