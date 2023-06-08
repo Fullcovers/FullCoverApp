@@ -8,8 +8,9 @@ import 'package:venq_assessment/Models/UserModel.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
+import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
-
+import '../../Providers/TicketProvider.dart';
 import '../../Providers/UserProvider.dart';
 
 class QrScanner extends StatefulWidget {
@@ -29,6 +30,8 @@ class _QrScannerState extends State<QrScanner> {
   void initState() {
     super.initState();
     orderprovider = Provider.of<OrderProvider>(context, listen: false);
+    var userprovider = Provider.of<UserProvider>(context, listen: false);
+    userprovider.loadToken();
   }
 
   Future<void> _qrScanner() async {
@@ -56,10 +59,21 @@ class _QrScannerState extends State<QrScanner> {
     final orderprovider = Provider.of<OrderProvider>(context);
     final fetchuserprovider = Provider.of<FetchUser>(context);
     final userprovider = Provider.of<UserProvider>(context);
+    final ticketprovider = Provider.of<TicketProvider>(context);
+    DateTime? d = orderprovider.order?.createdAt;
+    String formattedDate =
+        d != null ? DateFormat('EE, d MMMM y').format(d) : '';
+
     String? firstname = fetchuserprovider.user?.data.name.firstName;
     String? email = fetchuserprovider.user?.data.email;
     String? phno = fetchuserprovider.user?.data.phoneNumber;
-
+    int stagcount = 0;
+    int couplecount = 0;
+    if (ticketprovider.ticket?.name == "couple") {
+      couplecount++;
+    } else {
+      stagcount++;
+    }
     var moneyint = orderprovider.order?.total ?? 2000;
     final indianCurrencyFormat =
         NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0);
@@ -244,7 +258,7 @@ class _QrScannerState extends State<QrScanner> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "Stag x1",
+                                                    "Stag x$stagcount",
                                                     style: GoogleFonts
                                                         .sairaCondensed(
                                                       fontSize: 16,
@@ -257,7 +271,7 @@ class _QrScannerState extends State<QrScanner> {
                                                     translation:
                                                         const Offset(0, -0.2),
                                                     child: Text(
-                                                      "Couple x1",
+                                                      "Couple x$couplecount",
                                                       style: GoogleFonts
                                                           .sairaCondensed(
                                                         fontSize: 16,
@@ -278,7 +292,7 @@ class _QrScannerState extends State<QrScanner> {
                                                     CrossAxisAlignment.end,
                                                 children: [
                                                   Text(
-                                                    sdate.toString(),
+                                                    formattedDate,
                                                     style: GoogleFonts
                                                         .sairaCondensed(
                                                             fontSize: 20,
@@ -407,6 +421,10 @@ class _QrScannerState extends State<QrScanner> {
                             UserServices().getUserDetails(
                                 context: context,
                                 userId: orderprovider.order?.user);
+                            TicketServices().getTicketById(
+                              context: context,
+                              ticketId: orderprovider.order?.items[0].ticket,
+                            );
                           },
                           child: Container(
                             height: 58,

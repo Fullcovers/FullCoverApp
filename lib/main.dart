@@ -3,10 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
+import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
+import 'package:venq_assessment/screens/Clubs/ClubPage.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
@@ -25,6 +28,7 @@ import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
+import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 
 import 'Providers/ClubProvider.dart';
 import 'Providers/UserProvider.dart';
@@ -59,6 +63,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
         ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
         ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
+        ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
