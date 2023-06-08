@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../widgets/BookingScreen/FooterButtons.dart';
-import '../../widgets/ClubsScreen/ClubsFooterButtons.dart';
+import 'package:provider/provider.dart';
+import 'package:venq_assessment/Providers/EventProvider.dart';
+import 'package:venq_assessment/Services/Event_Services.dart';
+import '../../Models/Events.dart';
 import '../../widgets/EventsScreen/EventsFooterButtons.dart';
 
-class EventsScreen extends StatelessWidget {
+class EventsScreen extends StatefulWidget {
   const EventsScreen({super.key});
 
   @override
+  State<EventsScreen> createState() => _EventsScreenState();
+}
+
+class _EventsScreenState extends State<EventsScreen> {
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Future.delayed(Duration(milliseconds: 500), () {
+      EventsServices().getAllEvents(context: context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final eventprovider = Provider.of<EventProvider>(context, listen: false);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5;
@@ -110,30 +126,58 @@ class EventsScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
                 child: Container(
-                  height: 4.8 * height / 10,
-                  width: width,
-                  decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                  child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Container(
-                            height: height / 10,
-                            width: width / 2,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFD9D9D9),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                    height: 4.8 * height / 10,
+                    width: width,
+                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                    child: FutureBuilder<List<Event>>(
+                      future: EventsServices().getAllEvents(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                          ; // Show a loading indicator while data is being fetched
+                        } else if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
+                        } else {
+                          // Data retrieval is successful
+                          final eventsData = snapshot.data!;
+
+                          return ListView.builder(
+                            itemCount: eventsData.length,
+                            itemBuilder: (context, index) {
+                              final Event event = eventsData[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    height: height / 10,
+                                    width: width / 2,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFD9D9D9),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0)),
+                                    ),
+                                    child: Center(
+                                      child: Text(event.name),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    )),
               ),
             ),
             Container(

@@ -1,15 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:venq_assessment/Providers/ClubProvider.dart';
+
+import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
 
+import '../../Models/Clubs.dart';
+import '../../Providers/ClubProvider.dart';
 import '../../widgets/ClubsScreen/ClubsFooterButtons.dart';
 
-class ClubsScreen extends StatelessWidget {
+class ClubsScreen extends StatefulWidget {
   const ClubsScreen({Key? key}) : super(key: key);
 
   @override
+  State<ClubsScreen> createState() => _ClubsScreenState();
+}
+
+class _ClubsScreenState extends State<ClubsScreen> {
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Future.delayed(Duration(milliseconds: 500), () {
+      ClubServices().getAllClubs(context: context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5; // Adjust the overlap fraction as desired
@@ -151,87 +174,77 @@ class ClubsScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
                 child: Container(
-                  height: 4.8 * height / 10,
-                  width: width,
-                  decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                  child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Card(
-                          color: const Color(0xFF2C2F33),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: height / 10,
-                                width: 4 * width / 10,
-                                decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0))),
-                              ),
-                              Container(
-                                height: height / 10,
-                                width: 4 * width / 10,
-                                decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0))),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                    height: 4.8 * height / 10,
+                    width: width,
+                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                    child: FutureBuilder<List<ClubModel>>(
+                      future: ClubServices().getAllClubs(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ); // Show a loading indicator while data is being fetched
+                        } else if (snapshot.hasError) {
+                          return Text(
+                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
+                        } else {
+                          // Data retrieval is successful
+                          final clubsData = snapshot.data!;
+
+                          return ListView.builder(
+                            itemCount: clubsData.length,
+                            itemBuilder: (context, index) {
+                              final ClubModel club = clubsData[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 5.0),
+                                child: Card(
+                                  color: const Color(0xFF2C2F33),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        height: height / 10,
+                                        width: 4 * width / 10,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFD9D9D9),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        ),
+                                        // Display club name
+                                        child: Center(child: Text(club.name)),
+                                      ),
+                                      Container(
+                                        height: height / 10,
+                                        width: 4 * width / 10,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFD9D9D9),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        ),
+                                        // Display club description
+                                        child: Center(
+                                            child: Text(club.description)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    )),
               ),
             ),
-            // Align(
-            //   alignment: const Alignment(0, 0.5),
-            //   child: FractionalTranslation(
-            //     translation: const Offset(0, 0.5),
-            //     child: Padding(
-            //       padding: const EdgeInsets.only(top: 10.0),
-            //       child: Container(
-            //         height: 60,
-            //         width: 60,
-            //         decoration: const BoxDecoration(
-            //           color: Color(0xFF2C2F33),
-            //           borderRadius: BorderRadius.all(
-            //             Radius.circular(25),
-            //           ),
-            //           boxShadow: [
-            //             BoxShadow(
-            //               color: Color.fromARGB(255, 124, 120, 120),
-            //               blurRadius: 10,
-            //               spreadRadius: -2,
-            //               offset: Offset(-2, -2),
-            //             ),
-            //             BoxShadow(
-            //               color: Colors.black,
-            //               blurRadius: 20,
-            //               spreadRadius: -2,
-            //               offset: Offset(2, 2),
-            //             ),
-            //           ],
-            //         ),
-            //         child: IconButton(
-            //             onPressed: () {},
-            //             icon: const Icon(
-            //               Icons.qr_code_scanner,
-            //               size: 45,
-            //               color: Colors.white,
-            //             )),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             ClubsFooterButtons(
                 width: width,
                 colorb: Colors.white,

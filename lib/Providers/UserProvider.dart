@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/User.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 
 class UserProvider extends ChangeNotifier {
   User _user = User(
