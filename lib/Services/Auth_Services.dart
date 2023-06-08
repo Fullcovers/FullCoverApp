@@ -75,14 +75,6 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      // httpErrorHandle(
-      //   response: res,
-      //   context: context,
-      //   onSuccess: () async {
-      //     userprovider.setToken(jsonDecode(res.body)['token']);
-      //     navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
-      //   },
-      // );
       if (res.statusCode == 200) {
         // Successful login
         userprovider.setToken(jsonDecode(res.body)['token']);
@@ -94,6 +86,7 @@ class AuthService {
         // Other error occurred
         showSnackBar(context, 'An error occurred. Please try again later.');
       }
+
     } catch (e) {
       // showSnackBar(context, e.toString());
       print(e.toString());

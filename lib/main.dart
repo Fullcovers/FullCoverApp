@@ -5,8 +5,10 @@ import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
+import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
+import 'package:venq_assessment/screens/Clubs/ClubPage.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
@@ -25,6 +27,7 @@ import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
+import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 
 import 'Providers/ClubProvider.dart';
 import 'Providers/UserProvider.dart';
@@ -51,19 +54,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    userprovider.deleteToken();
-    String userDetails = userprovider.getId();
-    print(userDetails);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/barmenu': (context) => const BarMenu(),
-        '/register': (context) => const SignUp(),
-        '/login': (context) => const LoginPage(),
-      },
-      home: userprovider.token.isEmpty
-          ? const LoginPage()
-          : const BookingsScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+        ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
+        ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/barmenu': (context) => const BarMenu(),
+          '/register': (context) => const SignUp(),
+          '/login': (context) => const LoginPage(),
+          '/qrscanner': (context) => const QrScanner(),
+          '/allclubs': (context) => const ClubsScreen(),
+          '/clubs': (context) => const ClubPage(),
+        },
+        // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        home: userprovider.token.isEmpty
+            ? const LoginPage()
+            :  MyBookingPage(),
+
+        // home: LoginPage(),
+      ),
+
     );
   }
 }

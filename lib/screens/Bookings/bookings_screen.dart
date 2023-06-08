@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Coins.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 
@@ -268,7 +269,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                 width: width / 2,
                                 decoration: BoxDecoration(
                                   color:
-                                      const Color.fromARGB(255, 191, 150, 26),
+                                       golden,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Center(
