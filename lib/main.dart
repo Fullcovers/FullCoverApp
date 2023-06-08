@@ -13,7 +13,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Loyalty/Loyalty.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
@@ -51,19 +51,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    userprovider.deleteToken();
-    String userDetails = userprovider.getId();
-    print(userDetails);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/barmenu': (context) => const BarMenu(),
-        '/register': (context) => const SignUp(),
-        '/login': (context) => const LoginPage(),
-      },
-      home: userprovider.token.isEmpty
-          ? const LoginPage()
-          : const BookingsScreen(),
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+        ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
+        ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+        ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
+        ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/barmenu': (context) => const BarMenu(),
+          '/register': (context) => const SignUp(),
+          '/login': (context) => const LoginPage(),
+          '/qrscanner': (context) => const QrScanner(),
+          '/allclubs': (context) => const ClubsScreen(),
+          '/allevents': (context) => const EventsScreen(),
+        },
+        // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        home:
+            userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+
+        // home: QrScanner(),
+      ),
     );
   }
 }
