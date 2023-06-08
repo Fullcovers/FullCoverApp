@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
+import 'package:venq_assessment/Providers/FetchUserProvider.dart';
+import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -52,9 +54,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-
-    
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
