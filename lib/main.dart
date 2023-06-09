@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
         // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        home: ClubsScreen(),
+        home: EventsScreen(),
 
         // home: QrScanner(),
       ),

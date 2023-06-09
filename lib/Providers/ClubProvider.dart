@@ -33,4 +33,8 @@ class ClubProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  ClubModel getClubDetails(String clubId) {
+    return clubsData.firstWhere((club) => club.id == clubId);
+  }
 }

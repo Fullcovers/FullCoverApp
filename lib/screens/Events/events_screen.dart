@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
+import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import '../../Models/Events.dart';
 import '../../widgets/EventsScreen/EventsFooterButtons.dart';
 
@@ -26,6 +29,8 @@ class _EventsScreenState extends State<EventsScreen> {
   @override
   Widget build(BuildContext context) {
     final eventprovider = Provider.of<EventProvider>(context, listen: false);
+    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
+
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5;
@@ -155,20 +160,28 @@ class _EventsScreenState extends State<EventsScreen> {
                               final Event event = eventsData[index];
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Container(
-                                    height: height / 10,
-                                    width: width / 2,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EventDetail(event: event)));
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
-                                    child: Center(
-                                      child: Text(event.name),
+                                    child: Container(
+                                      height: height / 10,
+                                      width: width / 2,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFD9D9D9),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                      ),
+                                      child: Center(
+                                        child: Text(event.name),
+                                      ),
                                     ),
                                   ),
                                 ),

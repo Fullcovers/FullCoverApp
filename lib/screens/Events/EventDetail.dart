@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
-class EventDetail extends StatelessWidget {
-  const EventDetail({super.key});
+import '../../Models/Events.dart';
+import '../../Providers/ClubProvider.dart';
+
+class EventDetail extends StatefulWidget {
+  late ClubModel? club;
+  late Event event;
+
+  EventDetail({required this.event});
+
+  @override
+  State<EventDetail> createState() => _EventDetailState();
+}
+
+class _EventDetailState extends State<EventDetail> {
+  @override
+  void initState() {
+    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
+    widget.club = clubprovider.getClubDetails(widget.event.clubId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
@@ -44,7 +66,7 @@ class EventDetail extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "PSYTRANCE PARTY",
+                                  widget.event.name,
                                   style: GoogleFonts.bebasNeue(
                                       color: Colors.white, fontSize: 35),
                                 ),
@@ -85,6 +107,7 @@ class EventDetail extends StatelessWidget {
                     FractionalTranslation(
                       translation: const Offset(0, 0.13),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
@@ -92,7 +115,8 @@ class EventDetail extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Sun 28 May,2023 - Mon 29 May",
+                                  DateFormat('EE, d MMMM y')
+                                      .format(widget.event.date),
                                   style: GoogleFonts.sairaCondensed(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -102,7 +126,7 @@ class EventDetail extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4.0),
                                   child: Text(
-                                    "19:00 Hrs Onwards",
+                                    DateFormat.jm().format(widget.event.date),
                                     style: GoogleFonts.sairaCondensed(
                                       color: const Color(0XFFA7A7A7),
                                       fontSize: 14,
@@ -113,15 +137,18 @@ class EventDetail extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: width / 6,
-                          ),
-                          Text(
-                            "21+",
-                            style: GoogleFonts.bebasNeue(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 32,
-                                color: const Color(0XFFB59F68)),
+                          // SizedBox(
+                          //   width: width / 6,
+                          // ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Text(
+                              "21+",
+                              style: GoogleFonts.bebasNeue(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 32,
+                                  color: const Color(0XFFB59F68)),
+                            ),
                           ),
                         ],
                       ),
@@ -155,7 +182,7 @@ class EventDetail extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: Text(
-                                  "FREQ",
+                                  widget.club!.name,
                                   style: GoogleFonts.bebasNeue(
                                     color: const Color(0XFFB59F68),
                                     fontSize: 32,
@@ -373,7 +400,7 @@ class EventDetail extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(left: 20.0, top: 5.0),
                               child: Text(
-                                "An Exclusive Audio-Visual performance by Psykovsky & friends",
+                                widget.event.description,
                                 style: GoogleFonts.sairaCondensed(
                                   color: const Color(0XFFF0F0F3),
                                   fontSize: 14,

@@ -35,4 +35,7 @@ class ClubServices {
     }
     return clubProvider.clubsData;
   }
+
+  void getClubById(
+      {required BuildContext context, required String clubid}) async {}
 }
