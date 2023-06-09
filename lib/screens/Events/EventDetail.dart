@@ -23,10 +23,16 @@ class EventDetail extends StatelessWidget {
                   children: [
                     FractionalTranslation(
                       translation: const Offset(0, -0.2),
-                      child: Container(
-                        color: offwhite,
-                        height: height / 5.7,
-                        width: width,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
+                        child: Container(
+                          height: height / 5,
+                          width: width,
+                          decoration: BoxDecoration(
+                              color: const Color(0XFFD9D9D9),
+                              borderRadius: BorderRadius.circular(20.0)),
+                        ),
                       ),
                     ),
                     FractionalTranslation(
@@ -435,50 +441,44 @@ class EventDetail extends StatelessWidget {
                         thickness: 1,
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/ticketconfirming');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 30.0, right: 30),
-                        child: Center(
-                          child: Container(
-                            height: height / 15,
-                            width: width,
-                            decoration: BoxDecoration(
-                                color: const Color(0XFF3D4348),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(15.0),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0, right: 30),
+                      child: Center(
+                        child: Container(
+                          height: height / 15,
+                          width: width,
+                          decoration: BoxDecoration(
+                              color: const Color(0XFF3D4348),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: Text(
+                                  "Starts at Rs.999",
+                                  style: GoogleFonts.sairaCondensed(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                      color: const Color(0XFFF0F0F3)),
                                 ),
-                                border: Border.all(
-                                  color: Colors.white,
-                                )),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Text(
-                                    "Starts at Rs.999",
-                                    style: GoogleFonts.sairaCondensed(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FontStyle.normal,
-                                        color: const Color(0XFFF0F0F3)),
-                                  ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Container(
+                                  height: height / 28,
+                                  width: 50,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle, color: Color(0XFFD9D9D9)),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20.0),
-                                  child: Container(
-                                    height: height / 28,
-                                    width: 50,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0XFFD9D9D9)),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ),
