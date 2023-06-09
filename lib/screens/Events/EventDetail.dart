@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 class EventDetail extends StatelessWidget {
@@ -12,7 +13,7 @@ class EventDetail extends StatelessWidget {
     double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
+        backgroundColor: backgroundColorfigma,
         body: Column(
           children: [
             topnavigationbar(height, width),
@@ -22,16 +23,10 @@ class EventDetail extends StatelessWidget {
                   children: [
                     FractionalTranslation(
                       translation: const Offset(0, -0.2),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
-                        child: Container(
-                          height: height / 5,
-                          width: width,
-                          decoration: BoxDecoration(
-                              color: const Color(0XFFD9D9D9),
-                              borderRadius: BorderRadius.circular(20.0)),
-                        ),
+                      child: Container(
+                        color: offwhite,
+                        height: height / 5.7,
+                        width: width,
                       ),
                     ),
                     FractionalTranslation(
@@ -170,7 +165,8 @@ class EventDetail extends StatelessWidget {
                                   width: 55,
                                   decoration: BoxDecoration(
                                       color: const Color(0XFFD9D9D9),
-                                      borderRadius: BorderRadius.circular(10.0)),
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
                                   child: IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
@@ -357,7 +353,8 @@ class EventDetail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 20.0),
                               child: Text(
                                 "About",
                                 style: GoogleFonts.sairaCondensed(
@@ -368,7 +365,8 @@ class EventDetail extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 5.0),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 5.0),
                               child: Text(
                                 "An Exclusive Audio-Visual performance by Psykovsky & friends",
                                 style: GoogleFonts.sairaCondensed(
@@ -437,44 +435,50 @@ class EventDetail extends StatelessWidget {
                         thickness: 1,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0, right: 30),
-                      child: Center(
-                        child: Container(
-                          height: height / 15,
-                          width: width,
-                          decoration: BoxDecoration(
-                              color: const Color(0XFF3D4348),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(15.0),
-                              ),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: Text(
-                                  "Starts at Rs.999",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                      color: const Color(0XFFF0F0F3)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/ticketconfirming');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30.0, right: 30),
+                        child: Center(
+                          child: Container(
+                            height: height / 15,
+                            width: width,
+                            decoration: BoxDecoration(
+                                color: const Color(0XFF3D4348),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15.0),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Container(
-                                  height: height / 28,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle, color: Color(0XFFD9D9D9)),
+                                border: Border.all(
+                                  color: Colors.white,
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    "Starts at Rs.999",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        color: const Color(0XFFF0F0F3)),
+                                  ),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: Container(
+                                    height: height / 28,
+                                    width: 50,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0XFFD9D9D9)),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

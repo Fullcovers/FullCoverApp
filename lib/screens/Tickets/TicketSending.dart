@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 class TicketSending extends StatelessWidget {
   const TicketSending({super.key});
@@ -11,7 +12,7 @@ class TicketSending extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFF2C2F33),
+      backgroundColor: backgroundColorfigma,
       body: Column(
         children: [
           Container(
@@ -119,7 +120,7 @@ class TicketSending extends StatelessWidget {
               height: height / 4,
               width: double.maxFinite,
               decoration: BoxDecoration(
-                color: const Color(0xFF2C2F33),
+                color: backgroundColorfigma,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

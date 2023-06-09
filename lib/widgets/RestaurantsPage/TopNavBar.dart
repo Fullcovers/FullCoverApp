@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 Widget topnavigationbar(double height, double width) {
   double overlapFraction = 0.5;
@@ -20,38 +21,35 @@ Widget topnavigationbar(double height, double width) {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.supervisor_account_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {},
-                ),
-                height: height / 15,
+                child: Center(
+                    child: Image.asset(
+                  "assets/images/group.png",
+                  scale: 1,
+                )),
+                height: height / 10,
                 width: width / 7,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF2C2F33),
+                  color: backgroundColorfigma,
                 ),
               ),
               SizedBox(
                 width: width / 3,
               ),
               Container(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                    size: 30,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Center(
+                    child: Image.asset(
+                      "assets/images/person.png",
+                    ),
                   ),
-                  onPressed: () {},
                 ),
                 height: height / 15,
                 width: width / 7,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF2C2F33),
+                  color: backgroundColorfigma,
                 ),
               ),
             ],
@@ -62,10 +60,10 @@ Widget topnavigationbar(double height, double width) {
           child: FractionalTranslation(
             translation: Offset(0, -overlapFraction),
             child: Container(
-              height: height / 10,
+              height: height / 11,
               width: 3 * width / 6,
-              decoration: const BoxDecoration(
-                color: Color(0xFF2C2F33),
+              decoration: BoxDecoration(
+                color: backgroundColorfigma,
                 borderRadius: BorderRadius.all(
                   Radius.circular(40),
                 ),
@@ -78,7 +76,6 @@ Widget topnavigationbar(double height, double width) {
                       width: 11,
                     ),
                     Container(
-                      height: height / 12,
                       width: width / 6.5,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -95,7 +92,6 @@ Widget topnavigationbar(double height, double width) {
                       width: 11,
                     ),
                     Container(
-                      height: height / 12,
                       width: width / 6.5,
                       decoration: const BoxDecoration(
                         color: Colors.white,

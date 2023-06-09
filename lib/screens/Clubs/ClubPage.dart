@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
@@ -19,7 +20,7 @@ class ClubPage extends StatelessWidget {
     double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color(0xFF2C2F33),
+          backgroundColor: backgroundColorfigma,
           body: Column(
             children: [
               topnavigationbar(height, width),
@@ -46,7 +47,7 @@ class ClubPage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         children: [
-                          mycard(height, width),
+                          // mycard(height, width),
                           SizedBox(
                             height: 10,
                           )

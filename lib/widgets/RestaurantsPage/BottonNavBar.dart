@@ -29,7 +29,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
       child: Row(
         children: [
           SizedBox(
-            width: (widget.width - widget.width / 1.13) / 2,
+            width: (widget.width - widget.width / 1.04) / 2,
           ),
           Container(
             // margin: const EdgeInsets.all(24.0),
@@ -41,7 +41,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: widget.height / 12,
-                    width: widget.width / 1.13,
+                    width: widget.width / 1.04,
                     child: Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -60,7 +60,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    "assets/images/clubs.png",
+                                    "assets/images/clubs.png",scale: 19,
                                     color: widget.iscolorchange
                                         ? Colors.white
                                         : backgroundColorfigma,
@@ -84,7 +84,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    "assets/images/restaurant.png",
+                                    "assets/images/restaurant.png",scale: 19,
                                     color: widget.iscolorchange
                                         ? Colors.white
                                         : backgroundColorfigma,
@@ -108,7 +108,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    "assets/images/Events.png",
+                                    "assets/images/Events.png",scale: 19,
                                     color: widget.iscolorchange
                                         ? offwhite
                                         : backgroundColorfigma,
@@ -137,18 +137,18 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     child: Container(
                         height: widget.height / 10.5,
                         width: widget.width / 4.5,
-                        child: Card(
+                        child: Card(elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
                           color: widget.iscolorchange
-                                              ? Colors.white
-                                              : backgroundColorfigma,
+                              ? Colors.white
+                              : backgroundColorfigma,
                         )),
                   ),
                 ),
                 // Container(color: Colors.white,height: 25,width: widget.width-25,),
                 Padding(
-                  padding: const EdgeInsets.only(left: 35, top: 10),
+                  padding: const EdgeInsets.only(left: 37, top: 10),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -160,31 +160,38 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             onclick = true;
                           });
                         },
-                        child: Card(color: widget.iscolorchange?Colors.white:backgroundColorfigma,
+                        child: Card(
+                          color: widget.iscolorchange
+                              ? Colors.white
+                              : backgroundColorfigma,
                           // shape: RoundedRectangleBorder(
                           //     borderRadius: BorderRadius.circular(5)),
                           child: Container(
                               decoration: BoxDecoration(
-                                boxShadow:[
+                                boxShadow: [
+                                  // BoxShadow(
+                                  //   color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
+                                  //   offset: Offset(4, 4),
+                                  //   blurRadius: 2,
+                                  // ),
                                   BoxShadow(
-                                    color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
-                                    offset: Offset(4, 4),
-                                    blurRadius: 8,
-                                  ),
-                                  BoxShadow(
-                                    color:widget.iscolorchange ?  Colors.white:Colors.transparent,
+                                    color: widget.iscolorchange
+                                        ? Colors.white
+                                        : Color.fromARGB(255, 67, 73, 78),
                                     offset: Offset(-4, -4),
-                                    blurRadius: 8,
+                                    blurRadius: 10,
                                   ),
+                                  // BoxShadow(
+                                  //   color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
+                                  //   offset: Offset(-4, 4),
+                                  //   blurRadius: 2,
+                                  // ),
                                   BoxShadow(
-                                    color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
-                                    offset: Offset(-4, 4),
-                                    blurRadius: 8,
-                                  ),
-                                  BoxShadow(
-                                    color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.transparent,
+                                    color: widget.iscolorchange
+                                        ? Colors.grey.withOpacity(0.3)
+                                        : Colors.transparent,
                                     offset: Offset(4, -4),
-                                    blurRadius: 8,
+                                    blurRadius: 3,
                                   ),
                                 ],
                                 borderRadius:
@@ -194,7 +201,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                     : backgroundColorfigma,
                               ),
                               child: Image.asset(
-                                "assets/images/qrcode.png",scale: 1.2,
+                                "assets/images/qrcode.png",
+                                scale: 1.2,
                                 color: widget.iscolorchange
                                     ? Colors.black
                                     : Colors.white,
