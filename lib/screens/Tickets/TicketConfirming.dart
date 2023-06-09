@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/DateButton.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/TicketCount.dart';
 
@@ -17,7 +18,7 @@ class TicketConfirming extends StatelessWidget {
     final coloruntap = Color(0XFFB59F68);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
+        backgroundColor: backgroundColorfigma,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -134,9 +135,7 @@ class TicketConfirming extends StatelessWidget {
                       check != check;
                     },
                     child: DateButton(
-                        date: "13",
-                        color: colorbuttongold,
-                        colortext: colorontap),
+                        date: "13", color: golden, colortext: colorontap),
                   ),
                   DateButton(
                       date: "14",
@@ -256,21 +255,26 @@ class TicketConfirming extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: Container(
-                        height: 35,
-                        width: 150,
-                        decoration: BoxDecoration(
-                            color: const Color(0XFFB59F68),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: Center(
-                          child: Text(
-                            "Proceed",
-                            style: GoogleFonts.sairaCondensed(
-                                color: const Color(0XFF222222),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/ticketsending');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Container(
+                          height: 35,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              color: const Color(0XFFB59F68),
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: Center(
+                            child: Text(
+                              "Proceed",
+                              style: GoogleFonts.sairaCondensed(
+                                  color: const Color(0XFF222222),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                       ),

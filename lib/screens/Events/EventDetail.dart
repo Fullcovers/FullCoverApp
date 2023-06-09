@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 class EventDetail extends StatelessWidget {
@@ -12,7 +13,7 @@ class EventDetail extends StatelessWidget {
     double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
+        backgroundColor: backgroundColorfigma,
         body: Column(
           children: [
             topnavigationbar(height, width),
@@ -23,8 +24,8 @@ class EventDetail extends StatelessWidget {
                     FractionalTranslation(
                       translation: const Offset(0, -0.2),
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 25.0, left: 20, right: 20.0),
+                        padding:
+                            const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
                         child: Container(
                           height: height / 5,
                           width: width,
@@ -474,8 +475,7 @@ class EventDetail extends StatelessWidget {
                                   height: height / 28,
                                   width: 50,
                                   decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0XFFD9D9D9)),
+                                      shape: BoxShape.circle, color: Color(0XFFD9D9D9)),
                                 ),
                               )
                             ],

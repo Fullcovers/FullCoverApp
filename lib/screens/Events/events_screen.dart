@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
+import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 import '../../Models/Events.dart';
 import '../../widgets/EventsScreen/EventsFooterButtons.dart';
 
@@ -38,161 +41,115 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xFF2C2F33),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: height / 10,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50),
+          backgroundColor: backgroundColorfigma,
+          body: Column(
+            children: [
+              topnavigationbar(height, width),
+              FractionalTranslation(
+                translation: const Offset(0, -0.5),
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Center(
+                    child: Text("Events",
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 40,
+                          color: Color(0xFFB59F68),
+                        )),
+                  ),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: height / 15,
-                    width: width / 7,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF2C2F33),
-                    ),
-                  ),
-                  SizedBox(
-                    width: width / 3,
-                  ),
-                  Container(
-                    height: height / 15,
-                    width: width / 7,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF2C2F33),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment(0, -overlapFraction),
-              child: FractionalTranslation(
-                translation: Offset(0, -overlapFraction),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
-                  height: height / 10,
-                  width: 3 * width / 6,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2C2F33),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      height: height / 10,
-                      width: width / 3,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            FractionalTranslation(
-              translation: const Offset(0, -1),
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Center(
-                  child: Text("EVENTS",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 30,
-                        color: Colors.white,
-                      )),
-                ),
-              ),
-            ),
-            FractionalTranslation(
-              translation: const Offset(0, -0.1),
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
-                child: Container(
-                    height: 4.8 * height / 10,
-                    width: width,
-                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
-                    child: FutureBuilder<List<Event>>(
-                      future: EventsServices().getAllEvents(context: context),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                          ; // Show a loading indicator while data is being fetched
-                        } else if (snapshot.hasError) {
-                          return Text(
-                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
-                        } else {
-                          // Data retrieval is successful
-                          final eventsData = snapshot.data!;
-
-                          return ListView.builder(
-                            itemCount: eventsData.length,
-                            itemBuilder: (context, index) {
-                              final Event event = eventsData[index];
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Container(
-                                    height: height / 10,
-                                    width: width / 2,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
-                                    ),
-                                    child: Center(
-                                      child: Text(event.name),
-                                    ),
+                  height: height / 1.75,
+                  width: (width / 5) + (width / 1.5),
+                  decoration: BoxDecoration(color: backgroundColorfigma),
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          children: [
+                            Card(
+                              color: offwhite,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              child: Container(
+                                height: height / 12.21,
+                                width: width / 5.788,
+                                decoration: BoxDecoration(
+                                  color: offwhite,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(60.0),
                                   ),
                                 ),
-                              );
-                            },
-                          );
-                        }
-                      },
-                    )),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/eventdetail');
+                              },
+                              child: Card(
+                                color: offwhite,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Container(
+                                  height: height / 12.21,
+                                  width: width / 1.55,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFD9D9D9),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        "Event " + (index + 1).toString(),
+                                        style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text("Starts from",
+                                              style: GoogleFonts.mavenPro(
+                                                fontSize: 11,
+                                              )),
+                                          Text("Rs. 2000",
+                                              style: GoogleFonts.bebasNeue(
+                                                fontSize: 28,
+                                              )),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
-            Container(
-              height: rh,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: EventsFooterButtons(
-                  width: width,
-                  colorb: Colors.white,
-                  textcolor: const Color(0xFF2C2F33)),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+          bottomNavigationBar: bottomnavbar(height: height, width: width)),
     );
   }
 }
