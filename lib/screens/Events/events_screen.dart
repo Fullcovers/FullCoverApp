@@ -5,6 +5,9 @@ import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
+import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import '../../Models/Events.dart';
 import '../../widgets/EventsScreen/EventsFooterButtons.dart';
@@ -43,93 +46,25 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xFF2C2F33),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: height / 10,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: height / 15,
-                    width: width / 7,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF2C2F33),
-                    ),
-                  ),
-                  SizedBox(
-                    width: width / 3,
-                  ),
-                  Container(
-                    height: height / 15,
-                    width: width / 7,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF2C2F33),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment(0, -overlapFraction),
-              child: FractionalTranslation(
-                translation: Offset(0, -overlapFraction),
-                child: Container(
-                  height: height / 10,
-                  width: 3 * width / 6,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2C2F33),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      height: height / 10,
-                      width: width / 3,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                      ),
-                    ),
+          backgroundColor: backgroundColorfigma,
+          body: Column(
+            children: [
+              topnavigationbar(height, width),
+              FractionalTranslation(
+                translation: const Offset(0, -0.5),
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Center(
+                    child: Text("Events",
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 40,
+                          color: Color(0xFFB59F68),
+                        )),
                   ),
                 ),
               ),
-            ),
-            FractionalTranslation(
-              translation: const Offset(0, -1),
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Center(
-                  child: Text("EVENTS",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 30,
-                        color: Colors.white,
-                      )),
-                ),
-              ),
-            ),
-            FractionalTranslation(
-              translation: const Offset(0, -0.1),
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
                     height: 4.8 * height / 10,
                     width: width,
@@ -160,28 +95,20 @@ class _EventsScreenState extends State<EventsScreen> {
                               final Event event = eventsData[index];
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EventDetail(event: event)));
-                                  },
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Container(
+                                    height: height / 10,
+                                    width: width / 2,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFD9D9D9),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0)),
                                     ),
-                                    child: Container(
-                                      height: height / 10,
-                                      width: width / 2,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFFD9D9D9),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20.0)),
-                                      ),
-                                      child: Center(
-                                        child: Text(event.name),
-                                      ),
+                                    child: Center(
+                                      child: Text(event.name),
                                     ),
                                   ),
                                 ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 class ClubDetail extends StatelessWidget {
-  const ClubDetail({super.key});
+   ClubDetail({super.key,required this.club});
+final ClubModel club;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,7 @@ class ClubDetail extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color(0xFF2C2F33),
+      backgroundColor: backgroundColorfigma,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

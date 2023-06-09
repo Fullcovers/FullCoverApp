@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 import '../../Models/Events.dart';
@@ -34,7 +35,7 @@ class _EventDetailState extends State<EventDetail> {
     double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
+        backgroundColor: backgroundColorfigma,
         body: Column(
           children: [
             topnavigationbar(height, width),

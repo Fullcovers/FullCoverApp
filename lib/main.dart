@@ -75,13 +75,15 @@ class MyApp extends StatelessWidget {
           '/qrscanner': (context) => const QrScanner(),
           '/allclubs': (context) => const ClubsScreen(),
           '/allevents': (context) => const EventsScreen(),
+          '/ticketsending': (context) => const TicketSending(),
+          '/ticketconfirming': (context) => const TicketConfirming(),
         },
         // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         home: EventsScreen(),
 
-        // home: QrScanner(),
+,
       ),
     );
   }

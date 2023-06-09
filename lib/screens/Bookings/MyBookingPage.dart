@@ -623,19 +623,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 ],
               )),
         ),
-        // bottomNavigationBar: !iscolorchange
-        //     ? bottomnavbar(
-        //         width: width,
-        //         iscolorchange: iscolorchange,
-        //         height: height,
-        //       )
-        //     : null,
+        bottomNavigationBar: !iscolorchange
+            ? bottomnavbar(
+                width: width,
+                iscolorchange: iscolorchange,
+                height: height,
+              )
+            : null,
       ),
     );
   }
 }
 
-BorderRadiusGeometry radius = BorderRadius.only(
-  topLeft: Radius.circular(24.0),
-  topRight: Radius.circular(24.0),
-);
