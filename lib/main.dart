@@ -76,8 +76,9 @@ class MyApp extends StatelessWidget {
           '/allevents': (context) => const EventsScreen(),
         },
         // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        home:
-            userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        // home:
+        //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        home: ClubsScreen(),
 
         // home: QrScanner(),
       ),

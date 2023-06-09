@@ -23,8 +23,8 @@ class EventDetail extends StatelessWidget {
                     FractionalTranslation(
                       translation: const Offset(0, -0.2),
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
+                        padding: const EdgeInsets.only(
+                            top: 25.0, left: 20, right: 20.0),
                         child: Container(
                           height: height / 5,
                           width: width,
@@ -170,7 +170,8 @@ class EventDetail extends StatelessWidget {
                                   width: 55,
                                   decoration: BoxDecoration(
                                       color: const Color(0XFFD9D9D9),
-                                      borderRadius: BorderRadius.circular(10.0)),
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
                                   child: IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
@@ -357,7 +358,8 @@ class EventDetail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 20.0),
                               child: Text(
                                 "About",
                                 style: GoogleFonts.sairaCondensed(
@@ -368,7 +370,8 @@ class EventDetail extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 5.0),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 5.0),
                               child: Text(
                                 "An Exclusive Audio-Visual performance by Psykovsky & friends",
                                 style: GoogleFonts.sairaCondensed(
@@ -471,7 +474,8 @@ class EventDetail extends StatelessWidget {
                                   height: height / 28,
                                   width: 50,
                                   decoration: const BoxDecoration(
-                                      shape: BoxShape.circle, color: Color(0XFFD9D9D9)),
+                                      shape: BoxShape.circle,
+                                      color: Color(0XFFD9D9D9)),
                                 ),
                               )
                             ],
