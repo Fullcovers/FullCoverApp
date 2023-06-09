@@ -4,8 +4,8 @@ import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 
 class ClubDetail extends StatelessWidget {
-   ClubDetail({super.key,required this.club});
-final ClubModel club;
+  ClubDetail({super.key, required this.club});
+  final ClubModel club;
 
   @override
   Widget build(BuildContext context) {

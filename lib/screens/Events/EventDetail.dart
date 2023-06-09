@@ -8,12 +8,12 @@ import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 import '../../Models/Events.dart';
 import '../../Providers/ClubProvider.dart';
+import '../../Services/Club_Services.dart';
 
 class EventDetail extends StatefulWidget {
-  late ClubModel? club;
-  late Event event;
+  Event event;
 
-  EventDetail({required this.event});
+  EventDetail({super.key, required this.event});
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -21,18 +21,13 @@ class EventDetail extends StatefulWidget {
 
 class _EventDetailState extends State<EventDetail> {
   @override
-  void initState() {
-    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
-    widget.club = clubprovider.getClubDetails(widget.event.clubId);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
+    // ClubServices().getSingleClub(context: context, clubid: widget.event.clubId);
+
+    // print(clubprovider.club!.id);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
-    double overlapFraction = 0.5;
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColorfigma,
@@ -183,7 +178,7 @@ class _EventDetailState extends State<EventDetail> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: Text(
-                                  widget.club!.name,
+                                  clubprovider.club?.name ?? "",
                                   style: GoogleFonts.bebasNeue(
                                     color: const Color(0XFFB59F68),
                                     fontSize: 32,
@@ -220,9 +215,9 @@ class _EventDetailState extends State<EventDetail> {
                                 icon: const Icon(Icons.location_on_outlined),
                               ),
                               FractionalTranslation(
-                                translation: const Offset(-0.1, 0),
+                                translation: const Offset(0.05, 0),
                                 child: Text(
-                                  "Address Lorem ipsum",
+                                  clubprovider.club?.address ?? "",
                                   style: GoogleFonts.sairaCondensed(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,

@@ -36,6 +36,33 @@ class ClubServices {
     return clubProvider.clubsData;
   }
 
-  void getClubById(
-      {required BuildContext context, required String clubid}) async {}
+  Future<ClubModel?> getSingleClub(
+      {required BuildContext context, required clubid}) async {
+    final clubProvider = Provider.of<ClubProvider>(context, listen: false);
+    try {
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}club/$clubid'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            final clubProvider =
+                Provider.of<ClubProvider>(context, listen: false);
+            clubProvider.setclubnull();
+            final jsonData = json.decode(res.body)["data"];
+            // clubProvider.setClubsData(jsonData);
+            ClubModel club = clubProvider.getClubDetails(jsonData);
+            clubProvider.setSingleClub(club);
+
+            // showSnackBar(context, 'Clubs data fetched successfully');
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return clubProvider.club;
+  }
 }

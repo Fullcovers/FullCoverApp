@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
+import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
@@ -46,8 +47,9 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-          backgroundColor: backgroundColorfigma,
-          body: Column(
+        backgroundColor: backgroundColorfigma,
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               topnavigationbar(height, width),
               FractionalTranslation(
@@ -93,22 +95,39 @@ class _EventsScreenState extends State<EventsScreen> {
                             itemCount: eventsData.length,
                             itemBuilder: (context, index) {
                               final Event event = eventsData[index];
+                              // final ClubModel club =
+                              //     clubprovider.getClubDetails(event.clubId);
+
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Container(
-                                    height: height / 10,
-                                    width: width / 2,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    print(event.clubId);
+                                    ClubModel? club = await ClubServices()
+                                        .getSingleClub(
+                                            clubid: event.clubId,
+                                            context: context);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EventDetail(event: event)));
+                                    // clubprovider.setclubnull();
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
-                                    child: Center(
-                                      child: Text(event.name),
+                                    child: Container(
+                                      height: height / 10,
+                                      width: width / 2,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFD9D9D9),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                      ),
+                                      child: Center(
+                                        child: Text(event.name),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -119,19 +138,17 @@ class _EventsScreenState extends State<EventsScreen> {
                       },
                     )),
               ),
-            ),
-            Container(
-              height: rh,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: EventsFooterButtons(
-                  width: width,
-                  colorb: Colors.white,
-                  textcolor: const Color(0xFF2C2F33)),
-            ),
-          ],
-        ),
+              Container(
+                height: rh,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: EventsFooterButtons(
+                    width: width,
+                    colorb: Colors.white,
+                    textcolor: const Color(0xFF2C2F33)),
+              ),
+            ]),
       ),
     );
   }
