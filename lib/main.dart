@@ -9,6 +9,7 @@ import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage.dart';
+import 'package:venq_assessment/screens/Clubs/ClubsPage2.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
@@ -71,11 +72,11 @@ class MyApp extends StatelessWidget {
           '/clubs': (context) => const ClubPage(),
         },
         // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        home: userprovider.token.isEmpty
-            ? const LoginPage()
-            :  MyBookingPage(),
+        // home: userprovider.token.isEmpty
+        //     ? const LoginPage()
+        //     :  MyBookingPage(),
 
-        // home: LoginPage(),
+        home: ClubPage(),
       ),
 
     );

@@ -88,13 +88,9 @@ class Balancecard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      IconButton(
-                        onPressed: () {},
-                        color: const Color.fromARGB(255, 191, 150, 26),
-                        icon: const Icon(CryptoFontIcons.BTC),
-                      ),
+                      Image.asset("assets/images/coinlogo.png",scale: 13,),
                       const Text(
-                        "1385",
+                        " 1385",
                         style: TextStyle(
                             color: Color.fromARGB(255, 191, 150, 26),
                             fontSize: 30),

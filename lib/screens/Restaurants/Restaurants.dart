@@ -57,7 +57,7 @@ class RestaurantsPage extends StatelessWidget {
               )
             ],
           ),
-          bottomNavigationBar: bottomnavbar(height, width)),
+          bottomNavigationBar: bottomnavbar(height:height, width:width)),
     );
   }
 }
