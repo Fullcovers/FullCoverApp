@@ -28,7 +28,6 @@ class UserServices {
         body: jsonEncode(requestBody),
       );
       fetchuserprovider.setLoading(false);
-
       if (res.statusCode == 200) {
         UserModel user =
             fetchuserprovider.parseUserDetails(jsonDecode(res.body));

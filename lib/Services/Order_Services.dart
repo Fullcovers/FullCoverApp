@@ -56,9 +56,10 @@ class OrderServices {
                 orderProvider.setOrder(order);
               }
             }
-            showSnackBar(context, message);
+            // showSnackBar(context, message);
           });
     } catch (e) {
+      print(e.toString());
       showSnackBar(context, e.toString());
     }
   }
@@ -68,7 +69,6 @@ class OrderServices {
     String orderId = id;
     try {
       var userprovider = Provider.of<UserProvider>(context, listen: false);
-      print(userprovider.token);
       http.Response res = await http.post(
         Uri.parse('${Constants.uri}orders/$orderId'),
         headers: <String, String>{
@@ -76,24 +76,25 @@ class OrderServices {
           'Authorization': 'Bearer ${userprovider.token}'
         },
       );
-
-      if (res.statusCode == 403) {
-        // Handle the forbidden response
+      String message = jsonDecode(res.body)['message'];
+      if (res.statusCode == 200) {
+        showSnackBar(context, "Ticket Verified Successfully!!");
+      } else if (res.statusCode == 403) {
         showSnackBar(context, 'Forbidden: User not authenticated');
-        // Perform any other necessary actions or show an appropriate message
         return;
+      } else if (res.statusCode == 400) {
+        showSnackBar(context, message);
+      } else if (res.statusCode == 404) {
+        showSnackBar(context, message);
+      } else if (res.statusCode == 405) {
+        showSnackBar(context, message);
+      } else if (res.statusCode == 403) {
+        showSnackBar(context, "Forbidden User Not Authenticated");
+      } else {
+        showSnackBar(context, "Error in Fetching");
       }
-      print(res.body);
-      httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          showSnackBar(context, "Ticket has been Validated");
-        },
-      );
     } catch (e) {
       print(e.toString());
-      showSnackBar(context, e.toString());
     }
   }
 }

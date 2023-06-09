@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';

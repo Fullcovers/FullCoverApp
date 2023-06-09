@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -16,7 +17,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Loyalty/Loyalty.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
@@ -55,11 +56,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
         ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+        ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
+        ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
+        ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -69,16 +74,14 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginPage(),
           '/qrscanner': (context) => const QrScanner(),
           '/allclubs': (context) => const ClubsScreen(),
-          '/clubs': (context) => const ClubPage(),
+          '/allevents': (context) => const EventsScreen(),
         },
         // home: userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        // home: userprovider.token.isEmpty
-        //     ? const LoginPage()
-        //     :  MyBookingPage(),
+        home:
+            userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
 
-        home: ClubPage(),
+        // home: QrScanner(),
       ),
-
     );
   }
 }
