@@ -70,7 +70,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 child: Container(
                     height: 4.8 * height / 10,
                     width: width,
-                    decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                    decoration: BoxDecoration(color: backgroundColorfigma),
                     child: FutureBuilder<List<Event>>(
                       future: EventsServices().getAllEvents(context: context),
                       builder: (context, snapshot) {
@@ -101,36 +101,100 @@ class _EventsScreenState extends State<EventsScreen> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    print(event.clubId);
-                                    ClubModel? club = await ClubServices()
-                                        .getSingleClub(
-                                            clubid: event.clubId,
-                                            context: context);
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EventDetail(event: event)));
-                                    // clubprovider.setclubnull();
-                                  },
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: Container(
-                                      height: height / 10,
-                                      width: width / 2,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFFD9D9D9),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20.0)),
+                                    onTap: () async {
+                                      print(event.clubId);
+                                      ClubModel? club = await ClubServices()
+                                          .getSingleClub(
+                                              clubid: event.clubId,
+                                              context: context);
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetail(event: event)));
+                                      // clubprovider.setclubnull();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Card(
+                                            color: offwhite,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0)),
+                                            child: Container(
+                                              height: height / 12.21,
+                                              width: width / 5.788,
+                                              decoration: BoxDecoration(
+                                                color: offwhite,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(60.0),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [],
+                                              ),
+                                            ),
+                                          ),
+                                          Card(
+                                            color: offwhite,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0)),
+                                            child: Container(
+                                              height: height / 12.21,
+                                              width: width / 1.55,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFFD9D9D9),
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(20.0),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Text(
+                                                    event.name,
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 24,
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      Text("Starts from",
+                                                          style: GoogleFonts
+                                                              .mavenPro(
+                                                            fontSize: 11,
+                                                          )),
+                                                      Text("Rs. 2000",
+                                                          style: GoogleFonts
+                                                              .bebasNeue(
+                                                            fontSize: 28,
+                                                          )),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      child: Center(
-                                        child: Text(event.name),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                    )),
                               );
                             },
                           );
@@ -141,14 +205,8 @@ class _EventsScreenState extends State<EventsScreen> {
               Container(
                 height: rh,
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: EventsFooterButtons(
-                    width: width,
-                    colorb: Colors.white,
-                    textcolor: const Color(0xFF2C2F33)),
-              ),
             ]),
+        bottomNavigationBar: bottomnavbar(height: height, width: width),
       ),
     );
   }

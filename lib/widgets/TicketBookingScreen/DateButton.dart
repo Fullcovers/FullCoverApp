@@ -4,11 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class DateButton extends StatelessWidget {
   const DateButton({
     Key? key,
-    required this.date,
+    required this.date,    required this.weekday,
+
     required this.color,
     required this.colortext,
   }) : super(key: key);
-  final String date;
+  final String date;  final String weekday;
+
   final Color color;
   final Color colortext;
   @override
@@ -31,10 +33,10 @@ class DateButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Sat",
+              weekday.substring(0,3),
               style: GoogleFonts.sairaCondensed(
                 color: colortext,
-                fontSize: 20,
+                fontSize: height/43.35,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -42,7 +44,7 @@ class DateButton extends StatelessWidget {
               date,
               style: GoogleFonts.sairaCondensed(
                 color: colortext,
-                fontSize: 20,
+                fontSize: height/43.35,
                 fontWeight: FontWeight.w600,
               ),
             ),

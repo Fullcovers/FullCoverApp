@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 
-Widget mycard(double height, double width, ClubModel club) {
+Widget mycard(double height, double width, 
+ClubModel club
+) {
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15),
     ),
     child: Container(
-      width: width / 1.1,
-      height: height / 6.2,
+      width: width / 1.2,
+      height: height / 5,
       child: Stack(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
@@ -46,8 +48,8 @@ Widget mycard(double height, double width, ClubModel club) {
         Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              width: width / 1.1,
-              height: height / 18,
+              width: width / 1.2,
+              height: height / 15,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -56,6 +58,7 @@ Widget mycard(double height, double width, ClubModel club) {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(children: [
+                  SizedBox(width: width/40,),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +80,7 @@ Widget mycard(double height, double width, ClubModel club) {
                     ],
                   ),
                   SizedBox(
-                    width: width / 20,
+                    width: width / 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 2.0),
@@ -133,7 +136,7 @@ Widget mycard(double height, double width, ClubModel club) {
                     ),
                   ),
                   SizedBox(
-                    width: width / 20,
+                    width: width / 40,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -148,6 +151,7 @@ Widget mycard(double height, double width, ClubModel club) {
                       )
                     ],
                   ),
+                  SizedBox(width: width/40,),
                   Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(200.0)),
