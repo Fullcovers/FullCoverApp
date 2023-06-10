@@ -134,18 +134,18 @@ class TicketConfirming extends StatelessWidget {
                     onTap: () {
                       check != check;
                     },
-                    child: DateButton(
+                    child: DateButton(weekday: "",
                         date: "13", color: golden, colortext: colorontap),
                   ),
-                  DateButton(
+                  DateButton(weekday: "",
                       date: "14",
                       color: colorbuttonnormal,
                       colortext: coloruntap),
-                  DateButton(
+                  DateButton(weekday: "",
                       date: "15",
                       color: colorbuttonnormal,
                       colortext: coloruntap),
-                  DateButton(
+                  DateButton(weekday: "",
                       date: "16",
                       color: colorbuttonnormal,
                       colortext: coloruntap),

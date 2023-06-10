@@ -50,37 +50,37 @@ class _ClubsScreenState extends State<ClubsScreen> {
           children: [
             topnavigationbar(height, width),
             FractionalTranslation(
-                translation: const Offset(0, -1),
-                child: Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Center(
-                    child: Text("Clubs",
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 40,
-                          color: Color(0xFFB59F68),
-                        )),
-                  ),
+              translation: const Offset(0, -1),
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Center(
+                  child: Text("Clubs",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: width / 10.275,
+                        color: Color(0xFFB59F68),
+                      )),
                 ),
               ),
+            ),
             FractionalTranslation(
               translation: const Offset(0, -0.1),
               child: Padding(
                 padding:
-                    const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
+                    EdgeInsets.only(top: 0.0, left: width / 20.55, right: 20.0),
                 child: Container(
                     height: 4.8 * height / 8.4,
                     width: width,
-                    decoration:  BoxDecoration(color: backgroundColorfigma),
+                    decoration: BoxDecoration(color: backgroundColorfigma),
                     child: FutureBuilder<List<ClubModel>>(
                       future: ClubServices().getAllClubs(context: context),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
+                          return Center(
                             child: SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: CircularProgressIndicator(),
+                              height: height / 21.675,
+                              width: width / 10.275,
+                              child: const CircularProgressIndicator(),
                             ),
                           ); // Show a loading indicator while data is being fetched
                         } else if (snapshot.hasError) {
@@ -91,7 +91,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                           final clubsData = snapshot.data!;
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
+                            child: SizedBox(
                               width: width / 1.3,
                               height: height / 1.85,
                               child: ListView.builder(
@@ -100,13 +100,18 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                   final ClubModel club = clubsData[index];
                                   return Column(
                                     children: [
-                                      InkWell(onTap: (){
-                                        Navigator.of(context).push(
-                                                        MaterialPageRoute(builder: (context) =>  ClubDetail( club: club,)),
-
-                                        );
-                                      },child: mycard(height, width,club)),
-                                      SizedBox(
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ClubDetail(
+                                                        club: club,
+                                                      )),
+                                            );
+                                          },
+                                          child: mycard(height, width, club)),
+                                      const SizedBox(
                                         height: 10,
                                       )
                                     ],
@@ -164,11 +169,9 @@ class _ClubsScreenState extends State<ClubsScreen> {
                     )),
               ),
             ),
-
           ],
         ),
-                              bottomNavigationBar: bottomnavbar(height:height, width:width),
-
+        bottomNavigationBar: bottomnavbar(height: height, width: width),
       ),
     );
   }
