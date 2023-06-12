@@ -51,7 +51,8 @@ dependencies:
   flutter_neumorphic: ^3.2.0
   flutter_inset_box_shadow: ^1.0.8
   dio: ^5.2.0
-  jiffy: ^6.2.1
+  jiffy: ^6.1.0
+
 
 
 dev_dependencies:

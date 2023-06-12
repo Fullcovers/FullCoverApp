@@ -3,12 +3,15 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
+// import 'package:jiffy/jiffy.dart';
+
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage3.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/DateButton.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/TicketCount.dart';
-import 'package:jiffy/jiffy.dart';
 
 class ClubsPage2 extends StatefulWidget {
   const ClubsPage2({super.key, required this.club});
@@ -34,7 +37,6 @@ class _ClubsPage2State extends State<ClubsPage2> {
   var coloruntap4 = Colors.white;
   var coloruntap5 = Colors.white;
   var coloruntap6 = Colors.white;
-
 
   @override
   void initState() {
@@ -68,8 +70,10 @@ class _ClubsPage2State extends State<ClubsPage2> {
   late String dayaftertommorowsdayOfWeek = getDayOfWeek(dayaftertommorow);
   late String twodayaftertommorowsdayOfWeek = getDayOfWeek(twodayaftertommorow);
   late String threetomorrowsdayOfWeek = getDayOfWeek(threedayaftertommorow);
-  late String fourdayaftertommorowsdayOfWeek = getDayOfWeek(fourdayaftertommorow);
-  late String fivedayaftertommorowsdayOfWeek = getDayOfWeek(fivedayaftertommorow);
+  late String fourdayaftertommorowsdayOfWeek =
+      getDayOfWeek(fourdayaftertommorow);
+  late String fivedayaftertommorowsdayOfWeek =
+      getDayOfWeek(fivedayaftertommorow);
 
   DateTime tomorrow = DateTime.now().add(Duration(days: 1));
   DateTime dayaftertommorow = DateTime.now().add(Duration(days: 2));
@@ -81,7 +85,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
 
   @override
   Widget build(BuildContext context) {
-    var cmonth = Jiffy.now().MMM;
+    var cmonth = DateFormat.MMM().format(DateTime.now());
     int totalprice = (stagcount * stagentryprice) +
         (femalecount * femaleentryprice) +
         (couplecount * coupleentrypricce);
@@ -94,7 +98,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
       child: Scaffold(
         backgroundColor: backgroundColorfigma,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,12 +109,13 @@ class _ClubsPage2State extends State<ClubsPage2> {
                       height: height / 40,
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(top: height/43.35, left: width/20.55),
+                      padding: EdgeInsets.only(
+                          top: height / 43.35, left: width / 20.55),
                       child: Text(
                         widget.club.name,
                         style: GoogleFonts.bebasNeue(
                           color: const Color(0XFFF0F0F3),
-                          fontSize: height/23,
+                          fontSize: height / 23,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -123,7 +128,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           "Pune",
                           style: GoogleFonts.sairaCondensed(
                             color: const Color(0XFFB59F68),
-                            fontSize: height/54.1875,
+                            fontSize: height / 54.1875,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -136,10 +141,10 @@ class _ClubsPage2State extends State<ClubsPage2> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20.0, top: 0.0),
                     child: Text(
-                      "19:00 Hrs-23.45 Hrs",
+                      "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                       style: GoogleFonts.sairaCondensed(
                         color: const Color(0XFFFFFFFF),
-                        fontSize: height/43.35,
+                        fontSize: height / 43.35,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -158,7 +163,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                   child: Text(
                     widget.club.address,
                     style: GoogleFonts.sairaCondensed(
-                      fontSize: height/61.5,
+                      fontSize: height / 61.5,
                       fontWeight: FontWeight.w600,
                       color: const Color(0XFFBCBCBC),
                     ),
@@ -183,7 +188,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                     "Select Date",
                     style: GoogleFonts.sairaCondensed(
                       color: const Color(0XFFBABABA),
-                      fontSize: height/54,
+                      fontSize: height / 54,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -194,7 +199,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                     "${selectedday} $selected ${cmonth}, ${date.year}",
                     style: GoogleFonts.sairaCondensed(
                       color: const Color(0XFFB59F68),
-                      fontSize: height/54,
+                      fontSize: height / 54,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -202,19 +207,23 @@ class _ClubsPage2State extends State<ClubsPage2> {
               ],
             ),
             Padding(
-              padding:  EdgeInsets.only(
-                  right: width/20.55, left: width/20.55, bottom: height/35, top: height/35),
-              child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(
+                  right: width / 20.55,
+                  left: width / 20.55,
+                  bottom: height / 35,
+                  top: height / 35),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day;
-                                  
+
                             colorbuttonnormal = colorbuttonnormal == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -222,25 +231,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal2 =
-                                colorbuttonnormal3 =colorbuttonnormal4=colorbuttonnormal5=colorbuttonnormal6= backgroundColorfigma;
-                            coloruntap1 = coloruntap2 = coloruntap3 = coloruntap4 = coloruntap5 = coloruntap6=Colors.white;
-                                                  selectedday = todaysdayOfWeek;
-    });
+                                colorbuttonnormal3 = colorbuttonnormal4 =
+                                    colorbuttonnormal5 = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap2 = coloruntap3 =
+                                coloruntap4 =
+                                    coloruntap5 = coloruntap6 = Colors.white;
+                            selectedday = todaysdayOfWeek;
+                          });
                         },
-                        child: DateButton(weekday: todaysdayOfWeek,
+                        child: DateButton(
+                            weekday: todaysdayOfWeek,
                             date: (date.day).toString(),
                             color: colorbuttonnormal,
                             colortext: coloruntap),
                       ),
                     ),
-                    
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 1;
-                                  
+
                             colorbuttonnormal1 = colorbuttonnormal1 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -248,24 +261,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal = colorbuttonnormal2 =
-                                colorbuttonnormal3 =colorbuttonnormal4=colorbuttonnormal5=colorbuttonnormal6= backgroundColorfigma;
-                            coloruntap = coloruntap2 = coloruntap3 =coloruntap4 = coloruntap5 = coloruntap6= Colors.white;
+                                colorbuttonnormal3 = colorbuttonnormal4 =
+                                    colorbuttonnormal5 = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap = coloruntap2 = coloruntap3 =
+                                coloruntap4 =
+                                    coloruntap5 = coloruntap6 = Colors.white;
                             selectedday = tomorrowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: tomorrowsdayOfWeek,
+                        child: DateButton(
+                            weekday: tomorrowsdayOfWeek,
                             date: (date.day + 1).toString(),
                             color: colorbuttonnormal1,
                             colortext: coloruntap1),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 2;
-                                  
+
                             colorbuttonnormal2 = colorbuttonnormal2 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -273,24 +291,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal =
-                                colorbuttonnormal3 = colorbuttonnormal4=colorbuttonnormal5=colorbuttonnormal6=backgroundColorfigma;
-                            coloruntap1 = coloruntap = coloruntap3 =coloruntap4 = coloruntap5 = coloruntap6= Colors.white;
+                                colorbuttonnormal3 = colorbuttonnormal4 =
+                                    colorbuttonnormal5 = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap = coloruntap3 =
+                                coloruntap4 =
+                                    coloruntap5 = coloruntap6 = Colors.white;
                             selectedday = dayaftertommorowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: dayaftertommorowsdayOfWeek,
+                        child: DateButton(
+                            weekday: dayaftertommorowsdayOfWeek,
                             date: (date.day + 2).toString(),
                             color: colorbuttonnormal2,
                             colortext: coloruntap2),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 3;
-                                  
+
                             colorbuttonnormal3 = colorbuttonnormal3 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -298,24 +321,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal2 =
-                                colorbuttonnormal = colorbuttonnormal4=colorbuttonnormal5=colorbuttonnormal6=backgroundColorfigma;
-                            coloruntap1 = coloruntap2 = coloruntap = coloruntap4 = coloruntap5 = coloruntap6=Colors.white;
+                                colorbuttonnormal = colorbuttonnormal4 =
+                                    colorbuttonnormal5 = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap2 = coloruntap =
+                                coloruntap4 =
+                                    coloruntap5 = coloruntap6 = Colors.white;
                             selectedday = twodayaftertommorowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: twodayaftertommorowsdayOfWeek,
+                        child: DateButton(
+                            weekday: twodayaftertommorowsdayOfWeek,
                             date: (date.day + 3).toString(),
                             color: colorbuttonnormal3,
                             colortext: coloruntap3),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 4;
-                                  
+
                             colorbuttonnormal4 = colorbuttonnormal4 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -323,24 +351,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal2 =
-                                colorbuttonnormal3 = colorbuttonnormal=colorbuttonnormal5=colorbuttonnormal6=backgroundColorfigma;
-                            coloruntap1 = coloruntap2 = coloruntap3 =coloruntap = coloruntap5 = coloruntap6= Colors.white;
+                                colorbuttonnormal3 = colorbuttonnormal =
+                                    colorbuttonnormal5 = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap2 = coloruntap3 =
+                                coloruntap =
+                                    coloruntap5 = coloruntap6 = Colors.white;
                             selectedday = threetomorrowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: threetomorrowsdayOfWeek,
+                        child: DateButton(
+                            weekday: threetomorrowsdayOfWeek,
                             date: (date.day + 4).toString(),
                             color: colorbuttonnormal4,
                             colortext: coloruntap4),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 5;
-                                  
+
                             colorbuttonnormal5 = colorbuttonnormal5 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -348,24 +381,29 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal2 =
-                                colorbuttonnormal3 =colorbuttonnormal4=colorbuttonnormal=colorbuttonnormal6= backgroundColorfigma;
-                            coloruntap1 = coloruntap2 = coloruntap3 =coloruntap4 = coloruntap = coloruntap6= Colors.white;
+                                colorbuttonnormal3 = colorbuttonnormal4 =
+                                    colorbuttonnormal = colorbuttonnormal6 =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap2 = coloruntap3 =
+                                coloruntap4 =
+                                    coloruntap = coloruntap6 = Colors.white;
                             selectedday = fourdayaftertommorowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: fourdayaftertommorowsdayOfWeek,
+                        child: DateButton(
+                            weekday: fourdayaftertommorowsdayOfWeek,
                             date: (date.day + 5).toString(),
                             color: colorbuttonnormal5,
                             colortext: coloruntap5),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left:8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             selected = date.day + 6;
-                                  
+
                             colorbuttonnormal6 = colorbuttonnormal6 == golden
                                 ? backgroundColorfigma
                                 : golden;
@@ -373,12 +411,17 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ? Colors.black
                                 : Colors.white;
                             colorbuttonnormal1 = colorbuttonnormal2 =
-                                colorbuttonnormal3 = colorbuttonnormal4=colorbuttonnormal5=colorbuttonnormal=backgroundColorfigma;
-                            coloruntap1 = coloruntap2 = coloruntap3 =coloruntap4 = coloruntap5 = coloruntap= Colors.white;
+                                colorbuttonnormal3 = colorbuttonnormal4 =
+                                    colorbuttonnormal5 = colorbuttonnormal =
+                                        backgroundColorfigma;
+                            coloruntap1 = coloruntap2 = coloruntap3 =
+                                coloruntap4 =
+                                    coloruntap5 = coloruntap = Colors.white;
                             selectedday = fivedayaftertommorowsdayOfWeek;
                           });
                         },
-                        child: DateButton(weekday: fivedayaftertommorowsdayOfWeek,
+                        child: DateButton(
+                            weekday: fivedayaftertommorowsdayOfWeek,
                             date: (date.day + 6).toString(),
                             color: colorbuttonnormal6,
                             colortext: coloruntap6),
@@ -389,11 +432,11 @@ class _ClubsPage2State extends State<ClubsPage2> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: width/13, right: width/13),
+              padding: EdgeInsets.only(left: width / 13, right: width / 13),
               child: Container(
                 height: 3.2 * height / 10,
                 width: double.maxFinite,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   color: backgroundColorfigma,
                 ),
                 child: Column(
@@ -417,7 +460,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Stag",
                               style: GoogleFonts.mavenPro(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -425,7 +468,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Rs. $stagentryprice",
                               style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -453,9 +496,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                             }
                                           });
                                         },
-                                        icon:  Icon(
+                                        icon: Icon(
                                           Icons.remove,
-                                          size: width/25,
+                                          size: width / 25,
                                         ),
                                         color: Colors.black,
                                       ),
@@ -510,7 +553,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                           },
                                           icon: const Icon(Icons.add),
                                           color: Colors.black,
-                                          iconSize: width/25,
+                                          iconSize: width / 25,
                                         ),
                                       ),
                                     ),
@@ -540,7 +583,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Couple",
                               style: GoogleFonts.mavenPro(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -548,7 +591,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Rs. $coupleentrypricce",
                               style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -576,9 +619,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                             }
                                           });
                                         },
-                                        icon:  Icon(
+                                        icon: Icon(
                                           Icons.remove,
-                                          size: width/25,
+                                          size: width / 25,
                                         ),
                                         color: Colors.black,
                                       ),
@@ -633,7 +676,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                           },
                                           icon: const Icon(Icons.add),
                                           color: Colors.black,
-                                          iconSize: width/25,
+                                          iconSize: width / 25,
                                         ),
                                       ),
                                     ),
@@ -663,7 +706,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Female",
                               style: GoogleFonts.mavenPro(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -671,7 +714,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Rs. $femaleentryprice",
                               style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFFFFFFFF),
-                                fontSize: height/43.35,
+                                fontSize: height / 43.35,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -699,9 +742,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                             }
                                           });
                                         },
-                                        icon:  Icon(
+                                        icon: Icon(
                                           Icons.remove,
-                                          size: width/25,
+                                          size: width / 25,
                                         ),
                                         color: Colors.black,
                                       ),
@@ -710,7 +753,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                   Flexible(
                                     flex: 1,
                                     child: Container(
-                                      height: height/27,
+                                      height: height / 27,
                                       decoration: BoxDecoration(
                                         border: Border(
                                           top: BorderSide(
@@ -756,7 +799,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                           },
                                           icon: const Icon(Icons.add),
                                           color: Colors.black,
-                                          iconSize: width/25,
+                                          iconSize: width / 25,
                                         ),
                                       ),
                                     ),
@@ -820,7 +863,8 @@ class _ClubsPage2State extends State<ClubsPage2> {
               ),
             ),
             Flexible(
-              child: Container(height: height/10,
+              child: Container(
+                height: height / 10,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(
                   color: Color(0XFFD9D9D9),
@@ -841,7 +885,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             "Total Amount",
                             style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFF222222),
-                                fontSize: width/25.6875,
+                                fontSize: width / 25.6875,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -854,7 +898,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 .toString(),
                             style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFF222222),
-                                fontSize: width/16,
+                                fontSize: width / 16,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -865,7 +909,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ClubPage3(club: widget.club,date: selected,weekday: selectedday,year: date.year,month: cmonth,
+                                builder: (context) => ClubPage3(
+                                      club: widget.club,
+                                      date: selected,
+                                      weekday: selectedday,
+                                      year: date.year,
+                                      month: cmonth,
                                       femalecount: femalecount,
                                       femaleentryprice: femaleentryprice,
                                       stagcount: stagcount,
@@ -878,8 +927,8 @@ class _ClubsPage2State extends State<ClubsPage2> {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Container(
-                          height: height/24.77142857142857,
-                          width: width/2.74,
+                          height: height / 24.77142857142857,
+                          width: width / 2.74,
                           decoration: BoxDecoration(
                               color: const Color(0XFFB59F68),
                               borderRadius: BorderRadius.circular(20.0)),
@@ -888,7 +937,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               "Proceed",
                               style: GoogleFonts.sairaCondensed(
                                   color: const Color(0XFF222222),
-                                  fontSize: width/20.55,
+                                  fontSize: width / 20.55,
                                   fontWeight: FontWeight.w600),
                             ),
                           ),

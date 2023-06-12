@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
@@ -39,6 +37,8 @@ class ClubPage3 extends StatefulWidget {
 
 class _ClubPage3State extends State<ClubPage3> {
   PanelController panelController = PanelController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _ClubPage3State extends State<ClubPage3> {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    BorderRadiusGeometry radius = BorderRadius.only(
+    BorderRadiusGeometry radius = const BorderRadius.only(
       topLeft: Radius.circular(40.0),
       topRight: Radius.circular(40.0),
     );
@@ -121,8 +121,8 @@ class _ClubPage3State extends State<ClubPage3> {
                           Padding(
                             padding: const EdgeInsets.only(left: 30.0),
                             child: Container(
-                              height: height/19,
-                              width: width/2.163157894736842,
+                              height: height / 19,
+                              width: width / 2.163157894736842,
                               decoration: BoxDecoration(
                                   color: const Color(0XFFB59F68),
                                   borderRadius: BorderRadius.circular(15.0)),
@@ -141,8 +141,10 @@ class _ClubPage3State extends State<ClubPage3> {
                                               fontWeight: FontWeight.w600),
                                         )),
                                     Text(
-                                      (widget.totalprice+widget.totalprice * 4 / 100 +
-                                            gst18.floor()).toString(),
+                                      (widget.totalprice +
+                                              widget.totalprice * 4 / 100 +
+                                              gst18.floor())
+                                          .toString(),
                                       style: GoogleFonts.sairaCondensed(
                                           color: const Color(0XFF222222),
                                           fontSize: 30,
@@ -183,7 +185,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 28,
                                       color: Colors.black)),
-                              Text("Rs." + widget.totalprice.toString(),
+                              Text("Rs.${widget.totalprice}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w800,
                                       fontSize: 28,
@@ -203,9 +205,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                       fontSize: 18,
                                       color: Colors.black)),
                               Text(
-                                  "Rs." +
-                                      (widget.stagentryprice * widget.stagcount)
-                                          .toString(),
+                                  "Rs.${widget.stagentryprice * widget.stagcount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18,
@@ -225,10 +225,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                       fontSize: 18,
                                       color: Colors.black)),
                               Text(
-                                  "Rs." +
-                                      (widget.coupleentrypricce *
-                                              widget.couplecount)
-                                          .toString(),
+                                  "Rs.${widget.coupleentrypricce * widget.couplecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18,
@@ -248,10 +245,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                       fontSize: 18,
                                       color: Colors.black)),
                               Text(
-                                  "Rs." +
-                                      (widget.femaleentryprice *
-                                              widget.femalecount)
-                                          .toString(),
+                                  "Rs.${widget.femaleentryprice * widget.femalecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18,
@@ -259,9 +253,9 @@ class _ClubPage3State extends State<ClubPage3> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Divider(
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Divider(
                             height: 2,
                             thickness: 2,
                             indent: 2,
@@ -287,10 +281,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                     fontSize: 28,
                                     color: Colors.black)),
                             Text(
-                                "Rs." +
-                                    (widget.totalprice * 4 / 100 +
-                                            gst18.floor())
-                                        .toString(),
+                                "Rs.${widget.totalprice * 4 / 100 + gst18.floor()}",
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 28,
@@ -305,7 +296,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                     fontWeight: FontWeight.w800,
                                     fontSize: 15,
                                     color: Colors.black)),
-                            Text("Rs." + (gst18.floor()).toString(),
+                            Text("Rs.${gst18.floor()}",
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 16,
@@ -327,11 +318,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 fontSize: 18,
                                 color: Colors.black)),
                         Text(
-                            "Rs." +
-                                ((widget.stagentryprice * widget.stagcount) *
-                                        clubpersent /
-                                        100)
-                                    .toString(),
+                            "Rs.${(widget.stagentryprice * widget.stagcount) * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
@@ -351,12 +338,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 fontSize: 18,
                                 color: Colors.black)),
                         Text(
-                            "Rs." +
-                                (widget.coupleentrypricce *
-                                        widget.couplecount *
-                                        clubpersent /
-                                        100)
-                                    .toString(),
+                            "Rs.${widget.coupleentrypricce * widget.couplecount * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
@@ -376,12 +358,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 fontSize: 18,
                                 color: Colors.black)),
                         Text(
-                            "Rs." +
-                                (widget.femaleentryprice *
-                                        widget.femalecount *
-                                        clubpersent /
-                                        100)
-                                    .toString(),
+                            "Rs.${widget.femaleentryprice * widget.femalecount * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
@@ -389,21 +366,21 @@ class _ClubPage3State extends State<ClubPage3> {
                       ],
                     ),
                   ),
-                  Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Divider(
-                            height: 2,
-                            thickness: 2,
-                            indent: 2,
-                            endIndent: 0,
-                            color: Color(0xFFA0A0A0),
-                          ),
-                        ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Divider(
+                      height: 2,
+                      thickness: 2,
+                      indent: 2,
+                      endIndent: 0,
+                      color: Color(0xFFA0A0A0),
+                    ),
+                  ),
                   Container(
                       width: double.maxFinite,
                       decoration: BoxDecoration(
                         color: offwhite,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(40.0),
                           topRight: Radius.circular(40.0),
                         ),
@@ -472,8 +449,10 @@ class _ClubPage3State extends State<ClubPage3> {
                                                   fontWeight: FontWeight.w600),
                                             )),
                                         Text(
-                                          (widget.totalprice+widget.totalprice * 4 / 100 +
-                                            gst18.floor()).toString(),
+                                          (widget.totalprice +
+                                                  widget.totalprice * 4 / 100 +
+                                                  gst18.floor())
+                                              .toString(),
                                           style: GoogleFonts.sairaCondensed(
                                               color: const Color(0XFF222222),
                                               fontSize: 30,
@@ -568,7 +547,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 padding:
                                     const EdgeInsets.only(left: 20.0, top: 0.0),
                                 child: Text(
-                                  "19:00 Hrs-23.45 Hrs",
+                                  "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                                   style: GoogleFonts.sairaCondensed(
                                     color: const Color(0XFFFFFFFF),
                                     fontSize: 14,
@@ -580,21 +559,21 @@ class _ClubPage3State extends State<ClubPage3> {
                           ),
                         ],
                       ),
-                      FractionalTranslation(
-                        translation: const Offset(1.5, -1),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.close,
-                              size: 24,
-                              color: Color(0XFFF0F0F3),
-                            )),
-                      )
+                      // FractionalTranslation(
+                      //   translation: const Offset(1.5, -1),
+                      //   child: IconButton(
+                      //       onPressed: () {},
+                      //       icon: const Icon(
+                      //         Icons.close,
+                      //         size: 24,
+                      //         color: Color(0XFFF0F0F3),
+                      //       )),
+                      // )
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 20, bottom: 20, left: 40.0, right: 40.0),
                   child: Container(
                     height: height / 4,
@@ -614,7 +593,7 @@ class _ClubPage3State extends State<ClubPage3> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 20, bottom: 10),
+                          padding: const EdgeInsets.only(top: 20, bottom: 10),
                           child: Container(
                             height: height / 15,
                             width: double.maxFinite,
@@ -625,7 +604,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                   color: Colors.white,
                                 )),
                             child: Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
                               child: SingleChildScrollView(
                                 child: Container(
                                   height: height / 15,
@@ -661,6 +641,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 10),
                                             child: TextFormField(
+                                              controller: phoneController,
                                               style: GoogleFonts.sairaCondensed(
                                                 color: const Color(0XFFFFFFFF),
                                                 fontSize: 20,
@@ -701,6 +682,7 @@ class _ClubPage3State extends State<ClubPage3> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: TextFormField(
+                                controller: emailController,
                                 style: GoogleFonts.sairaCondensed(
                                   color: const Color(0XFFFFFFFF),
                                   fontSize: 20,

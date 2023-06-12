@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 
-Widget mycard(double height, double width, 
-ClubModel club
-) {
+Widget mycard(double height, double width, ClubModel club) {
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15),
     ),
-    child: Container(
+    child: SizedBox(
       width: width / 1.2,
       height: height / 5,
       child: Stack(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.asset(
-            "assets/images/Restaurants.jpg",
-            fit: BoxFit.cover,
-            width: width / 1.1,
-            height: height / 5.97,
-          ),
+          child: club.carouselImages.isNotEmpty
+              ? Image.network(
+                  club.carouselImages[0].imageUrl,
+                  fit: BoxFit.cover,
+                  width: width / 1.1,
+                  height: height / 5.97,
+                )
+              : Image.asset(
+                  "assets/images/Restaurants.jpg",
+                  fit: BoxFit.cover,
+                  width: width / 1.1,
+                  height: height / 5.97,
+                ),
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
@@ -58,7 +63,9 @@ ClubModel club
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(children: [
-                  SizedBox(width: width/40,),
+                  SizedBox(
+                    width: width / 40,
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,11 +158,14 @@ ClubModel club
                       )
                     ],
                   ),
-                  SizedBox(width: width/40,),
+                  SizedBox(
+                    width: width / 40,
+                  ),
                   Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(200.0)),
-                    color: Colors.green,child: Text("    "),
+                    color: Colors.green,
+                    child: Text("    "),
                   )
                 ]),
               ),

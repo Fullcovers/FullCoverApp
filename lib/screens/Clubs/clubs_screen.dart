@@ -56,7 +56,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                 child: Center(
                   child: Text("Clubs",
                       style: GoogleFonts.bebasNeue(
-                        fontSize: width/10.275,
+                        fontSize: width / 10.275,
                         color: Color(0xFFB59F68),
                       )),
                 ),
@@ -66,7 +66,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
               translation: const Offset(0, -0.1),
               child: Padding(
                 padding:
-                     EdgeInsets.only(top: 0.0, left: width/20.55, right: 20.0),
+                    EdgeInsets.only(top: 0.0, left: width / 20.55, right: 20.0),
                 child: Container(
                     height: 4.8 * height / 8.4,
                     width: width,
@@ -76,11 +76,11 @@ class _ClubsScreenState extends State<ClubsScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return  Center(
+                          return Center(
                             child: SizedBox(
-                              height: height/21.675,
-                              width: width/10.275,
-                              child: CircularProgressIndicator(),
+                              height: height / 21.675,
+                              width: width / 10.275,
+                              child: const CircularProgressIndicator(),
                             ),
                           ); // Show a loading indicator while data is being fetched
                         } else if (snapshot.hasError) {
@@ -91,7 +91,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                           final clubsData = snapshot.data!;
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
+                            child: SizedBox(
                               width: width / 1.3,
                               height: height / 1.85,
                               child: ListView.builder(
@@ -110,8 +110,8 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                                       )),
                                             );
                                           },
-                                          child: mycard(height, width,club)),
-                                      SizedBox(
+                                          child: mycard(height, width, club)),
+                                      const SizedBox(
                                         height: 10,
                                       )
                                     ],

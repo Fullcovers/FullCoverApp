@@ -20,13 +20,29 @@ class ClubDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
+              padding: const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
               child: Container(
                 height: height / 5,
                 width: width,
                 decoration: BoxDecoration(
                     color: Color(0XFFD9D9D9),
                     borderRadius: BorderRadius.circular(20.0)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: club.carouselImages.isNotEmpty
+                      ? Image.network(
+                          club.carouselImages[1].imageUrl,
+                          fit: BoxFit.cover,
+                          width: width / 1.1,
+                          height: height / 5.97,
+                        )
+                      : Image.asset(
+                          "assets/images/Restaurants.jpg",
+                          fit: BoxFit.cover,
+                          width: width / 1.1,
+                          height: height / 5.97,
+                        ),
+                ),
               ),
             ),
             Padding(
@@ -35,7 +51,7 @@ class ClubDetail extends StatelessWidget {
                 club.name,
                 style: GoogleFonts.bebasNeue(
                   color: const Color(0XFFF0F0F3),
-                  fontSize: width/11.41666666666667,
+                  fontSize: width / 11.41666666666667,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -46,7 +62,7 @@ class ClubDetail extends StatelessWidget {
                 "Pune",
                 style: GoogleFonts.sairaCondensed(
                   color: const Color(0XFFB59F68),
-                  fontSize: width/25.6875,
+                  fontSize: width / 25.6875,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -65,23 +81,24 @@ class ClubDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(left: width/20.55, top: width/41.10),
+                      padding: EdgeInsets.only(
+                          left: width / 20.55, top: width / 41.10),
                       child: Text(
-                        "Tuesday - Sunday",
+                        "${club.daysOpen.from != '' ? club.daysOpen.from : "Tuesday"} - ${club.daysOpen.till != '' ? club.daysOpen.till : "Sunday"}",
                         style: GoogleFonts.sairaCondensed(
                           color: Colors.white,
-                          fontSize: width/20.55,
+                          fontSize: width / 20.55,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(left: width/20.55, top: 0.0),
+                      padding: EdgeInsets.only(left: width / 20.55, top: 0.0),
                       child: Text(
-                        "19:00 Hrs-23.45 Hrs",
+                        "${club.timings.opensAt != '' ? "${club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${club.timings.closesAt != '' ? "${club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                         style: GoogleFonts.sairaCondensed(
                           color: const Color(0XFFA7A7A7),
-                          fontSize: width/29.35714285714286,
+                          fontSize: width / 29.35714285714286,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -89,10 +106,11 @@ class ClubDetail extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(left: width/20.55, top: 12.0),
+                  padding: EdgeInsets.only(left: width / 20.55, top: 12.0),
                   child: Container(
                     width: 0.5, // Set the width of the divider
-                    height: height/12.38571428571429, // Set the height of the divider
+                    height: height /
+                        12.38571428571429, // Set the height of the divider
                     color: Colors.white, // Set the color of the divider
                     margin: const EdgeInsets.symmetric(
                         horizontal: 20), // Set horizontal margin
@@ -107,23 +125,24 @@ class ClubDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:  EdgeInsets.only(left: width/20.55, top: height/43.35),
+                        padding: EdgeInsets.only(
+                            left: width / 20.55, top: height / 43.35),
                         child: Text(
                           "Dress Code",
                           style: GoogleFonts.sairaCondensed(
                             color: Colors.white,
-                            fontSize: width/27.4,
+                            fontSize: width / 27.4,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                       Padding(
-                        padding:  EdgeInsets.only(left: width/20.55, top: 0.0),
+                        padding: EdgeInsets.only(left: width / 20.55, top: 0.0),
                         child: Text(
                           "Casual, Smart Casual",
                           style: GoogleFonts.sairaCondensed(
                             color: const Color(0XFFF0F0F3),
-                            fontSize: width/20.55,
+                            fontSize: width / 20.55,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -148,23 +167,24 @@ class ClubDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(left: width/20.55, top: width/20.55),
+                      padding: EdgeInsets.only(
+                          left: width / 20.55, top: width / 20.55),
                       child: Text(
                         "About",
                         style: GoogleFonts.sairaCondensed(
                           color: const Color(0XFFA7A7A7),
-                          fontSize: width/29.35714285714286,
+                          fontSize: width / 29.35714285714286,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(left: width/20.55, top: 5.0),
+                      padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
                       child: Text(
                         club.description,
                         style: GoogleFonts.sairaCondensed(
                           color: const Color(0XFFF0F0F3),
-                          fontSize: width/29.35714285714286,
+                          fontSize: width / 29.35714285714286,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -202,7 +222,7 @@ class ClubDetail extends StatelessWidget {
                     "Take me there",
                     style: GoogleFonts.sairaCondensed(
                         color: const Color(0XFFA7A7A7),
-                        fontSize: width/29.35714285714286,
+                        fontSize: width / 29.35714285714286,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -217,7 +237,7 @@ class ClubDetail extends StatelessWidget {
                           club.name,
                           style: GoogleFonts.bebasNeue(
                             color: const Color(0XFFB59F68),
-                            fontSize: width/12.84375,
+                            fontSize: width / 12.84375,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -250,7 +270,7 @@ class ClubDetail extends StatelessWidget {
                         icon: const Icon(Icons.location_on_outlined),
                       ),
                       FractionalTranslation(
-                        translation: const Offset(-0.1, 0),
+                        translation: const Offset(-0.01, 0),
                         child: Text(
                           club.address,
                           style: GoogleFonts.sairaCondensed(
@@ -284,119 +304,149 @@ class ClubDetail extends StatelessWidget {
                       "Facilites",
                       style: GoogleFonts.sairaCondensed(
                         color: Colors.white,
-                        fontSize: width/29.35714285714286,
+                        fontSize: width / 29.35714285714286,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(left: width/20.55, top: 5.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Container(
-                            height: 2.5 * height / 100,
-                            width: 2 * width / 10,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
-                              border: Border.all(
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                            ),
-                            child:  Center(
-                                child: Text(
-                              "Techno",
-                              style: TextStyle(fontSize: width/40,
-                                color: Color(0XFFCBC1A8),
-                              ),
-                            )),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Container(
-                            height: 2.5 * height / 100,
-                            width: 2 * width / 10,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
-                              border: Border.all(
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                            ),
-                            child:  Center(
-                                child: Text(
-                              "Techno",
-                              style: TextStyle(fontSize: width/40,
-                                color: Color(0XFFCBC1A8),
-                              ),
-                            )),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Container(
-                            height: 2.5 * height / 100,
-                            width: 2 * width / 10,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
-                              border: Border.all(
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                            ),
-                            child:  Center(
-                                child: Text(
-                              "Techno",
-                              style: TextStyle(fontSize: width/40,
-                                color: Color(0XFFCBC1A8),
-                              ),
-                            )),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Container(
-                            height: 2.5 * height / 100,
-                            width: 2 * width / 10,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
-                              border: Border.all(
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                            ),
-                            child:  Center(
-                                child: Text(
-                              "Techno",
-                              style: TextStyle(fontSize: width/40,
-                                color: Color(0XFFCBC1A8),
-                              ),
-                            )),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
+                      child: Row(
+                        children: club.facilities.isNotEmpty
+                            ? club.facilities.map((facility) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 4.0, right: 10),
+                                  child: Container(
+                                    height: 2.5 * height / 100,
+                                    width: 2 * width / 10,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2C2F33),
+                                      border: Border.all(
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        facility,
+                                        style: TextStyle(
+                                          fontSize: width / 40,
+                                          color: const Color(0XFFCBC1A8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList()
+                            : [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Container(
+                                    height: 2.5 * height / 100,
+                                    width: 2 * width / 10,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2C2F33),
+                                      border: Border.all(
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Techno",
+                                        style: TextStyle(
+                                          fontSize: width / 40,
+                                          color: const Color(0XFFCBC1A8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Container(
+                                    height: 2.5 * height / 100,
+                                    width: 2 * width / 10,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2C2F33),
+                                      border: Border.all(
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Techno",
+                                        style: TextStyle(
+                                          fontSize: width / 40,
+                                          color: const Color(0XFFCBC1A8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Container(
+                                    height: 2.5 * height / 100,
+                                    width: 2 * width / 10,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2C2F33),
+                                      border: Border.all(
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Techno",
+                                        style: TextStyle(
+                                          fontSize: width / 40,
+                                          color: const Color(0XFFCBC1A8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Container(
+                                    height: 2.5 * height / 100,
+                                    width: 2 * width / 10,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2C2F33),
+                                      border: Border.all(
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Techno",
+                                        style: TextStyle(
+                                          fontSize: width / 40,
+                                          color: const Color(0XFFCBC1A8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                      )),
                 ],
               ),
             ),
@@ -408,29 +458,79 @@ class ClubDetail extends StatelessWidget {
                 thickness: 1,
               ),
             ),
+            // FractionalTranslation(
+            //   translation: const Offset(0, -0.2),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Padding(
+            //         padding: const EdgeInsets.only(left: 20.0),
+            //         child: Text(
+            //           "Terms",
+            //           style: GoogleFonts.sairaCondensed(
+            //               color: const Color(0XFFF0F0F3),
+            //               fontSize: 18,
+            //               fontWeight: FontWeight.w500),
+            //         ),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: IconButton(
+            //             onPressed: () {},
+            //             icon: const Icon(
+            //               Icons.add,
+            //               color: Color(0XFFF0F0F3),
+            //             )),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             FractionalTranslation(
-              translation: const Offset(0, -0.2),
+              translation: const Offset(0, -0.3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      "Terms",
-                      style: GoogleFonts.sairaCondensed(
-                          color: const Color(0XFFF0F0F3),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: width / 20.55, top: width / 20.55),
+                        child: Text(
+                          "Terms",
+                          style: GoogleFonts.sairaCondensed(
+                            color: const Color(0XFFA7A7A7),
+                            fontSize: width / 29.35714285714286,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
+                        child: Text(
+                          club.termsAndCondition != ''
+                              ? club.termsAndCondition
+                              : '',
+                          style: GoogleFonts.sairaCondensed(
+                            color: const Color(0XFFF0F0F3),
+                            fontSize: width / 29.35714285714286,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add,
-                          color: Color(0XFFF0F0F3),
-                        )),
+                  FractionalTranslation(
+                    translation: const Offset(-0.10, -0.05),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 0.0),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.add,
+                            color: Color(0XFFF0F0F3),
+                          )),
+                    ),
                   ),
                 ],
               ),
@@ -459,8 +559,8 @@ class ClubDetail extends StatelessWidget {
                     height: height / 15,
                     width: width,
                     decoration: BoxDecoration(
-                        color: Color(0XFF3D4348),
-                        borderRadius: BorderRadius.all(
+                        color: const Color(0XFF3D4348),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15.0),
                         ),
                         border: Border.all(
@@ -486,7 +586,8 @@ class ClubDetail extends StatelessWidget {
                             height: height / 28,
                             width: 50,
                             decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Color(0XFFD9D9D9)),
+                                shape: BoxShape.circle,
+                                color: Color(0XFFD9D9D9)),
                           ),
                         )
                       ],
