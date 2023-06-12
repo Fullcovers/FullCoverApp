@@ -7,6 +7,8 @@ import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
+import 'package:venq_assessment/widgets/EventsScreen/EventCard.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
@@ -47,11 +49,11 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: backgroundColorfigma,
+        backgroundColor: Colors.white,
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              topnavigationbar(height, width),
+              topnavigationbar(height, width,true),
               FractionalTranslation(
                 translation: const Offset(0, -0.5),
                 child: Padding(
@@ -70,16 +72,16 @@ class _EventsScreenState extends State<EventsScreen> {
                 child: Container(
                     height: 4.8 * height / 10,
                     width: width,
-                    decoration: BoxDecoration(color: backgroundColorfigma),
+                    decoration: BoxDecoration(color: Colors.white),
                     child: FutureBuilder<List<Event>>(
                       future: EventsServices().getAllEvents(context: context),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
+                          return  Center(
                             child: SizedBox(
-                              height: 40,
-                              width: 40,
+                              height: height/21.675,
+                              width: width/10.275,
                               child: CircularProgressIndicator(),
                             ),
                           );
@@ -113,88 +115,91 @@ class _EventsScreenState extends State<EventsScreen> {
                                                   EventDetail(event: event)));
                                       // clubprovider.setclubnull();
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Row(
-                                        children: [
-                                          Card(
-                                            color: offwhite,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0)),
-                                            child: Container(
-                                              height: height / 12.21,
-                                              width: width / 5.788,
-                                              decoration: BoxDecoration(
-                                                color: offwhite,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(60.0),
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [],
-                                              ),
-                                            ),
-                                          ),
-                                          Card(
-                                            color: offwhite,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0)),
-                                            child: Container(
-                                              height: height / 12.21,
-                                              width: width / 1.55,
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xFFD9D9D9),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(20.0),
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Text(
-                                                    event.name,
-                                                    style: GoogleFonts
-                                                        .sairaCondensed(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 24,
-                                                    ),
-                                                  ),
-                                                  Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text("Starts from",
-                                                          style: GoogleFonts
-                                                              .mavenPro(
-                                                            fontSize: 11,
-                                                          )),
-                                                      Text("Rs. 2000",
-                                                          style: GoogleFonts
-                                                              .bebasNeue(
-                                                            fontSize: 28,
-                                                          )),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )),
+                                    // child: Padding(
+                                      // padding: const EdgeInsets.only(top: 8.0),
+                                      child: myeventcard(height, width,event)
+                                      
+                                      // Row(
+                                      //   children: [
+                                      //     Card(
+                                      //       color: offwhite,
+                                      //       shape: RoundedRectangleBorder(
+                                      //           borderRadius:
+                                      //               BorderRadius.circular(
+                                      //                   10.0)),
+                                      //       child: Container(
+                                      //         height: height / 12.21,
+                                      //         width: width / 5.788,
+                                      //         decoration: BoxDecoration(
+                                      //           color: offwhite,
+                                      //           borderRadius: BorderRadius.all(
+                                      //             Radius.circular(60.0),
+                                      //           ),
+                                      //         ),
+                                      //         child: Row(
+                                      //           mainAxisAlignment:
+                                      //               MainAxisAlignment
+                                      //                   .spaceAround,
+                                      //           children: [],
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     Card(
+                                      //       color: offwhite,
+                                      //       shape: RoundedRectangleBorder(
+                                      //           borderRadius:
+                                      //               BorderRadius.circular(
+                                      //                   10.0)),
+                                      //       child: Container(
+                                      //         height: height / 12.21,
+                                      //         width: width / 1.55,
+                                      //         decoration: const BoxDecoration(
+                                      //           color: Color(0xFFD9D9D9),
+                                      //           borderRadius: BorderRadius.all(
+                                      //             Radius.circular(20.0),
+                                      //           ),
+                                      //         ),
+                                      //         child: Row(
+                                      //           mainAxisAlignment:
+                                      //               MainAxisAlignment
+                                      //                   .spaceAround,
+                                      //           children: [
+                                      //             Text(
+                                      //               event.name,
+                                      //               style: GoogleFonts
+                                      //                   .sairaCondensed(
+                                      //                 fontWeight:
+                                      //                     FontWeight.w500,
+                                      //                 fontSize: 24,
+                                      //               ),
+                                      //             ),
+                                      //             Column(
+                                      //               mainAxisAlignment:
+                                      //                   MainAxisAlignment
+                                      //                       .center,
+                                      //               crossAxisAlignment:
+                                      //                   CrossAxisAlignment.end,
+                                      //               children: [
+                                      //                 Text("Starts from",
+                                      //                     style: GoogleFonts
+                                      //                         .mavenPro(
+                                      //                       fontSize: 11,
+                                      //                     )),
+                                      //                 Text("Rs. 2000",
+                                      //                     style: GoogleFonts
+                                      //                         .bebasNeue(
+                                      //                       fontSize: 28,
+                                      //                     )),
+                                      //               ],
+                                      //             )
+                                      //           ],
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                    )
+                                    // ),
                               );
                             },
                           );
@@ -206,7 +211,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 height: rh,
               ),
             ]),
-        bottomNavigationBar: bottomnavbar(height: height, width: width),
+        bottomNavigationBar: bottomnavbar(height: height, width: width,iscolorchange: true,),
       ),
     );
   }

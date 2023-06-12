@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Models/Events.dart';
 
-Widget mycard(double height, double width, ClubModel club) {
+Widget myeventcard(double height, double width, Event event) {
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15),
@@ -13,9 +14,9 @@ Widget mycard(double height, double width, ClubModel club) {
       child: Stack(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: club.carouselImages.isNotEmpty
+          child: event.imageUrl.isNotEmpty
               ? Image.network(
-                  club.carouselImages[0].imageUrl,
+                  event.imageUrl,
                   fit: BoxFit.cover,
                   width: width / 1.1,
                   height: height / 5.97,
@@ -43,9 +44,9 @@ Widget mycard(double height, double width, ClubModel club) {
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Text(club.name,
+            child: Text(event.name,
                 style: GoogleFonts.bebasNeue(
-                  fontSize: height / 18.0625,
+                  fontSize: 48,
                   color: Colors.white,
                 )),
           ),
@@ -58,7 +59,7 @@ Widget mycard(double height, double width, ClubModel club) {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15.0),
+                      bottomLeft: Radius.circular(15.0),topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -74,46 +75,44 @@ Widget mycard(double height, double width, ClubModel club) {
                         "Timings",
                         style: GoogleFonts.sairaCondensed(
                             fontWeight: FontWeight.bold,
-                            fontSize: height / 86.7,
+                            fontSize: height/86.7,
                             color: Color(0xff545454)),
                       ),
                       Text(
                         "19:00 Hrs - 23:45 Hrs",
                         style: GoogleFonts.sairaCondensed(
                             fontWeight: FontWeight.bold,
-                            fontSize: height / 61.92857142857143,
+                            fontSize: height/61.92857142857143,
                             color: Color(0xff545454)),
                       )
                     ],
                   ),
                   SizedBox(
-                    width: width / 4,
+                    width: width / 3,
                   ),
-                  Column(
+                  
+                
+                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dancefloor Entry",
+                        "Starts from",
                         style: GoogleFonts.sairaCondensed(
                             fontWeight: FontWeight.bold,
-                            fontSize: height / 61.92857142857143,
+                            fontSize: height/86.7,
+                            color: Color(0xff545454)),
+                      ),
+                      Text(
+                        "Rs. 2000",
+                        style: GoogleFonts.sairaCondensed(
+                            fontWeight: FontWeight.bold,
+                            fontSize: height/61.92857142857143,
                             color: Color(0xff545454)),
                       )
                     ],
                   ),
-                  SizedBox(
-                    width: width / 40,
-                  ),
-                  Container(
-                    height: height / 43.35,
-                    width: width / 25.05,
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(100)
-                        //more than 50% of width makes circle
-                        ),
-                  )
+                 
                 ]),
               ),
             ))

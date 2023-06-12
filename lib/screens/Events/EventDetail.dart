@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/Events/EventDetail2.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 import '../../Models/Events.dart';
@@ -30,10 +31,11 @@ class _EventDetailState extends State<EventDetail> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: backgroundColorfigma,
+        backgroundColor: Colors.white,
         body: Column(
-          children: [
-            topnavigationbar(height, width),
+          children: [          SizedBox(height: height/10,),
+
+            // topnavigationbar(height, width, true),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -41,14 +43,18 @@ class _EventDetailState extends State<EventDetail> {
                     FractionalTranslation(
                       translation: const Offset(0, -0.2),
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 25.0, left: 20, right: 20.0),
+                        padding: const EdgeInsets.only(),
                         child: Container(
                           height: height / 5,
                           width: width,
                           decoration: BoxDecoration(
-                              color: const Color(0XFFD9D9D9),
-                              borderRadius: BorderRadius.circular(20.0)),
+                            color: backgroundColorfigma,
+                            borderRadius: BorderRadius.circular(20.0)
+                          ),
+                          child: Image.network(fit:BoxFit.fill,
+                            widget.event.imageUrl,
+                            width: width,
+                          ),
                         ),
                       ),
                     ),
@@ -64,7 +70,8 @@ class _EventDetailState extends State<EventDetail> {
                                 Text(
                                   widget.event.name,
                                   style: GoogleFonts.bebasNeue(
-                                      color: Colors.white, fontSize: 35),
+                                      color: backgroundColorfigma,
+                                      fontSize: 35),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4.0),
@@ -72,7 +79,7 @@ class _EventDetailState extends State<EventDetail> {
                                     height: 2.5 * height / 100,
                                     width: 2 * width / 10,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF2C2F33),
+                                      color: offwhite,
                                       border: Border.all(
                                         width: 1,
                                       ),
@@ -80,11 +87,11 @@ class _EventDetailState extends State<EventDetail> {
                                         Radius.circular(20.0),
                                       ),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                         child: Text(
                                       "Techno",
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: backgroundColorfigma,
                                       ),
                                     )),
                                   ),
@@ -114,7 +121,7 @@ class _EventDetailState extends State<EventDetail> {
                                   DateFormat('EE, d MMMM y')
                                       .format(widget.event.date),
                                   style: GoogleFonts.sairaCondensed(
-                                    color: Colors.white,
+                                    color: backgroundColorfigma,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -124,7 +131,7 @@ class _EventDetailState extends State<EventDetail> {
                                   child: Text(
                                     DateFormat.jm().format(widget.event.date),
                                     style: GoogleFonts.sairaCondensed(
-                                      color: const Color(0XFFA7A7A7),
+                                      color: const Color(0XFF565555),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -165,7 +172,7 @@ class _EventDetailState extends State<EventDetail> {
                           child: Text(
                             "Hosted by",
                             style: GoogleFonts.sairaCondensed(
-                                color: const Color(0XFFA7A7A7),
+                                color: const Color(0XFF565555),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -192,13 +199,14 @@ class _EventDetailState extends State<EventDetail> {
                                   height: 55,
                                   width: 55,
                                   decoration: BoxDecoration(
-                                      color: const Color(0XFFD9D9D9),
+                                      color: backgroundColorfigma,
                                       borderRadius:
                                           BorderRadius.circular(10.0)),
                                   child: IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
                                         Icons.location_on_outlined,
+                                        color: Colors.white,
                                         size: 40,
                                       )),
                                 ),
@@ -221,7 +229,7 @@ class _EventDetailState extends State<EventDetail> {
                                   style: GoogleFonts.sairaCondensed(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
-                                    color: const Color(0XFFF0F0F3),
+                                    color: backgroundColorfigma,
                                   ),
                                 ),
                               ),
@@ -250,7 +258,7 @@ class _EventDetailState extends State<EventDetail> {
                                 Text(
                                   "Line Up",
                                   style: GoogleFonts.sairaCondensed(
-                                    color: Colors.white,
+                                    color: backgroundColorfigma,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -263,7 +271,7 @@ class _EventDetailState extends State<EventDetail> {
                                         height: 2.5 * height / 100,
                                         width: 2 * width / 10,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF2C2F33),
+                                          color: offwhite,
                                           border: Border.all(
                                             width: 1,
                                           ),
@@ -271,11 +279,11 @@ class _EventDetailState extends State<EventDetail> {
                                             Radius.circular(5.0),
                                           ),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                             child: Text(
                                           "Techno",
                                           style: TextStyle(
-                                            color: Color(0XFFCBC1A8),
+                                            color: golden,
                                           ),
                                         )),
                                       ),
@@ -289,7 +297,7 @@ class _EventDetailState extends State<EventDetail> {
                                         height: 2.5 * height / 100,
                                         width: 2 * width / 10,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF2C2F33),
+                                          color: offwhite,
                                           border: Border.all(
                                             width: 1,
                                           ),
@@ -297,11 +305,11 @@ class _EventDetailState extends State<EventDetail> {
                                             Radius.circular(5.0),
                                           ),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                             child: Text(
                                           "Techno",
                                           style: TextStyle(
-                                            color: Color(0XFFCBC1A8),
+                                            color: golden,
                                           ),
                                         )),
                                       ),
@@ -315,7 +323,7 @@ class _EventDetailState extends State<EventDetail> {
                                         height: 2.5 * height / 100,
                                         width: 2 * width / 10,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF2C2F33),
+                                          color: offwhite,
                                           border: Border.all(
                                             width: 1,
                                           ),
@@ -323,11 +331,11 @@ class _EventDetailState extends State<EventDetail> {
                                             Radius.circular(5.0),
                                           ),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                             child: Text(
                                           "Techno",
                                           style: TextStyle(
-                                            color: Color(0XFFCBC1A8),
+                                            color: golden,
                                           ),
                                         )),
                                       ),
@@ -341,7 +349,7 @@ class _EventDetailState extends State<EventDetail> {
                                         height: 2.5 * height / 100,
                                         width: 2 * width / 10,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF2C2F33),
+                                          color: offwhite,
                                           border: Border.all(
                                             width: 1,
                                           ),
@@ -349,11 +357,11 @@ class _EventDetailState extends State<EventDetail> {
                                             Radius.circular(5.0),
                                           ),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                             child: Text(
                                           "Techno",
                                           style: TextStyle(
-                                            color: Color(0XFFCBC1A8),
+                                            color: golden,
                                           ),
                                         )),
                                       ),
@@ -386,7 +394,7 @@ class _EventDetailState extends State<EventDetail> {
                               child: Text(
                                 "About",
                                 style: GoogleFonts.sairaCondensed(
-                                  color: const Color(0XFFA7A7A7),
+                                  color: const Color(0XFF838383),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -398,7 +406,7 @@ class _EventDetailState extends State<EventDetail> {
                               child: Text(
                                 widget.event.description,
                                 style: GoogleFonts.sairaCondensed(
-                                  color: const Color(0XFFF0F0F3),
+                                  color: backgroundColorfigma,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -412,9 +420,9 @@ class _EventDetailState extends State<EventDetail> {
                             padding: const EdgeInsets.only(right: 0.0),
                             child: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.add,
-                                  color: Color(0XFFF0F0F3),
+                                  color: backgroundColorfigma,
                                 )),
                           ),
                         ),
@@ -438,7 +446,7 @@ class _EventDetailState extends State<EventDetail> {
                             child: Text(
                               "Terms",
                               style: GoogleFonts.sairaCondensed(
-                                  color: const Color(0XFFF0F0F3),
+                                  color: backgroundColorfigma,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -447,9 +455,9 @@ class _EventDetailState extends State<EventDetail> {
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.add,
-                                  color: Color(0XFFF0F0F3),
+                                  color: backgroundColorfigma,
                                 )),
                           ),
                         ],
@@ -465,43 +473,52 @@ class _EventDetailState extends State<EventDetail> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, right: 30),
-                      child: Center(
-                        child: Container(
-                          height: height / 15,
-                          width: width,
-                          decoration: BoxDecoration(
-                              color: const Color(0XFF3D4348),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(15.0),
-                              ),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: Text(
-                                  "Starts at Rs.999",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                      color: const Color(0XFFF0F0F3)),
+                      child: InkWell(onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => EventDetail2(
+                            club: clubprovider.club!, event: widget.event,
+                          )),
+                );
+              },
+                        child: Center(
+                          child: Container(
+                            height: height / 15,
+                            width: width,
+                            decoration: BoxDecoration(
+                                color: offwhite,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15.0),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Container(
-                                  height: height / 28,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0XFFD9D9D9)),
+                                border: Border.all(
+                                  color: backgroundColorfigma,
+                                )),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    "Starts at Rs.999",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xFF1E1E1E)),
+                                  ),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: Container(
+                                    height: height / 28,
+                                    width: width/10.275,
+                                    decoration:  BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: backgroundColorfigma),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
