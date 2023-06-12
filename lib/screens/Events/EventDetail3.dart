@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 
-class ClubPage3 extends StatefulWidget {
-  ClubPage3(
+class EventDetail3 extends StatefulWidget {
+  EventDetail3(
       {super.key,
       required this.club,
+      required this.event,
       required this.couplecount,
       required this.coupleentrypricce,
       required this.femalecount,
@@ -20,6 +24,7 @@ class ClubPage3 extends StatefulWidget {
       required this.weekday,
       required this.year});
   int stagcount;
+  Event event;
   ClubModel club;
   int stagentryprice;
   int couplecount;
@@ -32,14 +37,13 @@ class ClubPage3 extends StatefulWidget {
   String month;
   int year;
   @override
-  State<ClubPage3> createState() => _ClubPage3State();
+  State<EventDetail3> createState() => _EventDetail3State();
 }
 
-class _ClubPage3State extends State<ClubPage3> {
+class _EventDetail3State extends State<EventDetail3> {
   PanelController panelController = PanelController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     double clubpersent = 4;
@@ -55,7 +59,7 @@ class _ClubPage3State extends State<ClubPage3> {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: backgroundColorfigma,
+            backgroundColor: offwhite,
             body: SlidingUpPanel(
               borderRadius: radius,
               minHeight: height / 6,
@@ -65,8 +69,8 @@ class _ClubPage3State extends State<ClubPage3> {
               panelSnapping: false,
               collapsed: Container(
                   width: double.maxFinite,
-                  decoration: const BoxDecoration(
-                    color: Color(0XFFD9D9D9),
+                  decoration: BoxDecoration(
+                    color: backgroundColorfigma,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40.0),
                       topRight: Radius.circular(40.0),
@@ -93,7 +97,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   "Pay Using",
                                   style: GoogleFonts.sairaCondensed(
-                                      color: const Color(0XFF222222),
+                                      color: Colors.white,
                                       fontSize: height / 54.1875,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -103,7 +107,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   "Google Pay",
                                   style: GoogleFonts.sairaCondensed(
-                                      color: const Color(0XFF222222),
+                                      color: Colors.white,
                                       fontSize: height / 33.34615384615385,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -117,7 +121,7 @@ class _ClubPage3State extends State<ClubPage3> {
                             child: Container(
                               height: height / 10,
                               width: 1.5,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                           ),
                           Padding(
@@ -136,7 +140,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                     Text(
                                       "Pay",
                                       style: GoogleFonts.sairaCondensed(
-                                          color: const Color(0XFF222222),
+                                          color: offwhite,
                                           fontSize: height / 43.35,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -146,7 +150,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                               gst18.floor())
                                           .toString(),
                                       style: GoogleFonts.sairaCondensed(
-                                          color: const Color(0XFF222222),
+                                          color: offwhite,
                                           fontSize: height / 28.9,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -160,7 +164,7 @@ class _ClubPage3State extends State<ClubPage3> {
                     ],
                   )),
               panel: Container(
-                color: offwhite,
+                color: backgroundColorfigma,
                 child: Column(children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -184,12 +188,12 @@ class _ClubPage3State extends State<ClubPage3> {
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w800,
                                       fontSize: width / 14.67857142857143,
-                                      color: Colors.black)),
+                                      color: offwhite)),
                               Text("Rs.${widget.totalprice}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w800,
                                       fontSize: width / 14.67857142857143,
-                                      color: Colors.black))
+                                      color: offwhite))
                             ],
                           ),
                         ),
@@ -203,13 +207,13 @@ class _ClubPage3State extends State<ClubPage3> {
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black)),
+                                      color: offwhite)),
                               Text(
                                   "Rs.${widget.stagentryprice * widget.stagcount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black))
+                                      color: offwhite))
                             ],
                           ),
                         ),
@@ -223,13 +227,13 @@ class _ClubPage3State extends State<ClubPage3> {
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black)),
+                                      color: offwhite)),
                               Text(
                                   "Rs.${widget.coupleentrypricce * widget.couplecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black))
+                                      color: offwhite))
                             ],
                           ),
                         ),
@@ -243,13 +247,13 @@ class _ClubPage3State extends State<ClubPage3> {
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black)),
+                                      color: offwhite)),
                               Text(
                                   "Rs.${widget.femaleentryprice * widget.femalecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
-                                      color: Colors.black))
+                                      color: offwhite))
                             ],
                           ),
                         ),
@@ -260,7 +264,7 @@ class _ClubPage3State extends State<ClubPage3> {
                             thickness: 2,
                             indent: 2,
                             endIndent: 0,
-                            color: Color(0xFFA0A0A0),
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -279,13 +283,13 @@ class _ClubPage3State extends State<ClubPage3> {
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: width / 14.67857142857143,
-                                    color: Colors.black)),
+                                    color: offwhite)),
                             Text(
                                 "Rs.${widget.totalprice * 4 / 100 + gst18.floor()}",
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: width / 14.67857142857143,
-                                    color: Colors.black))
+                                    color: offwhite))
                           ],
                         ),
                         Row(
@@ -295,12 +299,12 @@ class _ClubPage3State extends State<ClubPage3> {
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: width / 27.4,
-                                    color: Colors.black)),
+                                    color: offwhite)),
                             Text("Rs.${gst18.floor()}",
                                 style: GoogleFonts.sairaCondensed(
                                     fontWeight: FontWeight.w800,
                                     fontSize: width / 27.4,
-                                    color: Colors.black))
+                                    color: offwhite))
                           ],
                         ),
                       ],
@@ -316,13 +320,13 @@ class _ClubPage3State extends State<ClubPage3> {
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black)),
+                                color: offwhite)),
                         Text(
                             "Rs.${(widget.stagentryprice * widget.stagcount) * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black))
+                                color: offwhite))
                       ],
                     ),
                   ),
@@ -336,13 +340,13 @@ class _ClubPage3State extends State<ClubPage3> {
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black)),
+                                color: offwhite)),
                         Text(
                             "Rs.${widget.coupleentrypricce * widget.couplecount * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black))
+                                color: offwhite))
                       ],
                     ),
                   ),
@@ -356,13 +360,13 @@ class _ClubPage3State extends State<ClubPage3> {
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black)),
+                                color: offwhite)),
                         Text(
                             "Rs.${widget.femaleentryprice * widget.femalecount * clubpersent / 100}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
-                                color: Colors.black))
+                                color: offwhite))
                       ],
                     ),
                   ),
@@ -371,7 +375,7 @@ class _ClubPage3State extends State<ClubPage3> {
                     thickness: 2,
                     indent: 2,
                     endIndent: 0,
-                    color: Color(0xFFA0A0A0),
+                    color: Colors.white,
                   ),
                   Container(
                       width: double.maxFinite,
@@ -412,16 +416,16 @@ class _ClubPage3State extends State<ClubPage3> {
                                   ),
                                 ],
                               ),
-                                 Padding(
-                            padding: EdgeInsets.only(
-                                left: width / 22.83333333333333,
-                                top: height / 86.7),
-                            child: Container(
-                              height: height / 12,
-                              width: 1.5,
-                              color: Colors.black,
-                            ),
-                          ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: width / 22.83333333333333,
+                                    top: height / 86.7),
+                                child: Container(
+                                  height: height / 12,
+                                  width: 1.5,
+                                  color: Colors.black,
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 30.0),
                                 child: Container(
@@ -475,7 +479,7 @@ class _ClubPage3State extends State<ClubPage3> {
                 Container(
                   height: height / 4,
                   width: double.maxFinite,
-                  decoration: const BoxDecoration(color: Color(0XFF373B40)),
+                  decoration:  BoxDecoration(color: offwhite),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -492,7 +496,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   widget.club.name,
                                   style: GoogleFonts.bebasNeue(
-                                    color: const Color(0XFFF0F0F3),
+                                    color: backgroundColorfigma,
                                     fontSize: height / 24.77142857142857,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -504,7 +508,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   "Pune",
                                   style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFB59F68),
+                                    color: golden ,
                                     fontSize: height / 54.1875,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -525,7 +529,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                   style: GoogleFonts.sairaCondensed(
                                     fontSize: height / 61.92857142857143,
                                     fontWeight: FontWeight.w600,
-                                    color: const Color(0XFFBCBCBC),
+                                    color: backgroundColorfigma,
                                   ),
                                 ),
                               ),
@@ -539,7 +543,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   "${widget.weekday} ${widget.date} ${widget.month}, ${widget.year}",
                                   style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFB59F68),
+                                    color: golden,
                                     fontSize: width / 20.55,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -551,7 +555,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: Text(
                                   "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                                   style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFFFFFFF),
+                                    color: backgroundColorfigma,
                                     fontSize: height / 61.92857142857143,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -575,13 +579,13 @@ class _ClubPage3State extends State<ClubPage3> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: 20, bottom: 20, left: 40.0, right: 40.0),
+                  padding:  EdgeInsets.only(
+                      top: height/43.35, bottom: height/43.35, left: width/10.275, right: width/10.275),
                   child: Container(
                     height: height / 4,
                     width: double.maxFinite,
                     decoration: BoxDecoration(
-                      color: backgroundColorfigma,
+                      color: offwhite,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -589,7 +593,7 @@ class _ClubPage3State extends State<ClubPage3> {
                         Text(
                           "Where should we send you tickets",
                           style: GoogleFonts.sairaCondensed(
-                            color: const Color(0XFFFFFFFF),
+                            color: backgroundColorfigma,
                             fontSize: height / 43.35,
                             fontWeight: FontWeight.w600,
                           ),
@@ -600,10 +604,10 @@ class _ClubPage3State extends State<ClubPage3> {
                             height: height / 15,
                             width: double.maxFinite,
                             decoration: BoxDecoration(
-                                color: const Color(0xFF2C2F33),
+                                color: offwhite,
                                 borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: Colors.white,
+                                border: Border.all(width: 3,
+                                  color: backgroundColorfigma,
                                 )),
                             child: Padding(
                               padding:
@@ -613,7 +617,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                   height: height / 15,
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF2C2F33),
+                                    color: offwhite,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   child: Row(
@@ -626,7 +630,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                           child: Text(
                                             '+91',
                                             style: GoogleFonts.sairaCondensed(
-                                              color: const Color(0XFFFFFFFF),
+                                              color: backgroundColorfigma,
                                               fontSize: height / 43.35,
                                             ),
                                           ),
@@ -654,7 +658,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                                 hintStyle:
                                                     GoogleFonts.sairaCondensed(
                                                   color:
-                                                      const Color(0XFFFFFFFF),
+                                                      backgroundColorfigma,
                                                 ),
                                                 border: InputBorder.none,
                                               ),
@@ -673,10 +677,10 @@ class _ClubPage3State extends State<ClubPage3> {
                           height: height / 15,
                           width: double.maxFinite,
                           decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
+                              color: offwhite,
                               borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(
-                                color: Colors.white,
+                              border: Border.all(width: 3,
+                                color: backgroundColorfigma,
                               )),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -690,7 +694,7 @@ class _ClubPage3State extends State<ClubPage3> {
                               decoration: InputDecoration(
                                 hintText: 'Email',
                                 hintStyle: GoogleFonts.sairaCondensed(
-                                  color: const Color(0XFFFFFFFF),
+                                  color: backgroundColorfigma,
                                 ),
                                 border: InputBorder.none,
                               ),
@@ -703,5 +707,6 @@ class _ClubPage3State extends State<ClubPage3> {
                 ),
               ]),
             )));
+    ;
   }
 }

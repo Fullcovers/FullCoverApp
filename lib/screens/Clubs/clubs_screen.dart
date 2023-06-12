@@ -48,7 +48,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            topnavigationbar(height, width),
+            topnavigationbar(height, width,false),
             FractionalTranslation(
               translation: const Offset(0, -1),
               child: Padding(

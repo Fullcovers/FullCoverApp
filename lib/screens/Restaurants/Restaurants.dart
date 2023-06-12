@@ -22,7 +22,7 @@ class RestaurantsPage extends StatelessWidget {
           backgroundColor:  backgroundColorfigma,
           body: Column(
             children: [
-              topnavigationbar(height, width),
+              topnavigationbar(height, width,false),
               FractionalTranslation(
                 translation: const Offset(0, -0.5),
                 child: Padding(

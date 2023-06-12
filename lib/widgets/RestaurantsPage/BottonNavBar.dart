@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
+import 'package:venq_assessment/screens/Events/events_screen.dart';
 
 bool onclick = false;
 
@@ -48,7 +49,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           borderRadius: BorderRadius.circular(20)),
                       color: widget.iscolorchange
                           ? backgroundColorfigma
-                          : Colors.white,
+                          : offwhite,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -67,7 +68,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/images/clubs.png",scale: 19,
+                                      "assets/images/clubs.png",scale: 16473/widget.height,
                                       color: widget.iscolorchange
                                           ? Colors.white
                                           : backgroundColorfigma,
@@ -76,7 +77,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: Text("Clubs",
                                           style: GoogleFonts.bebasNeue(
-                                            fontSize: 15,
+                                            fontSize: widget.height/45.63157894736842,
                                             color: widget.iscolorchange
                                                 ? Colors.white
                                                 : backgroundColorfigma,
@@ -92,7 +93,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    "assets/images/restaurant.png",scale: 19,
+                                    "assets/images/restaurant.png",scale: 16473/widget.height,
                                     color: widget.iscolorchange
                                         ? Colors.white
                                         : backgroundColorfigma,
@@ -101,7 +102,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                     padding: const EdgeInsets.only(top: 5.0),
                                     child: Text("Restraurants",
                                         style: GoogleFonts.bebasNeue(
-                                          fontSize: 15,
+                                          fontSize: widget.height/45.63157894736842,
                                           color: widget.iscolorchange
                                               ? Colors.white
                                               : backgroundColorfigma,
@@ -110,28 +111,35 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 ],
                               ),
                             ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/Events.png",scale: 19,
-                                    color: widget.iscolorchange
-                                        ? offwhite
-                                        : backgroundColorfigma,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
-                                    child: Text("Events",
-                                        style: GoogleFonts.bebasNeue(
-                                          fontSize: 15,
-                                          color: widget.iscolorchange
-                                              ? offwhite
-                                              : backgroundColorfigma,
-                                        )),
-                                  ),
-                                ],
+                            InkWell(onTap: (){
+                              Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventsScreen()));
+                            },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/Events.png",scale: 16473/widget.height,
+                                      color: widget.iscolorchange
+                                          ? offwhite
+                                          : backgroundColorfigma,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: Text("Events",
+                                          style: GoogleFonts.bebasNeue(
+                                            fontSize: widget.height/45.63157894736842,
+                                            color: widget.iscolorchange
+                                                ? offwhite
+                                                : backgroundColorfigma,
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ]),
@@ -210,7 +218,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                               ),
                               child: Image.asset(
                                 "assets/images/qrcode.png",
-                                scale: 1.2,
+                                scale: 1040.4/widget.height,
                                 color: widget.iscolorchange
                                     ? Colors.black
                                     : Colors.white,
