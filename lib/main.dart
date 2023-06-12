@@ -77,13 +77,12 @@ class MyApp extends StatelessWidget {
           '/ticketsending': (context) => const TicketSending(),
           '/ticketconfirming': (context) => const TicketConfirming(),
         },
-        // home: userprovider.token.isEmpty
-        //     ? const LoginPage()
-        //     : const ClubsScreen(),
+        home: userprovider.token.isEmpty
+            ? const LoginPage()
+            : const ClubsScreen(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        home: EventsScreen(),
       ),
-    );  
+    );
   }
 }

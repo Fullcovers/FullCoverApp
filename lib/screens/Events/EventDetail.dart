@@ -33,7 +33,10 @@ class _EventDetailState extends State<EventDetail> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
-          children: [          SizedBox(height: height/10,),
+          children: [
+            SizedBox(
+              height: height / 10,
+            ),
 
             // topnavigationbar(height, width, true),
             Expanded(
@@ -48,13 +51,20 @@ class _EventDetailState extends State<EventDetail> {
                           height: height / 5,
                           width: width,
                           decoration: BoxDecoration(
-                            color: backgroundColorfigma,
-                            borderRadius: BorderRadius.circular(20.0)
-                          ),
-                          child: Image.network(fit:BoxFit.fill,
-                            widget.event.imageUrl,
-                            width: width,
-                          ),
+                              color: backgroundColorfigma,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: widget.event.imageUrl != ''
+                              ? Image.network(
+                                  fit: BoxFit.fill,
+                                  widget.event.imageUrl,
+                                  width: width,
+                                )
+                              : Image.asset(
+                                  "assets/images/Restaurants.jpg",
+                                  fit: BoxFit.cover,
+                                  width: width / 1.1,
+                                  height: height / 5.97,
+                                ),
                         ),
                       ),
                     ),
@@ -140,9 +150,6 @@ class _EventDetailState extends State<EventDetail> {
                               ],
                             ),
                           ),
-                          // SizedBox(
-                          //   width: width / 6,
-                          // ),
                           Padding(
                             padding: const EdgeInsets.only(right: 20.0),
                             child: Text(
@@ -264,110 +271,139 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                                 ),
                                 Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Container(
-                                        height: 2.5 * height / 100,
-                                        width: 2 * width / 10,
-                                        decoration: BoxDecoration(
-                                          color: offwhite,
-                                          border: Border.all(
-                                            width: 1,
+                                  children: clubprovider
+                                          .club!.facilities.isNotEmpty
+                                      ? clubprovider.club!.facilities
+                                          .map((facility) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 4.0, right: 10),
+                                            child: Container(
+                                              height: 2.5 * height / 100,
+                                              width: 2 * width / 10,
+                                              decoration: BoxDecoration(
+                                                color: offwhite,
+                                                border: Border.all(
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(5.0),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                  child: Text(
+                                                facility,
+                                                style: TextStyle(
+                                                  color: golden,
+                                                ),
+                                              )),
+                                            ),
+                                          );
+                                        }).toList()
+                                      : [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 4.0),
+                                            child: Container(
+                                              height: 2.5 * height / 100,
+                                              width: 2 * width / 10,
+                                              decoration: BoxDecoration(
+                                                color: offwhite,
+                                                border: Border.all(
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(5.0),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                  child: Text(
+                                                "Techno",
+                                                style: TextStyle(
+                                                  color: golden,
+                                                ),
+                                              )),
+                                            ),
                                           ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0),
-                                          ),
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          "Techno",
-                                          style: TextStyle(
-                                            color: golden,
-                                          ),
-                                        )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Container(
-                                        height: 2.5 * height / 100,
-                                        width: 2 * width / 10,
-                                        decoration: BoxDecoration(
-                                          color: offwhite,
-                                          border: Border.all(
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0),
-                                          ),
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          "Techno",
-                                          style: TextStyle(
-                                            color: golden,
-                                          ),
-                                        )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Container(
-                                        height: 2.5 * height / 100,
-                                        width: 2 * width / 10,
-                                        decoration: BoxDecoration(
-                                          color: offwhite,
-                                          border: Border.all(
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0),
-                                          ),
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          "Techno",
-                                          style: TextStyle(
-                                            color: golden,
-                                          ),
-                                        )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Container(
-                                        height: 2.5 * height / 100,
-                                        width: 2 * width / 10,
-                                        decoration: BoxDecoration(
-                                          color: offwhite,
-                                          border: Border.all(
-                                            width: 1,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0),
-                                          ),
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          "Techno",
-                                          style: TextStyle(
-                                            color: golden,
-                                          ),
-                                        )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                          const SizedBox(width: 10),
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 4.0),
+                                              child: Container(
+                                                height: 2.5 * height / 100,
+                                                width: 2 * width / 10,
+                                                decoration: BoxDecoration(
+                                                  color: offwhite,
+                                                  border: Border.all(
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(5.0),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                    child: Text(
+                                                  "Techno",
+                                                  style: TextStyle(
+                                                    color: golden,
+                                                  ),
+                                                )),
+                                              )),
+                                          const SizedBox(width: 10),
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 4.0),
+                                              child: Container(
+                                                height: 2.5 * height / 100,
+                                                width: 2 * width / 10,
+                                                decoration: BoxDecoration(
+                                                  color: offwhite,
+                                                  border: Border.all(
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(5.0),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                    child: Text(
+                                                  "Techno",
+                                                  style: TextStyle(
+                                                    color: golden,
+                                                  ),
+                                                )),
+                                              )),
+                                          const SizedBox(width: 10),
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 4.0),
+                                              child: Container(
+                                                height: 2.5 * height / 100,
+                                                width: 2 * width / 10,
+                                                decoration: BoxDecoration(
+                                                  color: offwhite,
+                                                  border: Border.all(
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(5.0),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                    child: Text(
+                                                  "Techno",
+                                                  style: TextStyle(
+                                                    color: golden,
+                                                  ),
+                                                )),
+                                              )),
+                                        ],
+                                )
                               ],
                             ),
                           ),
@@ -473,14 +509,16 @@ class _EventDetailState extends State<EventDetail> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, right: 30),
-                      child: InkWell(onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => EventDetail2(
-                            club: clubprovider.club!, event: widget.event,
-                          )),
-                );
-              },
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => EventDetail2(
+                                      club: clubprovider.club!,
+                                      event: widget.event,
+                                    )),
+                          );
+                        },
                         child: Center(
                           child: Container(
                             height: height / 15,
@@ -511,8 +549,8 @@ class _EventDetailState extends State<EventDetail> {
                                   padding: const EdgeInsets.only(right: 20.0),
                                   child: Container(
                                     height: height / 28,
-                                    width: width/10.275,
-                                    decoration:  BoxDecoration(
+                                    width: width / 10.275,
+                                    decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: backgroundColorfigma),
                                   ),

@@ -19,7 +19,6 @@ class ClubServices {
           'Content-Type': 'application/json; charset=UTF-8'
         },
       );
-      print(res.body);
       httpErrorHandle(
           response: res,
           context: context,
@@ -32,7 +31,6 @@ class ClubServices {
             // showSnackBar(context, 'Clubs data fetched successfully');
           });
     } catch (e) {
-      print(e.toString());
       showSnackBar(context, e.toString());
     }
     return clubProvider.clubsData;
@@ -48,12 +46,10 @@ class ClubServices {
           'Content-Type': 'application/json; charset=UTF-8'
         },
       );
-      print(res.body);
       httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () {
-            print(res.body);
             final clubProvider =
                 Provider.of<ClubProvider>(context, listen: false);
             clubProvider.setclubnull();
@@ -65,7 +61,6 @@ class ClubServices {
             // showSnackBar(context, 'Clubs data fetched successfully');
           });
     } catch (e) {
-      print(e.toString());
       showSnackBar(context, e.toString());
     }
     return clubProvider.club;

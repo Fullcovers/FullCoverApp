@@ -34,12 +34,8 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final eventprovider = Provider.of<EventProvider>(context, listen: false);
-    final clubprovider = Provider.of<ClubProvider>(context, listen: false);
-
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double overlapFraction = 0.5;
     double rh = height -
         (height / 10 +
             height / 10 +
@@ -53,7 +49,7 @@ class _EventsScreenState extends State<EventsScreen> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              topnavigationbar(height, width,true),
+              topnavigationbar(height, width, true),
               FractionalTranslation(
                 translation: const Offset(0, -0.5),
                 child: Padding(
@@ -62,7 +58,7 @@ class _EventsScreenState extends State<EventsScreen> {
                     child: Text("Events",
                         style: GoogleFonts.bebasNeue(
                           fontSize: 40,
-                          color: Color(0xFFB59F68),
+                          color: const Color(0xFFB59F68),
                         )),
                   ),
                 ),
@@ -72,134 +68,42 @@ class _EventsScreenState extends State<EventsScreen> {
                 child: Container(
                     height: 4.8 * height / 10,
                     width: width,
-                    decoration: BoxDecoration(color: Colors.white),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: FutureBuilder<List<Event>>(
                       future: EventsServices().getAllEvents(context: context),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return  Center(
+                          return Center(
                             child: SizedBox(
-                              height: height/21.675,
-                              width: width/10.275,
-                              child: CircularProgressIndicator(),
+                              height: height / 21.675,
+                              width: width / 10.275,
+                              child: const CircularProgressIndicator(),
                             ),
                           );
-                          ; // Show a loading indicator while data is being fetched
                         } else if (snapshot.hasError) {
-                          return Text(
-                              'Error: ${snapshot.error}'); // Show an error message if an error occurred
+                          return Text('Error: ${snapshot.error}');
                         } else {
-                          // Data retrieval is successful
                           final eventsData = snapshot.data!;
 
                           return ListView.builder(
                             itemCount: eventsData.length,
                             itemBuilder: (context, index) {
                               final Event event = eventsData[index];
-                              // final ClubModel club =
-                              //     clubprovider.getClubDetails(event.clubId);
 
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                    onTap: () async {
-                                      print(event.clubId);
-                                      ClubModel? club = await ClubServices()
-                                          .getSingleClub(
-                                              clubid: event.clubId,
-                                              context: context);
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventDetail(event: event)));
-                                      // clubprovider.setclubnull();
-                                    },
-                                    // child: Padding(
-                                      // padding: const EdgeInsets.only(top: 8.0),
-                                      child: myeventcard(height, width,event)
-                                      
-                                      // Row(
-                                      //   children: [
-                                      //     Card(
-                                      //       color: offwhite,
-                                      //       shape: RoundedRectangleBorder(
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(
-                                      //                   10.0)),
-                                      //       child: Container(
-                                      //         height: height / 12.21,
-                                      //         width: width / 5.788,
-                                      //         decoration: BoxDecoration(
-                                      //           color: offwhite,
-                                      //           borderRadius: BorderRadius.all(
-                                      //             Radius.circular(60.0),
-                                      //           ),
-                                      //         ),
-                                      //         child: Row(
-                                      //           mainAxisAlignment:
-                                      //               MainAxisAlignment
-                                      //                   .spaceAround,
-                                      //           children: [],
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     Card(
-                                      //       color: offwhite,
-                                      //       shape: RoundedRectangleBorder(
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(
-                                      //                   10.0)),
-                                      //       child: Container(
-                                      //         height: height / 12.21,
-                                      //         width: width / 1.55,
-                                      //         decoration: const BoxDecoration(
-                                      //           color: Color(0xFFD9D9D9),
-                                      //           borderRadius: BorderRadius.all(
-                                      //             Radius.circular(20.0),
-                                      //           ),
-                                      //         ),
-                                      //         child: Row(
-                                      //           mainAxisAlignment:
-                                      //               MainAxisAlignment
-                                      //                   .spaceAround,
-                                      //           children: [
-                                      //             Text(
-                                      //               event.name,
-                                      //               style: GoogleFonts
-                                      //                   .sairaCondensed(
-                                      //                 fontWeight:
-                                      //                     FontWeight.w500,
-                                      //                 fontSize: 24,
-                                      //               ),
-                                      //             ),
-                                      //             Column(
-                                      //               mainAxisAlignment:
-                                      //                   MainAxisAlignment
-                                      //                       .center,
-                                      //               crossAxisAlignment:
-                                      //                   CrossAxisAlignment.end,
-                                      //               children: [
-                                      //                 Text("Starts from",
-                                      //                     style: GoogleFonts
-                                      //                         .mavenPro(
-                                      //                       fontSize: 11,
-                                      //                     )),
-                                      //                 Text("Rs. 2000",
-                                      //                     style: GoogleFonts
-                                      //                         .bebasNeue(
-                                      //                       fontSize: 28,
-                                      //                     )),
-                                      //               ],
-                                      //             )
-                                      //           ],
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                    )
-                                    // ),
+                                  onTap: () async {
+                                    await ClubServices().getSingleClub(
+                                        clubid: event.clubId, context: context);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EventDetail(event: event)));
+                                  },
+                                  child: myeventcard(height, width, event),
+                                ),
                               );
                             },
                           );
@@ -211,7 +115,11 @@ class _EventsScreenState extends State<EventsScreen> {
                 height: rh,
               ),
             ]),
-        bottomNavigationBar: bottomnavbar(height: height, width: width,iscolorchange: true,),
+        bottomNavigationBar: bottomnavbar(
+          height: height,
+          width: width,
+          iscolorchange: true,
+        ),
       ),
     );
   }
