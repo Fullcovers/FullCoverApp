@@ -87,7 +87,7 @@ Widget mycard(double height, double width, ClubModel club) {
                     ],
                   ),
                   SizedBox(
-                    width: width / 4,
+                    width: width / 8,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,

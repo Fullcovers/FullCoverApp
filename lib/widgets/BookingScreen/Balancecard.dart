@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 class Balancecard extends StatelessWidget {
   const Balancecard({
@@ -46,10 +47,13 @@ class Balancecard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10.0, right: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Text(
                     "VIP Membership",
-                    style: TextStyle(color: Color.fromARGB(255, 191, 150, 26)),
+                    style: GoogleFonts.sairaCondensed(
+                        color: golden,
+                        fontSize: height / 54.1875,
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -69,7 +73,7 @@ class Balancecard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 20.0),
+              padding: const EdgeInsets.only( left: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -82,18 +86,22 @@ class Balancecard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0, right: 30.0),
+              padding: const EdgeInsets.only(right: 30.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Row(
                     children: [
-                      Image.asset("assets/images/coinlogo.png",scale: 13,),
-                      const Text(
+                      Image.asset(
+                        "assets/images/coinlogo.png",
+                        scale: 13,
+                      ),
+                       Text(
                         " 1385",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 191, 150, 26),
-                            fontSize: 30),
+                        style: GoogleFonts.sairaCondensed(
+                                      color: golden,
+                                      fontSize: height / 30,
+                                      fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),

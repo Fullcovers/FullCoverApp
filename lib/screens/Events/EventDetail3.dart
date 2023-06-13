@@ -61,7 +61,7 @@ class _EventDetail3State extends State<EventDetail3> {
             body: SlidingUpPanel(
               borderRadius: radius,
               minHeight: height / 6,
-              maxHeight: height < 700 ? height / 1.65 : height / 2,
+              maxHeight:height / 1.65 ,
               controller: panelController,
               defaultPanelState: PanelState.CLOSED,
               panelSnapping: false,
@@ -163,7 +163,8 @@ class _EventDetail3State extends State<EventDetail3> {
                   )),
               panel: Container(
                 color: backgroundColorfigma,
-                child: Column(children: [
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -201,7 +202,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Stag*${widget.stagcount}",
+                              Text("Stagx${widget.stagcount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -221,7 +222,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Couple*${widget.couplecount}",
+                              Text("Couplex${widget.couplecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -241,7 +242,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Female*${widget.femalecount}",
+                              Text("Femalex${widget.femalecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -314,7 +315,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Stag*${widget.stagcount}",
+                        Text("Stagx${widget.stagcount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
@@ -334,7 +335,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Couple*${widget.couplecount}",
+                        Text("Couplex${widget.couplecount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
@@ -354,7 +355,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Female*${widget.femalecount}",
+                        Text("Femalex${widget.femalecount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
@@ -378,7 +379,7 @@ class _EventDetail3State extends State<EventDetail3> {
                   Container(
                       width: double.maxFinite,
                       decoration: BoxDecoration(
-                        color: offwhite,
+                        color: backgroundColorfigma,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(40.0),
                           topRight: Radius.circular(40.0),
@@ -397,7 +398,7 @@ class _EventDetail3State extends State<EventDetail3> {
                                     child: Text(
                                       "Pay Using",
                                       style: GoogleFonts.sairaCondensed(
-                                          color: const Color(0XFF222222),
+                                          color: offwhite,
                                           fontSize: width / 25.6875,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -407,7 +408,7 @@ class _EventDetail3State extends State<EventDetail3> {
                                     child: Text(
                                       "Google Pay",
                                       style: GoogleFonts.sairaCondensed(
-                                          color: const Color(0XFF222222),
+                                          color: offwhite,
                                           fontSize: width / 15.80769230769231,
                                           fontWeight: FontWeight.w600),
                                     ),

@@ -79,9 +79,10 @@ class MyApp extends StatelessWidget {
         },
         home: userprovider.token.isEmpty
             ? const LoginPage()
-            : const ClubsScreen(),
+            :  MyBookingPage(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        // home: MyBookingPage(),
       ),
     );
   }

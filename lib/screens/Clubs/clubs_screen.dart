@@ -95,7 +95,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                               width: width / 1.3,
                               height: height / 1.85,
                               child: ListView.builder(
-                                itemCount: 3,
+                                itemCount: clubsData.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   final ClubModel club = clubsData[index];
                                   return Column(

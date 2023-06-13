@@ -511,29 +511,29 @@ class ClubDetail extends StatelessWidget {
                 thickness: 1,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => ClubsPage2(
-                            club: club,
-                          )),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30),
-                child: Center(
-                  child: Container(
-                    height: height / 15,
-                    width: width,
-                    decoration: BoxDecoration(
-                        color: const Color(0XFF3D4348),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        border: Border.all(
-                          color: Colors.white,
-                        )),
+            Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: Center(
+                child: Container(
+                  height: height / 15,
+                  width: width,
+                  decoration: BoxDecoration(
+                      color: const Color(0XFF3D4348),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
+                      border: Border.all(
+                        color: Colors.white,
+                      )),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => ClubsPage2(
+                                  club: club,
+                                )),
+                      );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
