@@ -47,6 +47,10 @@ class _MyBookingPageState extends State<MyBookingPage> {
         setState(() {
           iscolorchange = false;
         });
+      } else {
+        setState(() {
+          iscolorchange = true;
+        });
       }
     });
   }
@@ -60,7 +64,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColorfigma,
         body: SlidingUpPanel(
-          maxHeight: height / 1.65,
+          maxHeight: height / 1.59,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -300,7 +304,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
             ],
           ),
           controller: panelController,
-          defaultPanelState: PanelState.CLOSED,
+          defaultPanelState: PanelState.OPEN,
           panel: Container(
               height: 100,
               decoration: BoxDecoration(
@@ -344,15 +348,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           Stack(
                             children: [
                               Container(
-                                width: 30,
-                                height: 70,
+                                width: width / 13.7,
+                                height: height / 12.38571428571429,
                                 decoration: BoxDecoration(
                                   color: backgroundColorfigma,
                                 ),
                               ),
                               Container(
-                                width: 30,
-                                height: 70,
+                                width: width / 13.7,
+                                height: height / 12.38571428571429,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(20),
@@ -361,8 +365,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 ),
                               ),
                               Container(
-                                width: 30,
-                                height: 70,
+                                width: width / 13.7,
+                                height: height / 12.38571428571429,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(20),
@@ -371,8 +375,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 ),
                               ),
                               Container(
-                                width: 30,
-                                height: 86,
+                                width: width / 13.7,
+                                height: height /10.1,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(20),
@@ -380,6 +384,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   color: Colors.white,
                                 ),
                               ),
+                              
                             ],
                           ),
                           InkWell(
@@ -389,41 +394,45 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 iscolorchange = false;
                               });
                             },
-                            child: Container(
-                              width: width / 3.34,
-                              height: height / 10.1,
-                              decoration: BoxDecoration(
-                                color: backgroundColorfigma,
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 25, bottom: 18.0, right: 25),
-                                child: Container(
-                                  width: 10,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: width / 3.34,
+                                  height: height / 10.1,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
+                                    color: backgroundColorfigma,
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
                                     ),
                                   ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      panelController.close();
-                                      setState(() {
-                                        iscolorchange = false;
-                                      });
-                                    },
-                                    child: Image.asset(
-                                      "assets/images/coinlogo.png",
-                                      scale: 6,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25, bottom: 10.0, right: 25,top: 8),
+                                    child: Container(
+                                      width: 10,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(20),
+                                        ),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          panelController.close();
+                                          setState(() {
+                                            iscolorchange = false;
+                                          });
+                                        },
+                                        child: Image.asset(
+                                          "assets/images/coinlogo.png",
+                                          scale: 6,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           )
                         ],
@@ -484,11 +493,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                       padding: const EdgeInsets.all(0.0),
                                       child: Row(
                                         children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                Icons.call_to_action_sharp),
-                                            iconSize: 30,
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Image.asset("assets/images/ticket.png",scale: height*0.0173010380622837,),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(0.0),

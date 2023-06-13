@@ -59,7 +59,7 @@ class _ClubPage3State extends State<ClubPage3> {
             body: SlidingUpPanel(
               borderRadius: radius,
               minHeight: height / 6,
-              maxHeight: height < 700 ? height / 1.65 : height / 2,
+              maxHeight: height / 1.65,
               controller: panelController,
               defaultPanelState: PanelState.CLOSED,
               panelSnapping: false,
@@ -161,7 +161,8 @@ class _ClubPage3State extends State<ClubPage3> {
                   )),
               panel: Container(
                 color: offwhite,
-                child: Column(children: [
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(

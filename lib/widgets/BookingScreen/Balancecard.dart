@@ -19,7 +19,7 @@ class Balancecard extends StatelessWidget {
       padding: const EdgeInsets.only(
           top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
       child: Container(
-        height: height / 5.5,
+        height: height / 5,
         width: double.maxFinite,
         decoration: const BoxDecoration(
           boxShadow: [
