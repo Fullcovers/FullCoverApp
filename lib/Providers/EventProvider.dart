@@ -9,7 +9,9 @@ class EventProvider with ChangeNotifier {
               id: eventData['_id'],
               clubId: eventData['clubId'],
               name: eventData['name'],
-              time: DateTime.parse(eventData['time']),
+              time: eventData.containsKey('time')
+                  ? DateTime.parse(eventData['time'])
+                  : DateTime.now(),
               date: DateTime.parse(eventData['date']),
               description: eventData['description'],
               imageUrl: eventData['imageUrl'],

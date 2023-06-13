@@ -16,7 +16,53 @@ import '../utils/Constants.dart';
 import '../utils/Utils.dart';
 
 class OrderServices {
-  void checkvalidateQrCode(
+  // void checkvalidateQrCode(
+  //     {required String id, required BuildContext context}) async {
+  //   String message = '';
+  //   String ticketId = '';
+  //   late bool isValid;
+  //   late int quantity;
+  //   try {
+  //     var userprovider = Provider.of<UserProvider>(context, listen: false);
+  //     var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+  //     orderProvider.setLoading(true);
+  //     http.Response res = await http.get(
+  //       Uri.parse('${Constants.uri}orders/$id'),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         'x-access-token': userprovider.token, // Pass access token as a header
+  //       },
+  //     );
+  //     orderProvider.setLoading(false);
+  //     httpErrorHandle(
+  //         response: res,
+  //         context: context,
+  //         onSuccess: () {
+  //           Map<String, dynamic> responseJson = json.decode(res.body);
+
+  //           isValid = responseJson['isValid'];
+  //           message = responseJson['message'];
+
+  //           if (responseJson.containsKey('data')) {
+  //             Map<String, dynamic> data = responseJson['data'];
+
+  //             ticketId = data['_id'];
+  //             quantity = data['items'][0]['quantity'];
+  //             var orderProvider =
+  //                 Provider.of<OrderProvider>(context, listen: false);
+  //             OrderModel? order = orderProvider.getOrderFromMap(data);
+  //             if (order != null) {
+  //               orderProvider.setOrder(order);
+  //             }
+  //           }
+  //           // showSnackBar(context, message);
+  //         });
+  //   } catch (e) {
+  //     print(e.toString());
+  //     showSnackBar(context, e.toString());
+  //   }
+  // }
+  Future<void> checkvalidateQrCode(
       {required String id, required BuildContext context}) async {
     String message = '';
     String ticketId = '';
@@ -43,7 +89,6 @@ class OrderServices {
             isValid = responseJson['isValid'];
             message = responseJson['message'];
 
-            print(responseJson);
             if (responseJson.containsKey('data')) {
               Map<String, dynamic> data = responseJson['data'];
 
@@ -61,6 +106,27 @@ class OrderServices {
     } catch (e) {
       print(e.toString());
       showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<void> getAllOrder({required BuildContext context}) async {
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}orders/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${userprovider.token}'
+        },
+      );
+      orderProvider.storeOrders(res.body);
+
+// Access the stored orders
+
+    } catch (e) {
+      print(e.toString());
     }
   }
 

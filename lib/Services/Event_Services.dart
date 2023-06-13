@@ -20,6 +20,7 @@ class EventsServices {
           'Content-Type': 'application/json; charset=UTF-8'
         },
       );
+      // print(res.body);
       httpErrorHandle(
           response: res,
           context: context,
@@ -29,6 +30,8 @@ class EventsServices {
             final eventData = json.decode(res.body)['data'];
 
             eventProvider.fetchEvents(eventData);
+            print("hello");
+            print(eventProvider.events);
 
             // showSnackBar(context, 'Events data fetched successfully');
           });

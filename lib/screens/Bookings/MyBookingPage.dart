@@ -6,8 +6,16 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:venq_assessment/Models/Order.dart';
+import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/TicketProvider.dart';
+import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
+import 'package:venq_assessment/Services/Order_Services.dart';
+import 'package:venq_assessment/Services/Ticket_Services.dart';
+import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
@@ -15,6 +23,7 @@ import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class MyBookingPage extends StatefulWidget {
   MyBookingPage({super.key});
@@ -24,6 +33,7 @@ class MyBookingPage extends StatefulWidget {
 }
 
 class _MyBookingPageState extends State<MyBookingPage> {
+  List<OrderModel> orders = [];
   bool iscolorchange = false;
   bool check = false;
   bool ischange = true;
@@ -35,13 +45,39 @@ class _MyBookingPageState extends State<MyBookingPage> {
   @override
   void initState() {
     super.initState();
+    initializeOrders();
     // Start the timer when the widget is initialized
+
     _startTimer();
+  }
+
+  Future<void> initializeOrders() async {
+    var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+
+    await OrderServices().getAllOrder(context: context);
+    List<OrderModel> fetchedOrders = await orderProvider.getOrders();
+    setState(() {
+      orders = fetchedOrders;
+    });
+
+    if (orders.isNotEmpty) {
+      await OrderServices().checkvalidateQrCode(
+        context: context,
+        id: orders[0].id,
+      );
+
+      String ticketId = orderProvider.order!.items[0].ticket;
+
+      await TicketServices().getTicketById(
+        context: context,
+        ticketId: ticketId,
+      );
+    }
   }
 
   void _startTimer() {
     // Check the condition every 2 seconds
-    _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       // Perform your condition check here
       if (panelController.isPanelClosed) {
         setState(() {
@@ -57,8 +93,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
   @override
   Widget build(BuildContext context) {
+    var userprovider = Provider.of<UserProvider>(context, listen: false);
+    var orderprovider = Provider.of<OrderProvider>(context, listen: false);
+    var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -93,37 +134,37 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               boxShadow: iselevatedgroupicon
                                   ? [
                                       BoxShadow(
-                                        color:
-                                            Color.fromARGB(255, 120, 116, 116),
+                                        color: const Color.fromARGB(
+                                            255, 120, 116, 116),
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
-                                        offset: Offset(-5, -5),
+                                        offset: const Offset(-5, -5),
                                       ),
                                       BoxShadow(
                                         color: Colors.black,
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
-                                        offset: Offset(5, 5),
+                                        offset: const Offset(5, 5),
                                       ),
                                     ]
                                   : [
                                       BoxShadow(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 120, 116, 116),
                                           blurRadius: blurradiusXl,
                                           spreadRadius: 1,
-                                          offset: Offset(-5, -5),
+                                          offset: const Offset(-5, -5),
                                           inset: true),
                                       BoxShadow(
                                           color: Colors.black,
                                           blurRadius: blurradiusXl,
                                           spreadRadius: 1,
-                                          offset: Offset(2, 2),
+                                          offset: const Offset(2, 2),
                                           inset: true),
                                     ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              color: Color(0xFF2C2F33),
+                                  const BorderRadius.all(Radius.circular(50)),
+                              color: const Color(0xFF2C2F33),
                             ),
                             child: Center(
                                 child: Image.asset(
@@ -148,37 +189,37 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               boxShadow: iselevatedaccicon
                                   ? [
                                       BoxShadow(
-                                        color:
-                                            Color.fromARGB(255, 120, 116, 116),
+                                        color: const Color.fromARGB(
+                                            255, 120, 116, 116),
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
-                                        offset: Offset(-5, -5),
+                                        offset: const Offset(-5, -5),
                                       ),
                                       BoxShadow(
                                         color: Colors.black,
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
-                                        offset: Offset(5, 5),
+                                        offset: const Offset(5, 5),
                                       ),
                                     ]
                                   : [
                                       BoxShadow(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 120, 116, 116),
                                           blurRadius: blurradiusXl,
                                           spreadRadius: 1,
-                                          offset: Offset(-5, -5),
+                                          offset: const Offset(-5, -5),
                                           inset: true),
                                       BoxShadow(
                                           color: Colors.black,
                                           blurRadius: blurradiusXl,
                                           spreadRadius: 1,
-                                          offset: Offset(2, 2),
+                                          offset: const Offset(2, 2),
                                           inset: true),
                                     ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              color: Color(0xFF2C2F33),
+                                  const BorderRadius.all(Radius.circular(50)),
+                              color: const Color(0xFF2C2F33),
                             ),
                             child: InkWell(
                               onTap: () {
@@ -227,7 +268,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     width: width / 7.76,
                                     decoration: BoxDecoration(
                                       color: offwhite,
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                         Radius.circular(60.0),
                                       ),
                                     ),
@@ -257,7 +298,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Text(
-                                          "Event " + (index + 1).toString(),
+                                          "Event ${index + 1}",
                                           style: GoogleFonts.mavenPro(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 16,
@@ -278,9 +319,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: height / 25,
-                  ),
+                  // SizedBox(
+                  //   height: height / 25,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Container(
@@ -304,295 +345,332 @@ class _MyBookingPageState extends State<MyBookingPage> {
             ],
           ),
           controller: panelController,
-          defaultPanelState: PanelState.OPEN,
-          panel: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              // margin: const EdgeInsets.all(24.0),
-              child: Container(
-                child: Column(children: [
-                  InkWell(
-                    onTap: () {
-                      panelController.close();
-                      setState(() {
-                        iscolorchange = false;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: width / 1.7,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(40),
-                                topLeft: Radius.circular(40),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Text(
-                                "MY BOOKINGS",
-                                style: GoogleFonts.bebasNeue(fontSize: 40),
-                              ),
-                            ),
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                width: width / 13.7,
-                                height: height / 12.38571428571429,
-                                decoration: BoxDecoration(
-                                  color: backgroundColorfigma,
-                                ),
-                              ),
-                              Container(
-                                width: width / 13.7,
-                                height: height / 12.38571428571429,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Container(
-                                width: width / 13.7,
-                                height: height / 12.38571428571429,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Container(
-                                width: width / 13.7,
-                                height: height /10.1,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              
-                            ],
-                          ),
-                          InkWell(
-                            onTap: () {
-                              panelController.close();
-                              setState(() {
-                                iscolorchange = false;
-                              });
-                            },
-                            child: Stack(
+          defaultPanelState: PanelState.CLOSED,
+          panel: orders.isNotEmpty
+              ? Container(
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  // margin: const EdgeInsets.all(24.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            panelController.close();
+
+                            setState(() {
+                              iscolorchange = false;
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Row(
                               children: [
                                 Container(
-                                  width: width / 3.34,
-                                  height: height / 10.1,
-                                  decoration: BoxDecoration(
-                                    color: backgroundColorfigma,
-                                    borderRadius: const BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20),
+                                  width: width / 1.7,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(40),
+                                      topLeft: Radius.circular(40),
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 25, bottom: 10.0, right: 25,top: 8),
-                                    child: Container(
-                                      width: 10,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
-                                        ),
-                                      ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          panelController.close();
-                                          setState(() {
-                                            iscolorchange = false;
-                                          });
-                                        },
-                                        child: Image.asset(
-                                          "assets/images/coinlogo.png",
-                                          scale: 6,
-                                        ),
-                                      ),
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: Text(
+                                      "MY BOOKINGS",
+                                      style:
+                                          GoogleFonts.bebasNeue(fontSize: 40),
                                     ),
                                   ),
                                 ),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: width / 13.7,
+                                      height: height / 12.38571428571429,
+                                      decoration: BoxDecoration(
+                                        color: backgroundColorfigma,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.7,
+                                      height: height / 12.38571428571429,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.7,
+                                      height: height / 12.38571428571429,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.7,
+                                      height: height / 10.1,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    panelController.close();
+                                    setState(() {
+                                      iscolorchange = false;
+                                    });
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        width: width / 3.34,
+                                        height: height / 10.1,
+                                        decoration: BoxDecoration(
+                                          color: backgroundColorfigma,
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 25,
+                                              bottom: 10.0,
+                                              right: 25,
+                                              top: 8),
+                                          child: Container(
+                                            width: 10,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(20),
+                                              ),
+                                            ),
+                                            child: InkWell(
+                                              onTap: () {
+                                                panelController.close();
+                                                setState(() {
+                                                  iscolorchange = false;
+                                                });
+                                              },
+                                              child: Image.asset(
+                                                "assets/images/coinlogo.png",
+                                                scale: 6,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, left: 10.0),
-                              child: Container(
-                                height: 3 * height / 11,
-                                width: 2 * width / 3,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20.0)),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Row(
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 10.0),
+                                    child: Container(
+                                      height: 3 * height / 11,
+                                      width: 2 * width / 3,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/Qr.png",
-                                            scale: 1.5,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(0.0),
-                                      child: Center(
-                                        child: Text("WATERZ",
-                                            style: GoogleFonts.bebasNeue(
-                                              fontSize: 32,
-                                            )),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(0.0),
-                                      child: Row(
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset("assets/images/ticket.png",scale: height*0.0173010380622837,),
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                orderprovider.orders.isNotEmpty
+                                                    ? orderprovider.order?.id
+                                                                .isNotEmpty ??
+                                                            false
+                                                        ? ticketprovider
+                                                                    .ticket
+                                                                    ?.id
+                                                                    .isNotEmpty ??
+                                                                false
+                                                            ? RepaintBoundary(
+                                                                child: QrImage(
+                                                                  data: ticketprovider
+                                                                      .ticket!
+                                                                      .id,
+                                                                  version:
+                                                                      QrVersions
+                                                                          .auto,
+                                                                  size: 130.0,
+                                                                ),
+                                                              )
+                                                            : const CircularProgressIndicator()
+                                                        : const CircularProgressIndicator()
+                                                    : const CircularProgressIndicator(),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(0.0),
+                                            child: Center(
+                                              child: Text("WATERZ",
+                                                  style: GoogleFonts.bebasNeue(
+                                                    fontSize: 32,
+                                                  )),
+                                            ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(0.0),
                                             child: Row(
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: const [
-                                                    Text("2x Couple"),
-                                                    Text("3x Stag")
-                                                  ],
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Image.asset(
+                                                    "assets/images/ticket.png",
+                                                    scale: height *
+                                                        0.0173010380622837,
+                                                  ),
                                                 ),
                                                 Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 30.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.access_time,
-                                                              size: 17,
-                                                            ),
-                                                            Text(
-                                                              " 08:00 pm",
-                                                            )
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.location_on,
-                                                              size: 17,
-                                                            ),
-                                                            Text(
-                                                              " Take me There",
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ))
+                                                  padding:
+                                                      const EdgeInsets.all(0.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '${orderprovider.order?.items[0].quantity ?? ''}x ${ticketprovider.ticket?.name ?? ''}',
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 30.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(
+                                                                children: const [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .access_time,
+                                                                    size: 17,
+                                                                  ),
+                                                                  Text(
+                                                                    " 08:00 pm",
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                children: const [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .location_on,
+                                                                    size: 17,
+                                                                  ),
+                                                                  Text(
+                                                                    " Take me There",
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ))
+                                                    ],
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           )
                                         ],
                                       ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, left: 10.0),
-                              child: Container(
-                                height: 3 * height / 11,
-                                width: width / 5,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20.0)),
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 2,
+                                    ),
                                   ),
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                  child: RotatedBox(
-                                    quarterTurns: 1,
-                                    child: Text("PREVIOUS BOOKINGS",
-                                        style: GoogleFonts.bebasNeue(
-                                          fontSize: 30,
-                                        )),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 10.0),
+                                    child: Container(
+                                      height: 3 * height / 11,
+                                      width: width / 5,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                      child: Center(
+                                        child: RotatedBox(
+                                          quarterTurns: 1,
+                                          child: Text("PREVIOUS BOOKINGS",
+                                              style: GoogleFonts.bebasNeue(
+                                                fontSize: 30,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height / 25,
-                  ),
-                  bottomnavbar(
-                    width: width,
-                    iscolorchange: iscolorchange,
-                    height: height,
-                  )
-                ]),
-              )),
+                        SizedBox(
+                          height: height / 25,
+                        ),
+                        bottomnavbar(
+                          width: width,
+                          iscolorchange: iscolorchange,
+                          height: height,
+                        )
+                      ]))
+              : const Center(child: CircularProgressIndicator()),
           renderPanelSheet: false,
           panelSnapping: false,
           collapsed: Container(
@@ -608,7 +686,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   Container(
                     width: width / 5.1375,
                     height: height / 12.38571428571429,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
