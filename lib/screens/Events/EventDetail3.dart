@@ -203,7 +203,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Stag*${widget.stagcount}",
+                              Text("Stagx${widget.stagcount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -223,7 +223,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Couple*${widget.couplecount}",
+                              Text("Couplex${widget.couplecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -243,7 +243,7 @@ class _EventDetail3State extends State<EventDetail3> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Female*${widget.femalecount}",
+                              Text("Femalex${widget.femalecount}",
                                   style: GoogleFonts.sairaCondensed(
                                       fontWeight: FontWeight.w600,
                                       fontSize: width / 22.83333333333333,
@@ -316,7 +316,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Stag*${widget.stagcount}",
+                        Text("Stagx${widget.stagcount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
@@ -336,7 +336,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Couple*${widget.couplecount}",
+                        Text("Couplex${widget.couplecount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,
@@ -356,7 +356,7 @@ class _EventDetail3State extends State<EventDetail3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Female*${widget.femalecount}",
+                        Text("Femalex${widget.femalecount}",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: width / 22.83333333333333,

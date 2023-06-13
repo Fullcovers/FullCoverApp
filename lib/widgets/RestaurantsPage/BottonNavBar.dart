@@ -56,19 +56,19 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             SizedBox(
                               width: widget.width / 6,
                             ),
-                            InkWell(onTap: (){
-                              Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ClubsScreen()));
-                            },
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ClubsScreen()));
+                              },
                               child: Container(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/images/clubs.png",scale: 16473/widget.height,
+                                      "assets/images/clubs.png",
+                                      scale: 16473 / widget.height,
                                       color: widget.iscolorchange
                                           ? Colors.white
                                           : backgroundColorfigma,
@@ -77,7 +77,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: Text("Clubs",
                                           style: GoogleFonts.bebasNeue(
-                                            fontSize: widget.height/45.63157894736842,
+                                            fontSize: widget.height /
+                                                45.63157894736842,
                                             color: widget.iscolorchange
                                                 ? Colors.white
                                                 : backgroundColorfigma,
@@ -87,43 +88,54 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 ),
                               ),
                             ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/restaurant.png",scale: 16473/widget.height,
-                                    color: widget.iscolorchange
-                                        ? Colors.white
-                                        : backgroundColorfigma,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
-                                    child: Text("Restraurants",
-                                        style: GoogleFonts.bebasNeue(
-                                          fontSize: widget.height/45.63157894736842,
-                                          color: widget.iscolorchange
-                                              ? Colors.white
-                                              : backgroundColorfigma,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            InkWell(onTap: (){
-                              Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventsScreen()));
-                            },
+                            InkWell(
+                              onTap: () {
+                                final snackBar = SnackBar(
+                                  content: const Text("Comming Soon"),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              },
                               child: Container(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/images/Events.png",scale: 16473/widget.height,
+                                      "assets/images/restaurant.png",
+                                      scale: 16473 / widget.height,
+                                      color: widget.iscolorchange 
+                                          ? Colors.white
+                                          : backgroundColorfigma,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: Text("Restraurants",
+                                          style: GoogleFonts.bebasNeue(
+                                            fontSize: widget.height /
+                                                45.63157894736842,
+                                            color: widget.iscolorchange
+                                                ? Colors.white
+                                                : backgroundColorfigma,
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => EventsScreen()));
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/Events.png",
+                                      scale: 16473 / widget.height,
                                       color: widget.iscolorchange
                                           ? offwhite
                                           : backgroundColorfigma,
@@ -132,7 +144,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: Text("Events",
                                           style: GoogleFonts.bebasNeue(
-                                            fontSize: widget.height/45.63157894736842,
+                                            fontSize: widget.height /
+                                                45.63157894736842,
                                             color: widget.iscolorchange
                                                 ? offwhite
                                                 : backgroundColorfigma,
@@ -153,7 +166,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     child: Container(
                         height: widget.height / 10.5,
                         width: widget.width / 4.5,
-                        child: Card(elevation: 0,
+                        child: Card(
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
                           color: widget.iscolorchange
@@ -218,7 +232,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                               ),
                               child: Image.asset(
                                 "assets/images/qrcode.png",
-                                scale: 1040.4/widget.height,
+                                scale: 1040.4 / widget.height,
                                 color: widget.iscolorchange
                                     ? Colors.black
                                     : Colors.white,

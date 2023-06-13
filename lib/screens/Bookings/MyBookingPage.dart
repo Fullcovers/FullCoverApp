@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:venq_assessment/Services/Auth_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
@@ -43,7 +44,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
     _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
       // Perform your condition check here
       if (panelController.isPanelClosed) {
-        print(panelController.isPanelClosed);
         setState(() {
           iscolorchange = false;
         });
@@ -89,8 +89,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               boxShadow: iselevatedgroupicon
                                   ? [
                                       BoxShadow(
-                                        color: Color.fromARGB(
-                                            255, 120, 116, 116),
+                                        color:
+                                            Color.fromARGB(255, 120, 116, 116),
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
                                         offset: Offset(-5, -5),
@@ -124,7 +124,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             child: Center(
                                 child: Image.asset(
                               "assets/images/group.png",
-                              scale: 1.2,
+                              scale: 1,
                             ))),
                       ),
                     ),
@@ -144,8 +144,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               boxShadow: iselevatedaccicon
                                   ? [
                                       BoxShadow(
-                                        color: Color.fromARGB(
-                                            255, 120, 116, 116),
+                                        color:
+                                            Color.fromARGB(255, 120, 116, 116),
                                         blurRadius: blurradiusXl,
                                         spreadRadius: -2,
                                         offset: Offset(-5, -5),
@@ -176,9 +176,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   BorderRadius.all(Radius.circular(50)),
                               color: Color(0xFF2C2F33),
                             ),
-                            child: Image.asset(
-                              "assets/images/person.png",
-                              scale: 1.2,
+                            child: InkWell(
+                              onTap: () {
+                                AuthService().signOut(context);
+                              },
+                              child: Image.asset(
+                                "assets/images/person.png",
+                                scale: 1.2,
+                              ),
                             )),
                       ),
                     ),
@@ -248,7 +253,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Text(
-                                          "Event " + index.toString(),
+                                          "Event " + (index + 1).toString(),
                                           style: GoogleFonts.mavenPro(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 16,
@@ -295,7 +300,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
             ],
           ),
           controller: panelController,
-          
           defaultPanelState: PanelState.CLOSED,
           panel: Container(
               height: 100,
@@ -311,7 +315,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 child: Column(children: [
                   InkWell(
                     onTap: () {
-                      print("object");
                       panelController.close();
                       setState(() {
                         iscolorchange = false;
@@ -381,7 +384,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              print("object");
                               panelController.close();
                               setState(() {
                                 iscolorchange = false;
@@ -591,7 +593,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
               child: Row(
                 children: [
                   Container(
-                    
                     width: width / 1.325806451612903,
                     decoration: BoxDecoration(
                       color: backgroundColorfigma,
@@ -634,4 +635,3 @@ class _MyBookingPageState extends State<MyBookingPage> {
     );
   }
 }
-
