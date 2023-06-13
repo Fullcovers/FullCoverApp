@@ -67,6 +67,7 @@ class ClubModel {
   final bool isClubOpen;
   final ClubTimings timings;
   final ClubOpenDays daysOpen;
+  final Clubdaddress daddress;
 
   ClubModel({
     required this.id,
@@ -87,6 +88,7 @@ class ClubModel {
     required this.isClubOpen,
     required this.timings,
     required this.daysOpen,
+    required this.daddress,
   });
 }
 
@@ -121,6 +123,21 @@ class ClubTimings {
   ClubTimings({
     required this.closesAt,
     required this.opensAt,
+  });
+}
+
+class Clubdaddress {
+  final String city;
+  final String plot;
+  final String postalcode;
+  final String state;
+  final String landmark;
+  Clubdaddress({
+    required this.city,
+    required this.plot,
+    required this.postalcode,
+    required this.state,
+    required this.landmark,
   });
 }
 

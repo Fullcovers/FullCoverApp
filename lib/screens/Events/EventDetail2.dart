@@ -1,6 +1,6 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
@@ -18,33 +18,33 @@ class EventDetail2 extends StatefulWidget {
 }
 
 class _EventDetail2State extends State<EventDetail2> {
-      int stagcount = 0;
-    int stagentryprice = 999;
-    int couplecount = 0;
-    int coupleentrypricce = 999;
-    int femalecount = 0;
-    int femaleentryprice = 999;
-    DateTime date = DateTime.now();
-    int selected = DateTime.now().day;
-    String getDayOfWeek(DateTime date) {
-      List<String> daysOfWeek = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ];
+  int stagcount = 0;
+  int stagentryprice = 999;
+  int couplecount = 0;
+  int coupleentrypricce = 999;
+  int femalecount = 0;
+  int femaleentryprice = 999;
+  DateTime date = DateTime.now();
+  int selected = DateTime.now().day;
+  String getDayOfWeek(DateTime date) {
+    List<String> daysOfWeek = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
 
-      return daysOfWeek[date.weekday - 1];
-    }
+    return daysOfWeek[date.weekday - 1];
+  }
 
-    late String todaysdayOfWeek = getDayOfWeek(date);
+  late String todaysdayOfWeek = getDayOfWeek(date);
 
-    late String selectedday = todaysdayOfWeek;
+  late String selectedday = todaysdayOfWeek;
 
-    var cmonth = DateFormat.MMM().format(DateTime.now());
+  var cmonth = DateFormat.MMM().format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +52,11 @@ class _EventDetail2State extends State<EventDetail2> {
         (femalecount * femaleentryprice) +
         (couplecount * coupleentrypricce);
 
-    bool check = false;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFE0E0E0),
+        backgroundColor: const Color(0xFFE0E0E0),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -85,7 +84,7 @@ class _EventDetail2State extends State<EventDetail2> {
                     Padding(
                       padding: EdgeInsets.only(left: width / 20.55),
                       child: Text(
-                        "Pune",
+                        widget.club.daddress.city,
                         style: GoogleFonts.sairaCondensed(
                           color: const Color(0XFFB59F68),
                           fontSize: height / 54.1875,
@@ -100,7 +99,7 @@ class _EventDetail2State extends State<EventDetail2> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20.0, top: 0.0),
                     child: Text(
-                      "19:00 Hrs : 23.45 Hrs",
+                      "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                       style: GoogleFonts.sairaCondensed(
                         color: Colors.black,
                         fontSize: height / 43.35,
@@ -170,7 +169,7 @@ class _EventDetail2State extends State<EventDetail2> {
               child: Container(
                 height: 3.2 * height / 10,
                 width: double.maxFinite,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xFFE0E0E0),
                 ),
                 child: Column(
@@ -181,8 +180,7 @@ class _EventDetail2State extends State<EventDetail2> {
                       width: double.maxFinite,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            width: 3
-                          ,
+                            width: 3,
                             color: const Color(0XFF979797),
                           ),
                           borderRadius:
@@ -656,7 +654,8 @@ class _EventDetail2State extends State<EventDetail2> {
                                       stagentryprice: stagentryprice,
                                       couplecount: couplecount,
                                       coupleentrypricce: coupleentrypricce,
-                                      totalprice: totalprice, event: widget.event,
+                                      totalprice: totalprice,
+                                      event: widget.event,
                                     )));
                       },
                       child: Padding(

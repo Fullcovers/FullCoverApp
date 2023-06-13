@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
@@ -71,7 +69,7 @@ class _EventDetail3State extends State<EventDetail3> {
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                     color: backgroundColorfigma,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(40.0),
                       topRight: Radius.circular(40.0),
                     ),
@@ -370,7 +368,7 @@ class _EventDetail3State extends State<EventDetail3> {
                       ],
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     height: 2,
                     thickness: 2,
                     indent: 2,
@@ -449,8 +447,8 @@ class _EventDetail3State extends State<EventDetail3> {
                                         ),
                                         FractionalTranslation(
                                           translation: height < 700
-                                              ? Offset(0, -0.2)
-                                              : Offset(0, 0),
+                                              ? const Offset(0, -0.2)
+                                              : const Offset(0, 0),
                                           child: Text(
                                             (widget.totalprice +
                                                     widget.totalprice *
@@ -479,7 +477,7 @@ class _EventDetail3State extends State<EventDetail3> {
                 Container(
                   height: height / 4,
                   width: double.maxFinite,
-                  decoration:  BoxDecoration(color: offwhite),
+                  decoration: BoxDecoration(color: offwhite),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -506,9 +504,9 @@ class _EventDetail3State extends State<EventDetail3> {
                                 padding: EdgeInsets.only(
                                     top: height / 43.35, left: width / 20.55),
                                 child: Text(
-                                  "Pune",
+                                  widget.club.daddress.city,
                                   style: GoogleFonts.sairaCondensed(
-                                    color: golden ,
+                                    color: golden,
                                     fontSize: height / 54.1875,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -565,22 +563,15 @@ class _EventDetail3State extends State<EventDetail3> {
                           ),
                         ],
                       ),
-                      // FractionalTranslation(
-                      //   translation: const Offset(1.5, -1),
-                      //   child: IconButton(
-                      //       onPressed: () {},
-                      //       icon: const Icon(
-                      //         Icons.close,
-                      //         size: 24,
-                      //         color: Color(0XFFF0F0F3),
-                      //       )),
-                      // )
                     ],
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(
-                      top: height/43.35, bottom: height/43.35, left: width/10.275, right: width/10.275),
+                  padding: EdgeInsets.only(
+                      top: height / 43.35,
+                      bottom: height / 43.35,
+                      left: width / 10.275,
+                      right: width / 10.275),
                   child: Container(
                     height: height / 4,
                     width: double.maxFinite,
@@ -606,7 +597,8 @@ class _EventDetail3State extends State<EventDetail3> {
                             decoration: BoxDecoration(
                                 color: offwhite,
                                 borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(width: 3,
+                                border: Border.all(
+                                  width: 3,
                                   color: backgroundColorfigma,
                                 )),
                             child: Padding(
@@ -657,8 +649,7 @@ class _EventDetail3State extends State<EventDetail3> {
                                                 hintText: 'Phone Number',
                                                 hintStyle:
                                                     GoogleFonts.sairaCondensed(
-                                                  color:
-                                                      backgroundColorfigma,
+                                                  color: backgroundColorfigma,
                                                 ),
                                                 border: InputBorder.none,
                                               ),
@@ -679,7 +670,8 @@ class _EventDetail3State extends State<EventDetail3> {
                           decoration: BoxDecoration(
                               color: offwhite,
                               borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(width: 3,
+                              border: Border.all(
+                                width: 3,
                                 color: backgroundColorfigma,
                               )),
                           child: Padding(

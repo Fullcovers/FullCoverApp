@@ -25,7 +25,7 @@ class ClubDetail extends StatelessWidget {
                 height: height / 5,
                 width: width,
                 decoration: BoxDecoration(
-                    color: Color(0XFFD9D9D9),
+                    color: const Color(0XFFD9D9D9),
                     borderRadius: BorderRadius.circular(20.0)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -108,17 +108,12 @@ class ClubDetail extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: width / 20.55, top: 12.0),
                   child: Container(
-                    width: 0.5, // Set the width of the divider
-                    height: height /
-                        12.38571428571429, // Set the height of the divider
-                    color: Colors.white, // Set the color of the divider
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20), // Set horizontal margin
+                    width: 0.5,
+                    height: height / 12.38571428571429,
+                    color: Colors.white,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                   ),
                 ),
-                // SizedBox(
-                //   width: width / 5,
-                // ),
                 FractionalTranslation(
                   translation: const Offset(-0.1, 0),
                   child: Column(
@@ -262,7 +257,7 @@ class ClubDetail extends StatelessWidget {
                   ),
                 ),
                 FractionalTranslation(
-                  translation: Offset(0, -0.55),
+                  translation: const Offset(0, -0.55),
                   child: Row(
                     children: [
                       IconButton(
@@ -458,33 +453,6 @@ class ClubDetail extends StatelessWidget {
                 thickness: 1,
               ),
             ),
-            // FractionalTranslation(
-            //   translation: const Offset(0, -0.2),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Padding(
-            //         padding: const EdgeInsets.only(left: 20.0),
-            //         child: Text(
-            //           "Terms",
-            //           style: GoogleFonts.sairaCondensed(
-            //               color: const Color(0XFFF0F0F3),
-            //               fontSize: 18,
-            //               fontWeight: FontWeight.w500),
-            //         ),
-            //       ),
-            //       Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: IconButton(
-            //             onPressed: () {},
-            //             icon: const Icon(
-            //               Icons.add,
-            //               color: Color(0XFFF0F0F3),
-            //             )),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             FractionalTranslation(
               translation: const Offset(0, -0.3),
               child: Row(
@@ -577,7 +545,7 @@ class ClubDetail extends StatelessWidget {
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
-                                color: Color(0XFFF0F0F3)),
+                                color: const Color(0XFFF0F0F3)),
                           ),
                         ),
                         Padding(
@@ -585,7 +553,7 @@ class ClubDetail extends StatelessWidget {
                           child: Container(
                             height: height / 28,
                             width: 50,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0XFFD9D9D9)),
                           ),

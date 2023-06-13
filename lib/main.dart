@@ -84,6 +84,6 @@ class MyApp extends StatelessWidget {
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),
       ),
-    );  
+    );
   }
 }
