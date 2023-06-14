@@ -208,8 +208,8 @@ class _EventDetail2State extends State<EventDetail2> {
                             Container(
                               height: 32,
                               width: 100,
-                              decoration: const BoxDecoration(
-                                color: Color(0XFFB59F68),
+                              decoration:  BoxDecoration(
+                                color: golden,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20.0)),
                               ),
@@ -331,8 +331,8 @@ class _EventDetail2State extends State<EventDetail2> {
                             Container(
                               height: 32,
                               width: 100,
-                              decoration: const BoxDecoration(
-                                color: Color(0XFFB59F68),
+                              decoration:  BoxDecoration(
+                                color: golden,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20.0)),
                               ),
@@ -454,8 +454,8 @@ class _EventDetail2State extends State<EventDetail2> {
                             Container(
                               height: 32,
                               width: 100,
-                              decoration: const BoxDecoration(
-                                color: Color(0XFFB59F68),
+                              decoration:  BoxDecoration(
+                                color: golden,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20.0)),
                               ),

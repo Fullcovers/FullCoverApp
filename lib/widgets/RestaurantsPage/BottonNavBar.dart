@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 
@@ -53,9 +54,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            SizedBox(
-                              width: widget.width / 6,
-                            ),
+                            
                             InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
@@ -88,41 +87,41 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                final snackBar = SnackBar(
-                                  content: const Text("Comming Soon"),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/restaurant.png",
-                                      scale: 16473 / widget.height,
-                                      color: widget.iscolorchange 
-                                          ? Colors.white
-                                          : backgroundColorfigma,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text("Restraurants",
-                                          style: GoogleFonts.bebasNeue(
-                                            fontSize: widget.height /
-                                                45.63157894736842,
-                                            color: widget.iscolorchange
-                                                ? Colors.white
-                                                : backgroundColorfigma,
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     final snackBar = SnackBar(
+                            //       content: const Text("Comming Soon"),
+                            //     );
+                            //     ScaffoldMessenger.of(context)
+                            //         .showSnackBar(snackBar);
+                            //   },
+                            //   child: Container(
+                            //     child: Column(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       crossAxisAlignment: CrossAxisAlignment.center,
+                            //       children: [
+                            //         Image.asset(
+                            //           "assets/images/restaurant.png",
+                            //           scale: 16473 / widget.height,
+                            //           color: widget.iscolorchange 
+                            //               ? Colors.white
+                            //               : backgroundColorfigma,
+                            //         ),
+                            //         Padding(
+                            //           padding: const EdgeInsets.only(top: 5.0),
+                            //           child: Text("Restraurants",
+                            //               style: GoogleFonts.bebasNeue(
+                            //                 fontSize: widget.height /
+                            //                     45.63157894736842,
+                            //                 color: widget.iscolorchange
+                            //                     ? Colors.white
+                            //                     : backgroundColorfigma,
+                            //               )),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                             InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
@@ -160,7 +159,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 22.0),
+                  padding:  EdgeInsets.only(left: (widget.width/2)-50.0),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -178,7 +177,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                 ),
                 // Container(color: Colors.white,height: 25,width: widget.width-25,),
                 Padding(
-                  padding: const EdgeInsets.only(left: 37, top: 10),
+                  padding:  EdgeInsets.only(left: (widget.width/2)-35, top: 10),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -190,58 +189,62 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             onclick = true;
                           });
                         },
-                        child: Card(
-                          color: widget.iscolorchange
-                              ? Colors.white
-                              : backgroundColorfigma,
-                          // shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(5)),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  // BoxShadow(
-                                  //   color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
-                                  //   offset: Offset(4, 4),
-                                  //   blurRadius: 2,
-                                  // ),
-                                  BoxShadow(
-                                    color: widget.iscolorchange
-                                        ? Colors.white
-                                        : Color.fromARGB(255, 67, 73, 78),
-                                    offset: Offset(-4, -4),
-                                    blurRadius: 10,
-                                  ),
-                                  // BoxShadow(
-                                  //   color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
-                                  //   offset: Offset(-4, 4),
-                                  //   blurRadius: 2,
-                                  // ),
-                                  BoxShadow(
-                                    color: widget.iscolorchange
-                                        ? Colors.grey.withOpacity(0.3)
-                                        : Colors.transparent,
-                                    offset: Offset(4, -4),
-                                    blurRadius: 3,
-                                  ),
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                color: widget.iscolorchange
-                                    ? Colors.white
-                                    : backgroundColorfigma,
-                              ),
-                              child: Image.asset(
-                                "assets/images/qrcode.png",
-                                scale: 1040.4 / widget.height,
-                                color: widget.iscolorchange
-                                    ? Colors.black
-                                    : Colors.white,
-                              )),
+                        child: InkWell(onTap: (){Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MyBookingPage()));},
+                          child: Card(
+                            color: widget.iscolorchange
+                                ? Colors.white
+                                : backgroundColorfigma,
+                            // shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(5)),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    // BoxShadow(
+                                    //   color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
+                                    //   offset: Offset(4, 4),
+                                    //   blurRadius: 2,
+                                    // ),
+                                    BoxShadow(
+                                      color: widget.iscolorchange
+                                          ? Colors.white
+                                          : Color.fromARGB(255, 67, 73, 78),
+                                      offset: Offset(-4, -4),
+                                      blurRadius: 10,
+                                    ),
+                                    // BoxShadow(
+                                    //   color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
+                                    //   offset: Offset(-4, 4),
+                                    //   blurRadius: 2,
+                                    // ),
+                                    BoxShadow(
+                                      color: widget.iscolorchange
+                                          ? Colors.grey.withOpacity(0.3)
+                                          : Colors.transparent,
+                                      offset: Offset(4, -4),
+                                      blurRadius: 3,
+                                    ),
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  color: widget.iscolorchange
+                                      ? Colors.white
+                                      : backgroundColorfigma,
+                                ),
+                                child: Image.asset(
+                                  "assets/images/qrcode.png",
+                                  scale: 1040.4 / widget.height,
+                                  color: widget.iscolorchange
+                                      ? Colors.black
+                                      : Colors.white,
+                                )),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                )
+                ),
+                
               ],
             ),
           ),

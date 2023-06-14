@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 
@@ -16,11 +19,12 @@ class BehindTheScenesPage extends StatefulWidget {
 
 class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
   Color textc = Color(0xFFB59F68);
+  bool forAndroid = false;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print(width);
+    print(height);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -114,20 +118,50 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
               ],
             ),
             SizedBox(
-              height: height / 30,
+              height: height / 50,
+            ),
+            Switch(
+              value: forAndroid,
+              activeColor: Colors.green,
+              onChanged: (value) {
+                setState(() => forAndroid = value);
+              },
             ),
             Wrap(
               runSpacing: height / 54.21,
               children: [
-                mycard(height, width, Color(0XB3D09494), "Tickets",
-                    Color(0XFFD09494)),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Tickets()));
+                  },
+                  child: mycard(height, width, Color(0XB3D09494),
+                      "Reservations", Color(0XFFD09494)),
+                ),
                 SizedBox(
                   width: width / 19.57,
                 ),
-                mycard(height, width, Color(0XB3A094D0), "Events",
-                    Color(0XFFA094D0)),
-                mycard(height, width, Color(0XB3B2D094), "Promoters",
-                    Color(0XFFB2D094)),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Events()));
+                  },
+                  child: mycard(height, width, Color(0XB3A094D0), "Events",
+                      Color(0XFFA094D0)),
+                ),
+                InkWell( onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Promoters()));
+                  },
+                  child: mycard(height, width, Color(0XB3B2D094), "Promoters",
+                      Color(0XFFB2D094)),
+                ),
                 SizedBox(
                   width: width / 19.57,
                 ),
@@ -150,20 +184,19 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
               ],
             ),
           ],
-        ),bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            left: width / 5, right: width / 5, bottom: width / 20),
-        child: bottombutton(
-          "Scan QR Code",
-          const Icon(
-            Icons.qr_code_2_outlined,
-            size: 35,
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(
+              left: width / 5, right: width / 5, bottom: width / 20),
+          child: bottombutton(
+            "Scan QR Code",
+            const Icon(
+              Icons.qr_code_2_outlined,
+              size: 35,
+            ),
           ),
         ),
-      ),
       ),
     );
   }
 }
-
-
