@@ -78,7 +78,7 @@ class AuthService {
       if (res.statusCode == 200) {
         // Successful login
         userprovider.setToken(jsonDecode(res.body)['token']);
-        navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
+        navigator.pushNamedAndRemoveUntil('/bookingsscreen', (route) => false);
       } else if (res.statusCode == 400) {
         // Invalid email or password
         showSnackBar(context, 'Invalid email or password');
@@ -86,7 +86,6 @@ class AuthService {
         // Other error occurred
         showSnackBar(context, 'An error occurred. Please try again later.');
       }
-
     } catch (e) {
       // showSnackBar(context, e.toString());
       print(e.toString());

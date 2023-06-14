@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../Models/Order.dart';
 
 import 'package:flutter/foundation.dart';
@@ -9,6 +11,7 @@ class OrderProvider with ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
+  List<OrderModel> orders = [];
 
   // Setter method to update the isLoading value
   void setLoading(bool value) {
@@ -61,5 +64,38 @@ class OrderProvider with ChangeNotifier {
       print('Error parsing order data: $e');
       return null;
     }
+  }
+
+  void storeOrders(String jsonOrders) {
+    final parsedData = json.decode(jsonOrders);
+    final List<dynamic> orderData = parsedData['data'];
+
+    orders = orderData.map<OrderModel>((item) {
+      List<dynamic> itemData = item['items'];
+      List<OrderItem> orderItems = itemData.map<OrderItem>((item) {
+        Map<String, dynamic> ticketData = item['ticket'];
+        return OrderItem(
+          quantity: item['quantity'],
+          ticket: ticketData['name'],
+          id: item['_id'],
+        );
+      }).toList();
+
+      return OrderModel(
+        id: item['_id'],
+        user: item['user'],
+        items: orderItems,
+        isValid: item['isValid'],
+        isPaid: item['isPaid'],
+        total: item['total'].toDouble(),
+        paymentMethod: item['paymentMethod'],
+        createdAt: DateTime.parse(item['createdAt']),
+        updatedAt: DateTime.parse(item['updatedAt']),
+      );
+    }).toList();
+  }
+
+  Future<List<OrderModel>> getOrders() async {
+    return orders;
   }
 }

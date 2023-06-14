@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
@@ -76,10 +75,9 @@ class MyApp extends StatelessWidget {
           '/allevents': (context) => const EventsScreen(),
           '/ticketsending': (context) => const TicketSending(),
           '/ticketconfirming': (context) => const TicketConfirming(),
+          '/bookingsscreen': (context) => MyBookingPage(),
         },
-        home: userprovider.token.isEmpty
-            ? const LoginPage()
-            :  MyBookingPage(),
+        home: userprovider.token.isEmpty ? const LoginPage() : MyBookingPage(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),
