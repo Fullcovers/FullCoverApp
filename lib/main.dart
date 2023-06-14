@@ -28,6 +28,7 @@ import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
+import 'package:venq_assessment/screens/profile/ProfilePage.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 
 import 'Providers/ClubProvider.dart';
