@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:neumorphic_button/neumorphic_button.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Order.dart';
@@ -105,7 +106,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColorfigma,
         body: SlidingUpPanel(
-          maxHeight: height / 1.59,
+          maxHeight: height / 1.7,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -126,51 +127,20 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             iselevatedgroupicon = !iselevatedgroupicon;
                           });
                         },
-                        child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              boxShadow: iselevatedgroupicon
-                                  ? [
-                                      BoxShadow(
-                                        color: const Color.fromARGB(
-                                            255, 120, 116, 116),
-                                        blurRadius: blurradiusXl,
-                                        spreadRadius: -2,
-                                        offset: const Offset(-5, -5),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: blurradiusXl,
-                                        spreadRadius: -2,
-                                        offset: const Offset(5, 5),
-                                      ),
-                                    ]
-                                  : [
-                                      BoxShadow(
-                                          color: const Color.fromARGB(
-                                              255, 120, 116, 116),
-                                          blurRadius: blurradiusXl,
-                                          spreadRadius: 1,
-                                          offset: const Offset(-5, -5),
-                                          inset: true),
-                                      BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: blurradiusXl,
-                                          spreadRadius: 1,
-                                          offset: const Offset(2, 2),
-                                          inset: true),
-                                    ],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
-                              color: const Color(0xFF2C2F33),
-                            ),
-                            child: Center(
-                                child: Image.asset(
-                              "assets/images/group.png",
-                              scale: 1,
-                            ))),
+                        child: NeumorphicButton(
+                              borderRadius: 15,
+                          backgroundColor: botoncolor,
+                          bottomRightShadowColor: nbcolor,
+                          height: 50,
+                          onTap: () {},
+                          topLeftShadowColor: nbcolor,
+                          width: 50,
+                          child: Center(
+                              child: Image.asset(
+                            "assets/images/group.png",
+                            scale: 1,
+                          )),
+                        ),
                       ),
                     ),
                     Padding(
@@ -181,55 +151,24 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             iselevatedaccicon = !iselevatedaccicon;
                           });
                         },
-                        child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              boxShadow: iselevatedaccicon
-                                  ? [
-                                      BoxShadow(
-                                        color: const Color.fromARGB(
-                                            255, 120, 116, 116),
-                                        blurRadius: blurradiusXl,
-                                        spreadRadius: -2,
-                                        offset: const Offset(-5, -5),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: blurradiusXl,
-                                        spreadRadius: -2,
-                                        offset: const Offset(5, 5),
-                                      ),
-                                    ]
-                                  : [
-                                      BoxShadow(
-                                          color: const Color.fromARGB(
-                                              255, 120, 116, 116),
-                                          blurRadius: blurradiusXl,
-                                          spreadRadius: 1,
-                                          offset: const Offset(-5, -5),
-                                          inset: true),
-                                      BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: blurradiusXl,
-                                          spreadRadius: 1,
-                                          offset: const Offset(2, 2),
-                                          inset: true),
-                                    ],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
-                              color: const Color(0xFF2C2F33),
+                        child: NeumorphicButton(
+                          borderRadius: 15,
+                          backgroundColor: botoncolor,
+                          bottomRightShadowColor: nbcolor,
+                          height: 50,
+                          onTap: () {},
+                          topLeftShadowColor: nbcolor,
+                          width: 50,
+                          child: InkWell(
+                            onTap: () {
+                              AuthService().signOut(context);
+                            },
+                            child: Image.asset(
+                              "assets/images/person.png",
+                              scale: 1.2,
                             ),
-                            child: InkWell(
-                              onTap: () {
-                                AuthService().signOut(context);
-                              },
-                              child: Image.asset(
-                                "assets/images/person.png",
-                                scale: 1.2,
-                              ),
-                            )),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -248,72 +187,67 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: 3 * height / 13,
-                      width: (width / 7) + (width / 1.69),
-                      decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+                      height: 3 * height / 9.2,
+                      width: (width / 7) + (width / 1.68),
+                      decoration: BoxDecoration(color: backgroundColorfigma),
                       child: ListView.builder(
                         itemCount: 10,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Row(
-                              children: [
-                                Card(
-                                  color: const Color(0xFFD9D9D9),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Container(
-                                    height: height / 18,
-                                    width: width / 7.76,
-                                    decoration: BoxDecoration(
-                                      color: offwhite,
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(60.0),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [],
+                          return Row(
+                            children: [
+                              Card(
+                                color: const Color(0xFFD9D9D9),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Container(
+                                  height: height / 18,
+                                  width: width / 7.76,
+                                  decoration: BoxDecoration(
+                                    color: offwhite,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(60.0),
                                     ),
                                   ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [],
+                                  ),
                                 ),
-                                Card(
-                                  color: offwhite,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Container(
-                                    height: height / 18,
-                                    width: width / 1.77,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0),
-                                      ),
+                              ),
+                              Card(
+                                color: offwhite,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Container(
+                                  height: height / 18,
+                                  width: width / 1.77,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFD9D9D9),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
                                     ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Event ${index + 1}",
-                                          style: GoogleFonts.mavenPro(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                          ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        "Event " + (index + 1).toString(),
+                                        style: GoogleFonts.mavenPro(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: height / 54.1875,
                                         ),
-                                        Text("300",
-                                            style: GoogleFonts.bebasNeue(
-                                              fontSize: 32,
-                                            ))
-                                      ],
-                                    ),
+                                      ),
+                                      Text("300",
+                                          style: GoogleFonts.bebasNeue(
+                                            fontSize: height / 27.09375,
+                                          ))
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           );
                         },
                       ),
@@ -322,30 +256,30 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   // SizedBox(
                   //   height: height / 25,
                   // ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Container(
-                      height: height / 23,
-                      width: width / 2,
-                      decoration: BoxDecoration(
-                        color: golden,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Center(
-                        child: Text("Redeem",
-                            style: GoogleFonts.sairaCondensed(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 24,
-                            )),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 10.0),
+                  //   child: Container(
+                  //     height: height / 23,
+                  //     width: width / 2,
+                  //     decoration: BoxDecoration(
+                  //       color: golden,
+                  //       borderRadius: BorderRadius.circular(10.0),
+                  //     ),
+                  //     child: Center(
+                  //       child: Text("Redeem",
+                  //           style: GoogleFonts.sairaCondensed(
+                  //             fontWeight: FontWeight.w600,
+                  //             fontSize: 24,
+                  //           )),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
           ),
           controller: panelController,
-          defaultPanelState: PanelState.CLOSED,
+          defaultPanelState: PanelState.OPEN,
           panel: orders.isNotEmpty
               ? Container(
                   height: 100,
@@ -386,51 +320,51 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     child: Text(
                                       "MY BOOKINGS",
                                       style:
-                                          GoogleFonts.bebasNeue(fontSize: 40),
+                                          GoogleFonts.bebasNeue(fontSize: height/21.675),
                                     ),
                                   ),
                                 ),
                                 Stack(
-                                  children: [
-                                    Container(
-                                      width: width / 13.7,
-                                      height: height / 12.38571428571429,
-                                      decoration: BoxDecoration(
-                                        color: backgroundColorfigma,
-                                      ),
+                                children: [
+                                  Container(
+                                    width: width / 13.6,
+                                    height: height / 12.38571428571429,
+                                    decoration: BoxDecoration(
+                                      color: backgroundColorfigma,
                                     ),
-                                    Container(
-                                      width: width / 13.7,
-                                      height: height / 12.38571428571429,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                        ),
-                                        color: Colors.white,
+                                  ),
+                                  Container(
+                                    width: width / 13.6,
+                                    height: height / 12.38571428571429,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(20),
                                       ),
+                                      color: Colors.white,
                                     ),
-                                    Container(
-                                      width: width / 13.7,
-                                      height: height / 12.38571428571429,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                        ),
-                                        color: Colors.white,
+                                  ),
+                                  Container(
+                                    width: width / 13.6,
+                                    height: height / 12.38571428571429,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(20),
                                       ),
+                                      color: Colors.white,
                                     ),
-                                    Container(
-                                      width: width / 13.7,
-                                      height: height / 10.1,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                        ),
-                                        color: Colors.white,
+                                  ),
+                                  Container(
+                                    width: width / 13.6,
+                                    height: height / 10.1,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(20),
                                       ),
+                                      color: Colors.white,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                                 InkWell(
                                   onTap: () {
                                     panelController.close();
@@ -441,7 +375,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        width: width / 3.34,
+                                        width: width / 3.365,
                                         height: height / 10.1,
                                         decoration: BoxDecoration(
                                           color: backgroundColorfigma,
@@ -451,11 +385,11 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           ),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 25,
-                                              bottom: 10.0,
-                                              right: 25,
-                                              top: 8),
+                                          padding:  EdgeInsets.only(
+                                              left: width / 16.44,
+                                            bottom: height / 86.7,
+                                            right: width / 16.44,
+                                            top: height / 108.375),
                                           child: Container(
                                             width: 10,
                                             decoration: const BoxDecoration(
@@ -486,9 +420,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                    
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Column(
@@ -586,9 +518,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                       ),
                                                       Padding(
                                                           padding:
-                                                              const EdgeInsets
+                                                               EdgeInsets
                                                                       .only(
-                                                                  left: 30.0),
+                                                                  left: width/13.7),
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
