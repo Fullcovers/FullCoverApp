@@ -21,7 +21,7 @@ class Balancecard extends StatelessWidget {
       child: Container(
         height: height / 5,
         width: double.maxFinite,
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Color.fromARGB(255, 202, 196, 196),
@@ -36,7 +36,7 @@ class Balancecard extends StatelessWidget {
               offset: Offset(2, 2),
             ),
           ],
-          color: Color(0xFF2D3135),
+          color: backgroundColorfigma,
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),

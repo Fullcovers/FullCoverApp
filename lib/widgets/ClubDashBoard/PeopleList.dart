@@ -72,7 +72,7 @@ class _PeopleListState extends State<PeopleList> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "Kartheek",
+                                "Ramesh Babu",
                                 style: GoogleFonts.sairaCondensed(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,

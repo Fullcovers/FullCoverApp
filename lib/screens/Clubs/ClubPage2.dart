@@ -22,13 +22,13 @@ class ClubsPage2 extends StatefulWidget {
 }
 
 class _ClubsPage2State extends State<ClubsPage2> {
-  var colorbuttonnormal = Color(0xFF2C2F33);
-  var colorbuttonnormal1 = Color(0xFF2C2F33);
-  var colorbuttonnormal2 = Color(0xFF2C2F33);
-  var colorbuttonnormal3 = Color(0xFF2C2F33);
-  var colorbuttonnormal4 = Color(0xFF2C2F33);
-  var colorbuttonnormal5 = Color(0xFF2C2F33);
-  var colorbuttonnormal6 = Color(0xFF2C2F33);
+  var colorbuttonnormal = golden;
+  var colorbuttonnormal1 = backgroundColorfigma;
+  var colorbuttonnormal2 = backgroundColorfigma;
+  var colorbuttonnormal3 = backgroundColorfigma;
+  var colorbuttonnormal4 = backgroundColorfigma;
+  var colorbuttonnormal5 = backgroundColorfigma;
+  var colorbuttonnormal6 = backgroundColorfigma;
 
   var coloruntap = Colors.white;
   var coloruntap1 = Colors.white;
