@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Padding(
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Don’t have an account?",
                                         style: TextStyle(
                                           fontSize: 12.0,
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   '/register',
                                                   (route) => false);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Sign Up",
                                           style: TextStyle(
                                             fontSize: 12.0,
@@ -240,8 +240,7 @@ class _LoginPageState extends State<LoginPage> {
                                           Text(
                                             "LOG IN",
                                             style: GoogleFonts.bebasNeue(
-                                                fontSize: 20,
-                                                color: golden),
+                                                fontSize: 20, color: golden),
                                           ),
                                         ],
                                       ),

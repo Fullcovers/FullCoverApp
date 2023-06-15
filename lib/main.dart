@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:venq_assessment/Providers/BTS_Providers/PromoterProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
@@ -7,32 +8,14 @@ import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
-import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
-import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
-import 'package:venq_assessment/screens/Clubs/ClubPage3.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMain.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Bar/BarMenu.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Events/Events2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
-import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
-import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
-import 'package:venq_assessment/screens/QrScanner/Demo.dart';
 import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
-import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
-import 'package:venq_assessment/screens/profile/ProfilePage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
-import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
-
 import 'Providers/ClubProvider.dart';
 import 'Providers/UserProvider.dart';
 
@@ -58,7 +41,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    // print(userprovider.token);
     Constants.usertoken = userprovider.token;
     return MultiProvider(
       providers: [
@@ -68,6 +50,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
         ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
         ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
+        ChangeNotifierProvider<PromoterProvider>(
+            create: (_) => PromoterProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -82,7 +66,9 @@ class MyApp extends StatelessWidget {
           '/ticketconfirming': (context) => const TicketConfirming(),
           '/bookingsscreen': (context) => MyBookingPage(),
         },
-        home: userprovider.token.isEmpty ? const LoginPage() : Events(),
+        home: userprovider.token.isEmpty
+            ? const LoginPage()
+            : BehindTheScenesPage(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),
