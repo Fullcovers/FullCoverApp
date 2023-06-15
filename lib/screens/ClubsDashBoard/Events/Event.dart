@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
@@ -25,15 +26,15 @@ class Events extends StatelessWidget {
           SizedBox(
             height: height / 25,
           ),
-          eventcard(height, width, "Event name", "Sat 13 May, 2023",15),
+          eventcard(height, width, "Event name", "Sat 13 May, 2023", 15),
           SizedBox(
             height: height / 42,
           ),
-          eventcard(height, width, "Event name", "Sat 13 May, 2023",15),
+          eventcard(height, width, "Event name", "Sat 13 May, 2023", 15),
           SizedBox(
             height: height / 42,
           ),
-          eventcard(height, width, "Event name", "Sat 13 May, 2023",15),
+          eventcard(height, width, "Event name", "Sat 13 May, 2023", 15),
         ],
       ),
       bottomNavigationBar: Padding(
@@ -44,10 +45,9 @@ class Events extends StatelessWidget {
           const Icon(
             Icons.add,
             size: 35,
-          ),
+          ),context,rought:CreateEvent()
         ),
       ),
     ));
   }
 }
-

@@ -14,11 +14,9 @@ class EditProfile extends StatelessWidget {
   bool isChecked2 = false;
   bool isChecked3 = false;
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-  final TextEditingController confirmpasswordController =
-      TextEditingController();
+
   Widget build(BuildContext context) {
     var widthofs = MediaQuery.of(context).size.width;
     var heightofs = MediaQuery.of(context).size.height;
