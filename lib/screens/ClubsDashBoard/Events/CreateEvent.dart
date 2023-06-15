@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
@@ -41,18 +42,23 @@ class _CreateEventState extends State<CreateEvent> {
     return 'Select Date';
   }
 
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController desccontroller = TextEditingController();
 
-  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController namecontroller = TextEditingController();
 
   final TextEditingController lastnameController = TextEditingController();
   TimeOfDay time =
+      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+      TimeOfDay endtime =
       TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
 
   @override
   Widget build(BuildContext context) {
     final hours = time.hour.toString().padLeft(2, "0");
     final minute = time.minute.toString().padLeft(2, "0");
+
+        final hoursend = endtime.hour.toString().padLeft(2, "0");
+    final minuteend = endtime.minute.toString().padLeft(2, "0");
 
     var widthofs = MediaQuery.of(context).size.width;
     var heightofs = MediaQuery.of(context).size.height;
@@ -76,10 +82,9 @@ class _CreateEventState extends State<CreateEvent> {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: Column(
                     children: [
+                      customtextfield(namecontroller, "Name", Colors.green),
                       customtextfield(
-                          firstnameController, "Name", Colors.green),
-                      customtextfield(
-                          lastnameController, "Description", Colors.green),
+                          desccontroller, "Description", Colors.green),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Container(
@@ -127,61 +132,131 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Container(
-                          height: heightofs / 20,
-                          width: widthofs / 2,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(34, 34, 34, 0.37),
-                            borderRadius: BorderRadius.circular(15.0),
-                            border: Border.all(
-                              color: Colors.black,
-                            ),
+                      Align(alignment: Alignment.bottomLeft,
+                        child: Text("Start At",
+                            style: GoogleFonts.sairaCondensed(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            )),
+                      ),
+                      Container(
+                        height: heightofs / 20,
+                        width: widthofs / 2,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(34, 34, 34, 0.37),
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                            color: Colors.black,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 20.0,
-                                ),
-                                child: Text("${hours}:${minute}",
-                                    style: GoogleFonts.sairaCondensed(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    )),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
-                                child: IconButton(
-                                  onPressed: () async {
-                                    TimeOfDay? newtime = await showTimePicker(
-                                        context: context, initialTime: time);
-                                    if (newtime == null) {
-                                      return;
-                                    }
-                                    setState(() {
-                                      time = newtime;
-                                    });
-                                  },
-                                  icon: const Icon(
-                                    Icons.alarm,
+                              child: Text("$hours:$minute",
+                                  style: GoogleFonts.sairaCondensed(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
                                     color: Colors.white,
-                                    size: 20,
-                                  ),
+                                  )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: IconButton(
+                                onPressed: () async {
+                                  TimeOfDay? newtime = await showTimePicker(
+                                      context: context, initialTime: time);
+                                  if (newtime == null) {
+                                    return;
+                                  }
+                                  setState(() {
+                                    endtime = newtime;
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.alarm,
+                                  color: Colors.white,
+                                  size: 20,
                                 ),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(alignment: Alignment.bottomLeft,
+                        child: Text("End At",
+                            style: GoogleFonts.sairaCondensed(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            )),
+                      ),
+                      Container(
+                        height: heightofs / 20,
+                        width: widthofs / 2,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(34, 34, 34, 0.37),
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                            color: Colors.black,
                           ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
+                              ),
+                              child: Text("${hoursend}:${minuteend}",
+                                  style: GoogleFonts.sairaCondensed(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: IconButton(
+                                onPressed: () async {
+                                  TimeOfDay? newtime = await showTimePicker(
+                                      context: context, initialTime: time);
+                                  if (newtime == null) {
+                                    return;
+                                  }
+                                  setState(() {
+                                    time = newtime;
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.alarm,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          CreateEventmethod.createeventfunction(
+                              context: context,
+                              date: formatDate(selectedDate).toString(),
+                              description: desccontroller.text,
+                              name: namecontroller.text,
+                              starttime: "${time.hour}:${time.minute}",endtime: "${endtime.hour}:${endtime.minute}");
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 0.0, left: 50, right: 50, bottom: 20.0),
