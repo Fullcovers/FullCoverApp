@@ -30,10 +30,12 @@ import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
 import 'package:venq_assessment/screens/profile/ProfilePage.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 
 import 'Providers/ClubProvider.dart';
 import 'Providers/UserProvider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
+    // print(userprovider.token);
+    Constants.usertoken=userprovider.token;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
