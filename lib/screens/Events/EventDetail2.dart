@@ -613,7 +613,7 @@ class _EventDetail2State extends State<EventDetail2> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: const EdgeInsets.only(top: 8,left: 20.0),
                           child: Text(
                             "Total Amount",
                             style: GoogleFonts.sairaCondensed(

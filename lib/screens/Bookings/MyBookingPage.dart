@@ -19,6 +19,7 @@ import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
+import 'package:venq_assessment/screens/profile/ProfilePage.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
@@ -117,57 +118,84 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     // color: Colors.white,
                     ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       setState(() {
+                    //         iselevatedgroupicon = !iselevatedgroupicon;
+                    //       });
+                    //     },
+                    //     child: NeumorphicButton(
+                    //       borderColor: Colors.black,
+                    //       borderWidth: 2,
+                    //       borderRadius: 15,
+                    //       backgroundColor: botoncolor,
+                    //       bottomRightShadowColor: nbcolor,
+                    //       height: 50,
+                    //       onTap: () {},
+                    //       topLeftShadowColor: nbcolor,
+                    //       width: 50,
+                    //       child: Center(
+                    //           child: Image.asset(
+                    //         "assets/images/group.png",
+                    //         scale: 1,
+                    //       )),
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            iselevatedgroupicon = !iselevatedgroupicon;
-                          });
-                        },
-                        child: NeumorphicButton(
-                              borderRadius: 15,
-                          backgroundColor: botoncolor,
-                          bottomRightShadowColor: nbcolor,
-                          height: 50,
-                          onTap: () {},
-                          topLeftShadowColor: nbcolor,
-                          width: 50,
-                          child: Center(
-                              child: Image.asset(
-                            "assets/images/group.png",
-                            scale: 1,
-                          )),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(right:20.0),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
                             iselevatedaccicon = !iselevatedaccicon;
+                            
                           });
+                        
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
+            
                         },
-                        child: NeumorphicButton(
-                          borderRadius: 15,
-                          backgroundColor: botoncolor,
-                          bottomRightShadowColor: nbcolor,
-                          height: 50,
-                          onTap: () {},
-                          topLeftShadowColor: nbcolor,
-                          width: 50,
-                          child: InkWell(
-                            onTap: () {
-                              AuthService().signOut(context);
-                            },
+                        child: AnimatedContainer(
+                          height: 50, width: 50,
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(4, 4),
+                              blurRadius: 15,
+                              spreadRadius: 1,
+                            ),
+                            BoxShadow(
+                              color: Color.fromARGB(255, 88, 88, 88),
+                              offset: Offset(-4, -4),
+                              blurRadius: 15,
+                              spreadRadius:
+                                  -2, // how far the color effect spreads.
+                            ),
+                          ]),
+                          duration: const Duration(
+                            milliseconds: 200,
+                          ),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            color: backgroundColorfigma,
                             child: Image.asset(
                               "assets/images/person.png",
-                              scale: 1.2,
+                              scale: 20,
                             ),
                           ),
+                          // child: Container(decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(8)),
+                          //   // child: Center(
+                          //   //   child: Image.asset(
+                          //   //     "assets/images/person.png",
+                          //   //     scale: 1.5,
+                          //   //   ),
+                          //   // ),
+                          // ),
                         ),
                       ),
                     ),
@@ -319,52 +347,52 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     padding: const EdgeInsets.only(left: 16.0),
                                     child: Text(
                                       "MY BOOKINGS",
-                                      style:
-                                          GoogleFonts.bebasNeue(fontSize: height/21.675),
+                                      style: GoogleFonts.bebasNeue(
+                                          fontSize: height / 21.675),
                                     ),
                                   ),
                                 ),
                                 Stack(
-                                children: [
-                                  Container(
-                                    width: width / 13.6,
-                                    height: height / 12.38571428571429,
-                                    decoration: BoxDecoration(
-                                      color: backgroundColorfigma,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width / 13.6,
-                                    height: height / 12.38571428571429,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(20),
+                                  children: [
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: BoxDecoration(
+                                        color: backgroundColorfigma,
                                       ),
-                                      color: Colors.white,
                                     ),
-                                  ),
-                                  Container(
-                                    width: width / 13.6,
-                                    height: height / 12.38571428571429,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(20),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
                                       ),
-                                      color: Colors.white,
                                     ),
-                                  ),
-                                  Container(
-                                    width: width / 13.6,
-                                    height: height / 10.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(20),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
                                       ),
-                                      color: Colors.white,
                                     ),
-                                  ),
-                                ],
-                              ),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 10.1,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 InkWell(
                                   onTap: () {
                                     panelController.close();
@@ -375,7 +403,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        width: width / 3.365,
+                                        width: width / 3.342,
                                         height: height / 10.1,
                                         decoration: BoxDecoration(
                                           color: backgroundColorfigma,
@@ -385,11 +413,11 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           ),
                                         ),
                                         child: Padding(
-                                          padding:  EdgeInsets.only(
+                                          padding: EdgeInsets.only(
                                               left: width / 16.44,
-                                            bottom: height / 86.7,
-                                            right: width / 16.44,
-                                            top: height / 108.375),
+                                              bottom: height / 86.7,
+                                              right: width / 16.44,
+                                              top: height / 108.375),
                                           child: Container(
                                             width: 10,
                                             decoration: const BoxDecoration(
@@ -420,7 +448,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ),
                           ),
                         ),
-                    
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Column(
@@ -518,9 +545,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                       ),
                                                       Padding(
                                                           padding:
-                                                               EdgeInsets
-                                                                      .only(
-                                                                  left: width/13.7),
+                                                              EdgeInsets.only(
+                                                                  left: width /
+                                                                      13.7),
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment

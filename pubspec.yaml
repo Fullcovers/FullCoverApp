@@ -51,7 +51,7 @@ dependencies:
   permission_handler: ^10.2.0
   flutter_neumorphic: ^3.2.0
   flutter_inset_box_shadow: ^1.0.8
-  dio: ^5.2.0
+  dio: ^5.2.1+1
   jiffy: ^6.1.0
 
 

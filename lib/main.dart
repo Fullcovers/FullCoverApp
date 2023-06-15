@@ -21,6 +21,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/QrScanner/Demo.dart';
@@ -28,6 +29,8 @@ import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Restaurants/Restaurants.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
+import 'package:venq_assessment/screens/profile/ProfilePage.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 
 import 'Providers/ClubProvider.dart';
@@ -55,6 +58,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
+    // print(userprovider.token);
+    Constants.usertoken = userprovider.token;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
@@ -65,24 +70,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/barmenu': (context) => const BarMenu(),
-            '/register': (context) => const SignUp(),
-            '/login': (context) => const LoginPage(),
-            '/qrscanner': (context) => const QrScanner(),
-            '/allclubs': (context) => const ClubsScreen(),
-            '/allevents': (context) => const EventsScreen(),
-            '/ticketsending': (context) => const TicketSending(),
-            '/ticketconfirming': (context) => const TicketConfirming(),
-            '/bookingsscreen': (context) => MyBookingPage(),
-          },
-          // home: userprovider.token.isEmpty ? const LoginPage() : MyBookingPage(),
-          home: BehindTheScenesPage()
-          // home:
-          //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-          // home: MyBookingPage(),
-          ),
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/barmenu': (context) => const BarMenu(),
+          '/register': (context) => const SignUp(),
+          '/login': (context) => const LoginPage(),
+          '/qrscanner': (context) => const QrScanner(),
+          '/allclubs': (context) => const ClubsScreen(),
+          '/allevents': (context) => const EventsScreen(),
+          '/ticketsending': (context) => const TicketSending(),
+          '/ticketconfirming': (context) => const TicketConfirming(),
+          '/bookingsscreen': (context) => MyBookingPage(),
+        },
+        home: userprovider.token.isEmpty ? const LoginPage() : Events(),
+        // home:
+        //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+        // home: MyBookingPage(),
+      ),
     );
   }
 }

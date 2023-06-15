@@ -196,7 +196,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
             const Icon(
               Icons.qr_code_2_outlined,
               size: 35,
-            ),
+            ),context
           ),
         ),
       ),

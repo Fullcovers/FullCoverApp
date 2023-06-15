@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 
-Widget bottombutton(String text, Icon icon) {
+Widget bottombutton(String text, Icon icon,BuildContext context,{Widget rought=const Events()} ) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: InkWell(
@@ -31,7 +33,10 @@ Widget bottombutton(String text, Icon icon) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                   Navigator.push(context,
+                MaterialPageRoute(builder: (context) => rought));
+                },
                 color: const Color.fromARGB(255, 252, 248, 248),
                 icon: icon),
             Text(

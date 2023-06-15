@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Event {
   final String id;
   final String clubId;
@@ -21,5 +23,19 @@ class Event {
     required this.tickets,
     required this.createdAt,
     required this.updatedAt,
+  });
+}
+
+class CreateEventModel {
+  final String name;
+  final TimeOfDay time;
+  final DateTime date;
+  final String description;
+
+  CreateEventModel({
+    required this.name,
+    required this.date,
+    required this.description,
+    required this.time,
   });
 }
