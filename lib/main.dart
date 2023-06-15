@@ -21,6 +21,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters2.dart
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/QrScanner/Demo.dart';
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
           '/ticketconfirming': (context) => const TicketConfirming(),
           '/bookingsscreen': (context) => MyBookingPage(),
         },
-        home: userprovider.token.isEmpty ? const LoginPage() : MyBookingPage(),
+        home: userprovider.token.isEmpty ? const LoginPage() : Events(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),

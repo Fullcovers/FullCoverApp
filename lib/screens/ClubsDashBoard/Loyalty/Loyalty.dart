@@ -57,7 +57,7 @@ class LoyaltyPage extends StatelessWidget {
           const Icon(
             Icons.add,
             size: 35,
-          ),
+          ),context
         ),
       ),
       ),
