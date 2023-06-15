@@ -65,23 +65,24 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/barmenu': (context) => const BarMenu(),
-          '/register': (context) => const SignUp(),
-          '/login': (context) => const LoginPage(),
-          '/qrscanner': (context) => const QrScanner(),
-          '/allclubs': (context) => const ClubsScreen(),
-          '/allevents': (context) => const EventsScreen(),
-          '/ticketsending': (context) => const TicketSending(),
-          '/ticketconfirming': (context) => const TicketConfirming(),
-          '/bookingsscreen': (context) => MyBookingPage(),
-        },
-        home: userprovider.token.isEmpty ? const LoginPage() : MyBookingPage(),
-        // home:
-        //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        // home: MyBookingPage(),
-      ),
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/barmenu': (context) => const BarMenu(),
+            '/register': (context) => const SignUp(),
+            '/login': (context) => const LoginPage(),
+            '/qrscanner': (context) => const QrScanner(),
+            '/allclubs': (context) => const ClubsScreen(),
+            '/allevents': (context) => const EventsScreen(),
+            '/ticketsending': (context) => const TicketSending(),
+            '/ticketconfirming': (context) => const TicketConfirming(),
+            '/bookingsscreen': (context) => MyBookingPage(),
+          },
+          // home: userprovider.token.isEmpty ? const LoginPage() : MyBookingPage(),
+          home: BehindTheScenesPage()
+          // home:
+          //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
+          // home: MyBookingPage(),
+          ),
     );
   }
 }
