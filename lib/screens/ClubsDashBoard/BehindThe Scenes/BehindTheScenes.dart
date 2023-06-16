@@ -114,101 +114,80 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                           Icons.person_outline_sharp,
                           size: 35,
                         ),
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 20,
-                          spreadRadius: -2,
-                          offset: Offset(2, 2),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Color(0xFF2C2F33),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BTSProfile()));
-                      },
-                      color: const Color.fromARGB(255, 252, 248, 248),
-                      icon: const Icon(
-                        Icons.person_outline_sharp,
-                        size: 35,
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height / 50,
-            ),
-            Switch(
-              value: forAndroid,
-              activeColor: Colors.green,
-              onChanged: (value) {
-                setState(() => forAndroid = value);
-              },
-            ),
-            Wrap(
-              runSpacing: height / 54.21,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Tickets()));
-                  },
-                  child: mycard(height, width, Color(0XB3D09494),
-                      "Reservations", Color(0XFFD09494)),
-                ),
-                SizedBox(
-                  width: width / 19.57,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Events()));
-                  },
-                  child: mycard(height, width, Color(0XB3A094D0), "Events",
-                      Color(0XFFA094D0)),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Promoters()));
-                  },
-                  child: mycard(height, width, Color(0XB3B2D094), "Promoters",
-                      Color(0XFFB2D094)),
-                ),
-                SizedBox(
-                  width: width / 19.57,
-                ),
-                mycard(height, width, Color(0XB394D0C5), "Guestlist",
-                    Color(0XFF94D0C5)),
-                mycard(height, width, Color(0XB3A094D0), "tables",
-                    Color(0XFFA094D0)),
-                SizedBox(
-                  width: width / 19.57,
-                ),
-                mycard(height, width, Color(0XB3D094B8), "Loyalty",
-                    Color(0XFFD094B8)),
-                mycard(
-                    height, width, Color(0XB3D0B194), "bar", Color(0XFFD0B194)),
-                SizedBox(
-                  width: width / 19.57,
-                ),
-                mycard(height, width, Color(0XB3B2D094), "Walkins",
-                    Color(0XFFB2D094)),
-              ],
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: height / 50,
+              ),
+              Switch(
+                value: forAndroid,
+                activeColor: Colors.green,
+                onChanged: (value) {
+                  setState(() => forAndroid = value);
+                },
+              ),
+              Wrap(
+                runSpacing: height / 54.21,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Tickets()));
+                    },
+                    child: mycard(height, width, const Color(0XB3D09494),
+                        "Reservations", const Color(0XFFD09494)),
+                  ),
+                  SizedBox(
+                    width: width / 19.57,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Events()));
+                    },
+                    child: mycard(height, width, const Color(0XB3A094D0),
+                        "Events", const Color(0XFFA094D0)),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Promoters()));
+                    },
+                    child: mycard(height, width, const Color(0XB3B2D094),
+                        "Promoters", const Color(0XFFB2D094)),
+                  ),
+                  SizedBox(
+                    width: width / 19.57,
+                  ),
+                  mycard(height, width, const Color(0XB394D0C5), "Guestlist",
+                      const Color(0XFF94D0C5)),
+                  mycard(height, width, const Color(0XB3A094D0), "tables",
+                      const Color(0XFFA094D0)),
+                  SizedBox(
+                    width: width / 19.57,
+                  ),
+                  mycard(height, width, const Color(0XB3D094B8), "Loyalty",
+                      const Color(0XFFD094B8)),
+                  mycard(height, width, const Color(0XB3D0B194), "bar",
+                      const Color(0XFFD0B194)),
+                  SizedBox(
+                    width: width / 19.57,
+                  ),
+                  mycard(height, width, const Color(0XB3B2D094), "Walkins",
+                      const Color(0XFFB2D094)),
+                ],
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.only(
