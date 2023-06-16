@@ -4,6 +4,8 @@ import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:venq_assessment/Models/OrderValidation.dart';
+import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/screens/QrScanner/Demo.dart';
@@ -70,7 +72,9 @@ class OrderServices {
     late int quantity;
     try {
       var userprovider = Provider.of<UserProvider>(context, listen: false);
-      var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      var orderProvider =
+          Provider.of<OrderValidationProvider>(context, listen: false);
+
       orderProvider.setLoading(true);
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}orders/$id'),
@@ -95,8 +99,8 @@ class OrderServices {
               ticketId = data['_id'];
               quantity = data['items'][0]['quantity'];
               var orderProvider =
-                  Provider.of<OrderProvider>(context, listen: false);
-              OrderModel? order = orderProvider.getOrderFromMap(data);
+                  Provider.of<OrderValidationProvider>(context, listen: false);
+              OrderValidationModel? order = orderProvider.getOrderFromMap(data);
               if (order != null) {
                 orderProvider.setOrder(order);
               }

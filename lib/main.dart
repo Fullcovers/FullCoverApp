@@ -6,6 +6,7 @@ import 'package:venq_assessment/Providers/BTS_Providers/PromoterProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
@@ -60,6 +61,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
         ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
         ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
+        ChangeNotifierProvider<OrderValidationProvider>(
+            create: (_) => OrderValidationProvider()),
         ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
         ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
         ChangeNotifierProvider<PromoterProvider>(
@@ -82,10 +85,7 @@ class _MyAppState extends State<MyApp> {
             ? const LoginPage()
             : Constants.btsprofile.role == "user"
                 ? MyBookingPage()
-                : BehindTheScenesPage(),
-        // home:
-        //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
-        // home: MyBookingPage(),
+                : const BehindTheScenesPage(),
       ),
     );
   }

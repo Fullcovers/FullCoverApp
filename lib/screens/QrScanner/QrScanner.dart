@@ -7,6 +7,7 @@ import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:venq_assessment/Models/UserModel.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
@@ -56,7 +57,7 @@ class _QrScannerState extends State<QrScanner> {
 
   @override
   Widget build(BuildContext context) {
-    final orderprovider = Provider.of<OrderProvider>(context);
+    final orderprovider = Provider.of<OrderValidationProvider>(context);
     final fetchuserprovider = Provider.of<FetchUser>(context);
     final userprovider = Provider.of<UserProvider>(context);
     final ticketprovider = Provider.of<TicketProvider>(context);

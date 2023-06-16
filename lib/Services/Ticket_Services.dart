@@ -57,7 +57,8 @@ class TicketServices {
       } else {
         showSnackBar(context, "Error!!!");
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
   }
-
 }

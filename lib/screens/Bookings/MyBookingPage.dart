@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Order.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
+import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
@@ -55,6 +56,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
   Future<void> initializeOrders() async {
     var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+    var ordervalProvider =
+        Provider.of<OrderValidationProvider>(context, listen: false);
 
     await OrderServices().getAllOrder(context: context);
     List<OrderModel> fetchedOrders = await orderProvider.getOrders();
@@ -68,7 +71,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
         id: orders[0].id,
       );
 
-      String ticketId = orderProvider.order!.items[0].ticket;
+      String ticketId = ordervalProvider.order!.items[0].ticket;
 
       await TicketServices().getTicketById(
         context: context,
@@ -97,6 +100,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
   Widget build(BuildContext context) {
     var userprovider = Provider.of<UserProvider>(context, listen: false);
     var orderprovider = Provider.of<OrderProvider>(context, listen: false);
+    var ordervalprovider =
+        Provider.of<OrderValidationProvider>(context, listen: false);
     var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
 
     double width = MediaQuery.of(context).size.width;
@@ -147,21 +152,21 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     //   ),
                     // ),
                     Padding(
-                      padding: const EdgeInsets.only(right:20.0),
+                      padding: const EdgeInsets.only(right: 20.0),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
                             iselevatedaccicon = !iselevatedaccicon;
-                            
                           });
-                        
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()));
-            
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ProfilePage()));
                         },
                         child: AnimatedContainer(
                           height: 50, width: 50,
-                          decoration: BoxDecoration(boxShadow: [
+                          decoration: const BoxDecoration(boxShadow: [
                             BoxShadow(
                               color: Colors.black,
                               offset: Offset(4, 4),
@@ -232,7 +237,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   width: width / 7.76,
                                   decoration: BoxDecoration(
                                     color: offwhite,
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(60.0),
                                     ),
                                   ),
@@ -261,7 +266,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        "Event " + (index + 1).toString(),
+                                        "Event ${index + 1}",
                                         style: GoogleFonts.mavenPro(
                                           fontWeight: FontWeight.w500,
                                           fontSize: height / 54.1875,
@@ -364,8 +369,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     Container(
                                       width: width / 13.6,
                                       height: height / 12.38571428571429,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
                                         ),
                                         color: Colors.white,
@@ -374,8 +379,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     Container(
                                       width: width / 13.6,
                                       height: height / 12.38571428571429,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
                                         ),
                                         color: Colors.white,
@@ -384,8 +389,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     Container(
                                       width: width / 13.6,
                                       height: height / 10.1,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
                                         ),
                                         color: Colors.white,
@@ -481,14 +486,16 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 orderprovider.orders.isNotEmpty
-                                                    ? orderprovider.order?.id
+                                                    ? (ordervalprovider
+                                                                .order
+                                                                ?.id
                                                                 .isNotEmpty ??
-                                                            false
-                                                        ? ticketprovider
+                                                            false)
+                                                        ? (ticketprovider
                                                                     .ticket
                                                                     ?.id
                                                                     .isNotEmpty ??
-                                                                false
+                                                                false)
                                                             ? RepaintBoundary(
                                                                 child: QrImage(
                                                                   data: ticketprovider
@@ -502,7 +509,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                               )
                                                             : const CircularProgressIndicator()
                                                         : const CircularProgressIndicator()
-                                                    : const CircularProgressIndicator(),
+                                                    : const CircularProgressIndicator()
                                               ],
                                             ),
                                           ),
@@ -539,7 +546,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            '${orderprovider.order?.items[0].quantity ?? ''}x ${ticketprovider.ticket?.name ?? ''}',
+                                                            '${ordervalprovider.order?.items[0].quantity ?? ''}x ${ticketprovider.ticket?.name ?? ''}',
                                                           ),
                                                         ],
                                                       ),
