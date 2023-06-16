@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/BTS_Providers/PromoterProvider.dart';
@@ -5,6 +7,7 @@ import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/Providers/TicketProvider.dart';
+import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -15,16 +18,20 @@ import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/screens/Tickets/TicketConfirming.dart';
 import 'package:venq_assessment/screens/Tickets/TicketSending.dart';
+import 'package:venq_assessment/screens/loading.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'Providers/ClubProvider.dart';
 import 'Providers/UserProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final userProvider = UserProvider();
   await userProvider.loadToken();
   await userProvider.loadId();
+  if (userProvider.token.isNotEmpty) {
+    Constants.usertoken = userProvider.token;
+    await UserServices.getprofileinfo();
+  }
 
   runApp(
     ChangeNotifierProvider.value(
@@ -34,14 +41,19 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserProvider>(context);
-    Constants.usertoken = userprovider.token;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
@@ -68,7 +80,9 @@ class MyApp extends StatelessWidget {
         },
         home: userprovider.token.isEmpty
             ? const LoginPage()
-            : BehindTheScenesPage(),
+            : Constants.btsprofile.role == "user"
+                ? MyBookingPage()
+                : BehindTheScenesPage(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),

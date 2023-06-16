@@ -34,10 +34,11 @@ class _ProfilePageState extends State<ProfilePage> {
           style: GoogleFonts.bebasNeue(
               fontWeight: FontWeight.w500, fontSize: 40, color: offwhite),
         ),
-        InkWell(  onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  EditProfile()));
-            },
+        InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EditProfile()));
+          },
           child: Padding(
             padding: const EdgeInsets.only(top: 18.0),
             child: Container(

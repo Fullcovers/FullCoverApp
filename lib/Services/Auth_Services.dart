@@ -4,8 +4,11 @@ import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:venq_assessment/Services/User_Services.dart';
+import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 
 import '../Models/User.dart';
 import '../Providers/UserProvider.dart';
@@ -78,7 +81,16 @@ class AuthService {
       if (res.statusCode == 200) {
         // Successful login
         userprovider.setToken(jsonDecode(res.body)['token']);
-        navigator.pushNamedAndRemoveUntil('/bookingsscreen', (route) => false);
+        Constants.usertoken = userprovider.token;
+        await UserServices.getprofileinfo();
+        if (Constants.btsprofile.role == "user") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MyBookingPage()));
+        } else {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BehindTheScenesPage()));
+        }
+        // navigator.pushNamedAndRemoveUntil('/bookingsscreen', (route) => false);
       } else if (res.statusCode == 400) {
         // Invalid email or password
         showSnackBar(context, 'Invalid email or password');

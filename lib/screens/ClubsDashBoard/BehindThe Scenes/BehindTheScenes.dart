@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
@@ -85,33 +86,42 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 120, 116, 116),
-                            blurRadius: 20,
-                            spreadRadius: -2,
-                            offset: Offset(-2, -2),
+                    child: InkWell(onTap: (){
+                       
+                    },
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 120, 116, 116),
+                              blurRadius: 20,
+                              spreadRadius: -2,
+                              offset: Offset(-2, -2),
+                            ),
+                            BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 20,
+                              spreadRadius: -2,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Color(0xFF2C2F33),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const BTSProfile()));
+                          },
+                          color: const Color.fromARGB(255, 252, 248, 248),
+                          icon: const Icon(
+                            Icons.person_outline_sharp,
+                            size: 35,
                           ),
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 20,
-                            spreadRadius: -2,
-                            offset: Offset(2, 2),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xFF2C2F33),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        color: const Color.fromARGB(255, 252, 248, 248),
-                        icon: const Icon(
-                          Icons.person_outline_sharp,
-                          size: 35,
                         ),
                       ),
                     ),
@@ -192,12 +202,12 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
           padding: EdgeInsets.only(
               left: width / 5, right: width / 5, bottom: width / 20),
           child: bottombutton(
-            "Scan QR Code",
-            const Icon(
-              Icons.qr_code_2_outlined,
-              size: 35,
-            ),context
-          ),
+              "Scan QR Code",
+              const Icon(
+                Icons.qr_code_2_outlined,
+                size: 35,
+              ),
+              context),
         ),
       ),
     );
