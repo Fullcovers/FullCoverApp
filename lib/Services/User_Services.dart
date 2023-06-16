@@ -44,7 +44,7 @@ class UserServices {
   }
 
   static Future<UserData> getprofileinfo(
-      {required BuildContext context}) async {
+      ) async {
     late UserData profile;
 
     try {
@@ -72,7 +72,7 @@ class UserServices {
       // print(user['user']['name']['firstName']);
     } catch (e) {
       print(e);
-      showSnackBar(context, e.toString());
+      // showSnackBar(context, e.toString());
     }
     return Constants.btsprofile;
   }

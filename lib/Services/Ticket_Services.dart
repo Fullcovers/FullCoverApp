@@ -60,49 +60,4 @@ class TicketServices {
     } catch (e) {}
   }
 
-  // Future<List<Ticket>>
-  static Future<void> getclubTickets({required BuildContext context}) async {
-    try {
-      print(Constants.btsprofile.id);
-      print(Constants.usertoken);
-
-      http.Response myclub = await http.get(
-        Uri.parse('${Constants.uri}club/my-club'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ${Constants.usertoken}',
-        },
-      );
-      // print(myclub.body);
-    var  myclubid=jsonDecode(myclub.body)['data'][0]['_id'];
-print(myclubid);
-
-      var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
-      http.Response res = await http.get(
-        Uri.parse('${Constants.uri}ticket/${myclubid}'),
-        headers: <String, String>{
-          'Authorization': 'Bearer ${Constants.usertoken}',
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-      List<Ticket> tic=(jsonDecode(res.body))['data'];
-      
-      // Ticket ticket = Ticket.fromJson(tic);
-      // print(ticket.club);
-      // if (res.statusCode == 201) {
-      //   print(res.body);
-      //   // Ticket ticket = Ticket.fromJson(jsonDecode(res.body));
-      //   // ticketprovider.setTicket(ticket);
-      // } else if (res.statusCode == 404) {
-      //   showSnackBar(context, "TicketNotFound");
-      // } else if (res.statusCode == 403) {
-      //   showSnackBar(context, "Forbidden User not Authenticated");
-      // } else {
-      //   showSnackBar(context, "Error!!!");
-      // }
-    } catch (e) {
-      print(e);
-      showSnackBar(context, e.toString());
-    }
-  }
 }
