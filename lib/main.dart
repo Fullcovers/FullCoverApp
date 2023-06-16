@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           '/ticketconfirming': (context) => const TicketConfirming(),
           '/bookingsscreen': (context) => MyBookingPage(),
         },
-        home: userprovider.token.isEmpty ? const LoginPage() : Events(),
+        home: userprovider.token.isEmpty ? const LoginPage() : BehindTheScenesPage(),
         // home:
         //     userprovider.token.isEmpty ? const LoginPage() : const QrScanner(),
         // home: MyBookingPage(),

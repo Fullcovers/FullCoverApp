@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
@@ -106,7 +107,12 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                       color: Color(0xFF2C2F33),
                     ),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BTSProfile()));
+                      },
                       color: const Color.fromARGB(255, 252, 248, 248),
                       icon: const Icon(
                         Icons.person_outline_sharp,
@@ -153,7 +159,8 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                   child: mycard(height, width, Color(0XB3A094D0), "Events",
                       Color(0XFFA094D0)),
                 ),
-                InkWell( onTap: () {
+                InkWell(
+                  onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -189,12 +196,12 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
           padding: EdgeInsets.only(
               left: width / 5, right: width / 5, bottom: width / 20),
           child: bottombutton(
-            "Scan QR Code",
-            const Icon(
-              Icons.qr_code_2_outlined,
-              size: 35,
-            ),context
-          ),
+              "Scan QR Code",
+              const Icon(
+                Icons.qr_code_2_outlined,
+                size: 35,
+              ),
+              context),
         ),
       ),
     );

@@ -42,4 +42,38 @@ class UserServices {
       showSnackBar(context, e.toString());
     }
   }
+
+  static Future<UserData> getprofileinfo(
+      {required BuildContext context}) async {
+    late UserData profile;
+
+    try {
+      print(Constants.usertoken);
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}user/profile'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}'
+        },
+      );
+      var user = jsonDecode(res.body);
+      Name name=Name(firstName: user['user']['name']['firstName'], lastName: user['user']['name']['lastName']);
+      Constants.btsprofile = UserData(
+         name : name,
+          id: user['user']['_id'],
+          email: user['user']['email'],
+          password: user['user']['password'],
+          phoneNumber: user['user']['phoneNumber'],
+          role: user['user']['role'],
+          image: user['user']['image'],
+          isVerified: user['user']['isVerified'],
+          v: user['user']['__v']);
+
+      // print(user['user']['name']['firstName']);
+    } catch (e) {
+      print(e);
+      showSnackBar(context, e.toString());
+    }
+    return Constants.btsprofile;
+  }
 }

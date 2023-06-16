@@ -6,8 +6,8 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 
-class EditProfile extends StatelessWidget {
-  EditProfile({super.key});
+class BTSEditProfile extends StatelessWidget {
+  BTSEditProfile({super.key});
 
   @override
   bool isChecked = false;
@@ -15,8 +15,8 @@ class EditProfile extends StatelessWidget {
   bool isChecked3 = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();  final TextEditingController pnController = TextEditingController();
-
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController pnController = TextEditingController();
 
   Widget build(BuildContext context) {
     var widthofs = MediaQuery.of(context).size.width;
@@ -26,10 +26,10 @@ class EditProfile extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColorfigma,
         body: SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                      HeaderContent(title: "Edit Profile"),
-
+              HeaderContent(title: "Edit Profile"),
               SizedBox(
                 height: heightofs / 50,
               ),
@@ -56,7 +56,7 @@ class EditProfile extends StatelessWidget {
                               lastnameController, "Last Name", Colors.green),
                           customtextfield(
                               emailController, "Email", Colors.green),
-                               customtextfield(
+                          customtextfield(
                               pnController, "Phone Number", Colors.green),
                           SizedBox(
                             height: 20,
@@ -122,6 +122,5 @@ class EditProfile extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
