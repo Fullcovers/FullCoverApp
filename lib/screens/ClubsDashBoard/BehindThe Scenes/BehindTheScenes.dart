@@ -19,82 +19,100 @@ class BehindTheScenesPage extends StatefulWidget {
 }
 
 class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
-  Color textc = Color(0xFFB59F68);
+  Color textc = const Color(0xFFB59F68);
   bool forAndroid = false;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print(height);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFF2C2F33),
-        body: Column(
-          children: [
-            SizedBox(
-              height: height / 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Image.asset(
-                          "assets/images/coinlogo.png",
-                          height: 40,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: height / 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Image.asset(
+                            "assets/images/coinlogo.png",
+                            height: 40,
+                          ),
                         ),
                       ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: "B",
-                        style:
-                            GoogleFonts.bebasNeue(color: textc, fontSize: 48),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'ehind',
+                      RichText(
+                        text: TextSpan(
+                          text: "B",
+                          style:
+                              GoogleFonts.bebasNeue(color: textc, fontSize: 48),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'ehind',
+                                style: GoogleFonts.bebasNeue(
+                                    color: textc, fontSize: 14)),
+                            TextSpan(
+                              text: "T",
                               style: GoogleFonts.bebasNeue(
-                                  color: textc, fontSize: 14)),
-                          TextSpan(
-                            text: "T",
-                            style: GoogleFonts.bebasNeue(
-                                color: textc, fontSize: 48),
-                          ),
-                          TextSpan(
-                              text: 'he ',
+                                  color: textc, fontSize: 48),
+                            ),
+                            TextSpan(
+                                text: 'he ',
+                                style: GoogleFonts.bebasNeue(
+                                    color: textc, fontSize: 14)),
+                            TextSpan(
+                              text: "S",
                               style: GoogleFonts.bebasNeue(
-                                  color: textc, fontSize: 14)),
-                          TextSpan(
-                            text: "S",
-                            style: GoogleFonts.bebasNeue(
-                                color: textc, fontSize: 48),
-                          ),
-                          TextSpan(
-                              text: 'cenes',
-                              style: GoogleFonts.bebasNeue(
-                                  color: textc, fontSize: 14)),
-                        ],
+                                  color: textc, fontSize: 48),
+                            ),
+                            TextSpan(
+                                text: 'cenes',
+                                style: GoogleFonts.bebasNeue(
+                                    color: textc, fontSize: 14)),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 120, 116, 116),
-                          blurRadius: 20,
-                          spreadRadius: -2,
-                          offset: Offset(-2, -2),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 120, 116, 116),
+                            blurRadius: 20,
+                            spreadRadius: -2,
+                            offset: Offset(-2, -2),
+                          ),
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 20,
+                            spreadRadius: -2,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Color(0xFF2C2F33),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        color: const Color.fromARGB(255, 252, 248, 248),
+                        icon: const Icon(
+                          Icons.person_outline_sharp,
+                          size: 35,
                         ),
                         BoxShadow(
                           color: Colors.black,

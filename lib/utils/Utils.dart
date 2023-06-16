@@ -22,6 +22,9 @@ void httpErrorHandle({
     case 400:
       showSnackBar(context, jsonDecode(response.body)['msg']);
       break;
+    case 403:
+      showSnackBar(context, "Forbidden Not Authenticated!!");
+      break;
     case 500:
       showSnackBar(context, jsonDecode(response.body)['error']);
       break;
