@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Models/UserModel.dart';
+import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
 import 'package:venq_assessment/screens/profile/coins.dart';
@@ -16,6 +18,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late UserData user;
+  bool loded = false;
+  getuser() async {
+    user = await UserServices.getprofileinfo();
+    
+    setState(() {
+      loded = true;
+    });
+    
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getuser();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -23,42 +42,92 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: backgroundColorfigma,
-      body: Column(children: [
+      body: loded?Column(children: [
         HeaderContent(title: "Profile"),
-        Image.asset(
-          "assets/images/profile.png",
-          scale: 1.5,
-        ),
+        user.image.isNotEmpty? Container(
+                        height: height / 10,
+                        child: Image.network(
+                          user.image,
+                          scale: 1.5,
+                        ),
+                      )
+                    : Container(
+                        height: height / 10,
+                        child: Image.asset(
+                          "assets/images/profile.png",
+                          scale: 1.5,
+                        ),
+                      ),
+                
         Text(
-          'zee you',
+          user.name.firstName + " " + user.name.lastName,
           style: GoogleFonts.bebasNeue(
               fontWeight: FontWeight.w500, fontSize: 40, color: offwhite),
         ),
-        InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => EditProfile()));
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(top: 18.0),
-            child: Container(
-              width: width / 3,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(),
-                  color: Color.fromARGB(255, 133, 132, 132)),
-              child: Center(
-                  child: Text(
-                "Edit Profile",
-                style: GoogleFonts.sairaCondensed(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                    color: backgroundColorfigma),
-              )),
-            ),
-          ),
-        ),
+        SizedBox(height: height/10,),
+        Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Phone Number",
+                      style: GoogleFonts.sairaCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: offwhite),
+                    ),
+                    Text(
+                      user.phoneNumber,
+                      style: GoogleFonts.sairaCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: offwhite),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Email",
+                      style: GoogleFonts.sairaCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: offwhite),
+                    ),
+                    Text(
+                      user.email,
+                      style: GoogleFonts.sairaCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: offwhite),
+                    ),
+                  ],
+                ),
+        // InkWell(
+        //   onTap: () {
+        //     Navigator.push(context,
+        //         MaterialPageRoute(builder: (context) => EditProfile()));
+        //   },
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(top: 18.0),
+        //     child: Container(
+        //       width: width / 3,
+        //       height: 50,
+        //       decoration: BoxDecoration(
+        //           borderRadius: BorderRadius.circular(25),
+        //           border: Border.all(),
+        //           color: Color.fromARGB(255, 133, 132, 132)),
+        //       child: Center(
+        //           child: Text(
+        //         "Edit Profile",
+        //         style: GoogleFonts.sairaCondensed(
+        //             fontWeight: FontWeight.w500,
+        //             fontSize: 20,
+        //             color: backgroundColorfigma),
+        //       )),
+        //     ),
+        //   ),
+        // ),
 
         // Padding(
         //   padding: const EdgeInsets.all(8.0),
@@ -179,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
             )
           ]),
         ),
-      ]),
+      ]):CircularProgressIndicator(),
     ));
   }
 }
