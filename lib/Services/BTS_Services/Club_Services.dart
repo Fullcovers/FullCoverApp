@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/utils/Utils.dart';
 
@@ -123,5 +125,45 @@ class BTSClubServices {
       showSnackBar(context, e.toString());
       print(e);
     }
+  }
+
+  static Future<ClubModel?> btsgetSingleClub(
+      {required BuildContext context}) async {
+    final clubProvider = Provider.of<ClubProvider>(context, listen: false);
+    try {
+      http.Response myclub = await http.get(
+        Uri.parse('${Constants.uri}club/my-club'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}',
+        },
+      );
+      var myclubid = jsonDecode(myclub.body)['data'][0]['_id'];
+      print(myclubid);
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}club/$myclubid'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            final clubProvider =
+                Provider.of<ClubProvider>(context, listen: false);
+            clubProvider.setclubnull();
+            final jsonData = json.decode(res.body)["data"];
+            // clubProvider.setClubsData(jsonData);
+            ClubModel club = clubProvider.getClubDetails(jsonData);
+            clubProvider.setSingleClub(club);
+
+            // showSnackBar(context, 'Clubs data fetched successfully');
+            print(clubProvider.club!.id.toString());
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return clubProvider.club;
   }
 }

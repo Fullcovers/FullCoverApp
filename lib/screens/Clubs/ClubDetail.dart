@@ -4,9 +4,16 @@ import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage2.dart';
 
-class ClubDetail extends StatelessWidget {
+class ClubDetail extends StatefulWidget {
   ClubDetail({super.key, required this.club});
   final ClubModel club;
+
+  @override
+  State<ClubDetail> createState() => _ClubDetailState();
+}
+
+class _ClubDetailState extends State<ClubDetail> {
+  bool clubdescdropdown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +36,9 @@ class ClubDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: club.carouselImages.isNotEmpty
+                  child: widget.club.carouselImages.isNotEmpty
                       ? Image.network(
-                          club.carouselImages[1].imageUrl,
+                          widget.club.carouselImages[0].imageUrl,
                           fit: BoxFit.cover,
                           width: width / 1.1,
                           height: height / 5.97,
@@ -48,7 +55,7 @@ class ClubDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, left: 20.0),
               child: Text(
-                club.name,
+                widget.club.name,
                 style: GoogleFonts.bebasNeue(
                   color: const Color(0XFFF0F0F3),
                   fontSize: width / 11.41666666666667,
@@ -84,7 +91,7 @@ class ClubDetail extends StatelessWidget {
                       padding: EdgeInsets.only(
                           left: width / 20.55, top: width / 41.10),
                       child: Text(
-                        "${club.daysOpen.from != '' ? club.daysOpen.from : "Tuesday"} - ${club.daysOpen.till != '' ? club.daysOpen.till : "Sunday"}",
+                        "${widget.club.daysOpen.from != '' ? widget.club.daysOpen.from : "Tuesday"} - ${widget.club.daysOpen.till != '' ? widget.club.daysOpen.till : "Sunday"}",
                         style: GoogleFonts.sairaCondensed(
                           color: Colors.white,
                           fontSize: width / 20.55,
@@ -95,7 +102,7 @@ class ClubDetail extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: width / 20.55, top: 0.0),
                       child: Text(
-                        "${club.timings.opensAt != '' ? "${club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${club.timings.closesAt != '' ? "${club.timings.closesAt} Hrs" : "23.45 Hrs"}",
+                        "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                         style: GoogleFonts.sairaCondensed(
                           color: const Color(0XFFA7A7A7),
                           fontSize: width / 29.35714285714286,
@@ -158,42 +165,59 @@ class ClubDetail extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: width / 20.55, top: width / 20.55),
-                      child: Text(
-                        "About",
-                        style: GoogleFonts.sairaCondensed(
-                          color: const Color(0XFFA7A7A7),
-                          fontSize: width / 29.35714285714286,
-                          fontWeight: FontWeight.w500,
+                Container(
+                  width: width - (width / 20) - 20 - 25,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: width / 20.55, top: width / 20.55),
+                        child: Text(
+                          "About",
+                          style: GoogleFonts.sairaCondensed(
+                            color: const Color(0XFFA7A7A7),
+                            fontSize: width / 29.35714285714286,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
-                      child: Text(
-                        club.description,
-                        style: GoogleFonts.sairaCondensed(
-                          color: const Color(0XFFF0F0F3),
-                          fontSize: width / 29.35714285714286,
-                          fontWeight: FontWeight.w600,
+                      Padding(
+                        padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
+                        child: Text(
+                          textAlign: TextAlign.left,
+                          clubdescdropdown
+                              ? widget.club.description
+                                      .substring(
+                                          0,
+                                          widget.club.description.length < 60
+                                              ? widget.club.description.length
+                                              : 60)
+                                      .toString() +
+                                  "..."
+                              : widget.club.description,
+                          style: GoogleFonts.sairaCondensed(
+                            color: const Color(0XFFF0F0F3),
+                            fontSize: width / 29.35714285714286,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
                 FractionalTranslation(
                   translation: const Offset(-0.10, -0.05),
                   child: Padding(
                     padding: const EdgeInsets.only(right: 0.0),
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            clubdescdropdown = !clubdescdropdown;
+                          });
+                        },
                         icon: const Icon(
-                          Icons.add,
+                          Icons.arrow_drop_down,
                           color: Color(0XFFF0F0F3),
                         )),
                   ),
@@ -229,7 +253,7 @@ class ClubDetail extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
-                          club.name,
+                          widget.club.name,
                           style: GoogleFonts.bebasNeue(
                             color: const Color(0XFFB59F68),
                             fontSize: width / 12.84375,
@@ -267,7 +291,7 @@ class ClubDetail extends StatelessWidget {
                       FractionalTranslation(
                         translation: const Offset(-0.01, 0),
                         child: Text(
-                          club.address,
+                          widget.club.address,
                           style: GoogleFonts.sairaCondensed(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -307,8 +331,8 @@ class ClubDetail extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
                       child: Row(
-                        children: club.facilities.isNotEmpty
-                            ? club.facilities.map((facility) {
+                        children: widget.club.facilities.isNotEmpty
+                            ? widget.club.facilities.map((facility) {
                                 return Padding(
                                   padding: const EdgeInsets.only(
                                       top: 4.0, right: 10),
@@ -476,8 +500,8 @@ class ClubDetail extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: width / 20.55, top: 5.0),
                         child: Text(
-                          club.termsAndCondition != ''
-                              ? club.termsAndCondition
+                          widget.club.termsAndCondition != ''
+                              ? widget.club.termsAndCondition
                               : '',
                           style: GoogleFonts.sairaCondensed(
                             color: const Color(0XFFF0F0F3),
@@ -530,7 +554,7 @@ class ClubDetail extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => ClubsPage2(
-                                  club: club,
+                                  club: widget.club,
                                 )),
                       );
                     },

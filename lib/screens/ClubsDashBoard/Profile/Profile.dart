@@ -7,6 +7,7 @@ import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/CarouselPage.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Myclub.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Ticketsbts.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/editprofilebts.dart';
 import 'package:venq_assessment/utils/Constants.dart';
@@ -192,6 +193,41 @@ class _BTSProfileState extends State<BTSProfile> {
                           ),
                           Text(
                             "Ticket",
+                            style: GoogleFonts.sairaCondensed(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 25,
+                                color: offwhite),
+                          ),
+                          Icon(
+                            Icons.navigate_next,
+                            color: offwhite,
+                          )
+                        ]),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: height / 20,
+                    left: width / 5.0,
+                    right: width / 5.0,
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyClub()));
+                    },
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            "assets/images/club.png",
+                            color: Colors.white,
+                            scale: 14,
+                          ),
+                          Text(
+                            "My Club",
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 25,

@@ -23,10 +23,16 @@ class EventDetail extends StatefulWidget {
 class _EventDetailState extends State<EventDetail> {
   @override
   Widget build(BuildContext context) {
+    print(widget.event.clubId);
     final clubprovider = Provider.of<ClubProvider>(context, listen: false);
     // ClubServices().getSingleClub(context: context, clubid: widget.event.clubId);
 
-    // print(clubprovider.club!.id);
+    print("clubprovider.club?.id");
+    print(clubprovider.club?.id);
+    List<String> facilities = [];
+    if (clubprovider.club != null) {
+      facilities = clubprovider.club!.facilities;
+    }
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -271,10 +277,8 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                                 ),
                                 Row(
-                                  children: clubprovider
-                                          .club!.facilities.isNotEmpty
-                                      ? clubprovider.club!.facilities
-                                          .map((facility) {
+                                  children: facilities.isNotEmpty
+                                      ? facilities.map((facility) {
                                           return Padding(
                                             padding: const EdgeInsets.only(
                                                 top: 4.0, right: 10),

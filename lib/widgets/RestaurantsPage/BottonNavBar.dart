@@ -54,7 +54,6 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            
                             InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
@@ -103,7 +102,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             //         Image.asset(
                             //           "assets/images/restaurant.png",
                             //           scale: 16473 / widget.height,
-                            //           color: widget.iscolorchange 
+                            //           color: widget.iscolorchange
                             //               ? Colors.white
                             //               : backgroundColorfigma,
                             //         ),
@@ -159,7 +158,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(left: (widget.width/2)-50.0),
+                  padding: EdgeInsets.only(left: (widget.width / 2) - 50.0),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -177,7 +176,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                 ),
                 // Container(color: Colors.white,height: 25,width: widget.width-25,),
                 Padding(
-                  padding:  EdgeInsets.only(left: (widget.width/2)-35, top: 10),
+                  padding:
+                      EdgeInsets.only(left: (widget.width / 2) - 35, top: 10),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -189,8 +189,11 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             onclick = true;
                           });
                         },
-                        child: InkWell(onTap: (){Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MyBookingPage()));},
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MyBookingPage()));
+                          },
                           child: Card(
                             color: widget.iscolorchange
                                 ? Colors.white
@@ -199,32 +202,46 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             //     borderRadius: BorderRadius.circular(5)),
                             child: Container(
                                 decoration: BoxDecoration(
-                                  boxShadow: [
-                                    // BoxShadow(
-                                    //   color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
-                                    //   offset: Offset(4, 4),
-                                    //   blurRadius: 2,
-                                    // ),
-                                    BoxShadow(
-                                      color: widget.iscolorchange
-                                          ? Colors.white
-                                          : Color.fromARGB(255, 67, 73, 78),
-                                      offset: Offset(-4, -4),
-                                      blurRadius: 10,
-                                    ),
-                                    // BoxShadow(
-                                    //   color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
-                                    //   offset: Offset(-4, 4),
-                                    //   blurRadius: 2,
-                                    // ),
-                                    BoxShadow(
-                                      color: widget.iscolorchange
-                                          ? Colors.grey.withOpacity(0.3)
-                                          : Colors.transparent,
-                                      offset: Offset(4, -4),
-                                      blurRadius: 3,
-                                    ),
-                                  ],
+                                  boxShadow: widget.iscolorchange
+                                      ? [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromARGB(255, 67, 73, 78),
+                                            offset: Offset(-4, -4),
+                                            blurRadius: 10,
+                                          ),
+                                          // BoxShadow(
+                                          //   color:widget.iscolorchange ?  Colors.grey.withOpacity(0.3):Colors.white10.withOpacity(0.05),
+                                          //   offset: Offset(-4, 4),
+                                          //   blurRadius: 2,
+                                          // ),
+                                          BoxShadow(
+                                            color: Colors.transparent,
+                                            offset: Offset(4, -4),
+                                            blurRadius: 3,
+                                          ),
+                                        ]
+                                      : [
+                                          // BoxShadow(
+                                          //   color: widget.iscolorchange ? Color(0xFFE0E0E0):Colors.white10.withOpacity(0.05),
+                                          //   offset: Offset(4, 4),
+                                          //   blurRadius: 2,
+                                          // ),
+                                          BoxShadow(
+                                            color: Colors.black,
+                                            offset: Offset(4, 4),
+                                            blurRadius: 15,
+                                            spreadRadius: 1,
+                                          ),
+                                          BoxShadow(
+                                            color:
+                                                Color.fromARGB(255, 88, 88, 88),
+                                            offset: Offset(-4, -4),
+                                            blurRadius: 15,
+                                            spreadRadius:
+                                                -2, // how far the color effect spreads.
+                                          ),
+                                        ],
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   color: widget.iscolorchange
@@ -244,7 +261,6 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),

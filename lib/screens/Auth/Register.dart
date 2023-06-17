@@ -22,6 +22,8 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
+    final TextEditingController pnController = TextEditingController();
+
   final TextEditingController confirmpasswordController =
       TextEditingController();
   Color getColor(Set<MaterialState> states) {
@@ -101,10 +103,12 @@ class _SignUpState extends State<SignUp> {
                               lastnameController, "Last Name", Colors.green),
                           customtextfield(
                               emailController, "Email", Colors.green),
+                              customtextfield(
+                              pnController, "Phone Number", Colors.green),
                           customtextfield(
-                              passwordController, "Password", Colors.red),
+                              passwordController, "Password", Colors.green),
                           customtextfield(confirmpasswordController,
-                              "Confirm Password", Colors.red),
+                              "Confirm Password", Colors.green),
                         
                           Row(
                             children: [
