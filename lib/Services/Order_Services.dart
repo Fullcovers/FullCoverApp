@@ -167,4 +167,29 @@ class OrderServices {
       print(e.toString());
     }
   }
+
+  void placeOrder(
+      {required BuildContext context,
+      required Map<String, dynamic> requestbody}) async {
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+
+      await userprovider.loadToken();
+      http.Response res =
+          await http.post(Uri.parse('${Constants.uri}orders/s/'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ${userprovider.token}'
+              },
+              body: jsonEncode(requestbody));
+
+      if (res.statusCode == 201) {
+        showSnackBar(context, 'Order Created');
+      } else {
+        showSnackBar(context, 'Something went wrong');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

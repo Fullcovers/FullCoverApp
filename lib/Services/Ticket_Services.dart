@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../Models/Ticket.dart';
 
 import '../Providers/TicketProvider.dart';
+import '../Providers/UserProvider.dart';
 import '../utils/Constants.dart';
 import '../utils/Utils.dart';
 
@@ -60,5 +61,45 @@ class TicketServices {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<List<Ticket>> getClubsTickets(
+      {required BuildContext context, required String clubId}) async {
+    var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+          Uri.parse('${Constants.uri}ticket/$clubId'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${userprovider.token}'
+          });
+
+      ticketprovider.setMultiTickets(jsonDecode(res.body));
+    } catch (e) {
+      print(e.toString());
+    }
+    return ticketprovider.tickets;
+  }
+
+  Future<List<Ticket>> getEventsTickets(
+      {required BuildContext context, required String eventId}) async {
+    var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+          Uri.parse('${Constants.uri}ticket/c/$eventId'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${userprovider.token}'
+          });
+      ticketprovider.setMultiTickets(jsonDecode(res.body));
+      // ticketprovider.setMultiTickets(jsonDecode(res.body));
+    } catch (e) {
+      print(e.toString());
+    }
+    return ticketprovider.tickets;
   }
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+
+import '../../Services/Order_Services.dart';
 
 class EventDetail3 extends StatefulWidget {
   EventDetail3(
@@ -20,7 +23,11 @@ class EventDetail3 extends StatefulWidget {
       required this.date,
       required this.month,
       required this.weekday,
-      required this.year});
+      required this.year,
+      required this.stagid,
+      required this.coupleid,
+      required this.femaleid,
+      required this.promocode});
   int stagcount;
   Event event;
   ClubModel club;
@@ -34,6 +41,10 @@ class EventDetail3 extends StatefulWidget {
   int date;
   String month;
   int year;
+  String stagid;
+  String coupleid;
+  String femaleid;
+  String promocode;
   @override
   State<EventDetail3> createState() => _EventDetail3State();
 }
@@ -45,6 +56,8 @@ class _EventDetail3State extends State<EventDetail3> {
   @override
   Widget build(BuildContext context) {
     double clubpersent = 4;
+    String formattedDate =
+        DateFormat('EEE MMM dd yyyy HH:mm:ss').format(DateTime.now());
 
     double gst18 = widget.totalprice * clubpersent * 18 / 10000;
 
@@ -61,7 +74,7 @@ class _EventDetail3State extends State<EventDetail3> {
             body: SlidingUpPanel(
               borderRadius: radius,
               minHeight: height / 6,
-              maxHeight:height / 1.65 ,
+              maxHeight: height / 1.65,
               controller: panelController,
               defaultPanelState: PanelState.CLOSED,
               panelSnapping: false,
@@ -130,29 +143,73 @@ class _EventDetail3State extends State<EventDetail3> {
                               decoration: BoxDecoration(
                                   color: const Color(0XFFB59F68),
                                   borderRadius: BorderRadius.circular(15.0)),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      "Pay",
-                                      style: GoogleFonts.sairaCondensed(
-                                          color: offwhite,
-                                          fontSize: height / 43.35,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      (widget.totalprice +
-                                              widget.totalprice * 4 / 100 +
-                                              gst18.floor())
-                                          .toString(),
-                                      style: GoogleFonts.sairaCondensed(
-                                          color: offwhite,
-                                          fontSize: height / 28.9,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
+                              child: InkWell(
+                                onTap: () {
+                                  List<Map<String, dynamic>> tickets = [];
+
+                                  if (widget.stagcount > 0) {
+                                    tickets.add({
+                                      "qty": widget.stagcount,
+                                      "ticket": widget.stagid
+                                    });
+                                  }
+
+                                  if (widget.couplecount > 0) {
+                                    tickets.add({
+                                      "qty": widget.couplecount,
+                                      "ticket": widget.coupleid
+                                    });
+                                  }
+
+                                  if (widget.femalecount > 0) {
+                                    tickets.add({
+                                      "qty": widget.femalecount,
+                                      "ticket": widget.femaleid
+                                    });
+                                  }
+
+                                  Map<String, dynamic> requestBody = {
+                                    "tickets": tickets,
+                                    "send_to": {
+                                      "phoneNumber": phoneController.text,
+                                      "email": emailController.text
+                                    },
+                                    "club": widget.club.id,
+                                    "date": formattedDate,
+                                    "promo_code": widget.promocode,
+                                    "amount": widget.totalprice +
+                                        widget.totalprice * 4 / 100 +
+                                        gst18.floor()
+                                  };
+
+                                  OrderServices().placeOrder(
+                                      context: context,
+                                      requestbody: requestBody);
+                                },
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        "Pay",
+                                        style: GoogleFonts.sairaCondensed(
+                                            color: offwhite,
+                                            fontSize: height / 43.35,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        (widget.totalprice +
+                                                widget.totalprice * 4 / 100 +
+                                                gst18.floor())
+                                            .toString(),
+                                        style: GoogleFonts.sairaCondensed(
+                                            color: offwhite,
+                                            fontSize: height / 28.9,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -163,316 +220,330 @@ class _EventDetail3State extends State<EventDetail3> {
                   )),
               panel: Container(
                 color: backgroundColorfigma,
-                child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 3,
-                      width: width / 4,
-                      color: const Color(0XFFB59F68),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: height / 95),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: width / 30, right: width / 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Passes",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: width / 14.67857142857143,
-                                      color: offwhite)),
-                              Text("Rs.${widget.totalprice}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: width / 14.67857142857143,
-                                      color: offwhite))
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: width / 20, right: width / 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Stagx${widget.stagcount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite)),
-                              Text(
-                                  "Rs.${widget.stagentryprice * widget.stagcount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite))
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: width / 20, right: width / 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Couplex${widget.couplecount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite)),
-                              Text(
-                                  "Rs.${widget.coupleentrypricce * widget.couplecount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite))
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: width / 20, right: width / 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Femalex${widget.femalecount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite)),
-                              Text(
-                                  "Rs.${widget.femaleentryprice * widget.femalecount}",
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: width / 22.83333333333333,
-                                      color: offwhite))
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Divider(
-                            height: 2,
-                            thickness: 2,
-                            indent: 2,
-                            endIndent: 0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: width / 30, right: width / 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Convience Fees",
-                                style: GoogleFonts.sairaCondensed(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: width / 14.67857142857143,
-                                    color: offwhite)),
-                            Text(
-                                "Rs.${widget.totalprice * 4 / 100 + gst18.floor()}",
-                                style: GoogleFonts.sairaCondensed(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: width / 14.67857142857143,
-                                    color: offwhite))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Integrated GST (IGST) 18%",
-                                style: GoogleFonts.sairaCondensed(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: width / 27.4,
-                                    color: offwhite)),
-                            Text("Rs.${gst18.floor()}",
-                                style: GoogleFonts.sairaCondensed(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: width / 27.4,
-                                    color: offwhite))
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: height / 80, left: width / 20, right: width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Stagx${widget.stagcount}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite)),
-                        Text(
-                            "Rs.${(widget.stagentryprice * widget.stagcount) * clubpersent / 100}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: width / 20, right: width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Couplex${widget.couplecount}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite)),
-                        Text(
-                            "Rs.${widget.coupleentrypricce * widget.couplecount * clubpersent / 100}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: width / 20, right: width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Femalex${widget.femalecount}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite)),
-                        Text(
-                            "Rs.${widget.femaleentryprice * widget.femalecount * clubpersent / 100}",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w600,
-                                fontSize: width / 22.83333333333333,
-                                color: offwhite))
-                      ],
-                    ),
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 2,
-                    indent: 2,
-                    endIndent: 0,
-                    color: Colors.white,
-                  ),
-                  Container(
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: backgroundColorfigma,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(40.0),
-                          topRight: Radius.circular(40.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 3,
+                          width: width / 4,
+                          color: const Color(0XFFB59F68),
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                      Padding(
+                        padding: EdgeInsets.only(top: height / 95),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: width / 30, right: width / 30),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Text("Passes",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: width / 14.67857142857143,
+                                          color: offwhite)),
+                                  Text("Rs.${widget.totalprice}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: width / 14.67857142857143,
+                                          color: offwhite))
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: width / 20, right: width / 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Stagx${widget.stagcount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite)),
+                                  Text(
+                                      "Rs.${widget.stagentryprice * widget.stagcount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite))
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: width / 20, right: width / 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Couplex${widget.couplecount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite)),
+                                  Text(
+                                      "Rs.${widget.coupleentrypricce * widget.couplecount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite))
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: width / 20, right: width / 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Femalex${widget.femalecount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite)),
+                                  Text(
+                                      "Rs.${widget.femaleentryprice * widget.femalecount}",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: width / 22.83333333333333,
+                                          color: offwhite))
+                                ],
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Divider(
+                                height: 2,
+                                thickness: 2,
+                                indent: 2,
+                                endIndent: 0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: width / 30, right: width / 30),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Convience Fees",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: width / 14.67857142857143,
+                                        color: offwhite)),
+                                Text(
+                                    "Rs.${widget.totalprice * 4 / 100 + gst18.floor()}",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: width / 14.67857142857143,
+                                        color: offwhite))
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Integrated GST (IGST) 18%",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: width / 27.4,
+                                        color: offwhite)),
+                                Text("Rs.${gst18.floor()}",
+                                    style: GoogleFonts.sairaCondensed(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: width / 27.4,
+                                        color: offwhite))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: height / 80,
+                            left: width / 20,
+                            right: width / 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Stagx${widget.stagcount}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite)),
+                            Text(
+                                "Rs.${(widget.stagentryprice * widget.stagcount) * clubpersent / 100}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: width / 20, right: width / 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Couplex${widget.couplecount}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite)),
+                            Text(
+                                "Rs.${widget.coupleentrypricce * widget.couplecount * clubpersent / 100}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: width / 20, right: width / 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Femalex${widget.femalecount}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite)),
+                            Text(
+                                "Rs.${widget.femaleentryprice * widget.femalecount * clubpersent / 100}",
+                                style: GoogleFonts.sairaCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: width / 22.83333333333333,
+                                    color: offwhite))
+                          ],
+                        ),
+                      ),
+                      const Divider(
+                        height: 2,
+                        thickness: 2,
+                        indent: 2,
+                        endIndent: 0,
+                        color: Colors.white,
+                      ),
+                      Container(
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            color: backgroundColorfigma,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(40.0),
+                              topRight: Radius.circular(40.0),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: width / 20.55, top: 0.0),
+                                        child: Text(
+                                          "Pay Using",
+                                          style: GoogleFonts.sairaCondensed(
+                                              color: offwhite,
+                                              fontSize: width / 25.6875,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20.0),
+                                        child: Text(
+                                          "Google Pay",
+                                          style: GoogleFonts.sairaCondensed(
+                                              color: offwhite,
+                                              fontSize:
+                                                  width / 15.80769230769231,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: width / 20.55, top: 0.0),
-                                    child: Text(
-                                      "Pay Using",
-                                      style: GoogleFonts.sairaCondensed(
-                                          color: offwhite,
-                                          fontSize: width / 25.6875,
-                                          fontWeight: FontWeight.w600),
+                                        left: width / 22.83333333333333,
+                                        top: height / 86.7),
+                                    child: Container(
+                                      height: height / 12,
+                                      width: 1.5,
+                                      color: Colors.black,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      "Google Pay",
-                                      style: GoogleFonts.sairaCondensed(
-                                          color: offwhite,
-                                          fontSize: width / 15.80769230769231,
-                                          fontWeight: FontWeight.w600),
+                                    padding: const EdgeInsets.only(left: 30.0),
+                                    child: Container(
+                                      height: height / 19.26666666666667,
+                                      width: width / 2.163157894736842,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0XFFB59F68),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0)),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                              "Pay",
+                                              style: GoogleFonts.sairaCondensed(
+                                                  color:
+                                                      const Color(0XFF222222),
+                                                  fontSize: height / 43.35,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            FractionalTranslation(
+                                              translation: height < 700
+                                                  ? const Offset(0, -0.2)
+                                                  : const Offset(0, 0),
+                                              child: Text(
+                                                (widget.totalprice +
+                                                        widget.totalprice *
+                                                            4 /
+                                                            100 +
+                                                        gst18.floor())
+                                                    .toString(),
+                                                style:
+                                                    GoogleFonts.sairaCondensed(
+                                                        color: const Color(
+                                                            0XFF222222),
+                                                        fontSize: width / 13.7,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: width / 22.83333333333333,
-                                    top: height / 86.7),
-                                child: Container(
-                                  height: height / 12,
-                                  width: 1.5,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 30.0),
-                                child: Container(
-                                  height: height / 19.26666666666667,
-                                  width: width / 2.163157894736842,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0XFFB59F68),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Pay",
-                                          style: GoogleFonts.sairaCondensed(
-                                              color: const Color(0XFF222222),
-                                              fontSize: height / 43.35,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        FractionalTranslation(
-                                          translation: height < 700
-                                              ? const Offset(0, -0.2)
-                                              : const Offset(0, 0),
-                                          child: Text(
-                                            (widget.totalprice +
-                                                    widget.totalprice *
-                                                        4 /
-                                                        100 +
-                                                    gst18.floor())
-                                                .toString(),
-                                            style: GoogleFonts.sairaCondensed(
-                                                color: const Color(0XFF222222),
-                                                fontSize: width / 13.7,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              )
                             ],
-                          )
-                        ],
-                      )),
-                ]),
+                          )),
+                    ]),
               ),
               body: Column(children: [
                 Container(

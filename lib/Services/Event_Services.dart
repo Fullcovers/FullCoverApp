@@ -32,8 +32,6 @@ class EventsServices {
             final eventData = json.decode(res.body)['data'];
 
             eventProvider.fetchEvents(eventData);
-            print("hello");
-            print(eventProvider.events);
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
@@ -55,7 +53,6 @@ class EventsServices {
         },
       );
       final clubid = json.decode(club.body)['data'][0]['_id'];
-      print(clubid);
 
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}club/$clubid/events'),
@@ -72,10 +69,7 @@ class EventsServices {
             EventProvider eventProvider =
                 Provider.of<EventProvider>(context, listen: false);
             final eventData = json.decode(res.body)['data'];
-            print(eventData);
             eventProvider.fetchEvents(eventData);
-            print("hello");
-            print(eventProvider.events);
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
@@ -97,12 +91,14 @@ class CreateEventmethod {
       required String description}) async {
     var body = {
       "name": name,
-      "timings": {"startAt": starttime.toString(), "endsAt": endtime.toString()},
+      "timings": {
+        "startAt": starttime.toString(),
+        "endsAt": endtime.toString()
+      },
       "date": date.toString(),
       "description": description
     };
 
-    print(Constants.usertoken);
     try {
       Dio dio = new Dio();
       var res = await dio.post('${Constants.uri}event/',
@@ -110,8 +106,6 @@ class CreateEventmethod {
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
 
-      print(json.encode(body));
-      print(res.data);
       showSnackBar(context, "Created");
     } catch (e) {
       showSnackBar(context, e.toString());

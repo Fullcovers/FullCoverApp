@@ -23,12 +23,10 @@ class EventDetail extends StatefulWidget {
 class _EventDetailState extends State<EventDetail> {
   @override
   Widget build(BuildContext context) {
-    print(widget.event.clubId);
     final clubprovider = Provider.of<ClubProvider>(context, listen: false);
-    // ClubServices().getSingleClub(context: context, clubid: widget.event.clubId);
+    print(widget.event.clubId);
+    ClubServices().getSingleClub(context: context, clubid: widget.event.clubId);
 
-    print("clubprovider.club?.id");
-    print(clubprovider.club?.id);
     List<String> facilities = [];
     if (clubprovider.club != null) {
       facilities = clubprovider.club!.facilities;

@@ -9,6 +9,9 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Events/EventDetail3.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/DateButton.dart';
 
+import '../../Models/Ticket.dart';
+import '../../Services/Ticket_Services.dart';
+
 class EventDetail2 extends StatefulWidget {
   EventDetail2({super.key, required this.event, required this.club});
   Event event;
@@ -18,12 +21,16 @@ class EventDetail2 extends StatefulWidget {
 }
 
 class _EventDetail2State extends State<EventDetail2> {
+  final promocodecontroller = TextEditingController();
   int stagcount = 0;
   int stagentryprice = 999;
   int couplecount = 0;
   int coupleentrypricce = 999;
   int femalecount = 0;
   int femaleentryprice = 999;
+  String stagid = '';
+  String coupleid = '';
+  String femaleid = '';
   DateTime date = DateTime.now();
   int selected = DateTime.now().day;
   String getDayOfWeek(DateTime date) {
@@ -45,6 +52,12 @@ class _EventDetail2State extends State<EventDetail2> {
   late String selectedday = todaysdayOfWeek;
 
   var cmonth = DateFormat.MMM().format(DateTime.now());
+  @override
+  void initState() {
+    TicketServices()
+        .getEventsTickets(context: context, eventId: widget.event.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +70,7 @@ class _EventDetail2State extends State<EventDetail2> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xFFE0E0E0),
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -166,381 +180,257 @@ class _EventDetail2State extends State<EventDetail2> {
             ),
             Padding(
               padding: EdgeInsets.only(left: width / 13, right: width / 13),
-              child: Container(
-                height: 3.2 * height / 10,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFE0E0E0),
+              child: SizedBox(
+                height: height / 5,
+                child: FutureBuilder<List<Ticket>>(
+                  future: TicketServices().getEventsTickets(
+                    context: context,
+                    eventId: widget.event.id,
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: Center(child: CircularProgressIndicator()));
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      List<Ticket> tickets = snapshot.data!;
+                      return Container(
+                        height: 3.2 * height / 10,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          color: backgroundColorfigma,
+                        ),
+                        child: ListView.builder(
+                          itemCount: tickets.length,
+                          itemBuilder: (context, index) {
+                            Ticket ticket = tickets[index];
+                            if (ticket.name == 'Stag') {
+                              stagid = ticket.id;
+                              stagentryprice = ticket.current;
+                            } else if (ticket.name == "Couple") {
+                              coupleid = ticket.id;
+                              coupleentrypricce = ticket.current;
+                            } else {
+                              femaleid = femaleid;
+                              femaleentryprice = ticket.current;
+                            }
+                            return Container(
+                              height: height / 10,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: const Color(0XFF979797),
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10.0))),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      ticket.name,
+                                      style: GoogleFonts.mavenPro(
+                                        color: const Color(0XFFFFFFFF),
+                                        fontSize: height / 43.35,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rs. ${ticket.current}",
+                                      style: GoogleFonts.sairaCondensed(
+                                        color: const Color(0XFFFFFFFF),
+                                        fontSize: height / 43.35,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 32,
+                                      width: 100,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0XFFB59F68),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Flexible(
+                                            flex: 1,
+                                            child: FractionalTranslation(
+                                              translation:
+                                                  const Offset(0, 0.05),
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  if (ticket.name == "Stag") {
+                                                    setState(() {
+                                                      if (stagcount > 0) {
+                                                        stagcount--;
+                                                      }
+                                                    });
+                                                  } else if (ticket.name ==
+                                                          'Couple' ||
+                                                      ticket.name == "couple") {
+                                                    setState(() {
+                                                      if (couplecount > 0) {
+                                                        couplecount--;
+                                                      }
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      if (femalecount > 0) {
+                                                        femalecount--;
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                icon: Icon(
+                                                  Icons.remove,
+                                                  size: width / 25,
+                                                ),
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 1,
+                                            child: Container(
+                                              height: height / 27,
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  top: BorderSide(
+                                                    color: Colors.black
+                                                        .withOpacity(0.2),
+                                                    width: 2,
+                                                    style: BorderStyle.solid,
+                                                  ),
+                                                  left: BorderSide(
+                                                    color: Colors.black
+                                                        .withOpacity(0.2),
+                                                    width: 2,
+                                                    style: BorderStyle.solid,
+                                                  ),
+                                                  right: BorderSide(
+                                                    color: Colors.black
+                                                        .withOpacity(0.2),
+                                                    width: 2,
+                                                    style: BorderStyle.solid,
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  getCountByTicketName(
+                                                      ticket.name),
+                                                  style: const TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 1,
+                                            child: FractionalTranslation(
+                                              translation:
+                                                  const Offset(0, 0.05),
+                                              child: Center(
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    if (ticket.name == "Stag" ||
+                                                        ticket.name == "Stag") {
+                                                      setState(() {
+                                                        stagcount++;
+                                                      });
+                                                    } else if (ticket.name ==
+                                                            'couple' ||
+                                                        ticket.name ==
+                                                            "Couple") {
+                                                      setState(() {
+                                                        couplecount++;
+                                                      });
+                                                    } else {
+                                                      setState(() {
+                                                        femalecount++;
+                                                      });
+                                                    }
+                                                  },
+                                                  icon: const Icon(Icons.add),
+                                                  color: Colors.black,
+                                                  iconSize: width / 25,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return const Text(
+                          'No tickets found'); // Show a message if no tickets are available
+                    }
+                  },
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              ),
+            ),
+            const FractionalTranslation(
+              translation: Offset(0, 10),
+              child: Divider(
+                height: 1,
+                color: Color(0XFFB9B9B9),
+                thickness: 1,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: width / 13, right: width / 13),
+              child: SizedBox(
+                height: height / 20,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: height / 10,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 3,
-                            color: const Color(0XFF979797),
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10.0))),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Stag",
-                              style: GoogleFonts.mavenPro(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              "Rs. $stagentryprice",
-                              style: GoogleFonts.sairaCondensed(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Container(
-                              height: 32,
-                              width: 100,
-                              decoration:  BoxDecoration(
-                                color: golden,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            if (stagcount > 0) {
-                                              stagcount--;
-                                            }
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.remove,
-                                          size: width / 25,
-                                        ),
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                      height: 32,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          left: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          right: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          stagcount
-                                              .toString(), // Use the dynamic count value
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: Center(
-                                        child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              stagcount++;
-                                            });
-                                          },
-                                          icon: const Icon(Icons.add),
-                                          color: Colors.black,
-                                          iconSize: width / 25,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    Text(
+                      "Promoters",
+                      style: GoogleFonts.sairaCondensed(
+                          fontSize: 25, color: Colors.black),
                     ),
+                    const SizedBox(width: 10),
                     Container(
-                      height: height / 10,
-                      width: double.maxFinite,
+                      height: 180,
+                      width: 180,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            width: 3,
-                            color: const Color(0XFF979797),
+                            color: Colors.black,
                           ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10.0))),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Couple",
-                              style: GoogleFonts.mavenPro(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 13),
+                        child: Center(
+                          child: TextFormField(
+                            controller: promocodecontroller,
+                            style: GoogleFonts.sairaCondensed(
+                              color: Colors.black,
+                              fontSize: 20,
                             ),
-                            Text(
-                              "Rs. $coupleentrypricce",
-                              style: GoogleFonts.sairaCondensed(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              hintText: 'PROMOCODE',
+                              hintStyle: GoogleFonts.sairaCondensed(
+                                color: Color.fromARGB(255, 14, 13, 13),
                               ),
+                              border: InputBorder.none,
                             ),
-                            Container(
-                              height: 32,
-                              width: 100,
-                              decoration:  BoxDecoration(
-                                color: golden,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            if (couplecount > 0) {
-                                              couplecount--;
-                                            }
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.remove,
-                                          size: width / 25,
-                                        ),
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                      height: 32,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          left: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          right: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          couplecount
-                                              .toString(), // Use the dynamic count value
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: Center(
-                                        child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              couplecount++;
-                                            });
-                                          },
-                                          icon: const Icon(Icons.add),
-                                          color: Colors.black,
-                                          iconSize: width / 25,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: height / 10,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 3,
-                            color: const Color(0XFF979797),
                           ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10.0))),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Female",
-                              style: GoogleFonts.mavenPro(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              "Rs. $femaleentryprice",
-                              style: GoogleFonts.sairaCondensed(
-                                color: Colors.black,
-                                fontSize: height / 43.35,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Container(
-                              height: 32,
-                              width: 100,
-                              decoration:  BoxDecoration(
-                                color: golden,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            if (femalecount > 0) {
-                                              femalecount--;
-                                            }
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.remove,
-                                          size: width / 25,
-                                        ),
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                      height: height / 27,
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          left: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                          right: BorderSide(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            width: 2,
-                                            style: BorderStyle.solid,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          femalecount
-                                              .toString(), // Use the dynamic count value
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: FractionalTranslation(
-                                      translation: const Offset(0, 0.05),
-                                      child: Center(
-                                        child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              femalecount++;
-                                            });
-                                          },
-                                          icon: const Icon(Icons.add),
-                                          color: Colors.black,
-                                          iconSize: width / 25,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ),
@@ -578,7 +468,7 @@ class _EventDetail2State extends State<EventDetail2> {
                           left: 8.0, right: 8.0, bottom: 8.0),
                       child: IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add,
                             color: Colors.black,
                           )),
@@ -601,7 +491,7 @@ class _EventDetail2State extends State<EventDetail2> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   color: backgroundColorfigma,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40.0),
                     topRight: Radius.circular(40.0),
                   ),
@@ -613,11 +503,11 @@ class _EventDetail2State extends State<EventDetail2> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 8,left: 20.0),
+                          padding: const EdgeInsets.only(top: 8, left: 20.0),
                           child: Text(
                             "Total Amount",
                             style: GoogleFonts.sairaCondensed(
-                                color: Color(0xFFE0E0E0),
+                                color: const Color(0xFFE0E0E0),
                                 fontSize: width / 25.6875,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -630,7 +520,7 @@ class _EventDetail2State extends State<EventDetail2> {
                                     (couplecount * coupleentrypricce))
                                 .toString(),
                             style: GoogleFonts.sairaCondensed(
-                                color: Color(0xFFE0E0E0),
+                                color: const Color(0xFFE0E0E0),
                                 fontSize: width / 16,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -656,6 +546,10 @@ class _EventDetail2State extends State<EventDetail2> {
                                       coupleentrypricce: coupleentrypricce,
                                       totalprice: totalprice,
                                       event: widget.event,
+                                      stagid: stagid,
+                                      coupleid: coupleid,
+                                      femaleid: femaleid,
+                                      promocode: promocodecontroller.text,
                                     )));
                       },
                       child: Padding(
@@ -686,6 +580,15 @@ class _EventDetail2State extends State<EventDetail2> {
         ),
       ),
     );
-    ;
+  }
+
+  String getCountByTicketName(String name) {
+    if (name.toLowerCase() == "stag") {
+      return stagcount.toString();
+    } else if (name.toLowerCase() == "couple") {
+      return couplecount.toString();
+    } else {
+      return femalecount.toString();
+    }
   }
 }
