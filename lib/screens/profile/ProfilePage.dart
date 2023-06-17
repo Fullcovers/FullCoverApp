@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/UserModel.dart';
+import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
@@ -33,11 +35,15 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     getuser();
+        var userprovider = Provider.of<UserProvider>(context, listen: false);
+
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+        final userprovider = Provider.of<UserProvider>(context);
+
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
@@ -225,28 +231,34 @@ class _ProfilePageState extends State<ProfilePage> {
                 ]),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: height / 20,
-            left: width / 5.0,
-            right: width / 5.0,
+        InkWell(onTap: (){
+          userprovider.deleteToken();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/login', (route) => false);
+        },
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: height / 20,
+              left: width / 5.0,
+              right: width / 5.0,
+            ),
+            child:
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Icon(
+                Icons.logout_sharp,
+                color: offwhite,
+              ),
+              Text(
+                "Log Out",
+                style: GoogleFonts.sairaCondensed(
+                    fontWeight: FontWeight.w500, fontSize: 25, color: offwhite),
+              ),
+              Icon(
+                Icons.navigate_next,
+                color: offwhite,
+              )
+            ]),
           ),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Icon(
-              Icons.logout_sharp,
-              color: offwhite,
-            ),
-            Text(
-              "Log Out",
-              style: GoogleFonts.sairaCondensed(
-                  fontWeight: FontWeight.w500, fontSize: 25, color: offwhite),
-            ),
-            Icon(
-              Icons.navigate_next,
-              color: offwhite,
-            )
-          ]),
         ),
       ]):CircularProgressIndicator(),
     ));

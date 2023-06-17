@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
+import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
@@ -20,38 +22,26 @@ class AuthService {
     required BuildContext context, //for scaffold
     required String email,
     required String password,
-    required Map<String, String> name,
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
   }) async {
+    var user = {
+      "name": {"firstName": firstName, "lastName": lastName},
+      "phoneNumber": phoneNumber,
+      "email": email,
+      "password": password,
+      "role": "user"
+    };
     try {
-      User user = User(
-        id: '',
-        name: name,
-        email: email,
-        password: password,
-        phoneNumber: '',
-        role: 'user',
-      );
-
-      http.Response res = await http.post(
-        Uri.parse('${Constants.uri}auth/register'),
-        body: user.toJson(),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-      );
-      httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            showSnackBar(
-                context, 'Account Created! Login with the same credentials');
-            print(res.body);
-
-            final userDetails = jsonDecode(res.body);
-            Provider.of<UserProvider>(context, listen: false)
-                .setId(userDetails['_id']);
-            Navigator.of(context).pushNamed('/login');
-          });
+      Dio dio = Dio();
+      var res = await dio.post('${Constants.uri}auth/register',
+          data: user,
+          options: Options(
+              headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+              print("Created");
+              Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
+                            builder: (context) => LoginPage()),(route) => false);
     } catch (e) {
       showSnackBar(context, e.toString());
     }
