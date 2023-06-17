@@ -8,6 +8,8 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
+import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 
@@ -179,20 +181,19 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                   ),
                   mycard(height, width, const Color(0XB394D0C5), "Guestlist",
                       const Color(0XFF94D0C5)),
-                  mycard(height, width, const Color(0XB3A094D0), "tables",
-                      const Color(0XFFA094D0)),
+                 
                   SizedBox(
                     width: width / 19.57,
                   ),
-                  mycard(height, width, const Color(0XB3D094B8), "Loyalty",
-                      const Color(0XFFD094B8)),
-                  mycard(height, width, const Color(0XB3D0B194), "bar",
-                      const Color(0XFFD0B194)),
-                  SizedBox(
-                    width: width / 19.57,
+                  InkWell(onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Walkins()));
+                    },
+                    child: mycard(height, width, const Color(0XB3B2D094), "Walkins",
+                        const Color(0XFFB2D094)),
                   ),
-                  mycard(height, width, const Color(0XB3B2D094), "Walkins",
-                      const Color(0XFFB2D094)),
                 ],
               ),
             ],
@@ -207,7 +208,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                 Icons.qr_code_2_outlined,
                 size: 35,
               ),
-              context),
+              context,rought: QrScanner()),
         ),
       ),
     );
