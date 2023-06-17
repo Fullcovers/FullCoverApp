@@ -8,6 +8,7 @@ import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
+import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 
@@ -207,7 +208,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                 Icons.qr_code_2_outlined,
                 size: 35,
               ),
-              context),
+              context,rought: QrScanner()),
         ),
       ),
     );

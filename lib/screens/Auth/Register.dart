@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-    final TextEditingController pnController = TextEditingController();
+  final TextEditingController pnController = TextEditingController();
 
   final TextEditingController confirmpasswordController =
       TextEditingController();
@@ -49,7 +49,7 @@ class _SignUpState extends State<SignUp> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-               SizedBox(
+              SizedBox(
                 height: heightofs / 100,
               ),
               Align(
@@ -61,7 +61,8 @@ class _SignUpState extends State<SignUp> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                child: Column( mainAxisAlignment: MainAxisAlignment.start,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
@@ -97,24 +98,23 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(left: 25, right: 25),
                       child: Column(
                         children: [
-                          customtextfield(firstnameController, "First Name",
-                              Colors.green),
+                          customtextfield(
+                              firstnameController, "First Name", Colors.green),
                           customtextfield(
                               lastnameController, "Last Name", Colors.green),
                           customtextfield(
                               emailController, "Email", Colors.green),
-                              customtextfield(
+                          customtextfield(
                               pnController, "Phone Number", Colors.green),
                           customtextfield(
                               passwordController, "Password", Colors.green),
                           customtextfield(confirmpasswordController,
                               "Confirm Password", Colors.green),
-                        
                           Row(
                             children: [
                               Checkbox(
-                                fillColor: MaterialStateProperty.resolveWith(
-                                    getColor),
+                                fillColor:
+                                    MaterialStateProperty.resolveWith(getColor),
                                 checkColor: Colors.black,
                                 value: isChecked2,
                                 onChanged: (bool? value) {
@@ -134,8 +134,8 @@ class _SignUpState extends State<SignUp> {
                                       children: <TextSpan>[
                                         TextSpan(
                                             text: ' Risk Warnings.',
-                                            style: TextStyle(
-                                                color: Colors.blue)),
+                                            style:
+                                                TextStyle(color: Colors.blue)),
                                       ],
                                     ),
                                   ),
@@ -146,8 +146,8 @@ class _SignUpState extends State<SignUp> {
                           Row(
                             children: [
                               Checkbox(
-                                fillColor: MaterialStateProperty.resolveWith(
-                                    getColor),
+                                fillColor:
+                                    MaterialStateProperty.resolveWith(getColor),
                                 checkColor: Colors.black,
                                 value: isChecked3,
                                 onChanged: (bool? value) {
@@ -171,34 +171,29 @@ class _SignUpState extends State<SignUp> {
                               )
                             ],
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(
+                            height: 20,
+                          ),
                           GestureDetector(
                             onTap: () {
                               AuthService().signUpUser(
                                   context: context,
                                   email: emailController.text.trim(),
                                   password: passwordController.text.trim(),
-                                  name: {
-                                    "firstName":
-                                        firstnameController.text.trim(),
-                                    "lastName":
-                                        lastnameController.text.trim(),
-                                  });
+                                  firstName: firstnameController.text,
+                                  lastName: lastnameController.text,
+                                  phoneNumber: pnController.text);
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  top: 0.0,
-                                  left: 50,
-                                  right: 50,
-                                  bottom: 20.0),
+                                  top: 0.0, left: 50, right: 50, bottom: 20.0),
                               child: Container(
                                 height: heightofs / 20,
                                 width: double.maxFinite,
                                 decoration: const BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          Color.fromARGB(255, 202, 196, 196),
+                                      color: Color.fromARGB(255, 202, 196, 196),
                                       blurRadius: 10,
                                       spreadRadius: -2,
                                       offset: Offset(-2, -2),
@@ -227,8 +222,7 @@ class _SignUpState extends State<SignUp> {
                                           Text(
                                             "Sign Up",
                                             style: GoogleFonts.bebasNeue(
-                                                fontSize: 20,
-                                                color: golden),
+                                                fontSize: 20, color: golden),
                                           ),
                                         ],
                                       ),
@@ -268,11 +262,11 @@ Widget customtextfield(
                 borderRadius: BorderRadius.circular(15),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide( color: color),
+                borderSide: BorderSide(color: color),
                 borderRadius: BorderRadius.circular(15),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 3,color: color),
+                borderSide: BorderSide(width: 3, color: color),
                 borderRadius: BorderRadius.circular(15),
               ),
               fillColor: Colors.white,

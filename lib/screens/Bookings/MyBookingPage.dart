@@ -312,7 +312,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
             ],
           ),
           controller: panelController,
-          defaultPanelState: PanelState.OPEN,
+          defaultPanelState: PanelState.CLOSED,
           panel: orders.isNotEmpty
               ? Container(
                   height: 100,
@@ -636,7 +636,216 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           height: height,
                         )
                       ]))
-              : const Center(child: CircularProgressIndicator()),
+              : Container(
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  // margin: const EdgeInsets.all(24.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            panelController.close();
+
+                            setState(() {
+                              iscolorchange = false;
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: width / 1.7,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(40),
+                                      topLeft: Radius.circular(40),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: Text(
+                                      "MY BOOKINGS",
+                                      style: GoogleFonts.bebasNeue(
+                                          fontSize: height / 21.675),
+                                    ),
+                                  ),
+                                ),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: BoxDecoration(
+                                        color: backgroundColorfigma,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 12.38571428571429,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: width / 13.6,
+                                      height: height / 10.1,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    panelController.close();
+                                    setState(() {
+                                      iscolorchange = false;
+                                    });
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        width: width / 3.342,
+                                        height: height / 10.1,
+                                        decoration: BoxDecoration(
+                                          color: backgroundColorfigma,
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: width / 16.44,
+                                              bottom: height / 86.7,
+                                              right: width / 16.44,
+                                              top: height / 108.375),
+                                          child: Container(
+                                            width: 10,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(20),
+                                              ),
+                                            ),
+                                            child: InkWell(
+                                              onTap: () {
+                                                panelController.close();
+                                                setState(() {
+                                                  iscolorchange = false;
+                                                });
+                                              },
+                                              child: Image.asset(
+                                                "assets/images/coinlogo.png",
+                                                scale: 6,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 10.0),
+                                    child: Container(
+                                      height: 3 * height / 11,
+                                      width: 2 * width / 3,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: 
+                                      Column(mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text("No Bookings",style: GoogleFonts.bebasNeue(
+                                                fontSize: 30,
+                                              )),
+                                        ],
+                                      )
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 10.0),
+                                    child: Container(
+                                      height: 3 * height / 11,
+                                      width: width / 5,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20.0)),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                      child: Center(
+                                        child: RotatedBox(
+                                          quarterTurns: 1,
+                                          child: Text("PREVIOUS BOOKINGS",
+                                              style: GoogleFonts.bebasNeue(
+                                                fontSize: 30,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: height / 25,
+                        ),
+                        bottomnavbar(
+                          width: width,
+                          iscolorchange: iscolorchange,
+                          height: height,
+                        )
+                      ])),
           renderPanelSheet: false,
           panelSnapping: false,
           collapsed: Container(
