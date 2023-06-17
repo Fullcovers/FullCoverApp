@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
 import 'package:image_picker/image_picker.dart';
@@ -165,5 +166,29 @@ class BTSClubServices {
       showSnackBar(context, e.toString());
     }
     return clubProvider.club;
+  }
+  static Future<void> updateclub({
+    required BuildContext context,
+    required var body,
+    required String myclubid,
+    
+  }) async {
+    try {
+     Dio dio =  Dio();
+      var res = await dio.put('${Constants.uri}club/$myclubid',
+          data:  body,
+          options: Options(
+              headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+
+
+  
+
+      // print(json.encode(body));
+      print(res.data);
+      showSnackBar(context, "Updated");
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      print(e);
+    }
   }
 }
