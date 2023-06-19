@@ -77,7 +77,7 @@ class Balancecard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("\$ 1260.50",
+                  Text("₹ 0",
                       style: GoogleFonts.bebasNeue(
                         fontSize: 30,
                         color: Colors.white,
@@ -97,7 +97,7 @@ class Balancecard extends StatelessWidget {
                         scale: 13,
                       ),
                        Text(
-                        " 1385",
+                        " 0",
                         style: GoogleFonts.sairaCondensed(
                                       color: golden,
                                       fontSize: height / 30,

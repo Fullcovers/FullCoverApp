@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
@@ -128,7 +129,6 @@ class OrderServices {
       orderProvider.storeOrders(res.body);
 
 // Access the stored orders
-
     } catch (e) {
       print(e.toString());
     }
@@ -168,21 +168,59 @@ class OrderServices {
     }
   }
 
-  void placeOrder(
+  static void placeOrder(
       {required BuildContext context,
       required Map<String, dynamic> requestbody}) async {
     try {
       var userprovider = Provider.of<UserProvider>(context, listen: false);
 
       await userprovider.loadToken();
-      http.Response res =
-          await http.post(Uri.parse('${Constants.uri}orders/s/'),
-              headers: <String, String>{
-                'Content-Type': 'application/json; charset=UTF-8',
-                'Authorization': 'Bearer ${userprovider.token}'
-              },
-              body: jsonEncode(requestbody));
-print(res.body);
+      Dio dio = Dio();
+      var res = await dio.post('${Constants.uri}orders/c/',
+          data: requestbody,
+          options: Options(headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${Constants.usertoken}'
+          }));
+      // http.Response res =
+      //     await http.post(Uri.parse('${Constants.uri}orders/s/'),
+      //         headers: <String, String>{
+      //           'Content-Type': 'application/json; charset=UTF-8',
+      //           'Authorization': 'Bearer ${userprovider.token}'
+      //         },
+      //         body: jsonEncode(requestbody));
+      print(res.data);
+      if (res.statusCode == 201) {
+        showSnackBar(context, 'Order Created');
+      } else {
+        showSnackBar(context, 'Something went wrong');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  static void placeOrderforevent(
+      {required BuildContext context,
+      required Map<String, dynamic> requestbody}) async {
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+
+      await userprovider.loadToken();
+      Dio dio = Dio();
+      var res = await dio.post('${Constants.uri}orders/e/',
+          data: requestbody,
+          options: Options(headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${Constants.usertoken}'
+          }));
+      // http.Response res =
+      //     await http.post(Uri.parse('${Constants.uri}orders/s/'),
+      //         headers: <String, String>{
+      //           'Content-Type': 'application/json; charset=UTF-8',
+      //           'Authorization': 'Bearer ${userprovider.token}'
+      //         },
+      //         body: jsonEncode(requestbody));
+      print(res.data);
       if (res.statusCode == 201) {
         showSnackBar(context, 'Order Created');
       } else {
