@@ -582,25 +582,24 @@ class _ClubPage3State extends State<ClubPage3> {
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.location_on_outlined),
-                              ),
-                              FractionalTranslation(
-                                translation: const Offset(-0.05, 0),
-                                child: Text(
-                                  widget.club.address,
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: height / 61.92857142857143,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0XFFBCBCBC),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     IconButton(
+                          //       onPressed: () {},
+                          //       icon: const Icon(Icons.location_on_outlined),
+                          //     ),
+                          //     Container(width: width/2,
+                          //       child: Text(textAlign: TextAlign.left,
+                          //         widget.club.address.substring(1,4),
+                          //         style: GoogleFonts.sairaCondensed(
+                          //           fontSize: height / 61.92857142857143,
+                          //           fontWeight: FontWeight.w600,
+                          //           color: const Color(0XFFBCBCBC),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           Row(
                             children: [
                               Padding(

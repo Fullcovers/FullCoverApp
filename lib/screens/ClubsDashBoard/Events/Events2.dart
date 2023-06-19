@@ -113,9 +113,9 @@ class _Events2State extends State<Events2> {
           const SearchPeople(
             title: "Search People",
           ),
-          PeopleList(
-            sdate: formatDate(selectedDate),
-          ),
+          // PeopleList(
+          //   sdate: formatDate(selectedDate),
+          // ),
         ],
       ),
     ));

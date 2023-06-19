@@ -165,6 +165,7 @@ class BTSClubServices {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+    Constants.myclub=clubProvider.club;
     return clubProvider.club;
   }
   static Future<void> updateclub({

@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class PeopleList extends StatefulWidget {
-  final String? sdate;
-  const PeopleList({super.key, required this.sdate});
+  var orders;int count;
+  PeopleList({super.key,  required this.orders,required this.count});
 
   @override
   State<PeopleList> createState() => _PeopleListState();
@@ -25,11 +25,11 @@ class _PeopleListState extends State<PeopleList> {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 15.0),
       child: Container(
-        height: 4 * height / 10,
+        height: 4 * height / 8,
         width: width,
         decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: widget.count,
           itemBuilder: (context, index) {
             return Column(
               children: [
@@ -72,7 +72,12 @@ class _PeopleListState extends State<PeopleList> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "Ramesh Babu",
+                                widget.orders[index]['user']['name']
+                                            ['firstName']
+                                        .toString() +
+                                    " " +
+                                    widget.orders[index]['user']['name']
+                                        ['lastName'],
                                 style: GoogleFonts.sairaCondensed(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
@@ -82,7 +87,7 @@ class _PeopleListState extends State<PeopleList> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20.0),
                               child: Text(
-                                formattedAmount,
+                                "₹"+widget.orders[index]['total'].toString(),
                                 style: GoogleFonts.bebasNeue(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w400,
@@ -135,25 +140,120 @@ class _PeopleListState extends State<PeopleList> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    Text(
-                                      "Stag x1",
-                                      style: GoogleFonts.sairaCondensed(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    FractionalTranslation(
-                                      translation: const Offset(0, -0.2),
-                                      child: Text(
-                                        "Couple x1",
-                                        style: GoogleFonts.sairaCondensed(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )
+                                    widget.orders[index]['items'].length == 1
+                                        ? Text(
+                                            widget.orders[index]['items'][0]
+                                                    ['ticket']['name'] +
+                                                " x" +
+                                                widget.orders[index]['items'][0]
+                                                        ['qty']
+                                                    .toString(),
+                                            style: GoogleFonts.sairaCondensed(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : widget.orders[index]['items']
+                                                    .length ==
+                                                2
+                                            ? Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    widget.orders[index]
+                                                                ['items'][0]
+                                                            ['ticket']['name'] +
+                                                        " x" +
+                                                        widget.orders[index]
+                                                                ['items'][0]
+                                                                ['qty']
+                                                            .toString(),
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    widget.orders[index]
+                                                                ['items'][1]
+                                                            ['ticket']['name'] +
+                                                        " x" +
+                                                        widget.orders[index]
+                                                                ['items'][1]
+                                                                ['qty']
+                                                            .toString(),
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white,
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            : Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    widget.orders[index]
+                                                                ['items'][0]
+                                                            ['ticket']['name'] +
+                                                        " x" +
+                                                        widget.orders[index]
+                                                                ['items'][0]
+                                                                ['qty']
+                                                            .toString(),
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    widget.orders[index]
+                                                                ['items'][1]
+                                                            ['ticket']['name'] +
+                                                        " x" +
+                                                        widget.orders[index]
+                                                                ['items'][1]
+                                                                ['qty']
+                                                            .toString(),
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    widget.orders[index]
+                                                                ['items'][2]
+                                                            ['ticket']['name'] +
+                                                        " x" +
+                                                        widget.orders[index]
+                                                                ['items'][2]
+                                                                ['qty']
+                                                            .toString(),
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                   ],
                                 ),
                               ),
@@ -164,14 +264,17 @@ class _PeopleListState extends State<PeopleList> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      widget.sdate.toString(),
+                                      widget.orders[index]['date']
+                                          .toString()
+                                          .substring(0, 10),
                                       style: GoogleFonts.sairaCondensed(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: const Color(0XFFB59F68)),
                                     ),
                                     Text(
-                                      "+91 9392841242",
+                                      widget.orders[index]['send_to']
+                                          ['phoneNumber'],
                                       style: GoogleFonts.sairaCondensed(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -179,7 +282,7 @@ class _PeopleListState extends State<PeopleList> {
                                       ),
                                     ),
                                     Text(
-                                      "kartheekdasari02@gmail.com",
+                                      widget.orders[index]['send_to']['email'],
                                       style: GoogleFonts.sairaCondensed(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,

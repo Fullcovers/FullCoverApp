@@ -182,7 +182,7 @@ class OrderServices {
                 'Authorization': 'Bearer ${userprovider.token}'
               },
               body: jsonEncode(requestbody));
-
+print(res.body);
       if (res.statusCode == 201) {
         showSnackBar(context, 'Order Created');
       } else {

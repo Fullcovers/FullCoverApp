@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/EventDetails.dart';
 import 'package:venq_assessment/screens/Events/EventDetail.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
@@ -38,7 +39,7 @@ class Events extends StatelessWidget {
                       width: width,
                       decoration:  BoxDecoration(color: Color(0xFF2C2F33)),
                       child: FutureBuilder<List<Event>>(
-                        future: EventsServices().getmyclubEvents(context: context),
+                        future: EventsServices.getmyclubEvents(context: context),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -65,10 +66,10 @@ class Events extends StatelessWidget {
                                     onTap: () async {
                                       // await ClubServices().getSingleClub(
                                       //     clubid: event.clubId, context: context);
-                                      // Navigator.of(context).push(
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             EventDetail(event: event)));
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetails(event: event)));
                                     },
                                     child: eventcard(height, width, event.name, event.createdAt.toString(), 15),
                                   ),

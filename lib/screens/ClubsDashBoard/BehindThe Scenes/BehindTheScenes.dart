@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
@@ -21,6 +22,16 @@ class BehindTheScenesPage extends StatefulWidget {
 }
 
 class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    load();
+  }
+  load()async{
+       await BTSClubServices.btsgetSingleClub(context: context);
+
+  }
   Color textc = const Color(0xFFB59F68);
   bool forAndroid = false;
   @override

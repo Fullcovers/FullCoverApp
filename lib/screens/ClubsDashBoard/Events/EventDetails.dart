@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Services/BTS_Services/Order_Services.dart';
 import 'package:venq_assessment/Services/BTS_Services/WalkIns_Services.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/PeopleList.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/PeopleList2.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/TicketMoneyStatus.dart';
 
-import '../../../widgets/ClubDashBoard/HeaderContent.dart';
-import '../../../widgets/ClubDashBoard/PeopleList.dart';
-import '../../../widgets/ClubDashBoard/SearchPeople.dart';
-import '../../../widgets/ClubDashBoard/TicketMoneyStatus.dart';
-
-class Tickets extends StatefulWidget {
-  const Tickets({super.key});
-
+class EventDetails extends StatefulWidget {
+  EventDetails({super.key, required this.event});
+  Event event;
   @override
-  State<Tickets> createState() => _TicketsState();
+  State<EventDetails> createState() => _EventDetailsState();
 }
 
-class _TicketsState extends State<Tickets> {
+class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     super.initState();
@@ -75,14 +76,14 @@ class _TicketsState extends State<Tickets> {
 
 // String todaydate=formatter1.format(DateTime.now());
   loadorders() async {
-    orders = await BTSOrderServices.getallorders(context: context);
+    orders = await BTSOrderServices.getallordersofevent(context: context,eventid: widget.event.id);
     setState(() {
       loded = true;
     });
   }
 
   loadwalkins() async {
-    walkins = await BTSwalkins.getallWalkins(context: context);
+    walkins = await BTSwalkins.getallWalkinsofevent(context: context,eventid: widget.event.id);
     setState(() {
       lodedwalkins = true;
     });
@@ -91,21 +92,23 @@ class _TicketsState extends State<Tickets> {
   @override
   Widget build(BuildContext context) {
         double totalmoney1 = 1000;
-
-// if (loded == true) {
-//         for (var i = 0; i < orders['data'].length; i++) {
-//           totalmoney = totalmoney +
-//                     orders['data'][i]['total'];
-        
-//       }
-//     }
+    // if (loded == true) {
+    //   if (orders.isNotEmpty) {
+    //     for (var i = 0; i < orders['data'].length; i++) {
+    //       for (var j = 0; j < orders['data'][i]["items"].length; j++) {
+    //         totalmoney = totalmoney +
+    //                 orders['data'][i]["items"][j]['ticket']['price']['current']
+    //             as int;
+    //       }
+    //     }
+    //   }
+    // }
 
     double height = MediaQuery.of(context).size.height;
-    return 
-    SafeArea(
+    return SafeArea(
         child: Scaffold(
       backgroundColor: const Color(0xFF2C2F33),
-      body: loded && lodedwalkins
+      body:loded && lodedwalkins
           ? Column(
               children: [
                 const Padding(
@@ -268,7 +271,7 @@ class _TicketsState extends State<Tickets> {
                       )
               ],
             )
-          : Center(child: CircularProgressIndicator()),
-    ));
+          : Center(child: CircularProgressIndicator()),));
+    
   }
 }
