@@ -232,22 +232,21 @@ class _ClubDetailState extends State<ClubDetail> {
                 thickness: 1,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 14.0, left: 20.0),
-                  child: Text(
-                    "Take me there",
-                    style: GoogleFonts.sairaCondensed(
-                        color: const Color(0XFFA7A7A7),
-                        fontSize: width / 29.35714285714286,
-                        fontWeight: FontWeight.w500),
+            Container(height: height/4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 14.0, left: 20.0),
+                    child: Text(
+                      "Take me there",
+                      style: GoogleFonts.sairaCondensed(
+                          color: const Color(0XFFA7A7A7),
+                          fontSize: width / 29.35714285714286,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                FractionalTranslation(
-                  translation: const Offset(0, -0.14),
-                  child: Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
@@ -279,10 +278,7 @@ class _ClubDetailState extends State<ClubDetail> {
                       )
                     ],
                   ),
-                ),
-                FractionalTranslation(
-                  translation: const Offset(0, -0.55),
-                  child: Row(
+                  Row(
                     children: [
                       IconButton(
                         onPressed: () {},
@@ -290,19 +286,22 @@ class _ClubDetailState extends State<ClubDetail> {
                       ),
                       FractionalTranslation(
                         translation: const Offset(-0.01, 0),
-                        child: Text(
-                          widget.club.address,
-                          style: GoogleFonts.sairaCondensed(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0XFFF0F0F3),
+                        child: Container(width: width/2,
+                          child: Text(textAlign:TextAlign.left,
+                            widget.club.address,
+                            // .substring(1,5),
+                            style: GoogleFonts.sairaCondensed(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0XFFF0F0F3),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const FractionalTranslation(
               translation: Offset(0, -24),

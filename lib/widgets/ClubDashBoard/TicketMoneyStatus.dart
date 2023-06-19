@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 class TicketMoneyStatus extends StatelessWidget {
   final String money;
-  final String ticket;
+  final dynamic ticket;
   const TicketMoneyStatus(
       {super.key, required this.money, required this.ticket});
 
@@ -35,7 +35,7 @@ class TicketMoneyStatus extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: Text(
-                      ticket,
+                      ticket.toString(),
                       style: GoogleFonts.bebasNeue(
                         fontSize: 36,
                         fontWeight: FontWeight.w400,

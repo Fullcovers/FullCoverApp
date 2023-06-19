@@ -41,7 +41,7 @@ class EventsServices {
     return eventProvider.events;
   }
 
-  Future<List<Event>> getmyclubEvents({required BuildContext context}) async {
+  static Future<List<Event>> getmyclubEvents({required BuildContext context}) async {
     EventProvider eventProvider =
         Provider.of<EventProvider>(context, listen: false);
     try {
@@ -73,6 +73,7 @@ class EventsServices {
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
+          print("object");
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());
