@@ -5,7 +5,8 @@ bool expanded = false;
 
 
 class TableCard extends StatefulWidget {
-  const TableCard({super.key});
+  var thistable;
+   TableCard({super.key,required this.thistable});
 
   @override
   State<TableCard> createState() => _TableCardState();
@@ -43,49 +44,76 @@ class _TableCardState extends State<TableCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Ramesh Babu',
+                          widget.thistable['name'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,
                               color: Colors.black),
                         ),
                         Text(
-                          '+91 8171221234',
+                          widget.thistable['phone'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               color: Colors.black),
                         ),
                         Text(
-                          'sakshammcheema@gmail.com',
+                          widget.thistable['email'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
+                              color: Colors.black),
+                        ),
+                        Text(
+                          "Cover Coins :-"+widget.thistable['cover'].toString(),
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                              color: golden),
+                        ),
+                        Text(
+                          
+                         "₹"+ widget.thistable['price'].toString(),
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 28,
                               color: Colors.black),
                         ),
                       ],
                     ),
-                    Column(
+                    Column(crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Sat 13 May, 2023',
+                          widget.thistable['date'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               color: golden),
                         ),
                         Text(
-                          '10:00pm',
+                          widget.thistable['time'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               color: golden),
                         ),
+                        Row(
+                      children: [
+                        Icon(Icons.account_circle_outlined),
                         Text(
-                          'Type: A',
+                          widget.thistable['number_of_people'].toString(),
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.w600,
-                              fontSize: 20,
+                              fontSize: 28,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    Text(
+                          "Table Number:- "+widget.thistable['table_number'].toString(),
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
                               color: Colors.black),
                         ),
                       ],
@@ -96,72 +124,61 @@ class _TableCardState extends State<TableCard> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      "₹1,00,000",
-                      style: GoogleFonts.sairaCondensed(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 28,
-                          color: Colors.black),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.account_circle_outlined),
-                        Text(
-                          "10",
-                          style: GoogleFonts.sairaCondensed(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 28,
-                              color: Colors.black),
-                        ),
-                      ],
-                    )
+                    // Text(
+                    //   "₹1,00,000",
+                    //   style: GoogleFonts.sairaCondensed(
+                    //       fontWeight: FontWeight.w600,
+                    //       fontSize: 28,
+                    //       color: Colors.black),
+                    // ),
+                    
                   ],
                 ),
               )
             ]),
           ),
-          expanded
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 4.0, bottom: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Center(
-                        child: Container(
-                          height: 40,
-                          width: 130,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("Accept")),
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            color: const Color(0xFF7BC598),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                          height: 40,
-                          width: 130,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("Decline")),
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            color: const Color(0xFFB06B6B),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Container()
+          // expanded
+          //     ? Padding(
+          //         padding: const EdgeInsets.only(top: 4.0, bottom: 4),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //           children: [
+          //             Center(
+          //               child: Container(
+          //                 height: 40,
+          //                 width: 130,
+          //                 child: Padding(
+          //                   padding: const EdgeInsets.all(8.0),
+          //                   child: Center(child: Text("Accept")),
+          //                 ),
+          //                 decoration: BoxDecoration(
+          //                   border: Border.all(),
+          //                   color: const Color(0xFF7BC598),
+          //                   borderRadius: BorderRadius.circular(20.0),
+          //                 ),
+          //               ),
+          //             ),
+          //             Center(
+          //               child: Container(
+          //                 height: 40,
+          //                 width: 130,
+          //                 child: Padding(
+          //                   padding: const EdgeInsets.all(8.0),
+          //                   child: Center(child: Text("Decline")),
+          //                 ),
+          //                 decoration: BoxDecoration(
+          //                   border: Border.all(),
+          //                   color: const Color(0xFFB06B6B),
+          //                   borderRadius: BorderRadius.circular(20.0),
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       )
+          //     : Container()
         ]),
       ),
     ),

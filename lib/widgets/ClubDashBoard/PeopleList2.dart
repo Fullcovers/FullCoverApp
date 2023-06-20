@@ -6,18 +6,18 @@ import 'package:intl/intl.dart';
 
 class PeopleList2 extends StatefulWidget {
   var walkins;
-   PeopleList2({super.key,required this.walkins});
+  PeopleList2({super.key, required this.walkins});
 
   @override
   State<PeopleList2> createState() => _PeopleList2State();
 }
 
 class _PeopleList2State extends State<PeopleList2> {
-    int selectedCardIndex = -1;
+  int selectedCardIndex = -1;
   bool isDropdownVisible = false;
   @override
   Widget build(BuildContext context) {
-     int moneyint = 2000;
+    int moneyint = 2000;
     final indianCurrencyFormat =
         NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0);
     final formattedAmount = indianCurrencyFormat.format(moneyint);
@@ -73,8 +73,7 @@ class _PeopleList2State extends State<PeopleList2> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                widget.walkins[index]['name']
-                                        .toString(),
+                                widget.walkins[index]['name'].toString(),
                                 style: GoogleFonts.sairaCondensed(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
@@ -84,7 +83,7 @@ class _PeopleList2State extends State<PeopleList2> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20.0),
                               child: Text(
-                                widget.walkins[index]['number_of_people'].toString(),
+                                widget.walkins[index]['price'].toString(),
                                 style: GoogleFonts.bebasNeue(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w400,
@@ -122,41 +121,56 @@ class _PeopleList2State extends State<PeopleList2> {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20.0, top: 20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            padding:
+                                const EdgeInsets.only(right: 20.0, top: 20.0),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  widget.walkins[index]['date']
-                                      .toString()
-                                      .substring(0, 10),
-                                  style: GoogleFonts.sairaCondensed(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: Text(
+                                        widget.walkins[index]['number_of_people']
+                                            .toString(),
+                                        style: GoogleFonts.sairaCondensed(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  widget.walkins[index]['email']
-                                   ,
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      widget.walkins[index]['date']
+                                          .toString()
+                                          .substring(0, 10),
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      widget.walkins[index]['email'],
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.walkins[index]['phone'],
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  widget.walkins[index]['phone'],
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                  
-                                ),
-                            
-                                  
-                                
                               ],
                             ),
                           ),
