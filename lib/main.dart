@@ -56,19 +56,20 @@ class _MyAppState extends State<MyApp> {
     final userprovider = Provider.of<UserProvider>(context);
 
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
-        ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
-        ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
-        ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
-        ChangeNotifierProvider<OrderValidationProvider>(
-            create: (_) => OrderValidationProvider()),
-        ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
-        ChangeNotifierProvider<TicketProvider>(create: (_) => TicketProvider()),
-        ChangeNotifierProvider<PromoterProvider>(
-            create: (_) => PromoterProvider()),
-      ],
-      child: MaterialApp(
+        providers: [
+          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+          ChangeNotifierProvider<ClubProvider>(create: (_) => ClubProvider()),
+          ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+          ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
+          ChangeNotifierProvider<OrderValidationProvider>(
+              create: (_) => OrderValidationProvider()),
+          ChangeNotifierProvider<FetchUser>(create: (_) => FetchUser()),
+          ChangeNotifierProvider<TicketProvider>(
+              create: (_) => TicketProvider()),
+          ChangeNotifierProvider<PromoterProvider>(
+              create: (_) => PromoterProvider()),
+        ],
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           routes: {
             '/barmenu': (context) => const BarMenu(),
@@ -85,8 +86,10 @@ class _MyAppState extends State<MyApp> {
               ? const LoginPage()
               : Constants.btsprofile.role == "user"
                   ? MyBookingPage()
-                  : const BehindTheScenesPage(),)
-          // home: ClubsScreen()),
-    );
+                  : const BehindTheScenesPage(),
+          // home: QrScanner(),
+        )
+        // home: ClubsScreen()),
+        );
   }
 }

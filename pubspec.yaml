@@ -54,6 +54,8 @@ dependencies:
   dio: ^5.2.1+1
   jiffy: ^6.1.0
   image_picker: ^0.8.9
+
+
   
 
 
