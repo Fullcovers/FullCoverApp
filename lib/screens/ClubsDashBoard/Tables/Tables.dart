@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:venq_assessment/Services/BTS_Services/Order_Services.dart';
+import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/searchbar.dart';
@@ -18,6 +19,7 @@ class TablePage extends StatefulWidget {
 }
 
 class _TablePageState extends State<TablePage> {
+  bool loded=false;
   DateTime? selectedDate;
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -35,7 +37,21 @@ class _TablePageState extends State<TablePage> {
       });
     }
   }
-
+  var tables;
+loadtables()async{
+        final DateFormat formatter = DateFormat('dd/M/yyyy');
+var date=formatter.format(DateTime.now());
+  tables=await BTStable.getalltables(context: context,date: date);
+  setState(() {
+    loded=true;
+  });
+}
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadtables();
+  }
   String formatDate(DateTime? date) {
     if (date != null) {
       final DateFormat formatter = DateFormat('E d MMM, yyyy');
@@ -55,70 +71,70 @@ class _TablePageState extends State<TablePage> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: const Color(0xFF2C2F33),
-      body: Column(children: [
+      body: loded?Column(children: [
         Padding(
           padding: EdgeInsets.all(10.0),
           child: HeaderContent(title: "Tables"),
         ),
-        Padding(
-          padding: EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
-          child: Container(
-            height: height / 20,
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(34, 34, 34, 0.37),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                color: Colors.black,
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20.0,
-                  ),
-                  child: Text(
-                      selectedDate != null
-                          ? formatDate(selectedDate)
-                          : "Select Date",
-                      style: GoogleFonts.sairaCondensed(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: IconButton(
-                    onPressed: () {
-                      _selectDate(
-                          context); // Show the date picker on icon press
-                    },
-                    icon: const Icon(
-                      Icons.calendar_today_outlined,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
+        //   child: Container(
+        //     height: height / 20,
+        //     width: double.maxFinite,
+        //     decoration: BoxDecoration(
+        //       color: const Color.fromRGBO(34, 34, 34, 0.37),
+        //       borderRadius: BorderRadius.circular(15.0),
+        //       border: Border.all(
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Padding(
+        //           padding: const EdgeInsets.only(
+        //             left: 20.0,
+        //           ),
+        //           child: Text(
+        //               selectedDate != null
+        //                   ? formatDate(selectedDate)
+        //                   : "Select Date",
+        //               style: GoogleFonts.sairaCondensed(
+        //                 fontSize: 16,
+        //                 fontWeight: FontWeight.w600,
+        //                 color: Colors.white,
+        //               )),
+        //         ),
+        //         Padding(
+        //           padding: const EdgeInsets.only(right: 10.0),
+        //           child: IconButton(
+        //             onPressed: () {
+        //               _selectDate(
+        //                   context); // Show the date picker on icon press
+        //             },
+        //             icon: const Icon(
+        //               Icons.calendar_today_outlined,
+        //               color: Colors.white,
+        //               size: 20,
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           height: height / 30,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-              height: height / 15,
-              width: width / 1.15,
-              child: SearchBar(
-                searchtext: 'Search Bookings',
-              )),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Container(
+        //       height: height / 15,
+        //       width: width / 1.15,
+        //       child: SearchBar(
+        //         searchtext: 'Search Bookings',
+        //       )),
+        // ),
         FractionalTranslation(
           translation: const Offset(0, 0.5),
           child: Row(
@@ -238,17 +254,17 @@ class _TablePageState extends State<TablePage> {
         ),
         ashow
             ? Expanded(
-                child: ListView.builder(itemCount: 3,
+                child: ListView.builder(itemCount: tables['date'].length,
                   itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      TableCard(),
+                      TableCard(thistable:tables['date'][index]),
                     ],
                   );
                 }),
               )
             : Container(),
-      ]),
+      ]):Center(child:CircularProgressIndicator()),
     ));
   }
 }

@@ -83,7 +83,7 @@ class EventsServices {
 }
 
 class CreateEventmethod {
-  static createeventfunction(
+  static Future<String> createeventfunction(
       {required BuildContext context,
       required String name,
       required String starttime,
@@ -99,18 +99,21 @@ class CreateEventmethod {
       "date": date.toString(),
       "description": description
     };
-
+String eventid="";
     try {
       Dio dio = new Dio();
       var res = await dio.post('${Constants.uri}event/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+               eventid=res.data['data']['_id'];
+              print(eventid);
 
       showSnackBar(context, "Created");
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e);
     }
+    return eventid;
   }
 }

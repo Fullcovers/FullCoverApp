@@ -3,9 +3,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/Services/BTS_Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/EventAddTickets.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 
 class CreateEvent extends StatefulWidget {
@@ -49,15 +51,16 @@ class _CreateEventState extends State<CreateEvent> {
   final TextEditingController lastnameController = TextEditingController();
   TimeOfDay time =
       TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
-      TimeOfDay endtime =
+  TimeOfDay endtime =
       TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+  Map<String, dynamic> EventTickets = {};
 
   @override
   Widget build(BuildContext context) {
     final hours = time.hour.toString().padLeft(2, "0");
     final minute = time.minute.toString().padLeft(2, "0");
 
-        final hoursend = endtime.hour.toString().padLeft(2, "0");
+    final hoursend = endtime.hour.toString().padLeft(2, "0");
     final minuteend = endtime.minute.toString().padLeft(2, "0");
 
     var widthofs = MediaQuery.of(context).size.width;
@@ -132,7 +135,8 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         ),
                       ),
-                      Align(alignment: Alignment.bottomLeft,
+                      Align(
+                        alignment: Alignment.bottomLeft,
                         child: Text("Start At",
                             style: GoogleFonts.sairaCondensed(
                               fontSize: 16,
@@ -190,7 +194,8 @@ class _CreateEventState extends State<CreateEvent> {
                       SizedBox(
                         height: 20,
                       ),
-                      Align(alignment: Alignment.bottomLeft,
+                      Align(
+                        alignment: Alignment.bottomLeft,
                         child: Text("End At",
                             style: GoogleFonts.sairaCondensed(
                               fontSize: 16,
@@ -250,12 +255,69 @@ class _CreateEventState extends State<CreateEvent> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          CreateEventmethod.createeventfunction(
+                      
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 0.0, left: 50, right: 50, bottom: 20.0),
+                          child: Container(
+                            height: heightofs / 20,
+                            width: double.maxFinite,
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 202, 196, 196),
+                                  blurRadius: 10,
+                                  spreadRadius: -2,
+                                  offset: Offset(-2, -2),
+                                ),
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 20,
+                                  spreadRadius: -2,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                              color: Color(0xFF2D3135),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20.0),
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, right: 20.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Add Tickets",
+                                        style: GoogleFonts.bebasNeue(
+                                            fontSize: 20, color: golden),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: ()async {
+                        String myeventid= await CreateEventmethod.createeventfunction(
                               context: context,
                               date: formatDate(selectedDate).toString(),
                               description: desccontroller.text,
                               name: namecontroller.text,
-                              starttime: "${time.hour}:${time.minute}",endtime: "${endtime.hour}:${endtime.minute}");
+                              starttime: "${time.hour}:${time.minute}",
+                              endtime: "${endtime.hour}:${endtime.minute}");
+                               Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                 EventAddTickets(eventid: myeventid,)));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(

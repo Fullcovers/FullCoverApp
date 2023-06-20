@@ -71,7 +71,7 @@ class Events extends StatelessWidget {
                                               builder: (context) =>
                                                   EventDetails(event: event)));
                                     },
-                                    child: eventcard(height, width, event.name, event.createdAt.toString(), 15),
+                                    child: eventcard(height, width, event.name, event.createdAt.toString().substring(0,10), 15),
                                   ),
                                 );
                               },

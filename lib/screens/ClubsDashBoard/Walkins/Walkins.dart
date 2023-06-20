@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:venq_assessment/Models/Events.dart';
+import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Services/BTS_Services/WalkIns_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 import '../../../widgets/ClubDashBoard/HeaderContentWalkins.dart';
 
@@ -43,20 +45,26 @@ class _WalkinsState extends State<Walkins> {
     }
   }
 
-  late String date1;
+  late String date1;  
+ 
   String formatDate(DateTime? date) {
     if (date != null) {
       final DateFormat formatter = DateFormat('M/dd/yyyy');
       date1 = formatter.format(date).toString();
+      
       return date1;
     }
     return 'Select Date';
   }
 
+  // var time = DateFormat('kk:mm:ss').format(DateTime.now());
+  var time = DateFormat.yMEd().add_jms().format(DateTime.now());
+
+// var time=DateTime.parse(DateTime.now().toString());
   bool loded = false;
   List<String> eventnames = [];
   String? selectedValue = "Select";
-String eventid="";
+  String eventid = "";
   getmyclubevents() async {
     myclubevents = await EventsServices.getmyclubEvents(context: context);
     eventnames.add("Select");
@@ -87,8 +95,14 @@ String eventid="";
   final TextEditingController nameController = TextEditingController();
   final TextEditingController pnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController coverController = TextEditingController();
+  final TextEditingController tableController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print(time.substring(15));
+ DateFormat formatter1 = DateFormat('dd/M/yyyy');
+      var date2 = formatter1.format(DateTime.now()).toString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -206,9 +220,7 @@ String eventid="";
                                           const Icon(Icons.keyboard_arrow_down),
 
                                       // Array list of items
-                                      items: eventnames
-                                          
-                                          .map((String entry) {
+                                      items: eventnames.map((String entry) {
                                         return DropdownMenuItem<String>(
                                           value: entry,
                                           child: Text(entry),
@@ -415,6 +427,118 @@ String eventid="";
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 0,
+                        left: 40,
+                        right: 40,
+                      ),
+                      child: Container(
+                        height: height / 20,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(108, 108, 108, 0.37),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.black,
+                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 10),
+                          child: TextFormField(
+                            controller: priceController,
+                            style: GoogleFonts.sairaCondensed(
+                              color: const Color(0XFFFFFFFF),
+                              fontSize: 18,
+                            ),
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              hintText: 'Price',
+                              hintStyle: GoogleFonts.sairaCondensed(
+                                color: const Color(0XFFAFAFAF),
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    goldalign
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              bottom: 0,
+                              left: 40,
+                              right: 40,
+                            ),
+                            child: Container(
+                              height: height / 20,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromRGBO(108, 108, 108, 0.37),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  )),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 15, left: 10),
+                                child: TextFormField(
+                                  controller: tableController,
+                                  style: GoogleFonts.sairaCondensed(
+                                    color: const Color(0XFFFFFFFF),
+                                    fontSize: 18,
+                                  ),
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    hintText: 'Table Number',
+                                    hintStyle: GoogleFonts.sairaCondensed(
+                                      color: const Color(0XFFAFAFAF),
+                                    ),
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 0,
+                        left: 40,
+                        right: 40,
+                      ),
+                      child: Container(
+                        height: height / 20,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(108, 108, 108, 0.37),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.black,
+                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 10),
+                          child: TextFormField(
+                            controller: coverController,
+                            style: GoogleFonts.sairaCondensed(
+                              color: const Color(0XFFFFFFFF),
+                              fontSize: 18,
+                            ),
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              hintText: 'Cover Points',
+                              hintStyle: GoogleFonts.sairaCondensed(
+                                color: const Color(0XFFAFAFAF),
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
                           left: 40.0, right: 40.0, top: 10.0),
                       child: Container(
                         height: height / 4,
@@ -445,7 +569,7 @@ String eventid="";
                                   padding: const EdgeInsets.only(
                                       right: 20.0, top: 10),
                                   child: Text(
-                                    (fcount + mcount + ccount).toString(),
+                                    (fcount + mcount + ccount * 2).toString(),
                                     style: GoogleFonts.bebasNeue(
                                       fontSize: 28,
                                       fontWeight: FontWeight.w600,
@@ -468,6 +592,17 @@ String eventid="";
                                         width: 60.0,
                                         height: 60.0,
                                         color: Colors.white,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, top: 0),
+                                      child: Text(
+                                        'Female',
+                                        style: GoogleFonts.bebasNeue(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: offwhite),
                                       ),
                                     ),
                                     Padding(
@@ -507,7 +642,7 @@ String eventid="";
                                     ),
                                   ],
                                 ),
-                                Column(
+                                Column(mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -521,7 +656,18 @@ String eventid="";
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 20.0, top: 22),
+                                          left: 20.0, top: 0),
+                                      child: Text(
+                                        'Male',
+                                        style: GoogleFonts.bebasNeue(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: offwhite),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, top: 12),
                                       child: Container(
                                         height: 30,
                                         width: 50,
@@ -557,6 +703,8 @@ String eventid="";
                                   ],
                                 ),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -566,6 +714,17 @@ String eventid="";
                                         width: 75.0,
                                         height: 55.0,
                                         color: Colors.white,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, top: 0),
+                                      child: Text(
+                                        'Couple',
+                                        style: GoogleFonts.bebasNeue(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: offwhite),
                                       ),
                                     ),
                                     Padding(
@@ -657,28 +816,84 @@ String eventid="";
                         ),
                         child: InkWell(
                           onTap: () {
-                            if (selectedValue == "Select") {
-                              BTSwalkins.createWalkins(
-                                  context: context,
-                                  name: nameController.text,
-                                  email: emailController.text,
-                                  phone: pnController.text,
-                                  date: date1,
-                                  number_of_people: (fcount + mcount + ccount*2));
-                            } else {
-                              for (var i = 0; i < myclubevents.length; i++) {
-                                if (myclubevents[i].name==selectedValue) {
-                                  eventid=myclubevents[i].id;
+                            if (goldalign) {
+                              if (selectedValue == "Select") {
+                                BTStable.createtable(
+                                    tablenum: int.parse(tableController.text),
+                                    cover: int.parse(coverController.text),
+                                    price: int.parse(priceController.text),
+                                    context: context,
+                                    time: time.substring(15),
+                                    date: date2,
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    phone: pnController.text,
+                                    number_of_people:
+                                        (fcount + mcount + ccount * 2));
+                                         nameController.text="";tableController.text="";
+                                        coverController.text="";
+                                        priceController.text="";
+                                        emailController.text="";
+                                        pnController.text="";
+                                        fcount=0;mcount=0;ccount=0;
+                              } else {
+                                for (var i = 0; i < myclubevents.length; i++) {
+                                  if (myclubevents[i].name == selectedValue) {
+                                    eventid = myclubevents[i].id;
+                                  }
                                 }
+                                // BTSwalkins.createWalkinsofevent(
+                                //     context: context,
+                                //     name: nameController.text,
+                                //     email: emailController.text,
+                                //     phone: pnController.text,
+                                //     date: date1,
+                                //     number_of_people:
+                                //         (fcount + mcount + ccount * 2),
+                                //     eventid: eventid);
                               }
-                              BTSwalkins.createWalkinsofevent(
-                                  context: context,
-                                  name: nameController.text,
-                                  email: emailController.text,
-                                  phone: pnController.text,
-                                  date: date1,
-                                  number_of_people: (fcount + mcount + ccount*2),
-                                  eventid: eventid);
+                            } else {
+                              if (selectedValue == "Select") {
+                                BTSwalkins.createWalkins(
+                                    cover: int.parse(coverController.text),
+                                    price: int.parse(priceController.text),
+                                    context: context,
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    phone: pnController.text,
+                                    date: date1,
+                                    number_of_people:
+                                        (fcount + mcount + ccount * 2));
+                                        nameController.text="";
+                                        coverController.text="";
+                                        priceController.text="";
+                                        emailController.text="";
+                                        pnController.text="";
+                                        fcount=0;mcount=0;ccount=0;
+                              } else {
+                                for (var i = 0; i < myclubevents.length; i++) {
+                                  if (myclubevents[i].name == selectedValue) {
+                                    eventid = myclubevents[i].id;
+                                  }
+                                }
+                                BTSwalkins.createWalkinsofevent(
+                                    cover: int.parse(coverController.text),
+                                    price: int.parse(priceController.text),
+                                    context: context,
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    phone: pnController.text,
+                                    date: date1,
+                                    number_of_people:
+                                        (fcount + mcount + ccount * 2),
+                                    eventid: eventid);
+                                     nameController.text="";
+                                        coverController.text="";
+                                        priceController.text="";
+                                        emailController.text="";
+                                        pnController.text="";
+                                        fcount=0;mcount=0;ccount=0;
+                              }
                             }
                           },
                           child: Center(

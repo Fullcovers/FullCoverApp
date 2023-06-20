@@ -51,8 +51,7 @@ class _ClubPage3State extends State<ClubPage3> {
   final emailController = TextEditingController();
 
 // Format the date as per your desired format
-  String formattedDate =
-      DateFormat('EEE MMM dd yyyy HH:mm:ss').format(DateTime.now());
+  String formattedDate = DateFormat('M/dd/yyyy').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +164,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                         "ticket": widget.femaleid
                                       });
                                     }
-
+                                    print(formattedDate);
                                     Map<String, dynamic> requestBody = {
                                       "tickets": tickets,
                                       "send_to": {
@@ -174,12 +173,13 @@ class _ClubPage3State extends State<ClubPage3> {
                                       },
                                       "club": widget.club.id,
                                       "date": formattedDate,
-                                      "promo_code": widget.promocode,
-                                      "amount": widget.totalprice +
-                                          widget.totalprice * 4 / 100 +
-                                          gst18.floor()
+                                      // "promo_code": widget.promocode,
+                                      "amount": 1
+                                      // widget.totalprice +
+                                      //     widget.totalprice * 4 / 100 +
+                                      //     gst18.floor()
                                     };
-                                    OrderServices().placeOrder(
+                                    OrderServices.placeOrder(
                                         context: context,
                                         requestbody: requestBody);
                                   },
@@ -582,24 +582,24 @@ class _ClubPage3State extends State<ClubPage3> {
                               ),
                             ],
                           ),
-                          // Row(
-                          //   children: [
-                          //     IconButton(
-                          //       onPressed: () {},
-                          //       icon: const Icon(Icons.location_on_outlined),
-                          //     ),
-                          //     Container(width: width/2,
-                          //       child: Text(textAlign: TextAlign.left,
-                          //         widget.club.address.substring(1,4),
-                          //         style: GoogleFonts.sairaCondensed(
-                          //           fontSize: height / 61.92857142857143,
-                          //           fontWeight: FontWeight.w600,
-                          //           color: const Color(0XFFBCBCBC),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                          Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.location_on_outlined),
+                              ),
+                              Container(width: width/1.2,
+                                child: Text(textAlign: TextAlign.left,
+                                  widget.club.address,
+                                  style: GoogleFonts.sairaCondensed(
+                                    fontSize: height / 61.92857142857143,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0XFFBCBCBC),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Row(
                             children: [
                               Padding(

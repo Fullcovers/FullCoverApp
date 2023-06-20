@@ -131,13 +131,15 @@ class _EventDetail2State extends State<EventDetail2> {
                   icon: const Icon(Icons.location_on_outlined),
                 ),
                 FractionalTranslation(
-                  translation: const Offset(-0.05, 0),
-                  child: Text(
-                    widget.club.address,
-                    style: GoogleFonts.sairaCondensed(
-                      fontSize: height / 61.5,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                  translation: const Offset(0, 0),
+                  child: Container(width: width/1.2,
+                    child: Text(textAlign: TextAlign.left,
+                      widget.club.address,
+                      style: GoogleFonts.sairaCondensed(
+                        fontSize: height / 61.5,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),

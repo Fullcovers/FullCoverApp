@@ -81,13 +81,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 20,
                           color: offwhite),
                     ),
-                    Text(
-                      user.phoneNumber,
-                      style: GoogleFonts.sairaCondensed(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
-                          color: offwhite),
-                    ),
+                    // Text(
+                    //   user.phoneNumber,
+                    //   style: GoogleFonts.sairaCondensed(
+                    //       fontWeight: FontWeight.w500,
+                    //       fontSize: 20,
+                    //       color: offwhite),
+                    // ),
                   ],
                 ),
                 Row(

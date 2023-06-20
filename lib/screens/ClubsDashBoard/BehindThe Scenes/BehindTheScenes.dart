@@ -8,6 +8,7 @@ import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tickets/Tickets.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Walkins/Walkins.dart';
 import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
@@ -22,16 +23,17 @@ class BehindTheScenesPage extends StatefulWidget {
 }
 
 class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     load();
   }
-  load()async{
-       await BTSClubServices.btsgetSingleClub(context: context);
 
+  load() async {
+    await BTSClubServices.btsgetSingleClub(context: context);
   }
+
   Color textc = const Color(0xFFB59F68);
   bool forAndroid = false;
   @override
@@ -99,9 +101,8 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: InkWell(onTap: (){
-                       
-                    },
+                    child: InkWell(
+                      onTap: () {},
                       child: Container(
                         height: 50,
                         width: 50,
@@ -126,9 +127,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                         child: IconButton(
                           onPressed: () {
                             Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BTSProfile()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const BTSProfile()));
                           },
                           color: const Color.fromARGB(255, 252, 248, 248),
                           icon: const Icon(
@@ -192,18 +193,35 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                   ),
                   mycard(height, width, const Color(0XB394D0C5), "Guestlist",
                       const Color(0XFF94D0C5)),
-                 
                   SizedBox(
                     width: width / 19.57,
                   ),
-                  InkWell(onTap: () {
+                  InkWell(
+                    onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Walkins()));
                     },
-                    child: mycard(height, width, const Color(0XB3B2D094), "Walkins",
-                        const Color(0XFFB2D094)),
+                    child: mycard(height, width, const Color(0XB3B2D094),
+                        "Walkins", const Color(0XFFB2D094)),
+                  ),
+                  SizedBox(
+                    width: width / 19.57,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TablePage()));
+                    },
+                    child: mycard(
+                        height,
+                        width,
+                        const Color.fromARGB(255, 148, 159, 208),
+                        "Tables",
+                        Color.fromARGB(255, 148, 159, 208)),
                   ),
                 ],
               ),
@@ -219,7 +237,8 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                 Icons.qr_code_2_outlined,
                 size: 35,
               ),
-              context,rought: QrScanner()),
+              context,
+              rought: QrScanner()),
         ),
       ),
     );

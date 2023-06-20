@@ -235,12 +235,14 @@ class _EventDetailState extends State<EventDetail> {
                               ),
                               FractionalTranslation(
                                 translation: const Offset(0.05, 0),
-                                child: Text(
-                                  clubprovider.club?.address ?? "",
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: backgroundColorfigma,
+                                child: Container(width: width/1.6,
+                                  child: Text(textAlign: TextAlign.left,
+                                    clubprovider.club?.address ?? "",
+                                    style: GoogleFonts.sairaCondensed(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: backgroundColorfigma,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -57,7 +57,7 @@ class _EventDetail3State extends State<EventDetail3> {
   Widget build(BuildContext context) {
     double clubpersent = 4;
     String formattedDate =
-        DateFormat('EEE MMM dd yyyy HH:mm:ss').format(DateTime.now());
+        DateFormat('M/dd/yyyy').format(DateTime.now());
 
     double gst18 = widget.totalprice * clubpersent * 18 / 10000;
 
@@ -167,22 +167,23 @@ class _EventDetail3State extends State<EventDetail3> {
                                       "ticket": widget.femaleid
                                     });
                                   }
-
+print(formattedDate);
                                   Map<String, dynamic> requestBody = {
                                     "tickets": tickets,
                                     "send_to": {
                                       "phoneNumber": phoneController.text,
                                       "email": emailController.text
                                     },
-                                    "club": widget.club.id,
+                                    "event": widget.event.id,
                                     "date": formattedDate,
                                     "promo_code": widget.promocode,
-                                    "amount": widget.totalprice +
-                                        widget.totalprice * 4 / 100 +
-                                        gst18.floor()
+                                    "amount": 1
+                                    // widget.totalprice +
+                                    //     widget.totalprice * 4 / 100 +
+                                    //     gst18.floor()
                                   };
 
-                                  OrderServices().placeOrder(
+                                  OrderServices.placeOrderforevent(
                                       context: context,
                                       requestbody: requestBody);
                                 },
@@ -593,13 +594,15 @@ class _EventDetail3State extends State<EventDetail3> {
                                 icon: const Icon(Icons.location_on_outlined),
                               ),
                               FractionalTranslation(
-                                translation: const Offset(-0.05, 0),
-                                child: Text(
-                                  widget.club.address,
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: height / 61.92857142857143,
-                                    fontWeight: FontWeight.w600,
-                                    color: backgroundColorfigma,
+                                translation: const Offset(0, 0),
+                                child: Container(width: width/1.2,
+                                  child: Text(textAlign: TextAlign.left,
+                                    widget.club.address,
+                                    style: GoogleFonts.sairaCondensed(
+                                      fontSize: height / 61.92857142857143,
+                                      fontWeight: FontWeight.w600,
+                                      color: backgroundColorfigma,
+                                    ),
                                   ),
                                 ),
                               ),

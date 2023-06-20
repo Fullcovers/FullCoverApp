@@ -22,7 +22,8 @@ class _TicketsState extends State<Tickets> {
   @override
   void initState() {
     super.initState();
-    loadorders();loadwalkins();
+    loadorders();
+    loadwalkins();
   }
 
   bool oshow = true;
@@ -48,7 +49,7 @@ class _TicketsState extends State<Tickets> {
     });
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     var date = formatter.format(pickedDate!);
-    loadordersbydate(date);
+    loadordersbydate(date);loadwalkinsbydate(date);
     if (pickedDate != null && pickedDate != selectedDate) {
       setState(() {
         selectedDate = pickedDate; // Update selectedDate if a date was picked
@@ -63,6 +64,13 @@ class _TicketsState extends State<Tickets> {
       loded = true;
     });
   }
+  loadwalkinsbydate(String date) async {
+    walkins =
+        await BTSwalkins.getallWalkinsbydate(context: context, date: date);
+    setState(() {
+      lodedwalkins = true;
+    });
+  }
 
   String formatDate(DateTime? date) {
     if (date != null) {
@@ -71,7 +79,7 @@ class _TicketsState extends State<Tickets> {
     }
     return 'Select Date';
   }
-        // final DateFormat formatter1 = DateFormat('E d MMM, yyyy');
+  // final DateFormat formatter1 = DateFormat('E d MMM, yyyy');
 
 // String todaydate=formatter1.format(DateTime.now());
   loadorders() async {
@@ -90,19 +98,18 @@ class _TicketsState extends State<Tickets> {
 
   @override
   Widget build(BuildContext context) {
-        double totalmoney1 = 1000;
+    double totalmoney1 = 1000;
 
 // if (loded == true) {
 //         for (var i = 0; i < orders['data'].length; i++) {
 //           totalmoney = totalmoney +
 //                     orders['data'][i]['total'];
-        
+
 //       }
 //     }
 
     double height = MediaQuery.of(context).size.height;
-    return 
-    SafeArea(
+    return SafeArea(
         child: Scaffold(
       backgroundColor: const Color(0xFF2C2F33),
       body: loded && lodedwalkins
@@ -161,9 +168,11 @@ class _TicketsState extends State<Tickets> {
                   ),
                 ),
                 TicketMoneyStatus(
-                    ticket:
-                     loded ? orders['count'] :
-                      0,
+                    ticket: show
+                        ? loded
+                            ? orders['count']
+                            : 0
+                        : walkins['date'].length.toString(),
                     money: totalmoney1.toString()),
                 FractionalTranslation(
                   translation: const Offset(0, 0.5),
@@ -228,7 +237,6 @@ class _TicketsState extends State<Tickets> {
                                   ),
                                 )),
                           ),
-                          
                           wshow
                               ? Container(
                                   height: 2,
@@ -259,9 +267,10 @@ class _TicketsState extends State<Tickets> {
                 //     : Container(),
                 show
                     ? PeopleList(
-                        orders: orders['data'],count: orders['count'],
+                        orders: orders['data'],
+                        count: orders['count'],
                       )
-                    : 
+                    :
                     // Container()
                     PeopleList2(
                         walkins: walkins['date'],
