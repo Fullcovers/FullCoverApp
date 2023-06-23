@@ -132,8 +132,10 @@ class _EventDetail2State extends State<EventDetail2> {
                 ),
                 FractionalTranslation(
                   translation: const Offset(0, 0),
-                  child: Container(width: width/1.2,
-                    child: Text(textAlign: TextAlign.left,
+                  child: Container(
+                    width: width / 1.2,
+                    child: Text(
+                      textAlign: TextAlign.left,
                       widget.club.address,
                       style: GoogleFonts.sairaCondensed(
                         fontSize: height / 61.5,
@@ -199,6 +201,8 @@ class _EventDetail2State extends State<EventDetail2> {
                       return Text('Error: ${snapshot.error}');
                     } else if (snapshot.hasData) {
                       List<Ticket> tickets = snapshot.data!;
+                      // print(tickets[0].name);
+                      // print(tickets[0].current);
                       return Container(
                         height: 3.2 * height / 10,
                         width: double.maxFinite,
@@ -209,10 +213,13 @@ class _EventDetail2State extends State<EventDetail2> {
                           itemCount: tickets.length,
                           itemBuilder: (context, index) {
                             Ticket ticket = tickets[index];
-                            if (ticket.name == 'Stag') {
+                            if (ticket.name == 'Stag' ||
+                                ticket.name == 'stag') {
                               stagid = ticket.id;
+
                               stagentryprice = ticket.current;
-                            } else if (ticket.name == "Couple") {
+                            } else if (ticket.name == "Couple" ||
+                                ticket.name == "couple") {
                               coupleid = ticket.id;
                               coupleentrypricce = ticket.current;
                             } else {
@@ -269,7 +276,8 @@ class _EventDetail2State extends State<EventDetail2> {
                                                   const Offset(0, 0.05),
                                               child: IconButton(
                                                 onPressed: () {
-                                                  if (ticket.name == "Stag") {
+                                                  if (ticket.name == "Stag" ||
+                                                      ticket.name == "stag") {
                                                     setState(() {
                                                       if (stagcount > 0) {
                                                         stagcount--;
@@ -428,7 +436,7 @@ class _EventDetail2State extends State<EventDetail2> {
                             decoration: InputDecoration(
                               hintText: 'PROMOCODE',
                               hintStyle: GoogleFonts.sairaCondensed(
-                                color: Color.fromARGB(255, 14, 13, 13),
+                                color: const Color.fromARGB(255, 14, 13, 13),
                               ),
                               border: InputBorder.none,
                             ),
@@ -585,9 +593,10 @@ class _EventDetail2State extends State<EventDetail2> {
   }
 
   String getCountByTicketName(String name) {
-    if (name.toLowerCase() == "stag") {
+    if (name.toLowerCase() == "stag" || name.toLowerCase() == "Stag") {
       return stagcount.toString();
-    } else if (name.toLowerCase() == "couple") {
+    } else if (name.toLowerCase() == "couple" ||
+        name.toLowerCase() == "Couple") {
       return couplecount.toString();
     } else {
       return femalecount.toString();

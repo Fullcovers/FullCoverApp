@@ -26,20 +26,22 @@ class BTSwalkins {
       "number_of_people": number_of_people,
       "name": name,
     };
-    var orders;
+
     try {
-      print("object");
       Dio dio = Dio();
       var res = await dio.post('${Constants.uri}walkins/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-      showSnackBar(context, "Created");
-
-      orders = jsonDecode(res.data);
+      if (res.statusCode == 201) {
+        showSnackBar(context, "Created");
+      } else if (res.statusCode == 403) {
+        showSnackBar(context, "Forbidden User Authentication Required");
+      } else {
+        showSnackBar(context, "Something Wrong!!");
+      }
     } catch (e) {
-      // showSnackBar(context, e.toString());
-      print(e);
+      print(e.toString());
     }
   }
 
@@ -54,7 +56,6 @@ class BTSwalkins {
     required String eventid,
     required int number_of_people,
   }) async {
-    print(eventid);
     var body = {
       "email": email,
       "phone": phone,
@@ -65,26 +66,28 @@ class BTSwalkins {
       "name": name,
       "eventId": eventid
     };
-    var orders;
+
     try {
       Dio dio = Dio();
       var res = await dio.post('${Constants.uri}walkins/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-      showSnackBar(context, "Created");
-
-      orders = jsonDecode(res.data);
+      if (res.statusCode == 201) {
+        showSnackBar(context, "Created");
+      } else if (res.statusCode == 403) {
+        showSnackBar(context, "Forbidden User Authentication Required");
+      } else {
+        showSnackBar(context, "Something Wrong!!");
+      }
     } catch (e) {
-      showSnackBar(context, e.toString());
-      print(e);
+      print(e.toString());
     }
   }
 
   static Future<dynamic> getallWalkins({required BuildContext context}) async {
     var orders;
     try {
-
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}walkins/'),
         headers: <String, String>{
@@ -99,7 +102,9 @@ class BTSwalkins {
     }
     return orders;
   }
-  static Future<dynamic> getallWalkinsbydate({required BuildContext context,required String date}) async {
+
+  static Future<dynamic> getallWalkinsbydate(
+      {required BuildContext context, required String date}) async {
     var orders;
     try {
       http.Response res = await http.get(

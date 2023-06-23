@@ -6,6 +6,7 @@ import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Services/BTS_Services/WalkIns_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Utils.dart';
 
 import '../../../widgets/ClubDashBoard/HeaderContentWalkins.dart';
 
@@ -45,13 +46,13 @@ class _WalkinsState extends State<Walkins> {
     }
   }
 
-  late String date1;  
- 
+  late String date1;
+
   String formatDate(DateTime? date) {
     if (date != null) {
       final DateFormat formatter = DateFormat('M/dd/yyyy');
       date1 = formatter.format(date).toString();
-      
+
       return date1;
     }
     return 'Select Date';
@@ -101,8 +102,8 @@ class _WalkinsState extends State<Walkins> {
   @override
   Widget build(BuildContext context) {
     print(time.substring(15));
- DateFormat formatter1 = DateFormat('dd/M/yyyy');
-      var date2 = formatter1.format(DateTime.now()).toString();
+    DateFormat formatter1 = DateFormat('dd/M/yyyy');
+    var date2 = formatter1.format(DateTime.now()).toString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -206,7 +207,7 @@ class _WalkinsState extends State<Walkins> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             eventnames.isNotEmpty
-                                ? Container(
+                                ? SizedBox(
                                     width: width - width / 3,
                                     child: DropdownButton(
                                       // Initial Value
@@ -226,7 +227,7 @@ class _WalkinsState extends State<Walkins> {
                                           child: Text(entry),
                                         );
                                       }).toList(),
-                                      hint: Text('Select an item'),
+                                      hint: const Text('Select an item'),
 
                                       // After selecting the desired option,it will
                                       // change button value to selected value
@@ -642,7 +643,8 @@ class _WalkinsState extends State<Walkins> {
                                     ),
                                   ],
                                 ),
-                                Column(mainAxisAlignment: MainAxisAlignment.center,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -817,43 +819,37 @@ class _WalkinsState extends State<Walkins> {
                         child: InkWell(
                           onTap: () {
                             if (goldalign) {
-                              if (selectedValue == "Select") {
-                                BTStable.createtable(
-                                    tablenum: int.parse(tableController.text),
-                                    cover: int.parse(coverController.text),
-                                    price: int.parse(priceController.text),
-                                    context: context,
-                                    time: time.substring(15),
-                                    date: date2,
-                                    name: nameController.text,
-                                    email: emailController.text,
-                                    phone: pnController.text,
-                                    number_of_people:
-                                        (fcount + mcount + ccount * 2));
-                                         nameController.text="";tableController.text="";
-                                        coverController.text="";
-                                        priceController.text="";
-                                        emailController.text="";
-                                        pnController.text="";
-                                        fcount=0;mcount=0;ccount=0;
-                              } else {
-                                for (var i = 0; i < myclubevents.length; i++) {
-                                  if (myclubevents[i].name == selectedValue) {
-                                    eventid = myclubevents[i].id;
-                                  }
-                                }
-                                // BTSwalkins.createWalkinsofevent(
-                                //     context: context,
-                                //     name: nameController.text,
-                                //     email: emailController.text,
-                                //     phone: pnController.text,
-                                //     date: date1,
-                                //     number_of_people:
-                                //         (fcount + mcount + ccount * 2),
-                                //     eventid: eventid);
+                              if (nameController.text.isEmpty) {
+                                showSnackBar(context,
+                                    "The name and date should be filled");
                               }
+                              BTStable.createtable(
+                                  tablenum: int.parse(tableController.text),
+                                  cover: int.parse(coverController.text),
+                                  price: int.parse(priceController.text),
+                                  context: context,
+                                  time: time.substring(15),
+                                  date: date2,
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  phone: pnController.text,
+                                  number_of_people:
+                                      (fcount + mcount + ccount * 2));
+                              nameController.text = "";
+                              tableController.text = "";
+                              coverController.text = "";
+                              priceController.text = "";
+                              emailController.text = "";
+                              pnController.text = "";
+                              fcount = 0;
+                              mcount = 0;
+                              ccount = 0;
                             } else {
                               if (selectedValue == "Select") {
+                                if (nameController.text.isEmpty) {
+                                  showSnackBar(context,
+                                      "The name and date should be filled");
+                                }
                                 BTSwalkins.createWalkins(
                                     cover: int.parse(coverController.text),
                                     price: int.parse(priceController.text),
@@ -864,17 +860,23 @@ class _WalkinsState extends State<Walkins> {
                                     date: date1,
                                     number_of_people:
                                         (fcount + mcount + ccount * 2));
-                                        nameController.text="";
-                                        coverController.text="";
-                                        priceController.text="";
-                                        emailController.text="";
-                                        pnController.text="";
-                                        fcount=0;mcount=0;ccount=0;
+                                nameController.text = "";
+                                coverController.text = "";
+                                priceController.text = "";
+                                emailController.text = "";
+                                pnController.text = "";
+                                fcount = 0;
+                                mcount = 0;
+                                ccount = 0;
                               } else {
                                 for (var i = 0; i < myclubevents.length; i++) {
                                   if (myclubevents[i].name == selectedValue) {
                                     eventid = myclubevents[i].id;
                                   }
+                                }
+                                if (nameController.text.isEmpty) {
+                                  showSnackBar(context,
+                                      "The name and date should be filled");
                                 }
                                 BTSwalkins.createWalkinsofevent(
                                     cover: int.parse(coverController.text),
@@ -887,12 +889,14 @@ class _WalkinsState extends State<Walkins> {
                                     number_of_people:
                                         (fcount + mcount + ccount * 2),
                                     eventid: eventid);
-                                     nameController.text="";
-                                        coverController.text="";
-                                        priceController.text="";
-                                        emailController.text="";
-                                        pnController.text="";
-                                        fcount=0;mcount=0;ccount=0;
+                                nameController.text = "";
+                                coverController.text = "";
+                                priceController.text = "";
+                                emailController.text = "";
+                                pnController.text = "";
+                                fcount = 0;
+                                mcount = 0;
+                                ccount = 0;
                               }
                             }
                           },

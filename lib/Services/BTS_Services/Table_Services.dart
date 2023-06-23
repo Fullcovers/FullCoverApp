@@ -20,7 +20,7 @@ class BTStable {
     required int number_of_people,
   }) async {
     var body = {
-      "email": email,
+      "email": email.isNotEmpty,
       "phone": phone,
       "number_of_people": number_of_people,
       "price": price,
@@ -30,21 +30,21 @@ class BTStable {
       "date": date,
       "name": name,
     };
-    var orders;
-    // print(date);
     try {
-      print("object");
       Dio dio = Dio();
       var res = await dio.post('${Constants.uri}table/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-      print("object");
-      showSnackBar(context, "Created");
-
-      orders = jsonDecode(res.data);
+      if (res.statusCode == 201) {
+        showSnackBar(context, "Created");
+      } else if (res.statusCode == 403) {
+        showSnackBar(context, "Forbidden User Authentication Required");
+      } else {
+        showSnackBar(context, "Something Wrong!!");
+      }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      // showSnackBar(context, e.toString());
       print(e);
     }
   }
@@ -65,19 +65,16 @@ class BTStable {
       "name": name,
       "eventId": eventid
     };
-    var orders;
-    // print(date);
     try {
-      print("object");
       Dio dio = Dio();
       var res = await dio.post('${Constants.uri}walkins/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-      print("object");
+
       showSnackBar(context, "Created");
 
-      orders = jsonDecode(res.data);
+      // orders = jsonDecode(res.data);
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e);

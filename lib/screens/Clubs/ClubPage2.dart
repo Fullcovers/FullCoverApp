@@ -169,8 +169,10 @@ class _ClubsPage2State extends State<ClubsPage2> {
                   padding: const EdgeInsets.all(8.0),
                   child: FractionalTranslation(
                     translation: const Offset(-0.05, 0),
-                    child: Container(width: width/1.2,
-                      child: Text(textAlign:TextAlign.left,
+                    child: SizedBox(
+                      width: width / 1.2,
+                      child: Text(
+                        textAlign: TextAlign.left,
                         widget.club.address,
                         style: GoogleFonts.sairaCondensed(
                           fontSize: height / 61.5,
@@ -472,10 +474,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           itemCount: tickets.length,
                           itemBuilder: (context, index) {
                             Ticket ticket = tickets[index];
-                            if (ticket.name == 'Stag') {
+                            if (ticket.name == 'Stag' ||
+                                ticket.name == 'stag') {
                               stagid = ticket.id;
                               stagentryprice = ticket.current;
-                            } else if (ticket.name == "couple") {
+                            } else if (ticket.name == "couple" ||
+                                ticket.name == "Couple") {
                               coupleid = ticket.id;
                               coupleentrypricce = ticket.current;
                             } else {
@@ -532,14 +536,16 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                                   const Offset(0, 0.05),
                                               child: IconButton(
                                                 onPressed: () {
-                                                  if (ticket.name == "Stag") {
+                                                  if (ticket.name == "Stag" ||
+                                                      ticket.name == "stag") {
                                                     setState(() {
                                                       if (stagcount > 0) {
                                                         stagcount--;
                                                       }
                                                     });
                                                   } else if (ticket.name ==
-                                                      'couple') {
+                                                          'couple' ||
+                                                      ticket.name == "Couple") {
                                                     setState(() {
                                                       if (couplecount > 0) {
                                                         couplecount--;
@@ -605,12 +611,15 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                               child: Center(
                                                 child: IconButton(
                                                   onPressed: () {
-                                                    if (ticket.name == "Stag") {
+                                                    if (ticket.name == "Stag" ||
+                                                        ticket.name == "stag") {
                                                       setState(() {
                                                         stagcount++;
                                                       });
                                                     } else if (ticket.name ==
-                                                        'couple') {
+                                                            'couple' ||
+                                                        ticket.name ==
+                                                            "Couple") {
                                                       setState(() {
                                                         couplecount++;
                                                       });
@@ -843,9 +852,10 @@ class _ClubsPage2State extends State<ClubsPage2> {
   }
 
   String getCountByTicketName(String name) {
-    if (name.toLowerCase() == "stag") {
+    if (name.toLowerCase() == "stag" || name.toLowerCase() == "Stag") {
       return stagcount.toString();
-    } else if (name.toLowerCase() == "couple") {
+    } else if (name.toLowerCase() == "couple" ||
+        name.toLowerCase() == "Couple") {
       return couplecount.toString();
     } else {
       return femalecount.toString();
