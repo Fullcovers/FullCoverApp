@@ -33,6 +33,7 @@ class BTSwalkins {
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+      print(res.data);
       if (res.statusCode == 201) {
         showSnackBar(context, "Created");
       } else if (res.statusCode == 403) {
@@ -73,6 +74,7 @@ class BTSwalkins {
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+      print(res.data);
       if (res.statusCode == 201) {
         showSnackBar(context, "Created");
       } else if (res.statusCode == 403) {

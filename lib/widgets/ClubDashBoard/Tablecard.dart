@@ -53,7 +53,7 @@ class _TableCardState extends State<TableCard> {
                           ),
                           Text(
                             widget.thistable['phone'] == null
-                                ? ""
+                                ? " "
                                 : widget.thistable['phone'].toString(),
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,

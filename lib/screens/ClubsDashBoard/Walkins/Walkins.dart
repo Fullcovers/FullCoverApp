@@ -94,14 +94,14 @@ class _WalkinsState extends State<Walkins> {
   }
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController pnController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController coverController = TextEditingController();
-  final TextEditingController tableController = TextEditingController();
+  String pnController = ' ';
+  String emailController = ' ';
+  int priceController = 0;
+  int coverController = 0;
+  int tableController = 0;
   @override
   Widget build(BuildContext context) {
-    print(time.substring(15));
+    // print(time.substring(15));
     DateFormat formatter1 = DateFormat('dd/M/yyyy');
     var date2 = formatter1.format(DateTime.now()).toString();
     double height = MediaQuery.of(context).size.height;
@@ -238,7 +238,7 @@ class _WalkinsState extends State<Walkins> {
                                       },
                                     ),
                                   )
-                                : CircularProgressIndicator(),
+                                : const CircularProgressIndicator(),
                           ],
                         ),
                       ),
@@ -336,7 +336,7 @@ class _WalkinsState extends State<Walkins> {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15, left: 10),
-                          child: TextFormField(
+                          child: TextField(
                             controller: nameController,
                             style: GoogleFonts.sairaCondensed(
                               color: const Color(0XFFFFFFFF),
@@ -372,8 +372,13 @@ class _WalkinsState extends State<Walkins> {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15, left: 10),
-                          child: TextFormField(
-                            controller: pnController,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                pnController = value;
+                              });
+                              // pnController = value;
+                            },
                             style: GoogleFonts.sairaCondensed(
                               color: const Color(0XFFFFFFFF),
                               fontSize: 18,
@@ -408,8 +413,13 @@ class _WalkinsState extends State<Walkins> {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15, left: 10),
-                          child: TextFormField(
-                            controller: emailController,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                emailController = value;
+                              });
+                              // emailController = value;
+                            },
                             style: GoogleFonts.sairaCondensed(
                               color: const Color(0XFFFFFFFF),
                               fontSize: 18,
@@ -444,8 +454,12 @@ class _WalkinsState extends State<Walkins> {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15, left: 10),
-                          child: TextFormField(
-                            controller: priceController,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                priceController = int.parse(value);
+                              });
+                            },
                             style: GoogleFonts.sairaCondensed(
                               color: const Color(0XFFFFFFFF),
                               fontSize: 18,
@@ -483,8 +497,13 @@ class _WalkinsState extends State<Walkins> {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 15, left: 10),
-                                child: TextFormField(
-                                  controller: tableController,
+                                child: TextField(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      tableController = int.parse(value);
+                                    });
+                                    // tableController = value;
+                                  },
                                   style: GoogleFonts.sairaCondensed(
                                     color: const Color(0XFFFFFFFF),
                                     fontSize: 18,
@@ -520,8 +539,13 @@ class _WalkinsState extends State<Walkins> {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15, left: 10),
-                          child: TextFormField(
-                            controller: coverController,
+                          child: TextField(
+                            onChanged: ((value) {
+                              setState(() {
+                                coverController = int.parse(value);
+                              });
+                              // coverController = value;
+                            }),
                             style: GoogleFonts.sairaCondensed(
                               color: const Color(0XFFFFFFFF),
                               fontSize: 18,
@@ -824,23 +848,23 @@ class _WalkinsState extends State<Walkins> {
                                     "The name and date should be filled");
                               }
                               BTStable.createtable(
-                                  tablenum: int.parse(tableController.text),
-                                  cover: int.parse(coverController.text),
-                                  price: int.parse(priceController.text),
+                                  tablenum: (tableController),
+                                  cover: (coverController),
+                                  price: (priceController),
                                   context: context,
                                   time: time.substring(15),
                                   date: date2,
                                   name: nameController.text,
-                                  email: emailController.text,
-                                  phone: pnController.text,
+                                  email: emailController,
+                                  phone: pnController,
                                   number_of_people:
                                       (fcount + mcount + ccount * 2));
-                              nameController.text = "";
-                              tableController.text = "";
-                              coverController.text = "";
-                              priceController.text = "";
-                              emailController.text = "";
-                              pnController.text = "";
+                              nameController.text = " ";
+                              tableController = 0;
+                              coverController = 0;
+                              priceController = 0;
+                              emailController = " ";
+                              pnController = " ";
                               fcount = 0;
                               mcount = 0;
                               ccount = 0;
@@ -851,20 +875,20 @@ class _WalkinsState extends State<Walkins> {
                                       "The name and date should be filled");
                                 }
                                 BTSwalkins.createWalkins(
-                                    cover: int.parse(coverController.text),
-                                    price: int.parse(priceController.text),
+                                    cover: (coverController),
+                                    price: (priceController),
                                     context: context,
                                     name: nameController.text,
-                                    email: emailController.text,
-                                    phone: pnController.text,
+                                    email: emailController,
+                                    phone: pnController,
                                     date: date1,
                                     number_of_people:
                                         (fcount + mcount + ccount * 2));
-                                nameController.text = "";
-                                coverController.text = "";
-                                priceController.text = "";
-                                emailController.text = "";
-                                pnController.text = "";
+                                nameController.text = " ";
+                                coverController = 0;
+                                priceController = 0;
+                                emailController = " ";
+                                pnController = " ";
                                 fcount = 0;
                                 mcount = 0;
                                 ccount = 0;
@@ -879,21 +903,21 @@ class _WalkinsState extends State<Walkins> {
                                       "The name and date should be filled");
                                 }
                                 BTSwalkins.createWalkinsofevent(
-                                    cover: int.parse(coverController.text),
-                                    price: int.parse(priceController.text),
+                                    cover: (coverController),
+                                    price: (priceController),
                                     context: context,
                                     name: nameController.text,
-                                    email: emailController.text,
-                                    phone: pnController.text,
+                                    email: emailController,
+                                    phone: pnController,
                                     date: date1,
                                     number_of_people:
                                         (fcount + mcount + ccount * 2),
                                     eventid: eventid);
-                                nameController.text = "";
-                                coverController.text = "";
-                                priceController.text = "";
-                                emailController.text = "";
-                                pnController.text = "";
+                                nameController.text = " ";
+                                coverController = 0;
+                                priceController = 0;
+                                emailController = " ";
+                                pnController = " ";
                                 fcount = 0;
                                 mcount = 0;
                                 ccount = 0;
