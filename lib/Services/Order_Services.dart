@@ -98,10 +98,11 @@ class OrderServices {
               Map<String, dynamic> data = responseJson['data'];
 
               ticketId = data['_id'];
-              quantity = data['items'][0]['quantity'];
+              quantity = data['items'][0]['qty'];
               var orderProvider =
                   Provider.of<OrderValidationProvider>(context, listen: false);
               OrderValidationModel? order = orderProvider.getOrderFromMap(data);
+              print(res.body);
               if (order != null) {
                 orderProvider.setOrder(order);
               }
@@ -146,6 +147,7 @@ class OrderServices {
           'Authorization': 'Bearer ${userprovider.token}'
         },
       );
+      print(res.statusCode);
       String message = jsonDecode(res.body)['message'];
       if (res.statusCode == 200) {
         showSnackBar(context, "Ticket Verified Successfully!!");
@@ -199,6 +201,7 @@ class OrderServices {
       print(e.toString());
     }
   }
+
   static void placeOrderforevent(
       {required BuildContext context,
       required Map<String, dynamic> requestbody}) async {

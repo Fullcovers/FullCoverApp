@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
+import 'package:venq_assessment/Models/QrUserModel.dart';
 import '../Models/UserModel.dart';
 import '../Providers/FetchUserProvider.dart';
 import '../Providers/UserProvider.dart';
@@ -12,7 +13,7 @@ import 'package:dio/dio.dart';
 
 class UserServices {
   Dio dio = Dio();
-  void getUserDetails(
+  Future<void> getUserDetails(
       {required BuildContext context, required String? userId}) async {
     var fetchuserprovider = Provider.of<FetchUser>(context, listen: false);
     try {
@@ -29,9 +30,10 @@ class UserServices {
       );
       fetchuserprovider.setLoading(false);
       if (res.statusCode == 200) {
-        UserModel user =
-            fetchuserprovider.parseUserDetails(jsonDecode(res.body));
-        fetchuserprovider.setFetchedUser(user);
+        QrUserModel user =
+            fetchuserprovider.qrUserDetails(jsonDecode(res.body));
+        print(res.body);
+        fetchuserprovider.setQrFetchedUser(user);
       } else if (res.statusCode == 400) {
         showSnackBar(context, "User ID Required");
       } else {
@@ -39,12 +41,10 @@ class UserServices {
       }
     } catch (e) {
       print(e.toString());
-      showSnackBar(context, e.toString());
     }
   }
 
-  static Future<UserData> getprofileinfo(
-      ) async {
+  static Future<UserData> getprofileinfo() async {
     late UserData profile;
 
     try {
@@ -57,9 +57,11 @@ class UserServices {
         },
       );
       var user = jsonDecode(res.body);
-      Name name=Name(firstName: user['user']['name']['firstName'], lastName: user['user']['name']['lastName']);
+      Name name = Name(
+          firstName: user['user']['name']['firstName'],
+          lastName: user['user']['name']['lastName']);
       Constants.btsprofile = UserData(
-         name : name,
+          name: name,
           id: user['user']['_id'],
           email: user['user']['email'],
           password: user['user']['password'],

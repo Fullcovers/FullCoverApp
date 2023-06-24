@@ -39,9 +39,10 @@ class AuthService {
           data: user,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-              print("Created");
-              Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(
-                            builder: (context) => LoginPage()),(route) => false);
+      print("Created");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LoginPage()),
+          (route) => false);
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -80,7 +81,7 @@ class AuthService {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => BehindTheScenesPage()));
         }
-        // navigator.pushNamedAndRemoveUntil('/bookingsscreen', (route) => false);
+        // navigator.pushNamedAndRemoveUntil('/qrscanner', (route) => false);
       } else if (res.statusCode == 400) {
         // Invalid email or password
         showSnackBar(context, 'Invalid email or password');

@@ -4,6 +4,15 @@ import '../Models/Ticket.dart';
 class TicketProvider with ChangeNotifier {
   Ticket? _ticket;
   List<Ticket> _tickets = [];
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  // Setter method to update the isLoading value
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   Ticket? get ticket => _ticket;
   List<Ticket> get tickets => _tickets;

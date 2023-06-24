@@ -44,7 +44,7 @@ class OrderValidationProvider with ChangeNotifier {
 
       List<OrderItem> items = (orderMap['items'] as List<dynamic>)
           .map((item) => OrderItem(
-                quantity: item['quantity'],
+                quantity: item['qty'],
                 ticket: item['ticket'],
                 id: item['_id'],
               ))

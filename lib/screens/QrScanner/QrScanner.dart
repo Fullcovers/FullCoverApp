@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:venq_assessment/Models/OrderValidation.dart';
 import 'package:venq_assessment/Models/UserModel.dart';
 import 'package:venq_assessment/Providers/FetchUserProvider.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
@@ -12,6 +13,7 @@ import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
+
 import '../../Providers/TicketProvider.dart';
 import '../../Providers/UserProvider.dart';
 
@@ -28,6 +30,9 @@ class _QrScannerState extends State<QrScanner> {
   String qrData = '';
   final String sdate = '';
   late OrderProvider orderprovider;
+  int scount = 0;
+  int ccount = 0;
+  int fcount = 0;
   @override
   void initState() {
     super.initState();
@@ -37,6 +42,69 @@ class _QrScannerState extends State<QrScanner> {
     // _qrScanner();
   }
 
+  // Future<void> getTicketDetails(String qrData) async {
+  //   print("hello");
+  //   final orderprovider =
+  //       Provider.of<OrderValidationProvider>(context, listen: false);
+
+  //   final ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+  //   ticketprovider.setLoading(false);
+  //   await OrderServices().checkvalidateQrCode(id: qrData, context: context);
+
+  //   await UserServices()
+  //       .getUserDetails(context: context, userId: orderprovider.order?.user);
+  //   await TicketServices().getTicketById(
+  //     context: context,
+  //     ticketId: orderprovider.order?.items[0].ticket,
+  //   );
+  //   ticketprovider.setLoading(true);
+  //   print("order${orderprovider.order!.user}");
+  //   print("ticket${ticketprovider.ticket!.id}");
+  // }
+
+  Future<void> processItems(BuildContext context, List<OrderItem> items) async {
+    try {
+      for (var item in items) {
+        String? ticketId = item.ticket;
+        String ticketName = await TicketServices()
+            .getTicketname(context: context, ticketId: ticketId);
+        int ticketCount = item.quantity;
+        if (ticketName == 'Stag' || ticketName == 'stag') {
+          scount = ticketCount;
+        } else if (ticketName == 'Couple' || ticketName == 'couple') {
+          ccount = ticketCount;
+        } else {
+          fcount = ticketCount;
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> getTicketDetails(String qrData) async {
+    print("hello");
+    final orderprovider =
+        Provider.of<OrderValidationProvider>(context, listen: false);
+
+    final ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+    ticketprovider.setLoading(false);
+    await OrderServices().checkvalidateQrCode(id: qrData, context: context);
+
+    await UserServices()
+        .getUserDetails(context: context, userId: orderprovider.order?.user);
+    scount = 0;
+    fcount = 0;
+    ccount = 0;
+    await processItems(context, orderprovider.order!.items);
+
+    // await TicketServices().getTicketById(
+    //   context: context,
+    //   ticketId: orderprovider.order?.items[0].ticket,
+    // );
+    ticketprovider.setLoading(true);
+  }
+
   Future<void> _qrScanner() async {
     var cameraStatus = await Permission.camera.status;
     if (cameraStatus.isGranted) {
@@ -44,7 +112,9 @@ class _QrScannerState extends State<QrScanner> {
       setState(() {
         qrData = scannedData!;
       });
-      OrderServices().checkvalidateQrCode(id: qrData, context: context);
+
+      getTicketDetails(qrData);
+
       // userprovider.deleteToken();
     } else {
       var isGranted = await Permission.camera.request();
@@ -53,7 +123,7 @@ class _QrScannerState extends State<QrScanner> {
         setState(() {
           qrData = scannedData!;
         });
-        OrderServices().checkvalidateQrCode(id: qrData, context: context);
+        getTicketDetails(qrData);
       }
     }
   }
@@ -67,9 +137,13 @@ class _QrScannerState extends State<QrScanner> {
     String formattedDate =
         d != null ? DateFormat('EE, d MMMM y').format(d) : '';
 
-    String? firstname = fetchuserprovider.user?.data.name.firstName;
-    String? email = fetchuserprovider.user?.data.email;
-    String? phno = fetchuserprovider.user?.data.phoneNumber;
+    // String? firstname = fetchuserprovider.user?.data.name.firstName;
+    // String? email = fetchuserprovider.user?.data.email;
+    // String? phno = fetchuserprovider.user?.data.phoneNumber;
+
+    String? firstname = fetchuserprovider.qruser?.data[0].name.firstName;
+    String? email = fetchuserprovider.qruser?.data[0].email;
+    String? phno = "";
     int stagcount = 0;
     int couplecount = 0;
     if (ticketprovider.ticket?.name == "couple") {
@@ -83,6 +157,7 @@ class _QrScannerState extends State<QrScanner> {
     final formattedAmount = indianCurrencyFormat.format(moneyint);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final userprovider = Provider.of<UserProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xFF2C2F33),
@@ -98,6 +173,9 @@ class _QrScannerState extends State<QrScanner> {
                     child: IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
+                        userprovider.deleteToken();
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/login', (route) => false);
                       },
                       icon: const Icon(
                         Icons.arrow_back,
@@ -114,7 +192,7 @@ class _QrScannerState extends State<QrScanner> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  fetchuserprovider.user?.data.id != null
+                  ticketprovider.isLoading
                       ? Padding(
                           padding: const EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 15.0),
@@ -228,7 +306,7 @@ class _QrScannerState extends State<QrScanner> {
                                               ),
                                             ),
                                             child: Container(
-                                              height: height / 7,
+                                              height: height / 6,
                                               width: width,
                                               decoration: const BoxDecoration(
                                                 color: Color.fromRGBO(
@@ -265,7 +343,17 @@ class _QrScannerState extends State<QrScanner> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          "Stag x$stagcount",
+                                                          "Stag x$scount",
+                                                          style: GoogleFonts
+                                                              .sairaCondensed(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Female x$fcount",
                                                           style: GoogleFonts
                                                               .sairaCondensed(
                                                             fontSize: 16,
@@ -277,9 +365,9 @@ class _QrScannerState extends State<QrScanner> {
                                                         FractionalTranslation(
                                                           translation:
                                                               const Offset(
-                                                                  0, -0.2),
+                                                                  0, 0),
                                                           child: Text(
-                                                            "Couple x$couplecount",
+                                                            "Couple x$ccount",
                                                             style: GoogleFonts
                                                                 .sairaCondensed(
                                                               fontSize: 16,
@@ -316,7 +404,7 @@ class _QrScannerState extends State<QrScanner> {
                                                                       0XFFB59F68)),
                                                         ),
                                                         Text(
-                                                          phno!,
+                                                          phno,
                                                           style: GoogleFonts
                                                               .sairaCondensed(
                                                             fontSize: 14,
@@ -362,6 +450,7 @@ class _QrScannerState extends State<QrScanner> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30.0),
@@ -396,53 +485,6 @@ class _QrScannerState extends State<QrScanner> {
                               children: [
                                 Text(
                                   "Open QR code",
-                                  style: GoogleFonts.bebasNeue(
-                                      color: Colors.white, fontSize: 25),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 30.0),
-                        child: InkWell(
-                          onTap: () {
-                            UserServices().getUserDetails(
-                                context: context,
-                                userId: orderprovider.order?.user);
-                            TicketServices().getTicketById(
-                              context: context,
-                              ticketId: orderprovider.order?.items[0].ticket,
-                            );
-                          },
-                          child: Container(
-                            height: 58,
-                            width: 190,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 120, 116, 116),
-                                  blurRadius: 20,
-                                  spreadRadius: -2,
-                                  offset: Offset(-2, -2),
-                                ),
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 20,
-                                  spreadRadius: -2,
-                                  offset: Offset(2, 2),
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              color: Color(0xFF2C2F33),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "GET TICKET DETAILS",
                                   style: GoogleFonts.bebasNeue(
                                       color: Colors.white, fontSize: 25),
                                 )

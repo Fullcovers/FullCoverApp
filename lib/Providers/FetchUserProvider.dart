@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:venq_assessment/Models/QrUserModel.dart';
 
 import '../Models/UserModel.dart';
 
@@ -14,6 +15,7 @@ class FetchUser with ChangeNotifier {
   }
 
   UserModel? user;
+  QrUserModel? qruser;
   UserModel parseUserDetails(Map<String, dynamic> responseData) {
     return UserModel(
       id: responseData['id'],
@@ -35,7 +37,34 @@ class FetchUser with ChangeNotifier {
     );
   }
 
+  QrUserModel qrUserDetails(Map<String, dynamic> responseData) {
+    return QrUserModel(
+      id: responseData['id'],
+      data: [
+        QrUserData(
+          name: QrName(
+            firstName: responseData['data'][0]['name']['firstName'],
+            lastName: responseData['data'][0]['name']['lastName'],
+          ),
+          id: responseData['data'][0]['_id'],
+          email: responseData['data'][0]['email'],
+          password: responseData['data'][0]['password'],
+          role: responseData['data'][0]['role'],
+          image: responseData['data'][0]['image'],
+          coverCoins: responseData['data'][0]['cover_coins'],
+          isVerified: responseData['data'][0]['isVerified'],
+          v: responseData['data'][0]['__v'],
+        ),
+      ],
+      message: responseData['message'],
+    );
+  }
+
   void setFetchedUser(UserModel u) {
     user = u;
+  }
+
+  void setQrFetchedUser(QrUserModel u) {
+    qruser = u;
   }
 }

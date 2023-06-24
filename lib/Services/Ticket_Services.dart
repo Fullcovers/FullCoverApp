@@ -50,6 +50,7 @@ class TicketServices {
       );
       if (res.statusCode == 201) {
         Ticket ticket = Ticket.fromJson(jsonDecode(res.body));
+        print(res.body);
         ticketprovider.setTicket(ticket);
       } else if (res.statusCode == 404) {
         showSnackBar(context, "TicketNotFound");
@@ -61,6 +62,35 @@ class TicketServices {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<String> getTicketname(
+      {required BuildContext context, required String? ticketId}) async {
+    String ticketname = '';
+    try {
+      var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}ticket/t/$ticketId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      if (res.statusCode == 201) {
+        Ticket ticket = Ticket.fromJson(jsonDecode(res.body));
+        print(res.body);
+        ticketprovider.setTicket(ticket);
+        ticketname = ticket.name;
+      } else if (res.statusCode == 404) {
+        showSnackBar(context, "TicketNotFound");
+      } else if (res.statusCode == 403) {
+        showSnackBar(context, "Forbidden User not Authenticated");
+      } else {
+        showSnackBar(context, "Error!!!");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return ticketname;
   }
 
   Future<List<Ticket>> getClubsTickets(
