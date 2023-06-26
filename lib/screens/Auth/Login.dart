@@ -18,7 +18,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  Color backbuttoncolor = Color.fromARGB(225, 202, 196, 196);
+  bool selected = true;
   @override
+  bool load = false;
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -196,15 +199,18 @@ class _LoginPageState extends State<LoginPage> {
                             height: 20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 0.0, left: 50, right: 50, bottom: 20.0),
-                            child: Container(
+                            padding: EdgeInsets.only(
+                                top: 0.0,
+                                left: width / 10,
+                                right: width / 10,
+                                bottom: 20.0),
+                            child: AnimatedContainer(
+                              width: selected ? width : 100.0,
                               height: height / 20,
-                              width: double.maxFinite,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromARGB(225, 202, 196, 196),
+                                    color: backbuttoncolor,
                                     blurRadius: 10,
                                     spreadRadius: -2,
                                     offset: Offset(-2, -2),
@@ -216,36 +222,44 @@ class _LoginPageState extends State<LoginPage> {
                                     offset: Offset(2, 2),
                                   ),
                                 ],
-                                color: Color(0xFF2D3135),
+                                color: backgroundColorfigma,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(20.0),
                                 ),
                               ),
+                              duration: const Duration(milliseconds: 500),
                               child: GestureDetector(
                                 onTap: () {
+                                  setState(() {
+                                    load = !load;
+                                    selected = !selected;
+                                  });
                                   AuthService().signInUser(
                                       context: context,
                                       email: emailController.text,
                                       password: passwordController.text);
-                                      
                                 },
                                 child: Column(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 10.0, right: 20.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "LOG IN",
-                                            style: GoogleFonts.bebasNeue(
-                                                fontSize: 20, color: golden),
+                                    load
+                                        ? CircularProgressIndicator(
+                                            color: golden, strokeWidth: 2)
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                                top: height / 65, right: 20.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "LOG IN", //one8@gmail.com  one812345
+                                                  style: GoogleFonts.bebasNeue(
+                                                      fontSize: 20,
+                                                      color: golden),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),

@@ -312,7 +312,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
             ],
           ),
           controller: panelController,
-          defaultPanelState: PanelState.CLOSED,
+          defaultPanelState: PanelState.OPEN,
           panel: orders.isNotEmpty
               ? Container(
                   height: 100,
@@ -591,7 +591,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                 )
                                               ],
                                             ),
-                                          )
+                                          ),
+                                          SizedBox(height: 10,)
                                         ],
                                       ),
                                     ),

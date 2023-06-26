@@ -82,11 +82,14 @@ class _MyAppState extends State<MyApp> {
             '/ticketconfirming': (context) => const TicketConfirming(),
             '/bookingsscreen': (context) => MyBookingPage(),
           },
-          home: userprovider.token.isEmpty
-              ? const LoginPage()
-              : Constants.btsprofile.role == "user"
-                  ? MyBookingPage()
-                  : const BehindTheScenesPage(),
+          home:  SplashScreen(user: userprovider.token.isEmpty)
+          
+          
+          // userprovider.token.isEmpty
+          //     ? const LoginPage()
+          //     : Constants.btsprofile.role == "user"
+          //         ? MyBookingPage()
+          //         : const BehindTheScenesPage(),
           // home: QrScanner(),
         )
         // home: ClubsScreen()),
