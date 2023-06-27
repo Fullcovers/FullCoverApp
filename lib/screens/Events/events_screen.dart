@@ -47,11 +47,11 @@ class _EventsScreenState extends State<EventsScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               topnavigationbar(height, width, true),
               FractionalTranslation(
-                translation: const Offset(0, -0.5),
+                translation: const Offset(0, 0),
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Center(
@@ -111,11 +111,9 @@ class _EventsScreenState extends State<EventsScreen> {
                       },
                     )),
               ),
-              Container(
-                height: rh,
-              ),
+              
             ]),
-        bottomNavigationBar: bottomnavbar(
+        bottomNavigationBar: bottomnavbar(isclub: false,isevent: true,
           height: height,
           width: width,
           iscolorchange: true,

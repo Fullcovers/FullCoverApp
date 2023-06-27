@@ -632,7 +632,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           height: height / 25,
                         ),
                         bottomnavbar(
-                          width: width,
+                          width: width,isclub: false,isevent: false,
                           iscolorchange: iscolorchange,
                           height: height,
                         )
@@ -844,7 +844,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                         bottomnavbar(
                           width: width,
                           iscolorchange: iscolorchange,
-                          height: height,
+                          height: height, isclub: false, isevent: false,
                         )
                       ])),
           renderPanelSheet: false,
@@ -886,7 +886,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
               )),
         ),
         bottomNavigationBar: !iscolorchange
-            ? bottomnavbar(
+            ? bottomnavbar(isclub: false,isevent: false,
                 width: width,
                 iscolorchange: iscolorchange,
                 height: height,

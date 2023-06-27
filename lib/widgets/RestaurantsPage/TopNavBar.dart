@@ -6,7 +6,8 @@ Widget topnavigationbar(double height, double width, bool iscolor) {
 
   return Stack(
     children: [
-      Column(children: [
+      Column(
+        children: [
         // Container(
         //   height: height / 12,
         //   width: double.maxFinite,
@@ -63,7 +64,7 @@ Widget topnavigationbar(double height, double width, bool iscolor) {
               translation: Offset(0, -overlapFraction),
               child: Container(
                 height: height / 10,
-                width: 3 * width / 6,
+                width:width,
                 decoration: BoxDecoration(
                   color: iscolor ? backgroundColorfigma : Colors.white,
                   borderRadius: BorderRadius.only(
@@ -73,20 +74,40 @@ Widget topnavigationbar(double height, double width, bool iscolor) {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Row(
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 11,
-                      ),
+                      
                       Container(
                         width: width / 6.5,
                         decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: iscolor?[
                             BoxShadow(
-                              color: Color.fromARGB(255, 67, 73, 78),
+                              color: Color.fromARGB(255, 88, 88, 88),
                               offset: Offset(-4, -4),
                               blurRadius: 10,
-                            )
+                              spreadRadius: -2,
+                            ),
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(4, 4),
+                              blurRadius: 15,
+                              spreadRadius:
+                                  -2, // how far the color effect spreads.
+                            ),
+                          ]:[
+                            BoxShadow(
+                              color: Color.fromARGB(255, 88, 88, 88),
+                              offset: Offset(4, 4),
+                              blurRadius: 15,
+                              spreadRadius: 1,
+                            ),
+                            BoxShadow(
+                              color: Colors.white,
+                              offset: Offset(-4, -4),
+                              blurRadius: 15,
+                              spreadRadius:
+                                  -2, // how far the color effect spreads.
+                            ),
                           ],
                           color: iscolor ? backgroundColorfigma : Colors.white,
                           borderRadius: BorderRadius.all(
@@ -112,12 +133,34 @@ Widget topnavigationbar(double height, double width, bool iscolor) {
                       Container(
                         width: width / 7,
                         decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: iscolor?[
                             BoxShadow(
-                              color: Color.fromARGB(255, 67, 73, 78),
+                              color: Color.fromARGB(255, 88, 88, 88),
                               offset: Offset(-4, -4),
                               blurRadius: 10,
-                            )
+                              spreadRadius: -2,
+                            ),
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(4, 4),
+                              blurRadius: 15,
+                              spreadRadius:
+                                  -2, // how far the color effect spreads.
+                            ),
+                          ]:[
+                            BoxShadow(
+                              color: Color.fromARGB(255, 88, 88, 88),
+                              offset: Offset(4, 4),
+                              blurRadius: 15,
+                              spreadRadius: 1,
+                            ),
+                            BoxShadow(
+                              color: Colors.white,
+                              offset: Offset(-4, -4),
+                              blurRadius: 15,
+                              spreadRadius:
+                                  -2, // how far the color effect spreads.
+                            ),
                           ],
                           color: iscolor ? backgroundColorfigma : Colors.white,
                           borderRadius: BorderRadius.all(

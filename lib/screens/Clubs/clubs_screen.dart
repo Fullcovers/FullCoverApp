@@ -93,7 +93,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
                               width: width / 1.3,
-                              height: height / 1.85,
+                              height: height / 1.7,
                               child: ListView.builder(
                                 itemCount: clubsData.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -171,7 +171,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
             ),
           ],
         ),
-        bottomNavigationBar: bottomnavbar(height: height, width: width),
+        bottomNavigationBar: bottomnavbar(height: height, width: width,isclub: true,isevent: false,),
       ),
     );
   }
