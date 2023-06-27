@@ -50,10 +50,10 @@ class Balancecard extends StatelessWidget {
                 children: [
                   Text(
                     "VIP Membership",
-                    style: GoogleFonts.sairaCondensed(
+                    style: GoogleFonts.mavenPro(
                         color: golden,
                         fontSize: height / 54.1875,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -73,7 +73,7 @@ class Balancecard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only( left: 20.0),
+              padding: const EdgeInsets.only(top: 10.0, left: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

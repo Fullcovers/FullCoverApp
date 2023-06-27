@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color golden=Color(0xFF9b804a);
+Color golden=Color(0xFFB59F68);
 Color backgroundColorweb=Color(0xFF222222);
 Color backgroundColorfigma=Color(0xFF212426);
 Color offwhite=Color(0xFFd9d9d9);

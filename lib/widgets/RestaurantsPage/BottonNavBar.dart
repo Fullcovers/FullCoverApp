@@ -158,16 +158,16 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: (widget.width / 2) - 50.0),
+                  padding: EdgeInsets.only(left: (widget.width / 2) - widget.width / 8.5),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
-                        height: widget.height / 10.5,
-                        width: widget.width / 4.5,
+                        height: widget.height / 9.5,
+                        width: widget.width / 4.2,
                         child: Card(
                           elevation: 0,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
+                              borderRadius: BorderRadius.circular(25)),
                           color: widget.iscolorchange
                               ? Colors.white
                               : backgroundColorfigma,
@@ -181,8 +181,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Container(
-                      height: widget.height / 14,
-                      width: widget.width / 6.62,
+                      height: widget.height / 12,
+                      width: widget.width / 6,
                       child: InkWell(
                         onTap: () {
                           setState(() {
@@ -203,11 +203,15 @@ class _bottomnavbarState extends State<bottomnavbar> {
                             child: Container(
                                 decoration: BoxDecoration(
                                   boxShadow: widget.iscolorchange
-                                      ? [
+                                      ? [  BoxShadow(
+                                            color: Colors.transparent,
+                                            offset: Offset(-4, -4),
+                                            blurRadius: 3,
+                                          ),
                                           BoxShadow(
                                             color:
                                                 Color.fromARGB(255, 67, 73, 78),
-                                            offset: Offset(-4, -4),
+                                            offset: Offset(4, 4),
                                             blurRadius: 10,
                                           ),
                                           // BoxShadow(
@@ -215,11 +219,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                           //   offset: Offset(-4, 4),
                                           //   blurRadius: 2,
                                           // ),
-                                          BoxShadow(
-                                            color: Colors.transparent,
-                                            offset: Offset(4, -4),
-                                            blurRadius: 3,
-                                          ),
+                                        
                                         ]
                                       : [
                                           // BoxShadow(
@@ -250,7 +250,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 ),
                                 child: Image.asset(
                                   "assets/images/qrcode.png",
-                                  scale: 1040.4 / widget.height,
+                                  scale: 900/ widget.height,
                                   color: widget.iscolorchange
                                       ? Colors.black
                                       : Colors.white,
