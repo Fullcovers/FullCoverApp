@@ -4,12 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class DateButton extends StatelessWidget {
   const DateButton({
     Key? key,
-    required this.date,    required this.weekday,
-
+    required this.date,
+    required this.weekday,
     required this.color,
     required this.colortext,
   }) : super(key: key);
-  final String date;  final String weekday;
+  final String date;
+  final String weekday;
 
   final Color color;
   final Color colortext;
@@ -24,7 +25,7 @@ class DateButton extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
             width: 1.0,
-            color: Color(0XFF979797),
+            color: const Color(0XFF979797),
           ),
           color: color,
           borderRadius: BorderRadius.circular(15.0)),
@@ -33,10 +34,10 @@ class DateButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              weekday.substring(0,3),
+              weekday.substring(0, 3),
               style: GoogleFonts.sairaCondensed(
                 color: colortext,
-                fontSize: height/43.35,
+                fontSize: height / 43.35,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -44,7 +45,7 @@ class DateButton extends StatelessWidget {
               date,
               style: GoogleFonts.sairaCondensed(
                 color: colortext,
-                fontSize: height/43.35,
+                fontSize: height / 43.35,
                 fontWeight: FontWeight.w600,
               ),
             ),

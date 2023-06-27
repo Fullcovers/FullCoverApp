@@ -228,17 +228,57 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(
-              left: width / 5, right: width / 5, bottom: width / 20),
-          child: bottombutton(
-              "Scan QR Code",
-              const Icon(
-                Icons.qr_code_2_outlined,
-                size: 35,
+        bottomNavigationBar: InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, '/qrscanner');
+          },
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: width / 5, right: width / 5, bottom: width / 20),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 58,
+                width: 190,
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 120, 116, 116),
+                      blurRadius: 20,
+                      spreadRadius: -2,
+                      offset: Offset(-2, -2),
+                    ),
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 20,
+                      spreadRadius: -2,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Color(0xFF2C2F33),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      color: const Color.fromARGB(255, 252, 248, 248),
+                      icon: const Icon(
+                        Icons.qr_code_2_outlined,
+                        size: 35,
+                      ),
+                    ),
+                    Text(
+                      "SCAN QR CODE",
+                      style: GoogleFonts.bebasNeue(
+                          color: Colors.white, fontSize: 25),
+                    )
+                  ],
+                ),
               ),
-              context,
-              rought: QrScanner()),
+            ),
+          ),
         ),
       ),
     );

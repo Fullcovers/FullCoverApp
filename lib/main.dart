@@ -87,7 +87,6 @@ class _MyAppState extends State<MyApp> {
               : Constants.btsprofile.role == "user"
                   ? MyBookingPage()
                   : const BehindTheScenesPage(),
-          // home: QrScanner(),
         )
         // home: ClubsScreen()),
         );
