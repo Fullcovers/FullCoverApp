@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Models/Events.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 Widget myeventcard(double height, double width, Event event) {
   return Card(
@@ -10,7 +11,7 @@ Widget myeventcard(double height, double width, Event event) {
     ),
     child: SizedBox(
       width: width / 1.2,
-      height: height / 5,
+      height: height / 5.97,
       child: Stack(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
@@ -40,79 +41,62 @@ Widget myeventcard(double height, double width, Event event) {
             ),
           ),
         ),
+        
         Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(event.name,
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 48,
-                  color: Colors.white,
-                )),
-          ),
-        ),
-        Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.bottomRight,
             child: Container(
-              width: width / 1.2,
-              height: height / 15,
+              width: width / 1.4,
+              height: height / 12,
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: backgroundColorfigma,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Row(children: [
-                  SizedBox(
-                    width: width / 40,
-                  ),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                 
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Timings",
+                        event.name,
                         style: GoogleFonts.sairaCondensed(
                             fontWeight: FontWeight.bold,
-                            fontSize: height/86.7,
-                            color: Color(0xff545454)),
+                            fontSize: height/30,
+                            color: offwhite),
                       ),
-                      Text(
-                        "19:00 Hrs - 23:45 Hrs",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height/61.92857142857143,
-                            color: Color(0xff545454)),
-                      )
+                     
                     ],
                   ),
-                  SizedBox(
-                    width: width / 3,
-                  ),
+                
                   
                 
-                 Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Starts from",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height/86.7,
-                            color: Color(0xff545454)),
-                      ),
-                      Text(
-                        "Rs. 2000",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height/61.92857142857143,
-                            color: Color(0xff545454)),
-                      )
-                    ],
-                  ),
-                 
+                 Padding(
+                   padding: const EdgeInsets.only(right:18.0),
+                   child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Starts from",
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.bold,
+                              fontSize: height/50,
+                              color: offwhite),
+                        ),
+                        Text(
+                          "Rs. 2000",
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.bold,
+                              fontSize: height/50,
+                              color: offwhite),
+                        )
+                      ],
+                    ),
+                 ),
                 ]),
               ),
             ))

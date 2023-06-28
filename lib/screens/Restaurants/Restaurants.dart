@@ -22,7 +22,7 @@ class RestaurantsPage extends StatelessWidget {
           backgroundColor:  backgroundColorfigma,
           body: Column(
             children: [
-              topnavigationbar(height, width,false),
+              topnavigationbar(height: height, width:width,iscolor: false),
               FractionalTranslation(
                 translation: const Offset(0, -0.5),
                 child: Padding(
@@ -58,7 +58,7 @@ class RestaurantsPage extends StatelessWidget {
               )
             ],
           ),
-          bottomNavigationBar: bottomnavbar(height:height, width:width)),
+          bottomNavigationBar: bottomnavbar(height:height, width:width,isclub: false,isevent: false,initialindex: 0,)),
     );
   }
 }

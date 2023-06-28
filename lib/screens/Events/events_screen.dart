@@ -47,11 +47,11 @@ class _EventsScreenState extends State<EventsScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              topnavigationbar(height, width, true),
+              topnavigationbar(height: height, width:width,iscolor: true),
               FractionalTranslation(
-                translation: const Offset(0, -0.5),
+                translation: const Offset(0, -0.8),
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Center(
@@ -63,59 +63,60 @@ class _EventsScreenState extends State<EventsScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                    height: 4.8 * height / 10,
-                    width: width,
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: FutureBuilder<List<Event>>(
-                      future: EventsServices().getAllEvents(context: context),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: SizedBox(
-                              height: height / 21.675,
-                              width: width / 10.275,
-                              child: const CircularProgressIndicator(),
-                            ),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          final eventsData = snapshot.data!;
+              FractionalTranslation(                translation: const Offset(0, -0.1),
 
-                          return ListView.builder(
-                            itemCount: eventsData.length,
-                            itemBuilder: (context, index) {
-                              final Event event = eventsData[index];
-
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    await ClubServices().getSingleClub(
-                                        clubid: event.clubId, context: context);
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EventDetail(event: event)));
-                                  },
-                                  child: myeventcard(height, width, event),
-                                ),
-                              );
-                            },
-                          );
-                        }
-                      },
-                    )),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                      height: 4.8 * height / 10,
+                      width: width,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: FutureBuilder<List<Event>>(
+                        future: EventsServices().getAllEvents(context: context),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: SizedBox(
+                                height: height / 21.675,
+                                width: width / 10.275,
+                                child: const CircularProgressIndicator(),
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            final eventsData = snapshot.data!;
+              
+                            return ListView.builder(
+                              itemCount: eventsData.length,
+                              itemBuilder: (context, index) {
+                                final Event event = eventsData[index];
+              
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      await ClubServices().getSingleClub(
+                                          clubid: event.clubId, context: context);
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetail(event: event)));
+                                    },
+                                    child: myeventcard(height, width, event),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      )),
+                ),
               ),
-              Container(
-                height: rh,
-              ),
+              
             ]),
-        bottomNavigationBar: bottomnavbar(
+        bottomNavigationBar: bottomnavbar(isclub: false,isevent: true,initialindex: 2,
           height: height,
           width: width,
           iscolorchange: true,
