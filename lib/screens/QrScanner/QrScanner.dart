@@ -83,7 +83,6 @@ class _QrScannerState extends State<QrScanner> {
   }
 
   Future<void> getTicketDetails(String qrData) async {
-    print("hello");
     final orderprovider =
         Provider.of<OrderValidationProvider>(context, listen: false);
 
@@ -97,11 +96,6 @@ class _QrScannerState extends State<QrScanner> {
     fcount = 0;
     ccount = 0;
     await processItems(context, orderprovider.order!.items);
-
-    // await TicketServices().getTicketById(
-    //   context: context,
-    //   ticketId: orderprovider.order?.items[0].ticket,
-    // );
     ticketprovider.setLoading(true);
   }
 
@@ -137,10 +131,6 @@ class _QrScannerState extends State<QrScanner> {
     String formattedDate =
         d != null ? DateFormat('EE, d MMMM y').format(d) : '';
 
-    // String? firstname = fetchuserprovider.user?.data.name.firstName;
-    // String? email = fetchuserprovider.user?.data.email;
-    // String? phno = fetchuserprovider.user?.data.phoneNumber;
-
     String? firstname = fetchuserprovider.qruser?.data[0].name.firstName;
     String? email = fetchuserprovider.qruser?.data[0].email;
     String? phno = "";
@@ -173,9 +163,6 @@ class _QrScannerState extends State<QrScanner> {
                     child: IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-                        userprovider.deleteToken();
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/login', (route) => false);
                       },
                       icon: const Icon(
                         Icons.arrow_back,
