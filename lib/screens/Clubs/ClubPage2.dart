@@ -110,7 +110,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
+                Column(mainAxisAlignment:MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: height / 40,
@@ -130,7 +130,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                     Align(
                       // alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 0.0, left: 0.0),
+                        padding:  EdgeInsets.only(top: 0.0, left: width / 20.55),
                         child: Text(
                           "Pune",
                           style: GoogleFonts.sairaCondensed(
@@ -151,7 +151,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                       "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                       style: GoogleFonts.sairaCondensed(
                         color: const Color(0XFFFFFFFF),
-                        fontSize: height / 43.35,
+                        fontSize: height / 70,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

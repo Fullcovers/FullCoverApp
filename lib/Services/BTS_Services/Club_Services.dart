@@ -99,12 +99,13 @@ class BTSClubServices {
           await http.MultipartFile.fromPath('image', imageFile.path);
       request.files.add(multipartFile);
       // request.files.add(http.MultipartFile("name",""));
-      request.headers['Content-Type'] = 'application/json; charset=UTF-8';
+      request.headers['Content-Type'] = 'multipart/form-data; charset=UTF-8';
       request.headers['Authorization'] = 'Bearer ${Constants.usertoken}';
       request.fields['name'] = "userId";
 
       var response = await request.send();
-      var responseBody = await request.files[0].field;
+      final respStr = await response.stream.bytesToString();
+
 
       // http.Response res = await http.put(
       //   Uri.parse(
@@ -117,7 +118,7 @@ class BTSClubServices {
       // );
 
       // print(json.encode(body));
-      print(responseBody);
+      print(respStr);
       print(imageFile.path);
       print(imageFile.name);
       print(imageFile.mimeType);
