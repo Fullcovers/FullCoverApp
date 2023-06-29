@@ -3,13 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Models/Ticket.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 
 class ClubPage3 extends StatefulWidget {
   ClubPage3(
       {super.key,
+      required this.bookingtable,required this.time,
       required this.club,
+      required this.tableticketscount,
       required this.couplecount,
       required this.coupleentrypricce,
       required this.femalecount,
@@ -25,6 +28,9 @@ class ClubPage3 extends StatefulWidget {
       required this.coupleid,
       required this.femaleid,
       required this.promocode});
+  Map<Ticket, int> tableticketscount;
+  String time;
+  bool bookingtable;
   int stagcount;
   ClubModel club;
   int stagentryprice;
@@ -142,46 +148,86 @@ class _ClubPage3State extends State<ClubPage3> {
                               child: Center(
                                 child: InkWell(
                                   onTap: () {
-                                    List<Map<String, dynamic>> tickets = [];
+                                    if (widget.bookingtable) {
+                                      List<Map<String, dynamic>> tablestickets = [];
+                                      // for (var i = 0; i < widget.tableticketscount.length; i++) {
 
-                                    if (widget.stagcount > 0) {
-                                      tickets.add({
-                                        "qty": widget.stagcount,
-                                        "ticket": widget.stagid
+                                      //   if (widget.stagcount > 0) {
+                                      //   tickets.add({
+                                      //     "qty": widget.stagcount,
+                                      //     "ticket": widget.stagid
+                                      //   });
+                                      // }
+                                      // }
+                                      widget.tableticketscount
+                                          .forEach((ticket, count) {
+                                        if (count > 0) {
+                                          tablestickets.add({
+                                            "qty": count,
+                                            "table": ticket.id
+                                          });
+                                        }
                                       });
-                                    }
+                                      Map<String, dynamic> requestBody = {
+                                        "tables": tablestickets,
+                                        "send_to": {
+                                          "phoneNumber": phoneController.text,
+                                          "email": emailController.text
+                                        },
+                                        "club": widget.club.id,
+                                        "date": formattedDate,
+                                        // "promo_code": widget.promocode,
+                                        "amount": 1
+                                        // widget.totalprice +
+                                        //     widget.totalprice * 4 / 100 +
+                                        //     gst18.floor()
+                                      };
+                                        OrderServices.placetableOrder(
+                                          context: context,
+                                          requestbody: requestBody);
+                                    
+                                    } else {
+                                      List<Map<String, dynamic>> tickets = [];
 
-                                    if (widget.couplecount > 0) {
-                                      tickets.add({
-                                        "qty": widget.couplecount,
-                                        "ticket": widget.coupleid
-                                      });
-                                    }
+                                      if (widget.stagcount > 0) {
+                                        tickets.add({
+                                          "qty": widget.stagcount,
+                                          "ticket": widget.stagid
+                                        });
+                                      }
 
-                                    if (widget.femalecount > 0) {
-                                      tickets.add({
-                                        "qty": widget.femalecount,
-                                        "ticket": widget.femaleid
-                                      });
+                                      if (widget.couplecount > 0) {
+                                        tickets.add({
+                                          "qty": widget.couplecount,
+                                          "ticket": widget.coupleid
+                                        });
+                                      }
+
+                                      if (widget.femalecount > 0) {
+                                        tickets.add({
+                                          "qty": widget.femalecount,
+                                          "ticket": widget.femaleid
+                                        });
+                                      }
+                                      print(formattedDate);
+                                      Map<String, dynamic> requestBody = {
+                                        "tickets": tickets,
+                                        "send_to": {
+                                          "phoneNumber": phoneController.text,
+                                          "email": emailController.text
+                                        },
+                                        "club": widget.club.id,
+                                        "date": formattedDate,
+                                        // "promo_code": widget.promocode,
+                                        "amount": 1
+                                        // widget.totalprice +
+                                        //     widget.totalprice * 4 / 100 +
+                                        //     gst18.floor()
+                                      };
+                                      OrderServices.placeOrder(
+                                          context: context,
+                                          requestbody: requestBody);
                                     }
-                                    print(formattedDate);
-                                    Map<String, dynamic> requestBody = {
-                                      "tickets": tickets,
-                                      "send_to": {
-                                        "phoneNumber": phoneController.text,
-                                        "email": emailController.text
-                                      },
-                                      "club": widget.club.id,
-                                      "date": formattedDate,
-                                      // "promo_code": widget.promocode,
-                                      "amount": 1
-                                      // widget.totalprice +
-                                      //     widget.totalprice * 4 / 100 +
-                                      //     gst18.floor()
-                                    };
-                                    OrderServices.placeOrder(
-                                        context: context,
-                                        requestbody: requestBody);
                                   },
                                   child: Row(
                                     mainAxisAlignment:
@@ -588,8 +634,10 @@ class _ClubPage3State extends State<ClubPage3> {
                                 onPressed: () {},
                                 icon: const Icon(Icons.location_on_outlined),
                               ),
-                              Container(width: width/1.2,
-                                child: Text(textAlign: TextAlign.left,
+                              Container(
+                                width: width / 1.2,
+                                child: Text(
+                                  textAlign: TextAlign.left,
                                   widget.club.address,
                                   style: GoogleFonts.sairaCondensed(
                                     fontSize: height / 61.92857142857143,

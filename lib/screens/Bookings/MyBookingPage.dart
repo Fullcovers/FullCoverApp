@@ -20,6 +20,7 @@ import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
+import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
 import 'package:venq_assessment/screens/profile/ProfilePage.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
@@ -52,6 +53,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
     // Start the timer when the widget is initialized
 
     _startTimer();
+    UserServices.getprofileinfo();
   }
 
   Future<void> initializeOrders() async {
@@ -597,28 +599,35 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, left: 10.0),
-                                    child: Container(
-                                      height: 3 * height / 11,
-                                      width: width / 5,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20.0)),
-                                        border: Border.all(
-                                          color: Colors.black,
-                                          width: 2,
+                                  InkWell(onTap: () {
+                                    Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BookingHistory()));
+                                  },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10.0, left: 10.0),
+                                      child: Container(
+                                        height: 3 * height / 11,
+                                        width: width / 5,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 2,
+                                          ),
+                                          color: Colors.white,
                                         ),
-                                        color: Colors.white,
-                                      ),
-                                      child: Center(
-                                        child: RotatedBox(
-                                          quarterTurns: 1,
-                                          child: Text("PREVIOUS BOOKINGS",
-                                              style: GoogleFonts.bebasNeue(
-                                                fontSize: 30,
-                                              )),
+                                        child: Center(
+                                          child: RotatedBox(
+                                            quarterTurns: 1,
+                                            child: Text("PREVIOUS BOOKINGS",
+                                                style: GoogleFonts.bebasNeue(
+                                                  fontSize: 30,
+                                                )),
+                                          ),
                                         ),
                                       ),
                                     ),

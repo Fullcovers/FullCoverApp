@@ -19,7 +19,7 @@ class FetchUser with ChangeNotifier {
   UserModel parseUserDetails(Map<String, dynamic> responseData) {
     return UserModel(
       id: responseData['id'],
-      data: UserData(
+      data: UserData(covercoin: responseData['data'][0]['cover_coins'],
         name: Name(
           firstName: responseData['data'][0]['name']['firstName'],
           lastName: responseData['data'][0]['name']['lastName'],

@@ -115,7 +115,7 @@ class _TicketsState extends State<Tickets> {
       body: loded && lodedwalkins
           ? Column(
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: HeaderContent(title: "Reservations"),
                 ),

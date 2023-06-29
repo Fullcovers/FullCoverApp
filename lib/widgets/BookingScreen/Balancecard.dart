@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 
 class Balancecard extends StatelessWidget {
   const Balancecard({
@@ -96,13 +97,16 @@ class Balancecard extends StatelessWidget {
                         "assets/images/coinlogo.png",
                         scale: 13,
                       ),
-                       Text(
-                        " 0",
-                        style: GoogleFonts.sairaCondensed(
-                                      color: golden,
-                                      fontSize: height / 30,
-                                      fontWeight: FontWeight.w600),
-                      ),
+                       Padding(
+                         padding: const EdgeInsets.only(left:8.0),
+                         child: Text(
+                          Constants.btsprofile.covercoin.toString(),
+                          style: GoogleFonts.sairaCondensed(
+                                        color: golden,
+                                        fontSize: height / 30,
+                                        fontWeight: FontWeight.w600),
+                                             ),
+                       ),
                     ],
                   ),
                 ],

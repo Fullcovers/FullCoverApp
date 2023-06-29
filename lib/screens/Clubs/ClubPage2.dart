@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 // import 'package:jiffy/jiffy.dart';
 
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage3.dart';
@@ -41,13 +42,31 @@ class _ClubsPage2State extends State<ClubsPage2> {
   var coloruntap4 = Colors.white;
   var coloruntap5 = Colors.white;
   var coloruntap6 = Colors.white;
+  List<Ticket> tabletickets = [];
+  bool loded = false;
+  Map<Ticket, int> tableticketscount = {};
+  gettickets() async {
+    tabletickets = await BTStable.getTableTickets(
+      myclubid: widget.club.id,
+      context: context,
+    );
+    for (var i = 0; i < tabletickets.length; i++) {
+      tableticketscount[tabletickets[i]] = 0;
+    }
+    setState(() {
+      loded = true;
+    });
+  }
 
   @override
   void initState() {
     TicketServices().getClubsTickets(context: context, clubId: widget.club.id);
     super.initState();
+    gettickets();
   }
 
+  TimeOfDay time =
+      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
   int stagcount = 0;
   int stagentryprice = 999;
   int couplecount = 0;
@@ -118,15 +137,25 @@ class _ClubsPage2State extends State<ClubsPage2> {
   late List<DateTime> timeSlots;
   String selectedTime = '';
 
+  TimeOfDay endtime =
+      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
   @override
   Widget build(BuildContext context) {
+    // print(fourdayaftertommorow.day);
+    double totaltableamount = 0;
+    for (var i = 0; i < tableticketscount.length; i++) {
+      totaltableamount =
+          (tableticketscount[tabletickets[i]]! * tabletickets[i].current) +
+              totaltableamount;
+    }
     var cmonth = DateFormat.MMM().format(DateTime.now());
     int totalprice = (stagcount * stagentryprice) +
         (femalecount * femaleentryprice) +
         (couplecount * coupleentrypricce);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
+    final hoursend = endtime.hour.toString().padLeft(2, "0");
+    final minuteend = endtime.minute.toString().padLeft(2, "0");
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColorfigma,
@@ -137,7 +166,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(mainAxisAlignment:MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: height / 40,
@@ -155,7 +186,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                     ),
                     Align(
                       child: Padding(
-                        padding:  EdgeInsets.only(top: 0.0, left: width / 20.55),
+                        padding: EdgeInsets.only(top: 0.0, left: width / 20.55),
                         child: Text(
                           "Pune",
                           style: GoogleFonts.sairaCondensed(
@@ -294,7 +325,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 1;
+                                selected = tomorrow.day;
 
                                 colorbuttonnormal1 =
                                     colorbuttonnormal1 == golden
@@ -316,7 +347,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: tomorrowsdayOfWeek,
-                                date: (date.day + 1).toString(),
+                                date: (tomorrow.day).toString(),
                                 color: colorbuttonnormal1,
                                 colortext: coloruntap1),
                           ),
@@ -326,7 +357,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 2;
+                                selected = dayaftertommorow.day;
 
                                 colorbuttonnormal2 =
                                     colorbuttonnormal2 == golden
@@ -348,7 +379,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: dayaftertommorowsdayOfWeek,
-                                date: (date.day + 2).toString(),
+                                date: (dayaftertommorow.day).toString(),
                                 color: colorbuttonnormal2,
                                 colortext: coloruntap2),
                           ),
@@ -358,7 +389,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 3;
+                                selected = twodayaftertommorow.day;
 
                                 colorbuttonnormal3 =
                                     colorbuttonnormal3 == golden
@@ -380,7 +411,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: twodayaftertommorowsdayOfWeek,
-                                date: (date.day + 3).toString(),
+                                date: (twodayaftertommorow.day).toString(),
                                 color: colorbuttonnormal3,
                                 colortext: coloruntap3),
                           ),
@@ -390,7 +421,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 4;
+                                selected = threedayaftertommorow.day;
 
                                 colorbuttonnormal4 =
                                     colorbuttonnormal4 == golden
@@ -412,7 +443,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: threetomorrowsdayOfWeek,
-                                date: (date.day + 4).toString(),
+                                date: (threedayaftertommorow.day).toString(),
                                 color: colorbuttonnormal4,
                                 colortext: coloruntap4),
                           ),
@@ -422,7 +453,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 5;
+                                selected = fourdayaftertommorow.day;
 
                                 colorbuttonnormal5 =
                                     colorbuttonnormal5 == golden
@@ -443,7 +474,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: fourdayaftertommorowsdayOfWeek,
-                                date: (date.day + 5).toString(),
+                                date: (fourdayaftertommorow.day).toString(),
                                 color: colorbuttonnormal5,
                                 colortext: coloruntap5),
                           ),
@@ -453,7 +484,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                selected = date.day + 6;
+                                selected = fivedayaftertommorow.day;
 
                                 colorbuttonnormal6 =
                                     colorbuttonnormal6 == golden
@@ -474,7 +505,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                             },
                             child: DateButton(
                                 weekday: fivedayaftertommorowsdayOfWeek,
-                                date: (date.day + 6).toString(),
+                                date: (fivedayaftertommorow.day).toString(),
                                 color: colorbuttonnormal6,
                                 colortext: coloruntap6),
                           ),
@@ -498,7 +529,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
               curve: Curves.easeInOut,
               child: booktable
                   ? SizedBox(
-                      height: 3.5 * height / 10,
+                      height: 3.5 * height / 8,
                       child: Column(
                         children: [
                           InkWell(
@@ -539,110 +570,166 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               ),
                             ),
                           ),
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                          Align(alignment: Alignment.centerLeft,
+                            child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,left: 10 ),
+                                      child: Text(
+                                        "Select Time",
+                                        style: GoogleFonts.sairaCondensed(
+                                          color: const Color(0XFFBABABA),
+                                          fontSize: height / 54,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:8.0),
+                            child: Container(
+                              height: height / 20,
+                              width: width / 2,
+                              decoration: BoxDecoration(
+                                color: const Color.fromRGBO(34, 34, 34, 0.37),
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 0.0, left: 20.0),
-                                    child: Text(
-                                      "Select Time",
-                                      style: GoogleFonts.sairaCondensed(
-                                        color: const Color(0XFFBABABA),
-                                        fontSize: height / 54,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      left: 20.0,
                                     ),
+                                    child: Text("$hoursend:$minuteend",
+                                        style: GoogleFonts.sairaCondensed(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 0.0, right: 20.0),
-                                    child: Text(
-                                      selectedTime,
-                                      style: GoogleFonts.sairaCondensed(
-                                        color: const Color(0XFFB59F68),
-                                        fontSize: height / 54,
-                                        fontWeight: FontWeight.w500,
+                                    padding: const EdgeInsets.only(right: 10.0),
+                                    child: IconButton(
+                                      onPressed: () async {
+                                        TimeOfDay? newtime = await showTimePicker(
+                                            context: context, initialTime: time);
+                                        if (newtime == null) {
+                                          return;
+                                        }
+                                        setState(() {
+                                          endtime = newtime;
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.alarm,
+                                        color: Colors.white,
+                                        size: 20,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  right: width / 20.55,
-                                  left: width / 20.55,
-                                  bottom: 8,
-                                  top: 8,
-                                ),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: List.generate(timeSlots.length,
-                                        (index) {
-                                      DateTime timeSlot = timeSlots[index];
-                                      bool isSelected =
-                                          index == selectedTimeIndex;
-
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              selectedTimeIndex = index;
-                                              selectedTime =
-                                                  DateFormat('hh:mm a').format(
-                                                      timeSlots[
-                                                          selectedTimeIndex]);
-                                            });
-                                          },
-                                          child: TimeButton(
-                                            time: DateFormat('hh:mm a')
-                                                .format(timeSlot),
-                                            color: isSelected
-                                                ? golden
-                                                : backgroundColorfigma,
-                                            colortext: isSelected
-                                                ? Colors.black
-                                                : Colors.white,
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                              )
-                            ],
+                            ),
                           ),
+                          // Column(
+                          //   children: [
+                          //     Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceBetween,
+                          //       children: [
+                          //         Padding(
+                          //           padding: const EdgeInsets.only(
+                          //               top: 0.0, left: 20.0),
+                          //           child: Text(
+                          //             "Select Time",
+                          //             style: GoogleFonts.sairaCondensed(
+                          //               color: const Color(0XFFBABABA),
+                          //               fontSize: height / 54,
+                          //               fontWeight: FontWeight.w500,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //         Padding(
+                          //           padding: const EdgeInsets.only(
+                          //               top: 0.0, right: 20.0),
+                          //           child: Text(
+                          //             selectedTime,
+                          //             style: GoogleFonts.sairaCondensed(
+                          //               color: const Color(0XFFB59F68),
+                          //               fontSize: height / 54,
+                          //               fontWeight: FontWeight.w500,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     Padding(
+                          //       padding: EdgeInsets.only(
+                          //         right: width / 20.55,
+                          //         left: width / 20.55,
+                          //         bottom: 8,
+                          //         top: 8,
+                          //       ),
+                          //       child: SingleChildScrollView(
+                          //         scrollDirection: Axis.horizontal,
+                          //         child: Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: List.generate(timeSlots.length,
+                          //               (index) {
+                          //             DateTime timeSlot = timeSlots[index];
+                          //             bool isSelected =
+                          //                 index == selectedTimeIndex;
+
+                          //             return Padding(
+                          //               padding:
+                          //                   const EdgeInsets.only(left: 8.0),
+                          //               child: InkWell(
+                          //                 onTap: () {
+                          //                   setState(() {
+                          //                     selectedTimeIndex = index;
+                          //                     selectedTime =
+                          //                         DateFormat('hh:mm a').format(
+                          //                             timeSlots[
+                          //                                 selectedTimeIndex]);
+                          //                   });
+                          //                 },
+                          //                 child: TimeButton(
+                          //                   time: DateFormat('hh:mm a')
+                          //                       .format(timeSlot),
+                          //                   color: isSelected
+                          //                       ? golden
+                          //                       : backgroundColorfigma,
+                          //                   colortext: isSelected
+                          //                       ? Colors.black
+                          //                       : Colors.white,
+                          //                 ),
+                          //               ),
+                          //             );
+                          //           }),
+                          //         ),
+                          //       ),
+                          //     )
+                          //   ],
+                          // ),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: width / 13, right: width / 13, top: 10),
+                                left: width / 13, right: width / 13, top: height/30),
                             child: SizedBox(
-                              height: height / 8,
-                              child: FutureBuilder<List<Ticket>>(
-                                future: TicketServices().getClubsTickets(
-                                  context: context,
-                                  clubId: widget.club.id,
-                                ),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
+                              height: height / 4,
+                              child: ListView.builder(
+                                itemBuilder: (context, snapshot) {
+                                  if (tabletickets == []) {
                                     return const SizedBox(
                                         height: 40,
                                         width: 40,
                                         child: Center(
                                             child:
                                                 CircularProgressIndicator()));
-                                  } else if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  } else if (snapshot.hasData) {
-                                    List<Ticket> tickets = snapshot.data!;
+                                  } else {
                                     return Container(
                                       height: 3.2 * height / 10,
                                       width: double.maxFinite,
@@ -650,21 +737,22 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                         color: backgroundColorfigma,
                                       ),
                                       child: ListView.builder(
-                                        itemCount: tickets.length,
+                                        itemCount: tabletickets.length,
                                         itemBuilder: (context, index) {
-                                          Ticket ticket = tickets[index];
-                                          if (ticket.name == 'Stag' ||
-                                              ticket.name == 'stag') {
-                                            stagid = ticket.id;
-                                            stagentryprice = ticket.current;
-                                          } else if (ticket.name == "couple" ||
-                                              ticket.name == "Couple") {
-                                            coupleid = ticket.id;
-                                            coupleentrypricce = ticket.current;
-                                          } else {
-                                            femaleid = femaleid;
-                                            femaleentryprice = ticket.current;
-                                          }
+                                          Ticket ticket = tabletickets[index];
+                                          print(ticket.name);
+                                          // if (ticket.name == 'Stag' ||
+                                          //     ticket.name == 'stag') {
+                                          //   stagid = ticket.id;
+                                          //   stagentryprice = ticket.current;
+                                          // } else if (ticket.name == "couple" ||
+                                          //     ticket.name == "Couple") {
+                                          //   coupleid = ticket.id;
+                                          //   coupleentrypricce = ticket.current;
+                                          // } else {
+                                          //   femaleid = femaleid;
+                                          //   femaleentryprice = ticket.current;
+                                          // }
                                           return Container(
                                             height: height / 14,
                                             width: double.maxFinite,
@@ -729,35 +817,13 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                                                     0, 0.05),
                                                             child: IconButton(
                                                               onPressed: () {
-                                                                if (ticket.name ==
-                                                                        "Stag" ||
-                                                                    ticket.name ==
-                                                                        "stag") {
-                                                                  setState(() {
-                                                                    if (stagcount >
-                                                                        0) {
-                                                                      stagcount--;
-                                                                    }
-                                                                  });
-                                                                } else if (ticket
-                                                                            .name ==
-                                                                        'couple' ||
-                                                                    ticket.name ==
-                                                                        "Couple") {
-                                                                  setState(() {
-                                                                    if (couplecount >
-                                                                        0) {
-                                                                      couplecount--;
-                                                                    }
-                                                                  });
-                                                                } else {
-                                                                  setState(() {
-                                                                    if (femalecount >
-                                                                        0) {
-                                                                      femalecount--;
-                                                                    }
-                                                                  });
-                                                                }
+                                                                setState(() {
+                                                                  tableticketscount[
+                                                                          ticket] =
+                                                                      tableticketscount[
+                                                                              ticket]! -
+                                                                          1;
+                                                                });
                                                               },
                                                               icon: Icon(
                                                                 Icons.remove,
@@ -812,9 +878,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                                             ),
                                                             child: Center(
                                                               child: Text(
-                                                                getCountByTicketName(
-                                                                    ticket
-                                                                        .name),
+                                                                tableticketscount[
+                                                                        ticket]
+                                                                    .toString(),
                                                                 style: const TextStyle(
                                                                     color: Colors
                                                                         .black),
@@ -832,29 +898,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                                             child: Center(
                                                               child: IconButton(
                                                                 onPressed: () {
-                                                                  if (ticket.name ==
-                                                                          "Stag" ||
-                                                                      ticket.name ==
-                                                                          "stag") {
-                                                                    setState(
-                                                                        () {
-                                                                      stagcount++;
-                                                                    });
-                                                                  } else if (ticket
-                                                                              .name ==
-                                                                          'couple' ||
-                                                                      ticket.name ==
-                                                                          "Couple") {
-                                                                    setState(
-                                                                        () {
-                                                                      couplecount++;
-                                                                    });
-                                                                  } else {
-                                                                    setState(
-                                                                        () {
-                                                                      femalecount++;
-                                                                    });
-                                                                  }
+                                                                  setState(() {
+                                                                    tableticketscount[
+                                                                            ticket] =
+                                                                        tableticketscount[ticket]! +
+                                                                            1;
+                                                                  });
                                                                 },
                                                                 icon: const Icon(
                                                                     Icons.add),
@@ -876,9 +925,6 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                         },
                                       ),
                                     );
-                                  } else {
-                                    return const Text(
-                                        'No tickets found'); // Show a message if no tickets are available
                                   }
                                 },
                               ),
@@ -1334,10 +1380,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Text(
-                            ((stagcount * stagentryprice) +
-                                    (femalecount * femaleentryprice) +
-                                    (couplecount * coupleentrypricce))
-                                .toString(),
+                            booktable
+                                ? totaltableamount.toString()
+                                : ((stagcount * stagentryprice) +
+                                        (femalecount * femaleentryprice) +
+                                        (couplecount * coupleentrypricce))
+                                    .toString(),
                             style: GoogleFonts.sairaCondensed(
                                 color: const Color(0XFF222222),
                                 fontSize: width / 16,
@@ -1351,7 +1399,8 @@ class _ClubsPage2State extends State<ClubsPage2> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ClubPage3(
+                                builder: (context) => ClubPage3(bookingtable:booktable,time:  "${endtime.hour}:${endtime.minute}",
+                                      tableticketscount: tableticketscount,
                                       club: widget.club,
                                       date: selected,
                                       weekday: selectedday,

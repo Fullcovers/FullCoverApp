@@ -60,7 +60,7 @@ class UserServices {
       Name name = Name(
           firstName: user['user']['name']['firstName'],
           lastName: user['user']['name']['lastName']);
-      Constants.btsprofile = UserData(
+      Constants.btsprofile = UserData(covercoin: user['user']['cover_coins'],
           name: name,
           id: user['user']['_id'],
           email: user['user']['email'],

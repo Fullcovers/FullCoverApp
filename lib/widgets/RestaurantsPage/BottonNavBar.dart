@@ -416,21 +416,21 @@ class _bottomnavbarState extends State<bottomnavbar> {
             onTap: (index) {
               if (index == 2) {
                 Future.delayed(Duration(milliseconds: 500), () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => EventsScreen()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => EventsScreen()), (route) => false);
                 });
               }
               if (index == 1) {
                 Future.delayed(Duration(milliseconds: 500), () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MyBookingPage()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => MyBookingPage()), (route) => false);
                 });
               }
 
               if (index == 0) {
                 Future.delayed(Duration(milliseconds: 500), () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ClubsScreen()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => const ClubsScreen()), (route) => false);
                 });
               }
             },
@@ -464,7 +464,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0,bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -475,7 +475,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 bottomLeft: Radius.circular(10)),
                           ),
                           width: 20,
-                          height: 75,
+                          height: 65,
                         ),
                       ),
                     ),
@@ -507,7 +507,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
+                        padding: const EdgeInsets.only(left: 5.0,bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -518,7 +518,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 bottomLeft: Radius.circular(10)),
                           ),
                           width: 6,
-                          height: 69.95,
+                          height: 59.95,
                         ),
                       ),
                     ),
@@ -543,7 +543,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
+                        padding: const EdgeInsets.only(right: 10.0,bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -554,7 +554,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 bottomRight: Radius.circular(10)),
                           ),
                           width: 20,
-                          height: 75,
+                          height: 65,
                         ),
                       ),
                     ),
@@ -576,7 +576,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0),
+                        padding: const EdgeInsets.only(right: 5.0,bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: backgroundColorfigma,
@@ -585,7 +585,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 bottomRight: Radius.circular(10)),
                           ),
                           width: 6,
-                          height: 69.95,
+                          height: 59.95,
                         ),
                       ),
                     ),
@@ -597,6 +597,14 @@ class _bottomnavbarState extends State<bottomnavbar> {
               color: widget.iscolorchange ? Colors.white : backgroundColorfigma,
               width: widget.initialindex == 2 ? 5.15 : 10,
               height: 80,
+            ),
+          ),
+           Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: widget.iscolorchange ? Colors.white : backgroundColorfigma,
+              width: widget.width,
+              height: 10,
             ),
           ),
         ],

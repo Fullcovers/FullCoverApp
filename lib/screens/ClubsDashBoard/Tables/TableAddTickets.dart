@@ -4,30 +4,28 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Ticket.dart';
-import 'package:venq_assessment/Services/BTS_Services/Ticket_Services.dart';
+import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 
-class EventAddTickets extends StatefulWidget {
-  String eventid;
-  EventAddTickets({super.key, required this.eventid});
+class TableAddTicket extends StatefulWidget {
+  const TableAddTicket({super.key});
 
   @override
-  State<EventAddTickets> createState() => _EventAddTicketsState();
+  State<TableAddTicket> createState() => _TableAddTicketState();
 }
 
-class _EventAddTicketsState extends State<EventAddTickets> {
-  late List<Ticket> tickets = [];
+class _TableAddTicketState extends State<TableAddTicket> {
+    late List<Ticket> tickets = [];
   bool loded = false;
   gettickets() async {
-    tickets = await BTSTicketServices.getEventTickets(
-        context: context, eventid: widget.eventid);
+    tickets = await BTStable.getTableTickets(
+        context: context, );
     setState(() {
       loded = true;
     });
   }
-
-  @override
+    @override
   void initState() {
     super.initState();
     gettickets();
@@ -35,10 +33,7 @@ class _EventAddTicketsState extends State<EventAddTickets> {
 
   @override
   Widget build(BuildContext context) {
-    print("widget.eventid");
-    print(widget.eventid);
-
-    double width = MediaQuery.of(context).size.width;
+        double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
@@ -171,9 +166,9 @@ class _EventAddTicketsState extends State<EventAddTickets> {
                                                 fontSize: 15, color: golden),
                                           ),
                                           onPressed: () {
-                                            BTSTicketServices
-                                                .updateeventTickets(
-                                              eventid: widget.eventid,
+                                            BTStable
+                                                .updatetableTickets(ava: int.parse(availableController.text),
+                                              tableid: tickets[index].id,
                                               context: context,
                                               name: nameController.text,
                                               crossed: int.parse(
@@ -207,8 +202,8 @@ class _EventAddTicketsState extends State<EventAddTickets> {
                                                 fontSize: 15, color: golden),
                                           ),
                                           onPressed: () {
-                                            BTSTicketServices.deleventTickets(
-                                              eventid: widget.eventid,
+                                            BTStable.deltableTickets(
+                                              tableid: tickets[index].id,
                                               context: context,
                                               name: nameController.text,
                                             );
@@ -427,8 +422,7 @@ class _EventAddTicketsState extends State<EventAddTickets> {
                           fontSize: 15, color: golden),
                     ),
                     onPressed: () {
-                      BTSTicketServices.addEventTickets(
-                          eventid: widget.eventid,
+                      BTStable.addtableTickets(
                           context: context,
                           name: nameController.text,
                           crossed: int.parse(priceController.text),
@@ -472,5 +466,6 @@ class _EventAddTicketsState extends State<EventAddTickets> {
         ),
       ),
     ));
+;
   }
 }

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Services/BTS_Services/Order_Services.dart';
 import 'package:venq_assessment/Services/BTS_Services/WalkIns_Services.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Events/EventAddTickets.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/PeopleList.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/PeopleList2.dart';
@@ -23,7 +24,8 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     super.initState();
-    loadorders();loadwalkins();
+    loadorders();
+    loadwalkins();
   }
 
   bool oshow = true;
@@ -72,18 +74,20 @@ class _EventDetailsState extends State<EventDetails> {
     }
     return 'Select Date';
   }
-        // final DateFormat formatter1 = DateFormat('E d MMM, yyyy');
+  // final DateFormat formatter1 = DateFormat('E d MMM, yyyy');
 
 // String todaydate=formatter1.format(DateTime.now());
   loadorders() async {
-    orders = await BTSOrderServices.getallordersofevent(context: context,eventid: widget.event.id);
+    orders = await BTSOrderServices.getallordersofevent(
+        context: context, eventid: widget.event.id);
     setState(() {
       loded = true;
     });
   }
 
   loadwalkins() async {
-    walkins = await BTSwalkins.getallWalkinsofevent(context: context,eventid: widget.event.id);
+    walkins = await BTSwalkins.getallWalkinsofevent(
+        context: context, eventid: widget.event.id);
     setState(() {
       lodedwalkins = true;
     });
@@ -91,7 +95,7 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
-        double totalmoney1 = 1000;
+    double totalmoney1 = 1000;
     // if (loded == true) {
     //   if (orders.isNotEmpty) {
     //     for (var i = 0; i < orders['data'].length; i++) {
@@ -108,12 +112,22 @@ class _EventDetailsState extends State<EventDetails> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: const Color(0xFF2C2F33),
-      body:loded && lodedwalkins
+      body: loded && lodedwalkins
           ? Column(
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: HeaderContent(title: "Reservations"),
+                  child: HeaderContent(
+                    title: "Reservations",
+                    rought: EventAddTickets(
+                      eventid: widget.event.id,
+                    ),
+                    icon: const Icon(
+                      Icons.settings_outlined,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -164,9 +178,7 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                 ),
                 TicketMoneyStatus(
-                    ticket:
-                     loded ? orders['count'] :
-                      0,
+                    ticket: loded ? orders['count'] : 0,
                     money: totalmoney1.toString()),
                 FractionalTranslation(
                   translation: const Offset(0, 0.5),
@@ -231,7 +243,6 @@ class _EventDetailsState extends State<EventDetails> {
                                   ),
                                 )),
                           ),
-                          
                           wshow
                               ? Container(
                                   height: 2,
@@ -262,16 +273,17 @@ class _EventDetailsState extends State<EventDetails> {
                 //     : Container(),
                 show
                     ? PeopleList(
-                        orders: orders['data'],count: orders['count'],
+                        orders: orders['data'],
+                        count: orders['count'],
                       )
-                    : 
+                    :
                     // Container()
                     PeopleList2(
                         walkins: walkins['date'],
                       )
               ],
             )
-          : Center(child: CircularProgressIndicator()),));
-    
+          : Center(child: CircularProgressIndicator()),
+    ));
   }
 }

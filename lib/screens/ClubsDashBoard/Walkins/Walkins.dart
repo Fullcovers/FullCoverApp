@@ -102,7 +102,7 @@ class _WalkinsState extends State<Walkins> {
   @override
   Widget build(BuildContext context) {
     // print(time.substring(15));
-    DateFormat formatter1 = DateFormat('dd/M/yyyy');
+    DateFormat formatter1 = DateFormat('M/dd/yyyy');
     var date2 = formatter1.format(DateTime.now()).toString();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;

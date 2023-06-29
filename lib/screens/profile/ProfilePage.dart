@@ -260,7 +260,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ]),
           ),
         ),
-      ]):CircularProgressIndicator(),
+      ]):Center(child: CircularProgressIndicator()),
     ));
   }
 }
