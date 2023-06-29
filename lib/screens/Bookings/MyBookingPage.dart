@@ -463,7 +463,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     padding: const EdgeInsets.only(
                                         top: 10.0, left: 10.0),
                                     child: Container(
-                                      height: 3 * height / 11,
+                                      height: 3.3 * height / 11,
                                       width: 2 * width / 3,
                                       decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.all(
@@ -592,7 +592,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(height: 10,)
+                                          SizedBox(
+                                            height: 10,
+                                          )
                                         ],
                                       ),
                                     ),
@@ -786,26 +788,27 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     padding: const EdgeInsets.only(
                                         top: 10.0, left: 10.0),
                                     child: Container(
-                                      height: 3 * height / 11,
-                                      width: 2 * width / 3,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20.0)),
-                                        color: Colors.white,
-                                        border: Border.all(
-                                          color: Colors.black,
-                                          width: 2,
+                                        height: 3 * height / 11,
+                                        width: 2 * width / 3,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                          color: Colors.white,
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 2,
+                                          ),
                                         ),
-                                      ),
-                                      child: 
-                                      Column(mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text("No Bookings",style: GoogleFonts.bebasNeue(
-                                                fontSize: 30,
-                                              )),
-                                        ],
-                                      )
-                                    ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text("No Bookings",
+                                                style: GoogleFonts.bebasNeue(
+                                                  fontSize: 30,
+                                                )),
+                                          ],
+                                        )),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
