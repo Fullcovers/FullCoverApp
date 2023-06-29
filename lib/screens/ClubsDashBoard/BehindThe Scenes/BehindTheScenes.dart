@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
@@ -34,7 +35,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
     await BTSClubServices.btsgetSingleClub(context: context);
   }
 
-  Color textc = const Color(0xFFB59F68);
+  Color textc = golden;
   bool forAndroid = false;
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xFF2C2F33),
+        backgroundColor: backgroundColorfigma,
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

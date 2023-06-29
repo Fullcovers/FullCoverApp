@@ -134,6 +134,28 @@ class OrderServices {
       print(e.toString());
     }
   }
+  static Future<dynamic> getAllOrderhistory({required BuildContext context}) async {
+    var orders;
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}orders/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${userprovider.token}'
+        },
+      );
+      orderProvider.storeOrders(res.body);
+      orders=jsonDecode(res.body);
+
+// Access the stored orders
+    } catch (e) {
+      print(e.toString());
+    }
+    return orders;
+  }
 
   void validateQrCode(
       {required String id, required BuildContext context}) async {
@@ -194,6 +216,37 @@ class OrderServices {
       print(res.data);
       if (res.statusCode == 201) {
         showSnackBar(context, 'Order Created');
+      } else {
+        showSnackBar(context, 'Something went wrong');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  static void placetableOrder(
+      {required BuildContext context,
+      required Map<String, dynamic> requestbody}) async {
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+
+      await userprovider.loadToken();
+      Dio dio = Dio();
+      var res = await dio.post('${Constants.uri}torders/c/',
+          data: requestbody,
+          options: Options(headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${Constants.usertoken}'
+          }));
+      // http.Response res =
+      //     await http.post(Uri.parse('${Constants.uri}orders/s/'),
+      //         headers: <String, String>{
+      //           'Content-Type': 'application/json; charset=UTF-8',
+      //           'Authorization': 'Bearer ${userprovider.token}'
+      //         },
+      //         body: jsonEncode(requestbody));
+      print(res.data);
+      if (res.statusCode == 201) {
+        showSnackBar(context, 'Table Created');
       } else {
         showSnackBar(context, 'Something went wrong');
       }

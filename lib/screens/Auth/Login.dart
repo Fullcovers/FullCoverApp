@@ -97,7 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     fillColor: Colors.white,
                                     focusColor: Colors.white,
-                                    hintText: "Email",
+                                    // hintText: "Email",
+                                    label:Text("Email",style: TextStyle(color: Colors.white),) ,
                                     hintStyle: TextStyle(color: Colors.white)),
                               ),
                             ),
@@ -121,18 +122,20 @@ class _LoginPageState extends State<LoginPage> {
                                           BorderRadius.circular(circularradius),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: redborder),
+                                      borderSide: BorderSide(color: greenborder),
                                       borderRadius:
                                           BorderRadius.circular(circularradius),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          width: 3, color: redborder),
+                                          width: 3, color: greenborder),
                                       borderRadius:
                                           BorderRadius.circular(circularradius),
                                     ),
                                     fillColor: Colors.white,
-                                    hintText: "Password",
+                                    // hintText: "Password",
+                                    label:Text("Password",style: TextStyle(color: Colors.white),) ,
+
                                     hintStyle: TextStyle(color: Colors.white)),
                               ),
                             ),
@@ -205,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                                 right: width / 10,
                                 bottom: 20.0),
                             child: AnimatedContainer(
-                              width: selected ? width : 100.0,
+                              width: selected ? width : height / 15,
                               height: height / 20,
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -242,8 +245,11 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Column(
                                   children: [
                                     load
-                                        ? CircularProgressIndicator(
-                                            color: golden, strokeWidth: 2)
+                                        ? Padding(
+                                          padding: const EdgeInsets.only(top:6.0),
+                                          child: CircularProgressIndicator(
+                                              color: golden, strokeWidth: 2),
+                                        )
                                         : Padding(
                                             padding: EdgeInsets.only(
                                                 top: height / 65, right: 20.0),

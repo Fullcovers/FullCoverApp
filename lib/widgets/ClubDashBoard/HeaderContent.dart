@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
+
+import '../../screens/ClubsDashBoard/Events/Event.dart';
 
 class HeaderContent extends StatelessWidget {
-  const HeaderContent({super.key, required this.title});
+  HeaderContent({
+    super.key,
+    required this.title,
+     this.rought = const BehindTheScenesPage(),
+    this.icon =  const Icon(
+      Icons.settings_outlined,
+      color: Color(0xFF212426),
+      size: 30,
+    ),
+  });
+  Icon icon;
+  late Widget rought;
+
   final String title;
 
   @override
@@ -31,13 +46,11 @@ class HeaderContent extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.settings_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => rought));
+              },
+              icon: icon),
         ],
       ),
     );

@@ -19,6 +19,7 @@ class UserData {
   String role;
   String image;
   bool isVerified;
+  int covercoin;
   int v;
 
   UserData({
@@ -29,6 +30,7 @@ class UserData {
     required this.phoneNumber,
     required this.role,
     required this.image,
+    required this.covercoin,
     required this.isVerified,
     required this.v,
   });

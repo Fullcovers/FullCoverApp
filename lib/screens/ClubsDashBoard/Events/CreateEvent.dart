@@ -68,29 +68,84 @@ class _CreateEventState extends State<CreateEvent> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: backgroundColorfigma,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          HeaderContent(title: "Create Event"),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: heightofs / 40,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: Column(
-                    children: [
-                      customtextfield(namecontroller, "Name", Colors.green),
-                      customtextfield(
-                          desccontroller, "Description", Colors.green),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            HeaderContent(title: "Create Event"),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: heightofs / 40,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Column(
+                      children: [
+                        customtextfield(namecontroller, "Name", Colors.green),
+                        customtextfield(
+                            desccontroller, "Description", Colors.green),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Container(
+                            height: heightofs / 20,
+                            width: widthofs / 2,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(34, 34, 34, 0.37),
+                              borderRadius: BorderRadius.circular(15.0),
+                              border: Border.all(
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20.0,
+                                  ),
+                                  child: Text(
+                                      selectedDate != null
+                                          ? formatDate(selectedDate)
+                                          : "Select Date",
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10.0),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      _selectDate(
+                                          context); // Show the date picker on icon press
+                                    },
+                                    icon: const Icon(
+                                      Icons.calendar_today_outlined,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text("Start At",
+                              style: GoogleFonts.sairaCondensed(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              )),
+                        ),
+                        Container(
                           height: heightofs / 20,
                           width: widthofs / 2,
                           decoration: BoxDecoration(
@@ -107,10 +162,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 padding: const EdgeInsets.only(
                                   left: 20.0,
                                 ),
-                                child: Text(
-                                    selectedDate != null
-                                        ? formatDate(selectedDate)
-                                        : "Select Date",
+                                child: Text("$hoursend:$minuteend",
                                     style: GoogleFonts.sairaCondensed(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
@@ -120,12 +172,18 @@ class _CreateEventState extends State<CreateEvent> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 10.0),
                                 child: IconButton(
-                                  onPressed: () {
-                                    _selectDate(
-                                        context); // Show the date picker on icon press
+                                  onPressed: () async {
+                                    TimeOfDay? newtime = await showTimePicker(
+                                        context: context, initialTime: time);
+                                    if (newtime == null) {
+                                      return;
+                                    }
+                                    setState(() {
+                                      endtime = newtime;
+                                    });
                                   },
                                   icon: const Icon(
-                                    Icons.calendar_today_outlined,
+                                    Icons.alarm,
                                     color: Colors.white,
                                     size: 20,
                                   ),
@@ -134,245 +192,189 @@ class _CreateEventState extends State<CreateEvent> {
                             ],
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text("Start At",
-                            style: GoogleFonts.sairaCondensed(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            )),
-                      ),
-                      Container(
-                        height: heightofs / 20,
-                        width: widthofs / 2,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(34, 34, 34, 0.37),
-                          borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(
-                            color: Colors.black,
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text("End At",
+                              style: GoogleFonts.sairaCondensed(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              )),
+                        ),
+                        Container(
+                          height: heightofs / 20,
+                          width: widthofs / 2,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(34, 34, 34, 0.37),
+                            borderRadius: BorderRadius.circular(15.0),
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 20.0,
+                                ),
+                                child: Text("${hours}:${minute}",
+                                    style: GoogleFonts.sairaCondensed(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    )),
                               ),
-                              child: Text("$hours:$minute",
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: IconButton(
+                                  onPressed: () async {
+                                    TimeOfDay? newtime = await showTimePicker(
+                                        context: context, initialTime: time);
+                                    if (newtime == null) {
+                                      return;
+                                    }
+                                    setState(() {
+                                      time = newtime;
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.alarm,
                                     color: Colors.white,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: IconButton(
-                                onPressed: () async {
-                                  TimeOfDay? newtime = await showTimePicker(
-                                      context: context, initialTime: time);
-                                  if (newtime == null) {
-                                    return;
-                                  }
-                                  setState(() {
-                                    endtime = newtime;
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.alarm,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text("End At",
-                            style: GoogleFonts.sairaCondensed(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            )),
-                      ),
-                      Container(
-                        height: heightofs / 20,
-                        width: widthofs / 2,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(34, 34, 34, 0.37),
-                          borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20.0,
-                              ),
-                              child: Text("${hoursend}:${minuteend}",
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: IconButton(
-                                onPressed: () async {
-                                  TimeOfDay? newtime = await showTimePicker(
-                                      context: context, initialTime: time);
-                                  if (newtime == null) {
-                                    return;
-                                  }
-                                  setState(() {
-                                    time = newtime;
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.alarm,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                      
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 0.0, left: 50, right: 50, bottom: 20.0),
-                          child: Container(
-                            height: heightofs / 20,
-                            width: double.maxFinite,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 202, 196, 196),
-                                  blurRadius: 10,
-                                  spreadRadius: -2,
-                                  offset: Offset(-2, -2),
-                                ),
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 20,
-                                  spreadRadius: -2,
-                                  offset: Offset(2, 2),
-                                ),
-                              ],
-                              color: Color(0xFF2D3135),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20.0),
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10.0, right: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Add Tickets",
-                                        style: GoogleFonts.bebasNeue(
-                                            fontSize: 20, color: golden),
-                                      ),
-                                    ],
+                                    size: 20,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: ()async {
-                        String myeventid= await CreateEventmethod.createeventfunction(
-                              context: context,
-                              date: formatDate(selectedDate).toString(),
-                              description: desccontroller.text,
-                              name: namecontroller.text,
-                              starttime: "${time.hour}:${time.minute}",
-                              endtime: "${endtime.hour}:${endtime.minute}");
-                               Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                 EventAddTickets(eventid: myeventid,)));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 0.0, left: 50, right: 50, bottom: 20.0),
-                          child: Container(
-                            height: heightofs / 20,
-                            width: double.maxFinite,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 202, 196, 196),
-                                  blurRadius: 10,
-                                  spreadRadius: -2,
-                                  offset: Offset(-2, -2),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                        
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0.0, left: 50, right: 50, bottom: 20.0),
+                            child: Container(
+                              height: heightofs / 20,
+                              width: double.maxFinite,
+                              decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 202, 196, 196),
+                                    blurRadius: 10,
+                                    spreadRadius: -2,
+                                    offset: Offset(-2, -2),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 20,
+                                    spreadRadius: -2,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                                color: Color(0xFF2D3135),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0),
                                 ),
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 20,
-                                  spreadRadius: -2,
-                                  offset: Offset(2, 2),
-                                ),
-                              ],
-                              color: Color(0xFF2D3135),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20.0),
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, right: 20.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Add Tickets",
+                                          style: GoogleFonts.bebasNeue(
+                                              fontSize: 20, color: golden),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10.0, right: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Create",
-                                        style: GoogleFonts.bebasNeue(
-                                            fontSize: 20, color: golden),
-                                      ),
-                                    ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: ()async {
+                          String myeventid= await CreateEventmethod.createeventfunction(
+                                context: context,
+                                date: formatDate(selectedDate).toString(),
+                                description: desccontroller.text,
+                                name: namecontroller.text,
+                                starttime: "${time.hour}:${time.minute}",
+                                endtime: "${endtime.hour}:${endtime.minute}");
+                                 Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                   EventAddTickets(eventid: myeventid,)));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0.0, left: 50, right: 50, bottom: 20.0),
+                            child: Container(
+                              height: heightofs / 20,
+                              width: double.maxFinite,
+                              decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 202, 196, 196),
+                                    blurRadius: 10,
+                                    spreadRadius: -2,
+                                    offset: Offset(-2, -2),
                                   ),
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 20,
+                                    spreadRadius: -2,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                                color: Color(0xFF2D3135),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0),
                                 ),
-                              ],
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, right: 20.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Create",
+                                          style: GoogleFonts.bebasNeue(
+                                              fontSize: 20, color: golden),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }

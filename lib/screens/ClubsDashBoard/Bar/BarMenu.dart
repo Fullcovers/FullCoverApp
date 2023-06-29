@@ -30,7 +30,7 @@ class _BarMenuState extends State<BarMenu> {
         backgroundColor: const Color(0xFF2C2F33),
         body: Column(
           children: [
-            const HeaderContent(title: 'BAR MENU'),
+             HeaderContent(title: 'BAR MENU'),
             const SearchPeople(
               title: "Search Drinks",
             ),

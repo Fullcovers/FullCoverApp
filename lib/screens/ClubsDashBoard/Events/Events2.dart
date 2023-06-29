@@ -50,7 +50,7 @@ class _Events2State extends State<Events2> {
       backgroundColor: const Color(0xFF2C2F33),
       body: Column(
         children: [
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10.0),
             child: HeaderContent(title: "EVENTS"),
           ),

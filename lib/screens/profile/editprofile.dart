@@ -122,6 +122,6 @@ class EditProfile extends StatelessWidget {
         ),
       ),
     );
-    ;
+    
   }
 }

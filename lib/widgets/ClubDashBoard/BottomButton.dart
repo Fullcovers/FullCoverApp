@@ -29,21 +29,28 @@ Widget bottombutton(String text, Icon icon,BuildContext context,{Widget rought=c
           borderRadius: BorderRadius.all(Radius.circular(20)),
           color: Color(0xFF2C2F33),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: () {
+        child: InkWell(onTap: () {
+          
                    Navigator.push(context,
                 MaterialPageRoute(builder: (context) => rought));
-                },
-                color: const Color.fromARGB(255, 252, 248, 248),
-                icon: icon),
-            Text(
-              text,
-              style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 25),
-            )
-          ],
+                
+        },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                  onPressed: () {
+                     Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => rought));
+                  },
+                  color: const Color.fromARGB(255, 252, 248, 248),
+                  icon: icon),
+              Text(
+                text,
+                style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 25),
+              )
+            ],
+          ),
         ),
       ),
     ),
