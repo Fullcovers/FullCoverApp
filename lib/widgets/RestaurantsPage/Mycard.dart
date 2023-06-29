@@ -9,7 +9,7 @@ Widget mycard(double height, double width, ClubModel club) {
     ),
     child: SizedBox(
       width: width / 1.2,
-      height: height / 5,
+      height: height / 6,
       child: Stack(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(15),
@@ -45,7 +45,7 @@ Widget mycard(double height, double width, ClubModel club) {
             padding: const EdgeInsets.only(left: 10),
             child: Text(club.name,
                 style: GoogleFonts.bebasNeue(
-                  fontSize: height / 18.0625,
+                  fontSize: height / 20,
                   color: Colors.white,
                 )),
           ),
