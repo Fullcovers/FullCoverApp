@@ -8,6 +8,7 @@ import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/searchbar.dart';
 
 import '../../../Models/BTS_Models/Promoters.dart';
+import 'AddPromoterDialog.dart';
 
 class Promoters extends StatefulWidget {
   const Promoters({super.key});
@@ -94,10 +95,22 @@ class _PromotersState extends State<Promoters> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                PromoterServices().addPromoter(
-                    context: context,
-                    userid: "647f359f5c3c546ebb35fe6e",
-                    discount: 2);
+                // PromoterServices().addPromoter(
+                //     context: context,
+                //     userid: "647f359f5c3c546ebb35fe6e",
+                //     discount: 2);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AddPromoterDialog();
+                  },
+                ).then((selectedUser) {
+                  // Handle the selected user
+                  if (selectedUser != null) {
+                    // Perform necessary actions with the selected user
+                    print('Selected user: $selectedUser');
+                  }
+                });
               },
               child: Container(
                 height: 58,
