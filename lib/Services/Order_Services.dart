@@ -156,6 +156,26 @@ class OrderServices {
     }
     return orders;
   }
+static Future<dynamic> getAlltableOrderhistory({required BuildContext context}) async {
+    var orders;
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}torders/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${userprovider.token}'
+        },
+      );
+      orders=jsonDecode(res.body);
+print(orders);
+// Access the stored orders
+    } catch (e) {
+      print(e.toString());
+    }
+    return orders;
+  }
 
   void validateQrCode(
       {required String id, required BuildContext context}) async {

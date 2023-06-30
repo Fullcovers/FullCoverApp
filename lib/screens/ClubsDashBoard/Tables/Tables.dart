@@ -44,9 +44,10 @@ class _TablePageState extends State<TablePage> {
   var tables;  var tablesonline;
 
   loadtables() async {
-    final DateFormat formatter = DateFormat('M/dd/yyyy');
+    final DateFormat formatter = DateFormat('yyyy-M-dd');
     var date = formatter.format(DateTime.now());
     tables = await BTStable.getalltables(context: context, date: date);
+    print(tables);
     setState(() {
       loded = true;
     });
@@ -104,54 +105,54 @@ class _TablePageState extends State<TablePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding:
-                    EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
-                child: Container(
-                  height: height / 20,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(34, 34, 34, 0.37),
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                        ),
-                        child: Text(
-                            selectedDate != null
-                                ? formatDate(selectedDate)
-                                : formatDate(DateTime.now()),
-                            style: GoogleFonts.sairaCondensed(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: IconButton(
-                          onPressed: () {
-                            _selectDate(
-                                context); // Show the date picker on icon press
-                          },
-                          icon: const Icon(
-                            Icons.calendar_today_outlined,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding:
+              //       EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
+              //   child: Container(
+              //     height: height / 20,
+              //     width: double.maxFinite,
+              //     decoration: BoxDecoration(
+              //       color: const Color.fromRGBO(34, 34, 34, 0.37),
+              //       borderRadius: BorderRadius.circular(15.0),
+              //       border: Border.all(
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Padding(
+              //           padding: const EdgeInsets.only(
+              //             left: 20.0,
+              //           ),
+              //           child: Text(
+              //               selectedDate != null
+              //                   ? formatDate(selectedDate)
+              //                   : formatDate(DateTime.now()),
+              //               style: GoogleFonts.sairaCondensed(
+              //                 fontSize: 16,
+              //                 fontWeight: FontWeight.w600,
+              //                 color: Colors.white,
+              //               )),
+              //         ),
+              //         Padding(
+              //           padding: const EdgeInsets.only(right: 10.0),
+              //           child: IconButton(
+              //             onPressed: () {
+              //               _selectDate(
+              //                   context); // Show the date picker on icon press
+              //             },
+              //             icon: const Icon(
+              //               Icons.calendar_today_outlined,
+              //               color: Colors.white,
+              //               size: 20,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: height / 30,
               ),
@@ -290,11 +291,11 @@ class _TablePageState extends State<TablePage> {
               wshow
                   ? Expanded(
                       child: ListView.builder(
-                          itemCount:  tables['date'].length,
+                          itemCount:  tables['data'].length==null?0:tables['data'].length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                TableCard(thistable: tables['date'][index]),
+                                TableCard(thistable: tables['data'][index]),
                               ],
                             );
                           }),
