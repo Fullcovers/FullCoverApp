@@ -149,6 +149,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                 child: InkWell(
                                   onTap: () {
                                     if (widget.bookingtable) {
+                                      print(widget.bookingtable);
                                       List<Map<String, dynamic>> tablestickets = [];
                                       // for (var i = 0; i < widget.tableticketscount.length; i++) {
 
@@ -188,7 +189,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                     
                                     } else {
                                       List<Map<String, dynamic>> tickets = [];
-
+print(widget.stagcount);
                                       if (widget.stagcount > 0) {
                                         tickets.add({
                                           "qty": widget.stagcount,
