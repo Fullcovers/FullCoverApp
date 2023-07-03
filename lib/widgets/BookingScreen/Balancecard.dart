@@ -37,7 +37,7 @@ class Balancecard extends StatelessWidget {
               offset: Offset(2, 2),
             ),
           ],
-          color: backgroundColorfigma,
+          color: Color(0xff1e1e1e),
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),

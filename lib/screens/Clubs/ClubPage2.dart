@@ -570,22 +570,23 @@ class _ClubsPage2State extends State<ClubsPage2> {
                               ),
                             ),
                           ),
-                          Align(alignment: Alignment.centerLeft,
+                          Align(
+                            alignment: Alignment.centerLeft,
                             child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 0.0,left: 10 ),
-                                      child: Text(
-                                        "Select Time",
-                                        style: GoogleFonts.sairaCondensed(
-                                          color: const Color(0XFFBABABA),
-                                          fontSize: height / 54,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
+                              padding:
+                                  const EdgeInsets.only(top: 0.0, left: 10),
+                              child: Text(
+                                "Select Time",
+                                style: GoogleFonts.sairaCondensed(
+                                  color: const Color(0XFFBABABA),
+                                  fontSize: height / 54,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top:8.0),
+                            padding: const EdgeInsets.only(top: 8.0),
                             child: Container(
                               height: height / 20,
                               width: width / 2,
@@ -597,7 +598,8 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -614,8 +616,10 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                     padding: const EdgeInsets.only(right: 10.0),
                                     child: IconButton(
                                       onPressed: () async {
-                                        TimeOfDay? newtime = await showTimePicker(
-                                            context: context, initialTime: time);
+                                        TimeOfDay? newtime =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: time);
                                         if (newtime == null) {
                                           return;
                                         }
@@ -717,7 +721,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           // ),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: width / 13, right: width / 13, top: height/30),
+                                left: width / 13,
+                                right: width / 13,
+                                top: height / 30),
                             child: SizedBox(
                               height: height / 4,
                               child: ListView.builder(
@@ -961,6 +967,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                     return Text('Error: ${snapshot.error}');
                                   } else if (snapshot.hasData) {
                                     List<Ticket> tickets = snapshot.data!;
+
                                     return Container(
                                       height: 3.2 * height / 10,
                                       width: double.maxFinite,
@@ -971,6 +978,7 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                         itemCount: tickets.length,
                                         itemBuilder: (context, index) {
                                           Ticket ticket = tickets[index];
+                                          print(ticket.id);
                                           if (ticket.name == 'Stag' ||
                                               ticket.name == 'stag') {
                                             stagid = ticket.id;
@@ -978,10 +986,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                           } else if (ticket.name == "couple" ||
                                               ticket.name == "Couple") {
                                             coupleid = ticket.id;
+                                           
                                             coupleentrypricce = ticket.current;
                                           } else {
-                                            femaleid = femaleid;
+                                            femaleid = ticket.id;
                                             femaleentryprice = ticket.current;
+                                        
                                           }
                                           return Container(
                                             height: height / 10,
@@ -1399,7 +1409,9 @@ class _ClubsPage2State extends State<ClubsPage2> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ClubPage3(bookingtable:booktable,time:  "${endtime.hour}:${endtime.minute}",
+                                builder: (context) => ClubPage3(
+                                      bookingtable: booktable,
+                                      time: "${endtime.hour}:${endtime.minute}",
                                       tableticketscount: tableticketscount,
                                       club: widget.club,
                                       date: selected,

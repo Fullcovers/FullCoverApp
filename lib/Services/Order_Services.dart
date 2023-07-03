@@ -134,6 +134,29 @@ class OrderServices {
       print(e.toString());
     }
   }
+  static Future<dynamic> getAllpOrderhistory({required BuildContext context}) async {
+    var orders;
+    try {
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      var orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      await userprovider.loadToken();
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}orders/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${userprovider.token}'
+        },
+      );
+      orderProvider.storeOrders(res.body);
+      orders=jsonDecode(res.body);
+
+// Access the stored orders
+    } catch (e) {
+      print(e.toString());
+    }
+    return orders;
+  }
+
   static Future<dynamic> getAllOrderhistory({required BuildContext context}) async {
     var orders;
     try {
@@ -217,7 +240,7 @@ print(orders);
       required Map<String, dynamic> requestbody}) async {
     try {
       var userprovider = Provider.of<UserProvider>(context, listen: false);
-
+print(requestbody.toString());
       await userprovider.loadToken();
       Dio dio = Dio();
       var res = await dio.post('${Constants.uri}orders/c/',

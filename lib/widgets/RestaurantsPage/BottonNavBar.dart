@@ -312,17 +312,27 @@ class bottomnavbar extends StatefulWidget {
 class _bottomnavbarState extends State<bottomnavbar> {
   @override
   Widget build(BuildContext context) {
+    print(widget.width);
     return Container(
+      color: Colors.transparent,
       height: 75,
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
+          !widget.iscolorchange
+              ? Image.asset(
+                  "assets/images/background.png",
+                  height: 75,
+                  width: widget.width,
+                  fit: BoxFit.cover,
+                )
+              : Container(),
           CurvedNavigationBar(
             height: 75,
             buttonBackgroundColor: golden,
             index: widget.initialindex,
-            backgroundColor:
-                widget.iscolorchange ? Colors.white : backgroundColorfigma,
+            backgroundColor: Colors.transparent,
+            // widget.iscolorchange ? Colors.white : backgroundColorfigma,
             color: !widget.iscolorchange ? Colors.white : backgroundColorfigma,
             items: <Widget>[
               Padding(
@@ -417,20 +427,24 @@ class _bottomnavbarState extends State<bottomnavbar> {
               if (index == 2) {
                 Future.delayed(Duration(milliseconds: 500), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => EventsScreen()), (route) => false);
+                      MaterialPageRoute(builder: (context) => EventsScreen()),
+                      (route) => false);
                 });
               }
               if (index == 1) {
                 Future.delayed(Duration(milliseconds: 500), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => MyBookingPage()), (route) => false);
+                      MaterialPageRoute(builder: (context) => MyBookingPage()),
+                      (route) => false);
                 });
               }
 
               if (index == 0) {
                 Future.delayed(Duration(milliseconds: 500), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const ClubsScreen()), (route) => false);
+                      MaterialPageRoute(
+                          builder: (context) => const ClubsScreen()),
+                      (route) => false);
                 });
               }
             },
@@ -438,14 +452,22 @@ class _bottomnavbarState extends State<bottomnavbar> {
           widget.initialindex == 1 || widget.initialindex == 2
               ? Stack(
                   children: [
+                    !widget.iscolorchange
+                        ? Image.asset(
+                            "assets/images/background.png",
+                            height: 100,
+                            width: 11,
+                            fit: BoxFit.fill,
+                          )
+                        : Container(),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Container(
                         color: widget.iscolorchange
-                                ? Colors.white
-                                : backgroundColorfigma,
-                        width: 10,
-                        height: 75,
+                            ? Colors.white
+                            : Colors.transparent,
+                        width: 11,
+                        height: 80,
                       ),
                     ),
                     Align(
@@ -454,17 +476,17 @@ class _bottomnavbarState extends State<bottomnavbar> {
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
                           color: widget.iscolorchange
-                                ? Colors.white
-                                : backgroundColorfigma,
-                          width: 20,
-                          height: 75,
+                              ? Colors.white
+                              : backgroundColorfigma,
+                          width: 19,
+                          height: 76,
                         ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0,bottom: 10),
+                        padding: const EdgeInsets.only(left: 10.0, bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -483,14 +505,22 @@ class _bottomnavbarState extends State<bottomnavbar> {
                 )
               : Stack(
                   children: [
+                    !widget.iscolorchange
+                        ? Image.asset(
+                            "assets/images/background.png",
+                            height: 76,
+                            width: 10,
+                            fit: BoxFit.cover,
+                          )
+                        : Container(),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Container(
-                        color:widget.iscolorchange
-                                ? Colors.white
-                                : backgroundColorfigma ,
+                        color: widget.iscolorchange
+                            ? Colors.white
+                            : Colors.transparent,
                         width: 10,
-                        height: 75,
+                        height: 76,
                       ),
                     ),
                     // Align(
@@ -507,7 +537,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 5.0,bottom: 10),
+                        padding: const EdgeInsets.only(left: 5.0, bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -527,23 +557,33 @@ class _bottomnavbarState extends State<bottomnavbar> {
           widget.initialindex == 1 || widget.initialindex == 0
               ? Stack(
                   children: [
+                    !widget.iscolorchange
+                        ? Align(alignment: Alignment.bottomRight,
+                          child: Image.asset(
+                              "assets/images/background.png",
+                              height: 75,
+                              width: 20,
+                              fit: BoxFit.cover,
+                            ),
+                        )
+                        : Container(),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: Container(
                           color: !widget.iscolorchange
-                              ? backgroundColorfigma
+                              ? Colors.transparent
                               : Colors.white,
                           width: 20,
-                          height: 75,
+                          height: 76,
                         ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 10.0,bottom: 10),
+                        padding: const EdgeInsets.only(right: 10.0, bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
@@ -553,7 +593,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                                 topRight: Radius.circular(10),
                                 bottomRight: Radius.circular(10)),
                           ),
-                          width: 20,
+                          width: 21,
                           height: 65,
                         ),
                       ),
@@ -576,7 +616,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0,bottom: 10),
+                        padding: const EdgeInsets.only(right: 5.0, bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
                             color: backgroundColorfigma,
@@ -591,21 +631,53 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     ),
                   ],
                 ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              color: widget.iscolorchange ? Colors.white : backgroundColorfigma,
-              width: widget.initialindex == 2 ? 5.15 : 10,
-              height: 80,
-            ),
+          Stack(
+            children: [
+              !widget.iscolorchange
+                  ? Align(
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        "assets/images/background.png",
+                        height: 80,
+                        width: widget.initialindex == 2 ? 5.15 : 10,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : Container(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  color:
+                      widget.iscolorchange ? Colors.white : Colors.transparent,
+                  width: widget.initialindex == 2 ? 5.15 : 10,
+                  height: 80,
+                ),
+              ),
+            ],
           ),
-           Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              color: widget.iscolorchange ? Colors.white : backgroundColorfigma,
-              width: widget.width,
-              height: 10,
-            ),
+          Stack(
+            children: [
+              !widget.iscolorchange
+                  ? Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/images/background.png",
+                        height: 10,
+                        width: widget.width,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : Container(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color:
+                      widget.iscolorchange ? Colors.white : Colors.transparent,
+                  width: widget.width,
+                  height: 10,
+                ),
+              ),
+            ],
           ),
         ],
       ),

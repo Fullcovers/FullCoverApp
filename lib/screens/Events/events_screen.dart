@@ -46,29 +46,22 @@ class _EventsScreenState extends State<EventsScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              topnavigationbar(height: height, width:width,iscolor: true),
-              FractionalTranslation(
-                translation: const Offset(0, -0.8),
-                child: Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Center(
-                    child: Text("Events",
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 40,
-                          color: const Color(0xFFB59F68),
-                        )),
-                  ),
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                topnavigationbar(height: height, width:width,iscolor: true),
+                Center(
+                  child: Text("Events",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 40,
+                        color: const Color(0xFFB59F68),
+                      )),
                 ),
-              ),
-              FractionalTranslation(                translation: const Offset(0, -0.1),
-
-                child: Padding(
+                Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
-                      height: 4.8 * height / 10,
+                      height: 4.8 * height / 8,
                       width: width,
                       decoration: const BoxDecoration(color: Colors.white),
                       child: FutureBuilder<List<Event>>(
@@ -87,12 +80,12 @@ class _EventsScreenState extends State<EventsScreen> {
                             return Text('Error: ${snapshot.error}');
                           } else {
                             final eventsData = snapshot.data!;
-              
+                
                             return ListView.builder(
                               itemCount: eventsData.length,
                               itemBuilder: (context, index) {
                                 final Event event = eventsData[index];
-              
+                
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: GestureDetector(
@@ -113,9 +106,9 @@ class _EventsScreenState extends State<EventsScreen> {
                         },
                       )),
                 ),
-              ),
-              
-            ]),
+                
+              ]),
+        ),
         bottomNavigationBar: bottomnavbar(isclub: false,isevent: true,initialindex: 2,
           height: height,
           width: width,
