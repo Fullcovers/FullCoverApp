@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     "assets/images/logo.png",
                     scale: 1.5,
                   ),
-                  CircularProgressIndicator()
+                  Constants.mycircularProgressIndicator()
                 ],
               ),
             )),

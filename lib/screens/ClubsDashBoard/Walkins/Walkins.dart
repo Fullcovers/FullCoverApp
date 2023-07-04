@@ -250,7 +250,7 @@ class _WalkinsState extends State<Walkins> {
                                           },
                                         ),
                                       )
-                                    : const CircularProgressIndicator(),
+                                    : Constants.mycircularProgressIndicator()
                               ],
                             ),
                           ),
@@ -349,14 +349,19 @@ class _WalkinsState extends State<Walkins> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15, left: 10),
                               child: TextField(
-                                controller: nameController,
+                                onChanged: (value) {
+                                  setState(() {
+                                    pnController = value;
+                                  });
+                                  // pnController = value;
+                                },
                                 style: GoogleFonts.sairaCondensed(
                                   color: const Color(0XFFFFFFFF),
                                   fontSize: 18,
                                 ),
-                                keyboardType: TextInputType.emailAddress,
+                                keyboardType: TextInputType.phone,
                                 decoration: InputDecoration(
-                                  hintText: 'Name',
+                                  hintText: 'Enter Mobile Number',
                                   hintStyle: GoogleFonts.sairaCondensed(
                                     color: const Color(0XFFAFAFAF),
                                   ),
@@ -385,19 +390,14 @@ class _WalkinsState extends State<Walkins> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15, left: 10),
                               child: TextField(
-                                onChanged: (value) {
-                                  setState(() {
-                                    pnController = value;
-                                  });
-                                  // pnController = value;
-                                },
+                                controller: nameController,
                                 style: GoogleFonts.sairaCondensed(
                                   color: const Color(0XFFFFFFFF),
                                   fontSize: 18,
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
-                                  hintText: 'Enter Mobile Number',
+                                  hintText: 'Name',
                                   hintStyle: GoogleFonts.sairaCondensed(
                                     color: const Color(0XFFAFAFAF),
                                   ),
@@ -407,6 +407,7 @@ class _WalkinsState extends State<Walkins> {
                             ),
                           ),
                         ),
+                        
                         Padding(
                           padding: const EdgeInsets.only(
                             top: 10,
@@ -951,7 +952,7 @@ class _WalkinsState extends State<Walkins> {
                         )
                       ],
                     )
-                  : Container(height: height-100,child: Center(child: CircularProgressIndicator())),
+                  : Container(height: height-100,child: Center(child: Constants.mycircularProgressIndicator())),
             ),
           ),
         ],

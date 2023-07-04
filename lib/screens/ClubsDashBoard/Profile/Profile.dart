@@ -324,7 +324,7 @@ class _BTSProfileState extends State<BTSProfile> {
                     ),
                   ]),
                 )
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
     ),
           ],
         ));

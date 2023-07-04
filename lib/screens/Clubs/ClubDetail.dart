@@ -18,11 +18,13 @@ class ClubDetail extends StatefulWidget {
 
 class _ClubDetailState extends State<ClubDetail> {
   List<Ticket> tickets = [];
-  bool clubdescdropdown = true; Map<Ticket, int> tableticketscount = {};  List<Ticket> tabletickets = [];
+  bool clubdescdropdown = true;
+  Map<Ticket, int> tableticketscount = {};
+  List<Ticket> tabletickets = [];
   Map<Ticket, int> orderticketscount = {};
-bool ticketloded=false;
-bool ttloded=false;
- gettickets() async {
+  bool ticketloded = false;
+  bool ttloded = false;
+  gettickets() async {
     tabletickets = await BTStable.getTableTicketsbyclubid(
       myclubid: widget.club.id,
       context: context,
@@ -35,6 +37,7 @@ bool ttloded=false;
       ttloded = true;
     });
   }
+
   getclubtickets() async {
     tickets = await TicketServices().getClubsTickets(
       context: context,
@@ -44,7 +47,7 @@ bool ttloded=false;
       orderticketscount[tickets[i]] = 0;
     }
     setState(() {
-      ticketloded=true;
+      ticketloded = true;
     });
     print(tickets.length);
   }
@@ -53,7 +56,8 @@ bool ttloded=false;
   void initState() {
     // TODO: implement initState
     super.initState();
-    getclubtickets();gettickets();
+    getclubtickets();
+    gettickets();
   }
 
   @override
@@ -62,24 +66,24 @@ bool ttloded=false;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Stack(
-          children: [
- Image.asset(
-           Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-            Scaffold(
-      backgroundColor: backgroundColortransperent,
-      body: Stack(
+      children: [
+        Image.asset(
+          Constants.backgroundimage,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: backgroundColortransperent,
+          body: Stack(
             children: [
               SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 25.0, left: 20, right: 20.0),
+                      padding: const EdgeInsets.only(
+                          top: 25.0, left: 20, right: 20.0),
                       child: Container(
                         height: height / 5,
                         width: width,
@@ -152,8 +156,8 @@ bool ttloded=false;
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: width / 20.55, top: 0.0),
+                              padding: EdgeInsets.only(
+                                  left: width / 20.55, top: 0.0),
                               child: Text(
                                 "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                                 style: GoogleFonts.sairaCondensed(
@@ -166,7 +170,8 @@ bool ttloded=false;
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: width / 20.55, top: 12.0),
+                          padding:
+                              EdgeInsets.only(left: width / 20.55, top: 12.0),
                           child: Container(
                             width: 0.5,
                             height: height / 12.38571428571429,
@@ -192,8 +197,8 @@ bool ttloded=false;
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsets.only(left: width / 20.55, top: 0.0),
+                                padding: EdgeInsets.only(
+                                    left: width / 20.55, top: 0.0),
                                 child: Text(
                                   "Casual, Smart Casual",
                                   style: GoogleFonts.sairaCondensed(
@@ -237,18 +242,19 @@ bool ttloded=false;
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsets.only(left: width / 20.55, top: 5.0),
+                                padding: EdgeInsets.only(
+                                    left: width / 20.55, top: 5.0),
                                 child: Text(
                                   textAlign: TextAlign.left,
                                   clubdescdropdown
                                       ? widget.club.description
                                               .substring(
                                                   0,
-                                                  widget.club.description.length <
+                                                  widget.club.description
+                                                              .length <
                                                           60
-                                                      ? widget
-                                                          .club.description.length
+                                                      ? widget.club.description
+                                                          .length
                                                       : 60)
                                               .toString() +
                                           "..."
@@ -295,7 +301,8 @@ bool ttloded=false;
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 14.0, left: 20.0),
+                            padding:
+                                const EdgeInsets.only(top: 14.0, left: 20.0),
                             child: Text(
                               "Take me there",
                               style: GoogleFonts.sairaCondensed(
@@ -325,7 +332,8 @@ bool ttloded=false;
                                   width: 55,
                                   decoration: BoxDecoration(
                                       color: const Color(0XFFD9D9D9),
-                                      borderRadius: BorderRadius.circular(10.0)),
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
                                   child: IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
@@ -340,7 +348,10 @@ bool ttloded=false;
                             children: [
                               IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.location_on_outlined,color: Colors.white,),
+                                icon: const Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                               FractionalTranslation(
                                 translation: const Offset(0, 0),
@@ -388,8 +399,8 @@ bool ttloded=false;
                             ),
                           ),
                           Padding(
-                              padding:
-                                  EdgeInsets.only(left: width / 20.55, top: 5.0),
+                              padding: EdgeInsets.only(
+                                  left: width / 20.55, top: 5.0),
                               child: Row(
                                 children: widget.club.facilities.isNotEmpty
                                     ? widget.club.facilities.map((facility) {
@@ -404,7 +415,8 @@ bool ttloded=false;
                                               border: Border.all(
                                                 width: 1,
                                               ),
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(5.0),
                                               ),
                                             ),
@@ -413,7 +425,8 @@ bool ttloded=false;
                                                 facility,
                                                 style: TextStyle(
                                                   fontSize: width / 40,
-                                                  color: const Color(0XFFCBC1A8),
+                                                  color:
+                                                      const Color(0XFFCBC1A8),
                                                 ),
                                               ),
                                             ),
@@ -422,7 +435,8 @@ bool ttloded=false;
                                       }).toList()
                                     : [
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 4.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 4.0),
                                           child: Container(
                                             height: 2.5 * height / 100,
                                             width: 2 * width / 10,
@@ -431,7 +445,8 @@ bool ttloded=false;
                                               border: Border.all(
                                                 width: 1,
                                               ),
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(5.0),
                                               ),
                                             ),
@@ -440,7 +455,8 @@ bool ttloded=false;
                                                 "Techno",
                                                 style: TextStyle(
                                                   fontSize: width / 40,
-                                                  color: const Color(0XFFCBC1A8),
+                                                  color:
+                                                      const Color(0XFFCBC1A8),
                                                 ),
                                               ),
                                             ),
@@ -448,7 +464,8 @@ bool ttloded=false;
                                         ),
                                         const SizedBox(width: 10),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 4.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 4.0),
                                           child: Container(
                                             height: 2.5 * height / 100,
                                             width: 2 * width / 10,
@@ -457,7 +474,8 @@ bool ttloded=false;
                                               border: Border.all(
                                                 width: 1,
                                               ),
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(5.0),
                                               ),
                                             ),
@@ -466,7 +484,8 @@ bool ttloded=false;
                                                 "Techno",
                                                 style: TextStyle(
                                                   fontSize: width / 40,
-                                                  color: const Color(0XFFCBC1A8),
+                                                  color:
+                                                      const Color(0XFFCBC1A8),
                                                 ),
                                               ),
                                             ),
@@ -474,7 +493,8 @@ bool ttloded=false;
                                         ),
                                         const SizedBox(width: 10),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 4.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 4.0),
                                           child: Container(
                                             height: 2.5 * height / 100,
                                             width: 2 * width / 10,
@@ -483,7 +503,8 @@ bool ttloded=false;
                                               border: Border.all(
                                                 width: 1,
                                               ),
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(5.0),
                                               ),
                                             ),
@@ -492,7 +513,8 @@ bool ttloded=false;
                                                 "Techno",
                                                 style: TextStyle(
                                                   fontSize: width / 40,
-                                                  color: const Color(0XFFCBC1A8),
+                                                  color:
+                                                      const Color(0XFFCBC1A8),
                                                 ),
                                               ),
                                             ),
@@ -500,7 +522,8 @@ bool ttloded=false;
                                         ),
                                         const SizedBox(width: 10),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 4.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 4.0),
                                           child: Container(
                                             height: 2.5 * height / 100,
                                             width: 2 * width / 10,
@@ -509,7 +532,8 @@ bool ttloded=false;
                                               border: Border.all(
                                                 width: 1,
                                               ),
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(5.0),
                                               ),
                                             ),
@@ -518,7 +542,8 @@ bool ttloded=false;
                                                 "Techno",
                                                 style: TextStyle(
                                                   fontSize: width / 40,
-                                                  color: const Color(0XFFCBC1A8),
+                                                  color:
+                                                      const Color(0XFFCBC1A8),
                                                 ),
                                               ),
                                             ),
@@ -558,8 +583,8 @@ bool ttloded=false;
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsets.only(left: width / 20.55, top: 5.0),
+                                padding: EdgeInsets.only(
+                                    left: width / 20.55, top: 5.0),
                                 child: Text(
                                   widget.club.termsAndCondition != ''
                                       ? widget.club.termsAndCondition
@@ -571,7 +596,9 @@ bool ttloded=false;
                                   ),
                                 ),
                               ),
-                              SizedBox(height: height/20,)
+                              SizedBox(
+                                height: height / 20,
+                              )
                             ],
                           ),
                           FractionalTranslation(
@@ -596,7 +623,7 @@ bool ttloded=false;
                 ),
               ),
               Positioned(
-                bottom: width/50 ,
+                bottom: width / 50,
                 right: 1,
                 left: 1,
                 child: Padding(
@@ -613,53 +640,60 @@ bool ttloded=false;
                           border: Border.all(
                             color: Colors.white,
                           )),
-                      child: ticketloded                             && ttloded?InkWell(
-                        onTap: () async {
-                         Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => ClubsPage2(tableticketscount:tableticketscount,tabletickets:tabletickets,
-                                        tickets: tickets,
-                                        orderticketscount: orderticketscount,
-                                        club: widget.club,
-                                      )),
-                            );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                "Starts at Rs.999",
-                                style: GoogleFonts.sairaCondensed(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    color: const Color(0XFFF0F0F3)),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Container(
-                                height: height / 28,
-                                width: 50,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0XFFD9D9D9)),
-                                    child: Icon(Icons.arrow_forward),
+                      child: ticketloded && ttloded
+                          ? InkWell(
+                              onTap: () async {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => ClubsPage2(
+                                            tableticketscount:
+                                                tableticketscount,
+                                            tabletickets: tabletickets,
+                                            tickets: tickets,
+                                            orderticketscount:
+                                                orderticketscount,
+                                            club: widget.club,
+                                          )),
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      "Starts at Rs.999",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                          color: const Color(0XFFF0F0F3)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: Container(
+                                      height: height / 28,
+                                      width: 50,
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0XFFD9D9D9)),
+                                      child: Icon(Icons.arrow_forward),
+                                    ),
+                                  )
+                                ],
                               ),
                             )
-                          ],
-                        ),
-                      ):Center(child: Container(width:20,height:20,child: CircularProgressIndicator(color:golden))),
+                          : Constants.mycircularProgressIndicator()
                     ),
                   ),
                 ),
               )
             ],
-      ),
-    ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }

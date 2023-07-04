@@ -102,15 +102,21 @@ class _TicketsState extends State<Tickets> {
 
   @override
   Widget build(BuildContext context) {
-    double totalmoney1 = 1000;
+    double totalmoney1 = 0;
 
-// if (loded == true) {
-//         for (var i = 0; i < orders['data'].length; i++) {
-//           totalmoney = totalmoney +
-//                     orders['data'][i]['total'];
-
-//       }
-//     }
+    if (loded == true) {
+      if (show) {
+        for (var i = 0; i < orders['data'].length; i++) {
+          totalmoney1 = totalmoney1 + orders['data'][i]['total'];
+        }
+      } else if(lodedwalkins) {
+        for (var i = 0; i < walkins['date'].length; i++) {
+          totalmoney1 = totalmoney1 + walkins['date'][i]['price'];
+          print(walkins['date'][i]);
+        }
+      }
+      print(totalmoney1);
+    }
 
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -292,7 +298,7 @@ class _TicketsState extends State<Tickets> {
                           )
                   ],
                 )
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
         ),
       ],
     ));

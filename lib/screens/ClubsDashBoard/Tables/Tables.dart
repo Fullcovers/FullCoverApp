@@ -324,7 +324,7 @@ class _TablePageState extends State<TablePage> {
                         )
                       : Container(),
                 ])
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
     ),
           ],
         ));

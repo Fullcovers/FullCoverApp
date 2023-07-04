@@ -345,7 +345,7 @@ class _TableAddTicketState extends State<TableAddTicket> {
                         },
                       ),
                     )
-                  : Container(height: height-100,width: width,child: Center(child: CircularProgressIndicator())),
+                  : Container(height: height-100,width: width,child: Center(child: Constants.mycircularProgressIndicator())),
             ]),
       ),
       floatingActionButton: FloatingActionButton(

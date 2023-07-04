@@ -293,7 +293,7 @@ class _EventDetailsState extends State<EventDetails> {
                           )
                   ],
                 )
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
     ),
           ],
         ));

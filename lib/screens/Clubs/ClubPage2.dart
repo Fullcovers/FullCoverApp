@@ -740,12 +740,12 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                           itemCount: 1,
                                           itemBuilder: (context, snapshot) {
                                             if (widget.tabletickets == []) {
-                                              return const SizedBox(
+                                              return  SizedBox(
                                                   height: 40,
                                                   width: 40,
                                                   child: Center(
                                                       child:
-                                                          CircularProgressIndicator()));
+                                                          Constants.mycircularProgressIndicator()));
                                             } else {
                                               return Container(
                                                 height:

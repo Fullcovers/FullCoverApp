@@ -695,7 +695,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                           },
                         ),
                       )
-                : CircularProgressIndicator(),
+                : Constants.mycircularProgressIndicator(),
           ]),
         ),
       ],

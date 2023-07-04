@@ -860,7 +860,7 @@ class _MyClubState extends State<MyClub> {
                     ],
                   ),
                 )
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
     ),
           ],
         ));

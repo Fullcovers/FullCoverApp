@@ -558,9 +558,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                           130.0,
                                                                     ),
                                                                   )
-                                                                : const CircularProgressIndicator()
-                                                            : const CircularProgressIndicator()
-                                                        : const CircularProgressIndicator()
+                                                                : Constants.mycircularProgressIndicator()
+                                                            : Constants.mycircularProgressIndicator()
+                                                        : Constants.mycircularProgressIndicator()
                                                   ],
                                                 ),
                                               ),

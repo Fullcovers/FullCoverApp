@@ -280,7 +280,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ])
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
         ),
       ],
     ));

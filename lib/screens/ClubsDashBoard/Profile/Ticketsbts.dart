@@ -330,7 +330,7 @@ class _BTSTicketState extends State<BTSTicket> {
                       },
                     ),
                   )
-                : Center(child: CircularProgressIndicator()),
+                : Center(child: Constants.mycircularProgressIndicator()),
       ]),
       floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.black,

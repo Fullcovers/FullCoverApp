@@ -60,8 +60,8 @@ class _PromotersState extends State<Promoters> {
                       future: PromoterServices().getAllPromoters(context: context),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
+                          return  Center(
+                            child: Constants.mycircularProgressIndicator(),
                           );
                         } else if (snapshot.hasError) {
                           return Center(

@@ -137,7 +137,7 @@ class _CarouselPageState extends State<CarouselPage> {
                     ),
                   )
                 : Center(
-                    child: CircularProgressIndicator(),
+                    child: Constants.mycircularProgressIndicator()
                   ),
       ]),
       floatingActionButton: FloatingActionButton(

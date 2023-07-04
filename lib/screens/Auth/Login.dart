@@ -210,39 +210,8 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 0.0,
-                                    left: width / 10,
-                                    right: width / 10,
-                                    bottom: 20.0),
-                                child: AnimatedContainer(
-                                  width: selected ? width : height / 15,
-                                  height: height / 20,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: backbuttoncolor,
-                                        blurRadius: 10,
-                                        spreadRadius: -2,
-                                        offset: Offset(-2, -2),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 20,
-                                        spreadRadius: -2,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                    color: botoncolor,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20.0),
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 500),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
+                              InkWell(onTap: () {
+                                setState(() {
                                         load = !load;
                                         selected = !selected;
                                       });
@@ -250,32 +219,63 @@ class _LoginPageState extends State<LoginPage> {
                                           context: context,
                                           email: emailController.text,
                                           password: passwordController.text);
-                                    },
-                                    child: Column(
-                                      children: [
-                                        load
-                                            ? Padding(
-                                              padding: const EdgeInsets.only(top:6.0),
-                                              child: CircularProgressIndicator(
-                                                  color: golden, strokeWidth: 2),
-                                            )
-                                            : Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: height / 65, right: 20.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "LOG IN", //one8@gmail.com  one812345
-                                                      style: GoogleFonts.bebasNeue(
-                                                          fontSize: 20,
-                                                          color: golden),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
+                              },
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 0.0,
+                                      left: width / 10,
+                                      right: width / 10,
+                                      bottom: 20.0),
+                                  child: AnimatedContainer(
+                                    width: selected ? width : height / 15,
+                                    height: height / 20,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: backbuttoncolor,
+                                          blurRadius: 10,
+                                          spreadRadius: -2,
+                                          offset: Offset(-2, -2),
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 20,
+                                          spreadRadius: -2,
+                                          offset: Offset(2, 2),
+                                        ),
                                       ],
+                                      color: botoncolor,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 500),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        
+                                      },
+                                      child: Column(
+                                        children: [
+                                          load
+                                              ? Constants.mycircularProgressIndicator()
+                                              : Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: height / 65, right: 20.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                        "LOG IN", //one8@gmail.com  one812345
+                                                        style: GoogleFonts.bebasNeue(
+                                                            fontSize: 20,
+                                                            color: golden),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

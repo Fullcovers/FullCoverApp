@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Gustlist/Gustlist.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
@@ -164,7 +165,10 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                         SizedBox(
                           height: height / 50,
                         ),
-                        Switch(
+                        Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Club is", style: GoogleFonts.bebasNeue(
+                                  color: Colors.white, fontSize: 25),),Switch(
                           value: forAndroid,
                           activeColor: Colors.green,
                           onChanged: (value) async {
@@ -175,6 +179,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                             setState(() => forAndroid =club.isNotEmpty?club['data']['is_club_open']:value);
                           },
                         ),
+                          ],
+                        ),
+                        
                         Wrap(
                           runSpacing: height / 54.21,
                           children: [
@@ -227,8 +234,16 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                             SizedBox(
                               width: width / 19.57,
                             ),
-                            mycard(height, width, const Color(0XB394D0C5),
-                                "Guestlist", const Color(0XFF94D0C5)),
+                            InkWell(onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const GustListPage()));
+                              },
+                              child: mycard(height, width, const Color(0XB394D0C5),
+                                  "Guestlist", const Color(0XFF94D0C5)),
+                            ),
                             SizedBox(
                               width: width / 19.57,
                             ),
@@ -268,9 +283,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                         ),
                       ],
                     )
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  :Constants.mycircularProgressIndicator()
             ),
             bottomNavigationBar: InkWell(
               onTap: () {

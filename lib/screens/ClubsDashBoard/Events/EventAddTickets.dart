@@ -351,7 +351,7 @@ class _EventAddTicketsState extends State<EventAddTickets> {
                         },
                       ),
                     )
-                  : Center(child: CircularProgressIndicator()),
+                  : Center(child: Constants.mycircularProgressIndicator()),
             ]),
       ),
       floatingActionButton: FloatingActionButton(

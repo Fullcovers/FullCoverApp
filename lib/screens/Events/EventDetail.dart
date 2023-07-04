@@ -3,8 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'package:venq_assessment/Models/Ticket.dart';
+import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Events/EventDetail2.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 import '../../Models/Events.dart';
@@ -21,6 +24,24 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
+  List<Ticket> etickets=[];bool loded=false;  Map<Ticket, int> orderticketscount = {};
+
+  geteventtickets()async{
+     etickets=  await TicketServices()
+        .getEventsTickets(context: context, eventId: widget.event.id);
+        
+         for (var i = 0; i < etickets.length; i++) {
+      orderticketscount[etickets[i]] = 0;
+    }
+    setState(() {
+          loded=true;
+        });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();geteventtickets();
+  }
   @override
   Widget build(BuildContext context) {
     final clubprovider = Provider.of<ClubProvider>(context, listen: false);
@@ -511,13 +532,13 @@ class _EventDetailState extends State<EventDetail> {
                         thickness: 1,
                       ),
                     ),
-                    Padding(
+                  Padding(
                       padding: const EdgeInsets.only(left: 30.0, right: 30),
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => EventDetail2(
+                                builder: (context) => EventDetail2(etickets: etickets,orderticketscount:orderticketscount,
                                       club: clubprovider.club!,
                                       event: widget.event,
                                     )),
@@ -535,7 +556,7 @@ class _EventDetailState extends State<EventDetail> {
                                 border: Border.all(
                                   color: backgroundColorfigma,
                                 )),
-                            child: Row(
+                            child: loded?  Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
@@ -560,11 +581,15 @@ class _EventDetailState extends State<EventDetail> {
                                   ),
                                 )
                               ],
-                            ),
+                            ): Center(
+                              child: Container(
+                                  width: 20,
+                                  height: 20,
+                                  child:Constants.mycircularProgressIndicator())),
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

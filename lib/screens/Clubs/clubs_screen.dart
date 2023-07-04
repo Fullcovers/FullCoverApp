@@ -90,7 +90,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                   child: SizedBox(
                                     height: height / 21.675,
                                     width: width / 10.275,
-                                    child: const CircularProgressIndicator(),
+                                    child: Constants.mycircularProgressIndicator()
                                   ),
                                 ); // Show a loading indicator while data is being fetched
                               } else if (snapshot.hasError) {

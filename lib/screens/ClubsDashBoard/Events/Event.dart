@@ -56,7 +56,7 @@ class Events extends StatelessWidget {
                                   child: SizedBox(
                                     height: height / 21.675,
                                     width: width / 10.275,
-                                    child: const CircularProgressIndicator(),
+                                    child: Constants.mycircularProgressIndicator()
                                   ),
                                 );
                               } else if (snapshot.hasError) {
