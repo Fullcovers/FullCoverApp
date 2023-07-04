@@ -42,10 +42,10 @@ Widget mycard(double height, double width, ClubModel club) {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10,bottom: 10),
             child: Text(club.name,
                 style: GoogleFonts.bebasNeue(
-                  fontSize: height / 20,
+                  fontSize: height / 25,
                   color: Colors.white,
                 )),
           ),

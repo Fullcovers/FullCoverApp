@@ -193,4 +193,41 @@ class BTSClubServices {
       print(e);
     }
   }
+  static Future<dynamic> clubopenandclose({
+    required BuildContext context,
+  }) async {
+   var responce;
+    try {
+      http.Response myclub = await http.get(
+        Uri.parse('${Constants.uri}club/my-club'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}',
+        },
+      );
+      var myclubid = jsonDecode(myclub.body)['data'][0]['_id'];
+      print(myclubid);
+
+      http.Response res = await http.post(
+        Uri.parse(
+          '${Constants.uri}club/$myclubid/is-open',
+        ),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${Constants.usertoken}'
+        },
+        
+      );
+
+      responce=jsonDecode(res.body);
+      print(res.body);
+      if (responce['data']['is_club_open']) {
+        showSnackBar(context, "Opened");
+      }else{showSnackBar(context, "Closed");}
+      
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      print(e.toString());
+    }
+    return responce;
+  }
 }

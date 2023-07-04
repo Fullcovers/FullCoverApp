@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 class PeopleList2 extends StatefulWidget {
   var walkins;
@@ -28,7 +29,7 @@ class _PeopleList2State extends State<PeopleList2> {
       child: Container(
         height: 4 * height / 8,
         width: width,
-        decoration: const BoxDecoration(color: Color(0xFF2C2F33)),
+        decoration:  BoxDecoration(color: backgroundColortransperent),
         child: ListView.builder(
           itemCount: widget.walkins.length,
           itemBuilder: (context, index) {

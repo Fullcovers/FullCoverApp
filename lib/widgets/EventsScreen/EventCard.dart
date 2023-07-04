@@ -46,7 +46,7 @@ Widget myeventcard(double height, double width, Event event) {
             alignment: Alignment.bottomRight,
             child: Container(
               width: width / 1.4,
-              height: height / 12,
+              height: height / 11,
               decoration: BoxDecoration(
                   color: backgroundColorfigma,
                   borderRadius: BorderRadius.only(
@@ -61,12 +61,14 @@ Widget myeventcard(double height, double width, Event event) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        event.name,
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height/30,
-                            color: offwhite),
+                      Container(width: width/3,
+                        child: Text(textAlign: TextAlign.left,
+                          event.name,
+                          style: GoogleFonts.sairaCondensed(
+                              fontWeight: FontWeight.bold,
+                              fontSize: height/40,
+                              color: offwhite),
+                        ),
                       ),
                      
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/CreateEvent.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 
@@ -11,23 +12,23 @@ Widget bottombutton(String text, Icon icon,BuildContext context,{Widget rought=c
       child: Container(
         height: 58,
         width: 190,
-        decoration: const BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 120, 116, 116),
-              blurRadius: 20,
-              spreadRadius: -2,
-              offset: Offset(-2, -2),
-            ),
-            BoxShadow(
-              color: Colors.black,
-              blurRadius: 20,
-              spreadRadius: -2,
-              offset: Offset(2, 2),
-            ),
+        decoration:  BoxDecoration(
+          boxShadow: const [
+           BoxShadow(
+                          color: Color.fromARGB(255, 120, 116, 116),
+                          blurRadius: 20,
+                          spreadRadius: -2,
+                          offset: Offset(-2, -2),
+                        ),
+                        BoxShadow(
+                          color: Colors.black,
+                          blurRadius: 20,
+                          spreadRadius: -2,
+                          offset: Offset(2, 2),
+                        ),
           ],
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: Color(0xFF2C2F33),
+          color: botoncolor,
         ),
         child: InkWell(onTap: () {
           

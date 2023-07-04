@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/searchbar.dart';
@@ -15,51 +17,60 @@ class LoyaltyPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: HeaderContent(title: "Loyalty"),
-            ),
-            SizedBox(
-              height: height / 50,
-            ),
-            Container(
-                height: height / 15,
-                width: width / 1.15,
-                child: SearchBar(
-                  searchtext: 'Search People',
-                )),
-            SizedBox(
-              height: height / 50,
-            ),
-            Column(
+      child: Stack(
+        children: [Image.asset(
+            Constants.backgroundimage,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: backgroundColortransperent,
+            body: Column(
               children: [
-                mycard(width, height),
-                mycard(width, height),
-                mycard(width, height),
-                mycard(width, height),
-                mycard(width, height),
-                mycard(width, height),
-                mycard(width, height),
-                
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: HeaderContent(title: "Loyalty"),
+                ),
+                SizedBox(
+                  height: height / 50,
+                ),
+                Container(
+                    height: height / 15,
+                    width: width / 1.15,
+                    child: SearchBar(
+                      searchtext: 'Search People',
+                    )),
+                SizedBox(
+                  height: height / 50,
+                ),
+                Column(
+                  children: [
+                    mycard(width, height),
+                    mycard(width, height),
+                    mycard(width, height),
+                    mycard(width, height),
+                    mycard(width, height),
+                    mycard(width, height),
+                    mycard(width, height),
+                    
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-        bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            left: width / 5, right: width / 5, bottom: width / 20),
-        child: bottombutton(
-          "Add promoter",
-          const Icon(
-            Icons.add,
-            size: 35,
-          ),context
-        ),
-      ),
+            bottomNavigationBar: Padding(
+            padding: EdgeInsets.only(
+                left: width / 5, right: width / 5, bottom: width / 20),
+            child: bottombutton(
+              "Add promoter",
+              const Icon(
+                Icons.add,
+                size: 35,
+              ),context
+            ),
+          ),
+          ),
+        ],
       ),
     );
   }

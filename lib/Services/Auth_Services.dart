@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -74,6 +75,8 @@ class AuthService {
         userprovider.setToken(jsonDecode(res.body)['token']);
         Constants.usertoken = userprovider.token;
         await UserServices.getprofileinfo();
+            if(Constants.btsprofile.role != "user"){
+        await BTSClubServices.btsgetSingleClub(context: context);}
         if (Constants.btsprofile.role == "user") {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => MyBookingPage()));
@@ -87,7 +90,7 @@ class AuthService {
         showSnackBar(context, 'Invalid email or password');
       } else {
         // Other error occurred
-        showSnackBar(context, 'An error occurred. Please try again later.');
+        showSnackBar(context, res.statusCode.toString());
       }
     } catch (e) {
       // showSnackBar(context, e.toString());

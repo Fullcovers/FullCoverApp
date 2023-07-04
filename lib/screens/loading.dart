@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/UserProvider.dart';
+import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -28,6 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
     load();
   }
   load()async{
+    if(Constants.btsprofile.role != "user"){
+        await BTSClubServices.btsgetSingleClub(context: context);}
+
    await Future.delayed(Duration(milliseconds: 500), () {
      widget.user
                 ? Navigator.push(context,
@@ -48,18 +52,28 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: backgroundColorfigma,
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                scale: 1.5,
-              ),
-              CircularProgressIndicator()
-            ],
+    return Stack(
+      children: [
+         Image.asset(
+            Constants.backgroundimage,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
           ),
-        ));
+        Scaffold(
+            backgroundColor: backgroundColortransperent,
+            body: Center(
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    scale: 1.5,
+                  ),
+                  CircularProgressIndicator()
+                ],
+              ),
+            )),
+      ],
+    );
   }
 }
