@@ -7,6 +7,7 @@ import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventCard.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
@@ -73,7 +74,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               child: SizedBox(
                                 height: height / 21.675,
                                 width: width / 10.275,
-                                child: const CircularProgressIndicator(),
+                                child: Constants.mycircularProgressIndicator()
                               ),
                             );
                           } else if (snapshot.hasError) {

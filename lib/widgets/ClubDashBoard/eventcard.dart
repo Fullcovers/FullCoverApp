@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
 
 Widget eventcard(double height, double width, String eventname, String date,double fonts) {
   return Card(
-    color: Color.fromARGB(64, 227, 187, 107),
+    color: backgroundColortransperent,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
         side: BorderSide(color: Color(0xFF9B804A), width: 3)),

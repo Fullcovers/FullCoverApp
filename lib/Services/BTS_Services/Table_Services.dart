@@ -185,7 +185,6 @@ class BTStable {
     late List<Ticket> tickets = [];
     print("getTableTickets");
     try {
-      if (myclubid == "") {
         http.Response myclub = await http.get(
           Uri.parse('${Constants.uri}club/my-club'),
           headers: <String, String>{
@@ -194,7 +193,7 @@ class BTStable {
           },
         );
         var myclubid = jsonDecode(myclub.body)['data'][0]['_id'];
-      }
+      
       print(myclubid);
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}tables/c/$myclubid'),
@@ -204,6 +203,47 @@ class BTStable {
         },
       );
       List<dynamic> tic = (jsonDecode(res.body))['data'];
+      print(res);
+      for (var i = 0; i < tic.length; i++) {
+        Ticket ticket = Ticket(
+          crossed: tic[i]['price']['crossed'],
+          current: tic[i]['price']['current'],
+          id: tic[i]['_id'],
+          club: tic[i]['club'],
+          event: tic[i]['event'],
+          name: tic[i]['name'],
+          available: tic[i]['available'],
+          v: tic[i]['__v'],
+        );
+
+        tickets.add(ticket);
+      }
+      print(tickets.length);
+    } catch (e) {
+      print(e);
+      showSnackBar(context, e.toString());
+    }
+    return tickets;
+  }
+
+  static Future<List<Ticket>> getTableTicketsbyclubid({
+    required String myclubid,
+    required BuildContext context,
+  }) async {
+    late List<Ticket> tickets = [];
+    print("getTableTickets");
+    try {
+   
+      print(myclubid);
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}tables/c/$myclubid'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${Constants.usertoken}',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      List<dynamic> tic = (jsonDecode(res.body))['data'];
+      print(res);
       for (var i = 0; i < tic.length; i++) {
         Ticket ticket = Ticket(
           crossed: tic[i]['price']['crossed'],

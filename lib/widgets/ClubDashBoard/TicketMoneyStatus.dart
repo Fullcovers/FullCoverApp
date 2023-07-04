@@ -12,7 +12,7 @@ class TicketMoneyStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final int moneyint = int.tryParse(money) ?? 0;
+    final double moneyint = double.parse(money) ?? 0;
     final indianCurrencyFormat =
         NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0);
     final formattedAmount = indianCurrencyFormat.format(moneyint);
@@ -77,7 +77,7 @@ class TicketMoneyStatus extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: FittedBox(
                       child: Text(
-                        formattedAmount,
+                        formattedAmount.toString(),
                         style: GoogleFonts.bebasNeue(
                           fontSize: 36,
                           fontWeight: FontWeight.w400,

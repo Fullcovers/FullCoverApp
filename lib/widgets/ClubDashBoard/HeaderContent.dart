@@ -10,9 +10,7 @@ class HeaderContent extends StatelessWidget {
     required this.title,
      this.rought = const BehindTheScenesPage(),
     this.icon =  const Icon(
-      Icons.settings_outlined,
-      color: Color(0xFF212426),
-      size: 30,
+     null
     ),
   });
   Icon icon;

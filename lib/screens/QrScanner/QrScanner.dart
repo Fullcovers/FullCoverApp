@@ -12,6 +12,8 @@ import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
+import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
 
 import '../../Providers/TicketProvider.dart';
@@ -149,301 +151,353 @@ class _QrScannerState extends State<QrScanner> {
     double height = MediaQuery.of(context).size.height;
     final userprovider = Provider.of<UserProvider>(context);
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFF2C2F33),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 30,
+      child: Stack(
+        children: [
+          Image.asset(
+           Constants.backgroundimage,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: backgroundColortransperent,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ticketprovider.isLoading
-                      ? Padding(
-                          padding: const EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 15.0),
-                          child: Container(
-                            height: 2.5 * height / 10,
-                            width: width,
-                            decoration:
-                                const BoxDecoration(color: Color(0xFF2C2F33)),
-                            child: ListView.builder(
-                              itemCount: 1,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, right: 15.0, top: 5),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            if (selectedCardIndex == index) {
-                                              selectedCardIndex = -1;
-                                              isDropdownVisible = false;
-                                            } else {
-                                              selectedCardIndex = index;
-                                              isDropdownVisible = true;
-                                            }
-                                          });
-                                        },
-                                        child: Card(
-                                          color: const Color(0xFFD9D9D9),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: Container(
-                                            height: height / 15,
-                                            width: width,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xFFD9D9D9),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ticketprovider.isLoading
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 15.0),
+                              child: Container(
+                                height: 2.5 * height / 10,
+                                width: width,
+                                decoration:
+                                    const BoxDecoration(color: Color(0xFF2C2F33)),
+                                child: ListView.builder(
+                                  itemCount: 1,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15.0, right: 15.0, top: 5),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                if (selectedCardIndex == index) {
+                                                  selectedCardIndex = -1;
+                                                  isDropdownVisible = false;
+                                                } else {
+                                                  selectedCardIndex = index;
+                                                  isDropdownVisible = true;
+                                                }
+                                              });
+                                            },
+                                            child: Card(
+                                              color: const Color(0xFFD9D9D9),
+                                              shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    isDropdownVisible &&
-                                                            index ==
-                                                                selectedCardIndex
-                                                        ? const BorderRadius
-                                                            .only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    15.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    15.0),
-                                                          )
-                                                        : BorderRadius.circular(
-                                                            20.0)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20.0),
-                                                  child: Text(
-                                                    firstname!,
-                                                    style: GoogleFonts
-                                                        .sairaCondensed(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              child: Container(
+                                                height: height / 15,
+                                                width: width,
+                                                decoration: BoxDecoration(
+                                                    color: const Color(0xFFD9D9D9),
+                                                    borderRadius:
+                                                        isDropdownVisible &&
+                                                                index ==
+                                                                    selectedCardIndex
+                                                            ? const BorderRadius
+                                                                .only(
+                                                                topLeft:
+                                                                    Radius.circular(
+                                                                        15.0),
+                                                                topRight:
+                                                                    Radius.circular(
+                                                                        15.0),
+                                                              )
+                                                            : BorderRadius.circular(
+                                                                20.0)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20.0),
+                                                      child: Text(
+                                                        firstname!,
+                                                        style: GoogleFonts
+                                                            .sairaCondensed(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 20.0),
-                                                  child: Text(
-                                                    formattedAmount,
-                                                    style:
-                                                        GoogleFonts.bebasNeue(
-                                                      fontSize: 28,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20.0),
+                                                      child: Text(
+                                                        formattedAmount,
+                                                        style:
+                                                            GoogleFonts.bebasNeue(
+                                                          fontSize: 28,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                    if (isDropdownVisible &&
-                                        index ==
-                                            selectedCardIndex) // Add this condition
-                                      FractionalTranslation(
-                                        translation: const Offset(0, -0.07),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15.0, right: 15.0),
-                                          child: Card(
-                                            color: const Color.fromRGBO(
-                                                217, 217, 217, 0.33),
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(15.0),
-                                                bottomRight:
-                                                    Radius.circular(15.0),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              height: height / 6,
-                                              width: width,
-                                              decoration: const BoxDecoration(
-                                                color: Color.fromRGBO(
+                                        if (isDropdownVisible &&
+                                            index ==
+                                                selectedCardIndex) // Add this condition
+                                          FractionalTranslation(
+                                            translation: const Offset(0, -0.07),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 15.0, right: 15.0),
+                                              child: Card(
+                                                color: const Color.fromRGBO(
                                                     217, 217, 217, 0.33),
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(15.0),
-                                                  bottomRight:
-                                                      Radius.circular(15.0),
+                                                shape: const RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(15.0),
+                                                    bottomRight:
+                                                        Radius.circular(15.0),
+                                                  ),
                                                 ),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 20.0,
-                                                            top: 20.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          "Tickets",
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "Stag x$scount",
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "Female x$fcount",
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                        FractionalTranslation(
-                                                          translation:
-                                                              const Offset(
-                                                                  0, 0),
-                                                          child: Text(
-                                                            "Couple x$ccount",
-                                                            style: GoogleFonts
-                                                                .sairaCondensed(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                child: Container(
+                                                  height: height / 6,
+                                                  width: width,
+                                                  decoration: const BoxDecoration(
+                                                    color: Color.fromRGBO(
+                                                        217, 217, 217, 0.33),
+                                                    borderRadius: BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(15.0),
+                                                      bottomRight:
+                                                          Radius.circular(15.0),
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 20.0,
-                                                            top: 20.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                          formattedDate,
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                                  fontSize: 20,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                                left: 20.0,
+                                                                top: 20.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Tickets",
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "Stag x$scount",
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "Female x$fcount",
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
+                                                            FractionalTranslation(
+                                                              translation:
+                                                                  const Offset(
+                                                                      0, 0),
+                                                              child: Text(
+                                                                "Couple x$ccount",
+                                                                style: GoogleFonts
+                                                                    .sairaCondensed(
+                                                                  fontSize: 16,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600,
-                                                                  color: const Color(
-                                                                      0XFFB59F68)),
+                                                                  color:
+                                                                      Colors.white,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          phno,
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.white,
-                                                          ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                                right: 20.0,
+                                                                top: 20.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              formattedDate,
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                      fontSize: 20,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: const Color(
+                                                                          0XFFB59F68)),
+                                                            ),
+                                                            Text(
+                                                              phno,
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              email!,
+                                                              style: GoogleFonts
+                                                                  .sairaCondensed(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight.w600,
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          email!,
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                  ],
-                                );
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          : const SizedBox(
+                              height: 10,
+                            ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 30.0),
+                            child: InkWell(
+                              onTap: () {
+                                _qrScanner();
                               },
+                              child: Container(
+                                height: 58,
+                                width: 190,
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 120, 116, 116),
+                                      blurRadius: 20,
+                                      spreadRadius: -2,
+                                      offset: Offset(-2, -2),
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurRadius: 20,
+                                      spreadRadius: -2,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  color: Color(0xFF2C2F33),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Open QR code",
+                                      style: GoogleFonts.bebasNeue(
+                                          color: Colors.white, fontSize: 25),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        )
-                      : const SizedBox(
-                          height: 10,
-                        ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                        ],
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30.0),
                         child: InkWell(
                           onTap: () {
-                            _qrScanner();
+                            OrderServices()
+                                .validateQrCode(id: qrData, context: context);
                           },
                           child: Container(
                             height: 58,
@@ -463,15 +517,14 @@ class _QrScannerState extends State<QrScanner> {
                                   offset: Offset(2, 2),
                                 ),
                               ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
                               color: Color(0xFF2C2F33),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Open QR code",
+                                  "VALIDATE",
                                   style: GoogleFonts.bebasNeue(
                                       color: Colors.white, fontSize: 25),
                                 )
@@ -482,52 +535,11 @@ class _QrScannerState extends State<QrScanner> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30.0),
-                    child: InkWell(
-                      onTap: () {
-                        OrderServices()
-                            .validateQrCode(id: qrData, context: context);
-                      },
-                      child: Container(
-                        height: 58,
-                        width: 190,
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 120, 116, 116),
-                              blurRadius: 20,
-                              spreadRadius: -2,
-                              offset: Offset(-2, -2),
-                            ),
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 20,
-                              spreadRadius: -2,
-                              offset: Offset(2, 2),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Color(0xFF2C2F33),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "VALIDATE",
-                              style: GoogleFonts.bebasNeue(
-                                  color: Colors.white, fontSize: 25),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
@@ -45,7 +46,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
       child: Stack(
         children: [
           Image.asset(
-            "assets/images/background.png",
+           Constants.backgroundimage,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -89,7 +90,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                   child: SizedBox(
                                     height: height / 21.675,
                                     width: width / 10.275,
-                                    child: const CircularProgressIndicator(),
+                                    child: Constants.mycircularProgressIndicator()
                                   ),
                                 ); // Show a loading indicator while data is being fetched
                               } else if (snapshot.hasError) {

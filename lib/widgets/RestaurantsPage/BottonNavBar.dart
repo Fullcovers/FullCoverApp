@@ -327,7 +327,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                   fit: BoxFit.cover,
                 )
               : Container(),
-          CurvedNavigationBar(
+          CurvedNavigationBar(animationDuration:Duration(milliseconds: 400),
             height: 75,
             buttonBackgroundColor: golden,
             index: widget.initialindex,
@@ -425,14 +425,14 @@ class _bottomnavbarState extends State<bottomnavbar> {
             ],
             onTap: (index) {
               if (index == 2) {
-                Future.delayed(Duration(milliseconds: 500), () {
+                Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => EventsScreen()),
                       (route) => false);
                 });
               }
               if (index == 1) {
-                Future.delayed(Duration(milliseconds: 500), () {
+                Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => MyBookingPage()),
                       (route) => false);
@@ -440,7 +440,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
               }
 
               if (index == 0) {
-                Future.delayed(Duration(milliseconds: 500), () {
+                Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (context) => const ClubsScreen()),

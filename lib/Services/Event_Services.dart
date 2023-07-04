@@ -68,12 +68,12 @@ class EventsServices {
           onSuccess: () {
             EventProvider eventProvider =
                 Provider.of<EventProvider>(context, listen: false);
-            final eventData = json.decode(res.body)['data'];
+            final eventData = jsonDecode(res.body)['data'];
             eventProvider.fetchEvents(eventData);
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
-          print("object");
+          print(eventProvider.events);
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());

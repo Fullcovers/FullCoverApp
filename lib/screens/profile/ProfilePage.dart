@@ -10,6 +10,7 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
 import 'package:venq_assessment/screens/profile/coins.dart';
 import 'package:venq_assessment/screens/profile/editprofile.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Stack(
       children: [
         Image.asset(
-          "assets/images/background.png",
+          Constants.backgroundimage,
           height: height,
           width: width,
           fit: BoxFit.cover,
@@ -93,13 +94,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 20,
                             color: offwhite),
                       ),
-                      // Text(
-                      //   user.phoneNumber,
-                      //   style: GoogleFonts.sairaCondensed(
-                      //       fontWeight: FontWeight.w500,
-                      //       fontSize: 20,
-                      //       color: offwhite),
-                      // ),
+                      Text(
+                        user.phoneNumber.isNotEmpty?user.phoneNumber:"",
+                        style: GoogleFonts.sairaCondensed(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: offwhite),
+                      ),
                     ],
                   ),
                   Row(
@@ -279,7 +280,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ])
-              : Center(child: CircularProgressIndicator()),
+              : Center(child: Constants.mycircularProgressIndicator()),
         ),
       ],
     ));

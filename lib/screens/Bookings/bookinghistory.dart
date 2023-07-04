@@ -10,6 +10,7 @@ import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
 
@@ -78,7 +79,7 @@ class _BookingHistoryState extends State<BookingHistory> {
         child: Stack(
       children: [
         Image.asset(
-          "assets/images/background.png",
+          Constants.backgroundimage,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
@@ -694,7 +695,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                           },
                         ),
                       )
-                : CircularProgressIndicator(),
+                : Constants.mycircularProgressIndicator(),
           ]),
         ),
       ],

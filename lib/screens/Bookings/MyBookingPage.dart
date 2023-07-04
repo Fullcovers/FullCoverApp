@@ -21,7 +21,9 @@ import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
+import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/profile/ProfilePage.dart';
+import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
@@ -123,7 +125,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
       child: Stack(
         children: [
           Image.asset(
-            "assets/images/background.png",
+            Constants.backgroundimage,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -208,7 +210,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
-                                color: Color(0xff1e1e1e),
+                                color: botoncolor,
                                 child: Image.asset(
                                   "assets/images/person.png",
                                   scale: 20,
@@ -238,78 +240,78 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          height: 3 * height / 9.2,
-                          width: (width / 7) + (width / 1.68),
-                          decoration:
-                              BoxDecoration(color: backgroundColorfigma),
-                          child: ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Card(
-                                    color: const Color(0xFFD9D9D9),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    child: Container(
-                                      height: height / 18,
-                                      width: width / 7.76,
-                                      decoration: BoxDecoration(
-                                        color: offwhite,
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(60.0),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    color: offwhite,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    child: Container(
-                                      height: height / 18,
-                                      width: width / 1.77,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFFD9D9D9),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            "Event ${index + 1}",
-                                            style: GoogleFonts.mavenPro(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: height / 54.1875,
-                                            ),
-                                          ),
-                                          Text("300",
-                                              style: GoogleFonts.bebasNeue(
-                                                fontSize: height / 27.09375,
-                                              ))
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(5.0),
+                      //   child: Container(
+                      //     height: 3 * height / 9.2,
+                      //     width: (width / 7) + (width / 1.68),
+                      //     decoration:
+                      //         BoxDecoration(color: backgroundColorfigma),
+                      //     child: ListView.builder(
+                      //       itemCount: 10,
+                      //       itemBuilder: (context, index) {
+                      //         return Row(
+                      //           children: [
+                      //             Card(
+                      //               color: const Color(0xFFD9D9D9),
+                      //               shape: RoundedRectangleBorder(
+                      //                   borderRadius:
+                      //                       BorderRadius.circular(10.0)),
+                      //               child: Container(
+                      //                 height: height / 18,
+                      //                 width: width / 7.76,
+                      //                 decoration: BoxDecoration(
+                      //                   color: offwhite,
+                      //                   borderRadius: const BorderRadius.all(
+                      //                     Radius.circular(60.0),
+                      //                   ),
+                      //                 ),
+                      //                 child: Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.spaceAround,
+                      //                   children: [],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //             Card(
+                      //               color: offwhite,
+                      //               shape: RoundedRectangleBorder(
+                      //                   borderRadius:
+                      //                       BorderRadius.circular(10.0)),
+                      //               child: Container(
+                      //                 height: height / 18,
+                      //                 width: width / 1.77,
+                      //                 decoration: const BoxDecoration(
+                      //                   color: Color(0xFFD9D9D9),
+                      //                   borderRadius: BorderRadius.all(
+                      //                     Radius.circular(20.0),
+                      //                   ),
+                      //                 ),
+                      //                 child: Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.spaceAround,
+                      //                   children: [
+                      //                     Text(
+                      //                       "Event ${index + 1}",
+                      //                       style: GoogleFonts.mavenPro(
+                      //                         fontWeight: FontWeight.w500,
+                      //                         fontSize: height / 54.1875,
+                      //                       ),
+                      //                     ),
+                      //                     Text("300",
+                      //                         style: GoogleFonts.bebasNeue(
+                      //                           fontSize: height / 27.09375,
+                      //                         ))
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         );
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
                       // SizedBox(
                       //   height: height / 25,
                       // ),
@@ -556,9 +558,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                           130.0,
                                                                     ),
                                                                   )
-                                                                : const CircularProgressIndicator()
-                                                            : const CircularProgressIndicator()
-                                                        : const CircularProgressIndicator()
+                                                                : Constants.mycircularProgressIndicator()
+                                                            : Constants.mycircularProgressIndicator()
+                                                        : Constants.mycircularProgressIndicator()
                                                   ],
                                                 ),
                                               ),
@@ -778,7 +780,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             )
                           ]))
                   : Container(
-                      height: 100,
+                      height: 102,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -823,17 +825,17 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     ),
                                     Stack(
                                       children: [
-                                        //  Image.asset(
-                                        //     "assets/images/background.png",
-                                        //     height: height / 13.6,
-                                        //     width: width / 12.38571428571429,
-                                        //     fit: BoxFit.cover,
-                                        //   ),
+                                         Image.asset(
+                                            "assets/images/background.png",
+                                            height: height / 12.38571428571429,
+                                            width: width / 13.5,
+                                            fit: BoxFit.cover,
+                                          ),
                                         Container(
-                                          width: width / 13.6,
+                                          width: width / 13.5,
                                           height: height / 12.38571428571429,
                                           decoration: BoxDecoration(
-                                            color: backgroundColorfigma,
+                                            color: Colors.transparent,
                                           ),
                                         ),
                                         Container(
@@ -858,7 +860,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                         ),
                                         Container(
                                           width: width / 13.6,
-                                          height: height / 10.1,
+                                          height: height / 10.2,
                                           decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(20),
@@ -885,12 +887,12 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             child: Image.asset(
                                               "assets/images/background.png",
                                               height: height / 10.1,
-                                              width: width / 3.342,
+                                              width: width / 3.347,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
                                           Container(
-                                            width: width / 3.342,
+                                            width: width / 3.347,
                                             height: height / 10.1,
                                             decoration: BoxDecoration(
                                               color: Colors.transparent,
@@ -938,7 +940,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
+                              padding: const EdgeInsets.only(left: 16.0,right: 16),
                               child: Column(
                                 children: [
                                   Row(
@@ -948,7 +950,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             top: 10.0, left: 10.0),
                                         child: Container(
                                             height: 3 * height / 11,
-                                            width: 2 * width / 3,
+                                            width: width-52,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   const BorderRadius.all(
@@ -963,47 +965,73 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text("No Bookings Available Right Now",
+                                                Text(
+                                                    "No Bookings Available Right Now",
                                                     style:
                                                         GoogleFonts.bebasNeue(
-                                                      fontSize: 30,
+                                                      fontSize: 20,
                                                     )),
-                                                    Text("Lets change that",
+                                                Text("Lets change that",
                                                     style:
                                                         GoogleFonts.bebasNeue(
-                                                      fontSize: 30,
+                                                      fontSize: 15,
                                                     )),
-                                                    Container()
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context)
+                                                        .pushAndRemoveUntil(
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const ClubsScreen()),
+                                                            (route) => false);
+                                                  },
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: width / 13,
+                                                        right: width / 13,
+                                                        top: 10),
+                                                    child: SizedBox(
+                                                      height: height / 20,
+                                                      child: Container(
+                                                        height: height / 10,
+                                                        width: width / 5,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: golden,
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(
+                                                            Radius.circular(
+                                                                10.0),
+                                                          ),
+                                                          border: Border.all(
+                                                            width: 2,
+                                                            color: const Color(
+                                                                0xFF979797),
+                                                          ),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "VIEW CLUBS",
+                                                            style: GoogleFonts
+                                                                .bebasNeue(
+                                                              fontSize:
+                                                                  width / 30,
+                                                              
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             )),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10.0, left: 10.0),
-                                        child: Container(
-                                          height: 3 * height / 11,
-                                          width: width / 5,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(20.0)),
-                                            border: Border.all(
-                                              color: Colors.black,
-                                              width: 2,
-                                            ),
-                                            color: Colors.white,
-                                          ),
-                                          child: Center(
-                                            child: RotatedBox(
-                                              quarterTurns: 1,
-                                              child: Text("PREVIOUS BOOKINGS",
-                                                  style: GoogleFonts.bebasNeue(
-                                                    fontSize: 30,
-                                                  )),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      
                                     ],
                                   ),
                                 ],
@@ -1024,51 +1052,50 @@ class _MyBookingPageState extends State<MyBookingPage> {
               renderPanelSheet: false,
               panelSnapping: false,
               collapsed: Container(
-                  
                   child: Stack(
+                children: [
+                  Image.asset(
+                    "assets/images/background.png",
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
+                  Row(
                     children: [
-                      Image.asset(
-                        "assets/images/background.png",
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
+                      Container(
+                        width: width / 1.325806451612903,
+                        height: 500,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            width: width / 1.325806451612903,height: 500
-                            ,
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
+                      Container(
+                        width: width / 5.1375,
+                        height: height / 12.38571428571429,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
                           ),
-                          Container(
-                            width: width / 5.1375,
-                            height: height / 12.38571428571429,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
-                              ),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                panelController.open();
-                                setState(() {
-                                  iscolorchange = true;
-                                });
-                              },
-                              child: Image.asset(
-                                "assets/images/coinlogo.png",
-                                scale: 6,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            panelController.open();
+                            setState(() {
+                              iscolorchange = true;
+                            });
+                          },
+                          child: Image.asset(
+                            "assets/images/coinlogo.png",
+                            scale: 6,
+                          ),
+                        ),
+                      )
                     ],
-                  )),
+                  ),
+                ],
+              )),
             ),
             bottomNavigationBar: !iscolorchange
                 ? bottomnavbar(
