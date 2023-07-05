@@ -144,7 +144,8 @@ class _GustListPageState extends State<GustListPage> {
               ),
               loded
                   ? Expanded(
-                      child: ListView.builder(
+                      child: 
+                      ListView.builder(
                         itemCount: promoters!.length,
                         itemBuilder: (context, index) {
                           final promoter = promoters[index];

@@ -313,7 +313,6 @@ class bottomnavbar extends StatefulWidget {
 class _bottomnavbarState extends State<bottomnavbar> {
   @override
   Widget build(BuildContext context) {
-    print(widget.width);
     return Container(
       color: Colors.transparent,
       height: 75,

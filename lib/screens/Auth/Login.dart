@@ -211,14 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 20,
                               ),
                               InkWell(onTap: () {
-                                setState(() {
-                                        load = !load;
-                                        selected = !selected;
-                                      });
-                                      AuthService().signInUser(
-                                          context: context,
-                                          email: emailController.text,
-                                          password: passwordController.text);
+                                
                               },
                                 child: Padding(
                                   padding: EdgeInsets.only(
@@ -226,34 +219,38 @@ class _LoginPageState extends State<LoginPage> {
                                       left: width / 10,
                                       right: width / 10,
                                       bottom: 20.0),
-                                  child: AnimatedContainer(
-                                    width: selected ? width : height / 15,
-                                    height: height / 20,
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: backbuttoncolor,
-                                          blurRadius: 10,
-                                          spreadRadius: -2,
-                                          offset: Offset(-2, -2),
+                                  child: InkWell(onTap: (){setState(() {
+                                        load = !load;
+                                        selected = !selected;
+                                      });
+                                      AuthService().signInUser(
+                                          context: context,
+                                          email: emailController.text,
+                                          password: passwordController.text);},
+                                    child: AnimatedContainer(
+                                      width: selected ? width : height / 15,
+                                      height: height / 20,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: backbuttoncolor,
+                                            blurRadius: 10,
+                                            spreadRadius: -2,
+                                            offset: Offset(-2, -2),
+                                          ),
+                                          BoxShadow(
+                                            color: Colors.black,
+                                            blurRadius: 20,
+                                            spreadRadius: -2,
+                                            offset: Offset(2, 2),
+                                          ),
+                                        ],
+                                        color: botoncolor,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0),
                                         ),
-                                        BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: 20,
-                                          spreadRadius: -2,
-                                          offset: Offset(2, 2),
-                                        ),
-                                      ],
-                                      color: botoncolor,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20.0),
                                       ),
-                                    ),
-                                    duration: const Duration(milliseconds: 500),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        
-                                      },
+                                      duration: const Duration(milliseconds: 500),
                                       child: Column(
                                         children: [
                                           load

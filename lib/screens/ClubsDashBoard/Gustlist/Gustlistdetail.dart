@@ -5,6 +5,7 @@ import 'package:venq_assessment/Services/BTS_Services/Gustlist_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
+import 'package:venq_assessment/widgets/ClubDashBoard/PeopleList.dart';
 
 class GustlistdetailPage extends StatefulWidget {
   var prommoter;
@@ -49,11 +50,15 @@ class _GustlistdetailPageState extends State<GustlistdetailPage> {
                 padding: EdgeInsets.all(10.0),
                 child: HeaderContent(title: "GustList"),
               ),
-              Text(
-                widget.prommoter['user']['name']['firstName']+" "+widget.prommoter['user']['name']['lastName'],
-                style: TextStyle(color: Colors.white),
-              ),
-              loded?Card(child: Text(guistlist.toString()),):Constants.mycircularProgressIndicator()
+              
+              // Text(
+              //   widget.prommoter['user']['name']['firstName']+" "+widget.prommoter['user']['name']['lastName'],
+              //   style: TextStyle(color: Colors.white),
+              // ),
+              loded?PeopleList(
+                orders: guistlist,
+                count: guistlist.length  ,
+              ):Constants.mycircularProgressIndicator()
 
             ],
           ),

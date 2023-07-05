@@ -11,6 +11,7 @@ import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:video_player/video_player.dart';
 
 class SplashScreen extends StatefulWidget {
   var user;
@@ -21,18 +22,29 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> {  late VideoPlayerController _controller;
+
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    load();
+    super.initState();    load();
+
+    _controller = VideoPlayerController.asset("assets/LogointroApp.mp4")
+      ..initialize().then((_) {
+        setState(() {
+          _controller.setLooping(true);
+          _controller.play();
+        });
+      });
   }
   load()async{
-    if(Constants.btsprofile.role != "user"){
+    // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
+   if (!widget.user) {
+      if(Constants.btsprofile.role != "user"){
         await BTSClubServices.btsgetSingleClub(context: context);}
+   }
 
-   await Future.delayed(Duration(milliseconds: 500), () {
+   await Future.delayed(Duration(milliseconds: 7100), () {
      widget.user
                 ? Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const LoginPage()))
@@ -54,22 +66,28 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-         Image.asset(
-            Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
+        //  Image.asset(
+        //     Constants.backgroundimage,
+        //     height: MediaQuery.of(context).size.height,
+        //     width: MediaQuery.of(context).size.width,
+        //     fit: BoxFit.cover,
+        //   ),
         Scaffold(
             backgroundColor: backgroundColortransperent,
             body: Center(
               child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/images/logo.png",
-                    scale: 1.5,
+                  // Image.asset(
+                  //   "assets/images/logo.png",
+                  //   scale: 1.5,
+                  // ),
+                  Container(width: MediaQuery.of(context).size.width,height: MediaQuery.of(context).size.height,
+                    child: AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
+                          ),
                   ),
-                  Constants.mycircularProgressIndicator()
+                  // Constants.mycircularProgressIndicator()
                 ],
               ),
             )),

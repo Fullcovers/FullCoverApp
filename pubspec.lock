@@ -661,6 +661,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  video_player:
+    dependency: "direct main"
+    description:
+      name: video_player
+      sha256: "1c899a1f9d9d5c4fd72f27983a88972776334b74b456ce67c200db10af4595a4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.15"
+  video_player_platform_interface:
+    dependency: transitive
+    description:
+      name: video_player_platform_interface
+      sha256: a1d56477752271a7a0de872d8962bce1dd5fecf463beaf66da417ebebb9ba0f7
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.0"
+  video_player_web:
+    dependency: transitive
+    description:
+      name: video_player_web
+      sha256: fb3bbeaf0302cb0c31340ebd6075487939aa1fe3b379d1a8784ef852b679940e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.15"
   win32:
     dependency: transitive
     description:

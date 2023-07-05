@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Services/BTS_Services/Gustlist_Services.dart';
 
 import 'package:venq_assessment/Services/BTS_Services/Promoter_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Gustlist/Gustlistdetail.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
@@ -20,6 +22,32 @@ class Promoters extends StatefulWidget {
 }
 
 class _PromotersState extends State<Promoters> {
+  var promoters;
+  bool loded = false;
+  getpromoter() async {
+    promoters = await Gustlist_Services.getallpromoters(context: context);
+    setState(() {
+      loded = true;
+    });
+  }
+
+  void filterSearchResults(String query) {
+    final suggestions = promoters.where((promoter) {
+      final promotername = promoter['user']['name']['firstName'].toLowerCase();
+      final input = query.toLowerCase();
+      return promotername.contains(input)?true:false;
+    }).toList();
+    setState(() {
+      promoters=suggestions;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getpromoter();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -56,44 +84,43 @@ class _PromotersState extends State<Promoters> {
                   ),
                   SizedBox(
                     height: 6 * height / 10,
-                    child: FutureBuilder<List<PromoterModel>>(
-                      future: PromoterServices().getAllPromoters(context: context),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return  Center(
-                            child: Constants.mycircularProgressIndicator(),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Center(
-                            child: Text('Error: ${snapshot.error}'),
-                          );
-                        } else {
-                          final promoters = snapshot.data;
+                    child: loded
+                  ? Expanded(
+                      child: 
+                      ListView.builder(
+                        itemCount: promoters!.length,
+                        itemBuilder: (context, index) {
+                          final promoter = promoters[index];
 
-                          return ListView.builder(
-                            itemCount: promoters!.length,
-                            itemBuilder: (context, index) {
-                              final promoter = promoters[index];
-
-                              return Column(
-                                children: [
-                                  eventcard(
-                                    height,
-                                    width,
-                                    promoter.user.name.firstName,
-                                    "Code: ${promoter.promoCode}",
-                                    20,
-                                  ),
-                                  SizedBox(
-                                    height: height / 42,
-                                  ),
-                                ],
-                              );
-                            },
+                          return Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              GustlistdetailPage(
+                                                prommoter: promoter,
+                                              )));
+                                },
+                                child: eventcard(
+                                  height,
+                                  width,
+                                  promoter['user']['name']['firstName'],
+                                  "Code: ${promoter['promo_code']}",
+                                  20,
+                                ),
+                              ),
+                              SizedBox(
+                                height: height / 42,
+                              ),
+                            ],
                           );
-                        }
-                      },
-                    ),
+                        },
+                      ),
+                    )
+                  : Constants.mycircularProgressIndicator()
                   )
                 ],
               ),

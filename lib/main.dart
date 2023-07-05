@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,10 +30,19 @@ void main() async {
   final userProvider = UserProvider();
   await userProvider.loadToken();
   await userProvider.loadId();
-  if (userProvider.token.isNotEmpty) {
+  try {
+  final result = await InternetAddress.lookup('example.com');
+  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      if (userProvider.token.isNotEmpty) {
     Constants.usertoken = userProvider.token;
     await UserServices.getprofileinfo();
   }
+  }
+} on SocketException catch (_) {
+  print('not connected');
+}
+
+
 
   runApp(
     ChangeNotifierProvider.value(
