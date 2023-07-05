@@ -29,6 +29,7 @@ import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
 import 'package:venq_assessment/widgets/BookingScreen/NewBookings.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -183,8 +184,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
+                                  SlideTransitionPageRoute(direction: "topright",
+                                      child:
                                           const ProfilePage()));
                             },
                             child: AnimatedContainer(

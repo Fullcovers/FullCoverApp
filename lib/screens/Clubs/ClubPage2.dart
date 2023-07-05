@@ -18,6 +18,7 @@ import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage3.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/DateButton.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/TicketCount.dart';
 
@@ -1394,8 +1395,8 @@ class _ClubsPage2State extends State<ClubsPage2> {
                           onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => ClubPage3(
+                                SlideTransitionPageRoute(direction:"Up",
+                                    child: ClubPage3(
                                           promopersent: promocodeloded
                                               ? booktable
                                                   ? (totaltableamount1 -

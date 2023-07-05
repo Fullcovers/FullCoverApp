@@ -70,7 +70,7 @@ class _EventDetail3State extends State<EventDetail3> {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: offwhite,
+            backgroundColor: eventbackgroundcolor,
             body: SlidingUpPanel(
               borderRadius: radius,
               minHeight: height / 6,
@@ -650,9 +650,6 @@ print(formattedDate);
                   child: Container(
                     height: height / 4,
                     width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      color: offwhite,
-                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

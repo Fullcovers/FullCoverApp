@@ -6,6 +6,7 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
 bool onclick = false;
 
@@ -427,14 +428,14 @@ class _bottomnavbarState extends State<bottomnavbar> {
               if (index == 2) {
                 Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => EventsScreen()),
-                      (route) => false);
+                      SlideTransitionPageRoute(child:EventsScreen(),direction:"left"),
+                       (route) => false);
                 });
               }
               if (index == 1) {
                 Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => MyBookingPage()),
+                      ScaleTransitionPageRoute(child:MyBookingPage()),
                       (route) => false);
                 });
               }
@@ -442,8 +443,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
               if (index == 0) {
                 Future.delayed(Duration(milliseconds: 400), () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const ClubsScreen()),
+                      SlideTransitionPageRoute(child:
+                          const ClubsScreen(),direction: "right"),
                       (route) => false);
                 });
               }

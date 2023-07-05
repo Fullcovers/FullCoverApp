@@ -9,6 +9,7 @@ import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventCard.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
@@ -46,7 +47,7 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: eventbackgroundcolor,
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -94,8 +95,8 @@ class _EventsScreenState extends State<EventsScreen> {
                                       await ClubServices().getSingleClub(
                                           clubid: event.clubId, context: context);
                                       Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
+                                          ScaleTransitionPageRoute(
+                                              child:
                                                   EventDetail(event: event)));
                                     },
                                     child: myeventcard(height, width, event),

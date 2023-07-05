@@ -10,6 +10,7 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/FooterButtons.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/EventsScreen/EventsFooterButtons.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/BottonNavBar.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
@@ -53,7 +54,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
           ),
           Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color.fromARGB(255, 20, 20, 20),
             body: SingleChildScrollView(
               child: Container(
                
@@ -68,7 +69,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                         child: Center(
                           child: Text("Clubs",
                               style: GoogleFonts.bebasNeue(
-                                fontSize: width / 10.275,
+                                fontSize: width  / 10.275,
                                 color: Color(0xFFB59F68),
                               )),
                         ),
@@ -114,8 +115,8 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                             InkWell(
                                                 onTap: () {
                                                   Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
+                                                    ScaleTransitionPageRoute(
+                                                        child:
                                                             ClubDetail(
                                                               club: club,
                                                             )),
