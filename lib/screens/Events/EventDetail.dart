@@ -8,6 +8,7 @@ import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Events/EventDetail2.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/RestaurantsPage/TopNavBar.dart';
 
 import '../../Models/Events.dart';
@@ -56,7 +57,7 @@ class _EventDetailState extends State<EventDetail> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: eventbackgroundcolor,
         body: Column(
           children: [
             SizedBox(
@@ -537,8 +538,8 @@ class _EventDetailState extends State<EventDetail> {
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => EventDetail2(etickets: etickets,orderticketscount:orderticketscount,
+                            SlideTransitionPageRoute(direction: "left",
+                                child:EventDetail2(etickets: etickets,orderticketscount:orderticketscount,
                                       club: clubprovider.club!,
                                       event: widget.event,
                                     )),
@@ -577,7 +578,7 @@ class _EventDetailState extends State<EventDetail> {
                                     width: width / 10.275,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: backgroundColorfigma),
+                                        color: backgroundColorfigma),child: Icon(Icons.arrow_forward,color: Colors.white,),
                                   ),
                                 )
                               ],

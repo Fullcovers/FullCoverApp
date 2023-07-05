@@ -7,6 +7,7 @@ import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage2.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
 class ClubDetail extends StatefulWidget {
   ClubDetail({super.key, required this.club});
@@ -644,8 +645,8 @@ class _ClubDetailState extends State<ClubDetail> {
                           ? InkWell(
                               onTap: () async {
                                 Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) => ClubsPage2(
+                                  SlideTransitionPageRoute(direction: "left",
+                                      child: ClubsPage2(
                                             tableticketscount:
                                                 tableticketscount,
                                             tabletickets: tabletickets,

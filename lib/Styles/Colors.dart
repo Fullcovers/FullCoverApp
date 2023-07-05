@@ -11,5 +11,5 @@ Color botoncolor=Color(0xff1e1e1e);
 Color nbcolor=Color.fromARGB(255, 52, 55, 56);
 Color customtextfieldcolor=Colors.green;
 Color blacktextcolor=Colors.black;
-
+Color eventbackgroundcolor=Colors.white;
 // Color offwhite=Color(0xFFd9d9d9);

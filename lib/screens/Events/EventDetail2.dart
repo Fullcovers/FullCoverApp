@@ -7,6 +7,7 @@ import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Models/Events.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Events/EventDetail3.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 import 'package:venq_assessment/widgets/TicketBookingScreen/DateButton.dart';
 
 import '../../Models/Ticket.dart';
@@ -75,7 +76,7 @@ class _EventDetail2State extends State<EventDetail2> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFFE0E0E0),
+        backgroundColor: eventbackgroundcolor,
         resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -487,8 +488,8 @@ class _EventDetail2State extends State<EventDetail2> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => EventDetail3(
+                            SlideTransitionPageRoute(direction: "up",
+                                child:EventDetail3(
                                       club: widget.club,
                                       date: selected,
                                       weekday: selectedday,
