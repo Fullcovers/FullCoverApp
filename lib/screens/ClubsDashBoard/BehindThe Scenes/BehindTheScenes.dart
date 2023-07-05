@@ -8,6 +8,7 @@ import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/Event.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Gustlist/Gustlist.dart';
+import 'package:venq_assessment/screens/ClubsDashBoard/Gustlist/Gustlist2.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Profile/Profile.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Promoters/Promoters.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Tables/Tables.dart';
@@ -17,6 +18,7 @@ import 'package:venq_assessment/screens/QrScanner/QrScanner.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BehindTheScenesCard.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/BottomButton.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
 class BehindTheScenesPage extends StatefulWidget {
   const BehindTheScenesPage({super.key});
@@ -60,231 +62,274 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
             resizeToAvoidBottomInset: false,
             backgroundColor: backgroundColortransperent,
             body: SingleChildScrollView(
-              child: loded
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: height / 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Image.asset(
-                                      "assets/images/coinlogo.png",
-                                      height: 40,
+                child: loded
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: height / 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Image.asset(
+                                        "assets/images/coinlogo.png",
+                                        height: 40,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: "B",
-                                    style: GoogleFonts.bebasNeue(
-                                        color: textc, fontSize: 48),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'ehind',
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "B",
+                                      style: GoogleFonts.bebasNeue(
+                                          color: textc, fontSize: 48),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'ehind',
+                                            style: GoogleFonts.bebasNeue(
+                                                color: textc, fontSize: 14)),
+                                        TextSpan(
+                                          text: "T",
                                           style: GoogleFonts.bebasNeue(
-                                              color: textc, fontSize: 14)),
-                                      TextSpan(
-                                        text: "T",
-                                        style: GoogleFonts.bebasNeue(
-                                            color: textc, fontSize: 48),
-                                      ),
-                                      TextSpan(
-                                          text: 'he ',
+                                              color: textc, fontSize: 48),
+                                        ),
+                                        TextSpan(
+                                            text: 'he ',
+                                            style: GoogleFonts.bebasNeue(
+                                                color: textc, fontSize: 14)),
+                                        TextSpan(
+                                          text: "S",
                                           style: GoogleFonts.bebasNeue(
-                                              color: textc, fontSize: 14)),
-                                      TextSpan(
-                                        text: "S",
-                                        style: GoogleFonts.bebasNeue(
-                                            color: textc, fontSize: 48),
-                                      ),
-                                      TextSpan(
-                                          text: 'cenes',
-                                          style: GoogleFonts.bebasNeue(
-                                              color: textc, fontSize: 14)),
-                                    ],
+                                              color: textc, fontSize: 48),
+                                        ),
+                                        TextSpan(
+                                            text: 'cenes',
+                                            style: GoogleFonts.bebasNeue(
+                                                color: textc, fontSize: 14)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color:
-                                            Color.fromARGB(255, 120, 116, 116),
-                                        blurRadius: 20,
-                                        spreadRadius: -2,
-                                        offset: Offset(-2, -2),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color.fromARGB(
+                                              255, 120, 116, 116),
+                                          blurRadius: 20,
+                                          spreadRadius: -2,
+                                          offset: Offset(-2, -2),
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 20,
+                                          spreadRadius: -2,
+                                          offset: Offset(2, 2),
+                                        ),
+                                      ],
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                      color: botoncolor,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const BTSProfile()));
+                                      },
+                                      color: const Color.fromARGB(
+                                          255, 252, 248, 248),
+                                      icon: const Icon(
+                                        Icons.person_outline_sharp,
+                                        size: 35,
                                       ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 20,
-                                        spreadRadius: -2,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    color: botoncolor,
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const BTSProfile()));
-                                    },
-                                    color: const Color.fromARGB(
-                                        255, 252, 248, 248),
-                                    icon: const Icon(
-                                      Icons.person_outline_sharp,
-                                      size: 35,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: height / 50,
-                        ),
-                        Row(mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Club is", style: GoogleFonts.bebasNeue(
-                                  color: Colors.white, fontSize: 25),),Switch(
-                          value: forAndroid,
-                          activeColor: Colors.green,
-                          onChanged: (value) async {
-                            
-                           var club=await BTSClubServices.clubopenandclose(
-                                context: context);
-                                print(club['data']['is_club_open']);
-                            setState(() => forAndroid =club.isNotEmpty?club['data']['is_club_open']:value);
-                          },
-                        ),
-                          ],
-                        ),
-                        
-                        Wrap(
-                          runSpacing: height / 54.21,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Tickets()));
-                              },
-                              child: mycard(
-                                  height,
-                                  width,
-                                  const Color(0XB3D09494),
-                                  "Reservations",
-                                  const Color(0XFFD09494)),
-                            ),
-                            SizedBox(
-                              width: width / 19.57,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Events()));
-                              },
-                              child: mycard(
-                                  height,
-                                  width,
-                                  const Color(0XB3A094D0),
-                                  "Events",
-                                  const Color(0XFFA094D0)),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Promoters()));
-                              },
-                              child: mycard(
-                                  height,
-                                  width,
-                                  const Color(0XB3B2D094),
-                                  "Promoters",
-                                  const Color(0XFFB2D094)),
-                            ),
-                            SizedBox(
-                              width: width / 19.57,
-                            ),
-                            InkWell(onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const GustListPage()));
-                              },
-                              child: mycard(height, width, const Color(0XB394D0C5),
-                                  "Guestlist", const Color(0XFF94D0C5)),
-                            ),
-                            SizedBox(
-                              width: width / 19.57,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Walkins()));
-                              },
-                              child: mycard(
-                                  height,
-                                  width,
-                                  const Color(0XB3B2D094),
-                                  "Walkins",
-                                  const Color(0XFFB2D094)),
-                            ),
-                            SizedBox(
-                              width: width / 19.57,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const TablePage()));
-                              },
-                              child: mycard(
-                                  height,
-                                  width,
-                                  const Color.fromARGB(255, 148, 159, 208),
-                                  "Tables",
-                                  Color.fromARGB(255, 148, 159, 208)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  :Constants.mycircularProgressIndicator()
-            ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: height / 50,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Dancefloor entry",
+                                style: GoogleFonts.bebasNeue(
+                                    color: Colors.white, fontSize: 25),
+                              ),
+                              Switch(
+                                value: forAndroid,
+                                activeColor: Colors.green,
+                                onChanged: (value) async {
+                                  var club =
+                                      await BTSClubServices.clubopenandclose(
+                                          context: context);
+                                  print(club['data']['is_club_open']);
+                                  setState(() => forAndroid = club.isNotEmpty
+                                      ? club['data']['is_club_open']
+                                      : value);
+                                },
+                              ),
+                            ],
+                          ),
+                          Wrap(
+                            runSpacing: height / 54.21,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const Tickets()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB3D09494),
+                                    "Reservations",
+                                    const Color(0XFFD09494)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const Events()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB3A094D0),
+                                    "Events",
+                                    const Color(0XFFA094D0)),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const Promoters()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB3B2D094),
+                                    "Promoters",
+                                    const Color(0XFFB2D094)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const Gustlist2()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB394D0C5),
+                                    "Guestlist",
+                                    const Color(0XFF94D0C5)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const TablePage()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color.fromARGB(255, 148, 159, 208),
+                                    "Tables",
+                                    Color.fromARGB(255, 148, 159, 208)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0xffD094B8),
+                                    "Loyalty",
+                                    const Color(0xffD094B8)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const Gustlist2()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB3D0B194),
+                                    "Bar",
+                                    const Color(0XFFD0B194)),
+                              ),
+                              SizedBox(
+                                width: width / 19.57,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      ScaleTransitionPageRoute(
+                                          child:
+                                              const Walkins()));
+                                },
+                                child: mycard(
+                                    height,
+                                    width,
+                                    const Color(0XB3B2D094),
+                                    "Walkins",
+                                    const Color(0XFFB2D094)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Constants.mycircularProgressIndicator()),
             bottomNavigationBar: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, '/qrscanner');

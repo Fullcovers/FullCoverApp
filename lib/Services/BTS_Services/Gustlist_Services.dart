@@ -26,6 +26,35 @@ class Gustlist_Services{
     }
     return promoters;
   }
+static Future<dynamic> getguestlist({required BuildContext context,required String date}) async {
+    var guest;
+    try {
+      // print(Constants.myclub!.id);
+       http.Response club = await http.get(
+        Uri.parse('${Constants.uri}club/my-club'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}'
+        },
+      );
+      final clubid = json.decode(club.body)['data'][0]['_id'];
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}orders/g/$clubid/d/?date=$date'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}',
+        },
+      );
+      guest = jsonDecode(res.body);
+      print("guest");
+      print(guest);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      print(e);
+    }
+    return guest;
+  }
+  
   static Future<dynamic> getpromotersbyid({required BuildContext context,required String promoterid}) async {
     var gustlist;
     try {

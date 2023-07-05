@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:venq_assessment/Styles/Colors.dart';
 
 void showSnackBar(BuildContext context, String text) {
   showDialog(
@@ -10,8 +11,11 @@ void showSnackBar(BuildContext context, String text) {
             Future.delayed(Duration(seconds: 2), () {
               Navigator.of(context).pop(true);
             });
-            return AlertDialog(
-              title: Center(child: Text(text)),
+            return AlertDialog(backgroundColor: Colors.white,shape: RoundedRectangleBorder(
+		borderRadius: BorderRadius.circular(30),
+	),
+              title: Center(child: Text(text, style: GoogleFonts.bebasNeue(
+                                    color: golden, fontSize: 25),)),
             );
           });
 }

@@ -55,6 +55,7 @@ dependencies:
   jiffy: ^6.1.0
   image_picker: ^0.8.9
   curved_navigation_bar: ^1.0.3
+  video_player: 2.1.15
 
 
   

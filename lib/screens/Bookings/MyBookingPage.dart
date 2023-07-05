@@ -184,9 +184,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
                               Navigator.push(
                                   context,
-                                  SlideTransitionPageRoute(direction: "topright",
-                                      child:
-                                          const ProfilePage()));
+                                  SlideTransitionPageRoute(
+                                      direction: "topright",
+                                      child: const ProfilePage()));
                             },
                             child: AnimatedContainer(
                               height: 50, width: 50,
@@ -559,9 +559,12 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                           130.0,
                                                                     ),
                                                                   )
-                                                                : Constants.mycircularProgressIndicator()
-                                                            : Constants.mycircularProgressIndicator()
-                                                        : Constants.mycircularProgressIndicator()
+                                                                : Constants
+                                                                    .mycircularProgressIndicator()
+                                                            : Constants
+                                                                .mycircularProgressIndicator()
+                                                        : Constants
+                                                            .mycircularProgressIndicator()
                                                   ],
                                                 ),
                                               ),
@@ -826,12 +829,12 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     ),
                                     Stack(
                                       children: [
-                                         Image.asset(
-                                            "assets/images/background.png",
-                                            height: height / 12.38571428571429,
-                                            width: width / 13.5,
-                                            fit: BoxFit.cover,
-                                          ),
+                                        Image.asset(
+                                          "assets/images/background.png",
+                                          height: height / 12.38571428571429,
+                                          width: width / 13.5,
+                                          fit: BoxFit.cover,
+                                        ),
                                         Container(
                                           width: width / 13.5,
                                           height: height / 12.38571428571429,
@@ -941,7 +944,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 16.0,right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 16.0, right: 16),
                               child: Column(
                                 children: [
                                   Row(
@@ -951,7 +955,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             top: 10.0, left: 10.0),
                                         child: Container(
                                             height: 3 * height / 11,
-                                            width: width-52,
+                                            width: width - 52,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   const BorderRadius.all(
@@ -981,10 +985,11 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                   onTap: () {
                                                     Navigator.of(context)
                                                         .pushAndRemoveUntil(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const ClubsScreen()),
+                                                            SlideTransitionPageRoute(
+                                                                child:
+                                                                    const ClubsScreen(),
+                                                                direction:
+                                                                    "right"),
                                                             (route) => false);
                                                   },
                                                   child: Padding(
@@ -1019,7 +1024,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                 .bebasNeue(
                                                               fontSize:
                                                                   width / 30,
-                                                              
                                                               color:
                                                                   Colors.black,
                                                             ),
@@ -1032,7 +1036,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                               ],
                                             )),
                                       ),
-                                      
                                     ],
                                   ),
                                 ],
