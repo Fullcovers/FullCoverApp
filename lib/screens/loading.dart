@@ -15,19 +15,21 @@ import 'package:video_player/video_player.dart';
 
 class SplashScreen extends StatefulWidget {
   var user;
-  
+
   SplashScreen({super.key, required this.user});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {  late VideoPlayerController _controller;
+class _SplashScreenState extends State<SplashScreen> {
+  late VideoPlayerController _controller;
 
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();    load();
+    super.initState();
+    load();
 
     _controller = VideoPlayerController.asset("assets/LogointroApp.mp4")
       ..initialize().then((_) {
@@ -37,29 +39,29 @@ class _SplashScreenState extends State<SplashScreen> {  late VideoPlayerControll
         });
       });
   }
-  load()async{
-    // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
-   if (!widget.user) {
-      if(Constants.btsprofile.role != "user"){
-        await BTSClubServices.btsgetSingleClub(context: context);}
-   }
 
-   await Future.delayed(Duration(milliseconds: 7100), () {
-     widget.user
-                ? Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()))
-                : Constants.btsprofile.role == "user"
-                    ? Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  MyBookingPage()))
-                    :  Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const BehindTheScenesPage()));
+  load() async {
+    // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
+    if (!widget.user) {
+      if (Constants.btsprofile.role != "user") {
+        await BTSClubServices.btsgetSingleClub(context: context);
+      }
+    }
+
+    await Future.delayed(Duration(milliseconds: 7100), () {
+      widget.user
+          ? Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginPage()))
+          : Constants.btsprofile.role == "user"
+              ? Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MyBookingPage()))
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BehindTheScenesPage()));
     });
   }
+
   bool loded = false;
 
   @override
@@ -75,17 +77,20 @@ class _SplashScreenState extends State<SplashScreen> {  late VideoPlayerControll
         Scaffold(
             backgroundColor: backgroundColortransperent,
             body: Center(
-              child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Image.asset(
                   //   "assets/images/logo.png",
                   //   scale: 1.5,
                   // ),
-                  Container(width: MediaQuery.of(context).size.width,height: MediaQuery.of(context).size.height,
+                  Container(
+                    // width: MediaQuery.of(context).size.width,height: MediaQuery.of(context).size.height,
                     child: AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
-                          ),
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    ),
                   ),
                   // Constants.mycircularProgressIndicator()
                 ],

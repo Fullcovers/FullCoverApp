@@ -10,7 +10,7 @@ Widget myeventcard(double height, double width, Event event) {
       borderRadius: BorderRadius.circular(15),
     ),
     child: SizedBox(
-      width: width / 1.2,
+      width: width / 1.5,
       height: height / 5.97,
       child: Stack(children: [
         ClipRRect(
@@ -46,32 +46,35 @@ Widget myeventcard(double height, double width, Event event) {
             alignment: Alignment.bottomRight,
             child: Container(
               width: width / 1.4,
-              height: height / 11,
+              height: height / 20,
               decoration: BoxDecoration(
                   color: backgroundColorfigma,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
-              child: Padding(
+              child: 
+              Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                  
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(width: width/3,
-                        child: Text(textAlign: TextAlign.left,
-                          event.name,
-                          style: GoogleFonts.sairaCondensed(
-                              fontWeight: FontWeight.bold,
-                              fontSize: height/40,
-                              color: offwhite),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(width: width/3,
+                          child: Text(textAlign: TextAlign.left,
+                            event.name,
+                            style: GoogleFonts.sairaCondensed(
+                                fontWeight: FontWeight.bold,
+                                fontSize: height/80,
+                                color: offwhite),
+                          ),
                         ),
-                      ),
-                     
-                    ],
+                       
+                      ],
+                    ),
                   ),
                 
                   
@@ -86,14 +89,14 @@ Widget myeventcard(double height, double width, Event event) {
                           "Starts from",
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.bold,
-                              fontSize: height/50,
+                              fontSize: height/100,
                               color: offwhite),
                         ),
                         Text(
                           "Rs. 2000",
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.bold,
-                              fontSize: height/50,
+                              fontSize: height/100,
                               color: offwhite),
                         )
                       ],

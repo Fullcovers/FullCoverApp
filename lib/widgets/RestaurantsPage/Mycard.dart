@@ -105,11 +105,11 @@ Widget mycard(double height, double width, ClubModel club) {
                   SizedBox(
                     width: width / 40,
                   ),
-                  Container(
+                 Container(
                     height: height / 43.35,
                     width: width / 25.05,
                     decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: club.isClubOpen? Colors.green:Colors.red,
                         borderRadius: BorderRadius.circular(100)
                         //more than 50% of width makes circle
                         ),

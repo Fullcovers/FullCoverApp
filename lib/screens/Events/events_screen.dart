@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Providers/ClubProvider.dart';
@@ -34,6 +35,32 @@ class _EventsScreenState extends State<EventsScreen> {
     });
   }
 
+  String formatDate(DateTime? date) {
+    if (date != null) {
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      return formatter.format(date);
+    }
+    return 'Select Date';
+  }
+
+  DateTime? selectedDate;
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: selectedDate ??
+          DateTime
+              .now(), // Use selectedDate if available, else use current date
+      firstDate: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null && pickedDate != selectedDate) {
+      setState(() {
+        selectedDate = pickedDate; // Update selectedDate if a date was picked
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -49,69 +76,413 @@ class _EventsScreenState extends State<EventsScreen> {
       child: Scaffold(
         backgroundColor: eventbackgroundcolor,
         body: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                topnavigationbar(height: height, width:width,iscolor: true),
-                Center(
-                  child: Text("Events",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 40,
-                        color: const Color(0xFFB59F68),
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                      height: 4.8 * height / 8,
-                      width: width,
-                      decoration: const BoxDecoration(color: Colors.white),
-                      child: FutureBuilder<List<Event>>(
-                        future: EventsServices().getAllEvents(context: context),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(
-                              child: SizedBox(
-                                height: height / 21.675,
-                                width: width / 10.275,
-                                child: Constants.mycircularProgressIndicator()
-                              ),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            final eventsData = snapshot.data!;
-                
-                            return ListView.builder(
-                              itemCount: eventsData.length,
-                              itemBuilder: (context, index) {
-                                final Event event = eventsData[index];
-                
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () async {
-                                      await ClubServices().getSingleClub(
-                                          clubid: event.clubId, context: context);
-                                      Navigator.of(context).push(
-                                          ScaleTransitionPageRoute(
-                                              child:
-                                                  EventDetail(event: event)));
-                                    },
-                                    child: myeventcard(height, width, event),
-                                  ),
-                                );
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            topnavigationbar(height: height, width: width, iscolor: true),
+            //  Expanded(
+            //   child: ListView.builder(shrinkWrap:true,
+            //     itemCount: 5,
+            //     itemBuilder: (BuildContext context, int index) {
+            //       return Container(height: height/20.2,width: width/4.28125,child: Stack(children: [Image.asset("assets/images/clubimg.png")],),);
+            //     },
+            //   ),
+            // ),
+            // FractionalTranslation(
+            //   translation: Offset(0, -0.6),
+            // child:
+            Align(
+                alignment: Alignment.centerLeft,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                          height: height / 20.2,
+                          width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child:
+                                      Image.asset("assets/images/clubimg.png")),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Opacity(
+                                      opacity: 0.5,
+                                      child: Image.asset(
+                                          "assets/images/black.png"))),
+                              Center(
+                                child: Text("Apostrophe",
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Container(
+                          height: height / 20.2,
+                          width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child:
+                                      Image.asset("assets/images/clubimg.png")),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Opacity(
+                                      opacity: 0.5,
+                                      child: Image.asset(
+                                          "assets/images/black.png"))),
+                              Center(
+                                child: Text("010",
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Container(
+                          height: height / 20.2,
+                          width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child:
+                                      Image.asset("assets/images/clubimg.png")),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Opacity(
+                                      opacity: 0.5,
+                                      child: Image.asset(
+                                          "assets/images/black.png"))),
+                              Center(
+                                child: Text("Apostrophe",
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Container(
+                          height: height / 20.2,
+                          width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child:
+                                      Image.asset("assets/images/clubimg.png")),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Opacity(
+                                      opacity: 0.5,
+                                      child: Image.asset(
+                                          "assets/images/black.png"))),
+                              Center(
+                                child: Text("Apostrophe",
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Container(
+                          height: height / 20.2,
+                          width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child:
+                                      Image.asset("assets/images/clubimg.png")),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Opacity(
+                                      opacity: 0.5,
+                                      child: Image.asset(
+                                          "assets/images/black.png"))),
+                              Center(
+                                child: Text("Apostrophe",
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+            // ),
+
+            // FractionalTranslation(
+            //   translation: Offset(0, -0.5),
+            // child:
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, top: 8),
+                    child: Text("Events Today",
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: backgroundColorfigma,
+                        )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 20, bottom: 20, left: 60, right: 60),
+                    child: Container(
+                      height: height / 20,
+                      width: width / 2.5,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(34, 34, 34, 0.37),
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20.0,
+                            ),
+                            child: Text(
+                                selectedDate != null
+                                    ? formatDate(selectedDate)
+                                    : "Select Date",
+                                style: GoogleFonts.sairaCondensed(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: IconButton(
+                              onPressed: () {
+                                _selectDate(
+                                    context); // Show the date picker on icon press
                               },
-                            );
+                              icon: const Icon(
+                                Icons.calendar_today_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // ),
+
+            // FractionalTranslation(
+            //   translation: Offset(0, -0.1),
+            // child:
+            Container(
+                height: height / 6,
+                width: width,
+                decoration: const BoxDecoration(color: Colors.white),
+                child: FutureBuilder<List<Event>>(
+                  future: EventsServices().getAllEvents(context: context),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: SizedBox(
+                            height: height / 21.675,
+                            width: width / 10.275,
+                            child: Constants.mycircularProgressIndicator()),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      final eventsData = snapshot.data!;
+                      var eventdatabydate = [];
+                      if (eventsData.isNotEmpty) {
+                        for (var i = 0; i < eventsData.length; i++) {
+                          var date=selectedDate==null?formatDate(DateTime.now()):formatDate(selectedDate);
+                          if (eventsData[i].date.toString().substring(0, 10) ==
+                              date) {  
+                            eventdatabydate.add(eventsData[i]);
                           }
+                        }
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: eventdatabydate.length,
+                        itemBuilder: (context, index) {
+                          final Event event = eventdatabydate[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: GestureDetector(
+                              onTap: () async {
+                                await ClubServices().getSingleClub(
+                                    clubid: event.clubId, context: context);
+                                Navigator.of(context).push(
+                                    ScaleTransitionPageRoute(
+                                        child: EventDetail(event: event)));
+                              },
+                              child: myeventcard(height, width, event),
+                            ),
+                          );
                         },
-                      )),
-                ),
-                
-              ]),
+                      );
+                    }
+                  },
+                )),
+            // ),
+            // FractionalTranslation(
+            //   translation: Offset(0, -0.15),
+            // child:
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(left: 16.0, top: 8, bottom: 8),
+            //     child: Text("Featured Event",
+            //         style: GoogleFonts.bebasNeue(
+            //           fontSize: 18,
+            //           color: backgroundColorfigma,
+            //         )),
+            //   ),
+            // ),
+            // ),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(8.0),
+            //   child: Image.asset(
+            //     'assets/images/clubimg.png',
+            //     width: width / 1.07,
+            //     height: height / 5,
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+            // Container(
+            //   height: height / 5.5,
+            //   width: width / 1,
+            //   child: Stack(
+            //     children: [
+            //       ClipRRect(
+            //           borderRadius: BorderRadius.circular(10),
+            //           child: Image.asset("assets/images/clubimg.png")),
+            //       // ClipRRect(
+            //       //     borderRadius: BorderRadius.circular(10),
+            //       //     child: Opacity(
+            //       //         opacity: 0.5,
+            //       //         child: Image.asset(width:width/2,
+            //       //             "assets/images/black.png"))),
+            //     ],
+            //   ),
+            // ),
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Text("Genres",
+            //         style: GoogleFonts.bebasNeue(
+            //           fontSize: 35,
+            //           color: backgroundColorfigma,
+            //         )),
+            //   ),
+            // ),
+            SizedBox(
+              height: height / 60,
+            ),
+            Wrap(
+              spacing: 35,
+              runSpacing: 15,
+              children: [
+                genresbox(width, height, "Techno"),
+                genresbox(width, height, "Bolly"),
+                genresbox(width, height, "EDM"),
+                genresbox(width, height, "Concerts"),
+                genresbox(width, height, "Hip-Hop"),
+                genresbox(width, height, "Other"),
+                // Container(
+                //   height: height / 18.0625,
+                //   width: width / 1.1,
+                //   child: Stack(
+                //     children: [
+                //       ClipRRect(
+                //         borderRadius: BorderRadius.circular(8.0),
+                //         child: Image.asset(
+                //           'assets/images/clubimg.png',
+                //           width: width / 1.1,
+                //           height: height / 18.0625,
+                //           fit: BoxFit.fill,
+                //         ),
+                //       ),
+                //       ClipRRect(
+                //         borderRadius: BorderRadius.circular(8.0),
+                //         child: Opacity(
+                //           opacity: 0.5,
+                //           child: Image.asset(
+                //             'assets/images/black.png',
+                //             width: width / 1.1,
+                //             height: height / 18.0625,
+                //             fit: BoxFit.fill,
+                //           ),
+                //         ),
+                //       ),
+                //       Center(
+                //         child: Text("other",
+                //             style: GoogleFonts.sairaCondensed(
+                //               color: Colors.white,
+                //               fontWeight: FontWeight.w600,
+                //               fontSize: 15,
+                //             )),
+                //       )
+                //     ],
+                //   ),
+                // )
+              ],
+            ),
+            SizedBox(
+              height: height / 10,
+            )
+          ]),
         ),
-        bottomNavigationBar: bottomnavbar(isclub: false,isevent: true,initialindex: 2,
+        bottomNavigationBar: bottomnavbar(
+          isclub: false,
+          isevent: true,
+          initialindex: 2,
           height: height,
           width: width,
           iscolorchange: true,
@@ -119,4 +490,49 @@ class _EventsScreenState extends State<EventsScreen> {
       ),
     );
   }
+}
+
+Widget genresbox(double width, double height, String text) {
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      color: backgroundColorfigma,
+    ),
+    height: height / 18.0625,
+    width: width / 4.18,
+    child: Stack(
+      children: [
+        // ClipRRect(
+        //   borderRadius: BorderRadius.circular(8.0),
+        //   child: Image.asset(
+        //     'assets/images/clubimg.png',
+        //     width: width / 4.18,
+        //     height: height / 18.0625,
+        //     fit: BoxFit.fill,
+        //   ),
+        // ),
+        // ClipRRect(
+        //   borderRadius: BorderRadius.circular(8.0),
+        //   child: Opacity(
+        //     opacity: 0.5,
+        //     child: Image.asset(
+        //       'assets/images/black.png',
+        //       width: width / 4.18,
+        //       height: height / 18.0625,
+        //       fit: BoxFit.fill,
+        //     ),
+        //   ),
+        // ),
+
+        Center(
+          child: Text(text,
+              style: GoogleFonts.sairaCondensed(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              )),
+        )
+      ],
+    ),
+  );
 }
