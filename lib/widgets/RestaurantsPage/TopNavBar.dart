@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/Filter/Filter.dart';
 
 class topnavigationbar extends StatefulWidget {
   double height;
@@ -154,7 +155,11 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                   color: widget.iscolor
                                       ? Colors.white
                                       : backgroundColorfigma,
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const FilterPage()));},
                                 ),
                               ),
                             ),

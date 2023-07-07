@@ -355,7 +355,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     ],
                   ),
                 ],
-              ),
+              ),snapPoint: 0.99,panelSnapping: true,
+
               controller: panelController,
               defaultPanelState: PanelState.OPEN,
               panel: load
@@ -1347,7 +1348,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ])),
                   ),
               renderPanelSheet: false,
-              panelSnapping: false,
               collapsed: FractionalTranslation(
                 translation: Offset(0, 0.2),
                 child: Container(
