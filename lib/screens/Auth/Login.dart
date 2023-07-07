@@ -254,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Column(
                                         children: [
                                           load
-                                              ? Constants.mycircularProgressIndicator()
+                                              ? Center(child: Constants.mycircularProgressIndicator())
                                               : Padding(
                                                   padding: EdgeInsets.only(
                                                       top: height / 65, right: 20.0),
