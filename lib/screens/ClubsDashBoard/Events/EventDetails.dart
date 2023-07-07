@@ -69,6 +69,14 @@ class _EventDetailsState extends State<EventDetails> {
     });
   }
 
+  loadwalkinsbydate(String date) async {
+    orders =
+        await BTSOrderServices.getallordersbydate(context: context, date: date);
+    setState(() {
+      loded = true;
+    });
+  }
+
   String formatDate(DateTime? date) {
     if (date != null) {
       final DateFormat formatter = DateFormat('E d MMM, yyyy');
@@ -97,7 +105,7 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
-    double totalmoney1 = 1000;
+    double totalmoney1 = 0;
     // if (loded == true) {
     //   if (orders.isNotEmpty) {
     //     for (var i = 0; i < orders['data'].length; i++) {
@@ -109,20 +117,32 @@ class _EventDetailsState extends State<EventDetails> {
     //     }
     //   }
     // }
-
+    if (loded == true) {
+      if (show) {
+        for (var i = 0; i < orders['data'].length; i++) {
+          totalmoney1 = totalmoney1 + orders['data'][i]['total'];
+        }
+      } else if (lodedwalkins) {
+        for (var i = 0; i < walkins['date'].length; i++) {
+          totalmoney1 = totalmoney1 + walkins['date'][i]['price'];
+          print(walkins['date'][i]);
+        }
+      }
+      print(totalmoney1);
+    }
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Stack(
-          children: [
-            Image.asset(
-            Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-            Scaffold(
-      backgroundColor: backgroundColortransperent,
-      body: loded && lodedwalkins
+      children: [
+        Image.asset(
+          Constants.backgroundimage,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: backgroundColortransperent,
+          body: loded && lodedwalkins
               ? Column(
                   children: [
                     Padding(
@@ -214,8 +234,8 @@ class _EventDetailsState extends State<EventDetails> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
-                                        fontFamily:
-                                            FontAwesomeIcons.solidCircle.fontFamily,
+                                        fontFamily: FontAwesomeIcons
+                                            .solidCircle.fontFamily,
                                       ),
                                     )),
                               ),
@@ -248,8 +268,8 @@ class _EventDetailsState extends State<EventDetails> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
-                                        fontFamily:
-                                            FontAwesomeIcons.solidCircle.fontFamily,
+                                        fontFamily: FontAwesomeIcons
+                                            .solidCircle.fontFamily,
                                       ),
                                     )),
                               ),
@@ -294,8 +314,8 @@ class _EventDetailsState extends State<EventDetails> {
                   ],
                 )
               : Center(child: Constants.mycircularProgressIndicator()),
-    ),
-          ],
-        ));
+        ),
+      ],
+    ));
   }
 }

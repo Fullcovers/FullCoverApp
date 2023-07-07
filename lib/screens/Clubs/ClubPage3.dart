@@ -209,31 +209,40 @@ class _ClubPage3State extends State<ClubPage3> {
                                               context: context,
                                               requestbody: requestBody);
                                         } else {
-                                          List<Map<String, dynamic>> tickets = [];
+                                          List<Map<String, dynamic>> ordertickets = [];
                                           print(widget.stagcount);
-                                          if (widget.stagcount > 0) {
-                                            tickets.add({
-                                              "qty": widget.stagcount,
-                                              "ticket": widget.stagid
-                                            });
-                                          }
+                                          widget.orderticketscount
+                                              .forEach((ticket, count) {
+                                            if (count > 0) {
+                                              ordertickets.add({
+                                                "qty": count,
+                                                "table": ticket.id
+                                              });
+                                            }
+                                          });
+                                          // if (widget.stagcount > 0) {
+                                          //   tickets.add({
+                                          //     "qty": widget.stagcount,
+                                          //     "ticket": widget.stagid
+                                          //   });
+                                          // }
 
-                                          if (widget.couplecount > 0) {
-                                            tickets.add({
-                                              "qty": widget.couplecount,
-                                              "ticket": widget.coupleid
-                                            });
-                                          }
+                                          // if (widget.couplecount > 0) {
+                                          //   tickets.add({
+                                          //     "qty": widget.couplecount,
+                                          //     "ticket": widget.coupleid
+                                          //   });
+                                          // }
 
-                                          if (widget.femalecount > 0) {
-                                            tickets.add({
-                                              "qty": widget.femalecount,
-                                              "ticket": widget.femaleid
-                                            });
-                                          }
+                                          // if (widget.femalecount > 0) {
+                                          //   tickets.add({
+                                          //     "qty": widget.femalecount,
+                                          //     "ticket": widget.femaleid
+                                          //   });
+                                          // }
                                           print(formattedDate);
                                           Map<String, dynamic> requestBody = {
-                                            "tickets": tickets,
+                                            "tickets": ordertickets,
                                             "send_to": {
                                               "phoneNumber": phoneController.text,
                                               "email": emailController.text

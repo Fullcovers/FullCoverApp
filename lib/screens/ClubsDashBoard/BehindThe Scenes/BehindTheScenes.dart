@@ -190,142 +190,138 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                               ),
                             ],
                           ),
-                          Wrap(
-                            runSpacing: height / 54.21,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const Tickets()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB3D09494),
-                                    "Reservations",
-                                    const Color(0XFFD09494)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const Events()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB3A094D0),
-                                    "Events",
-                                    const Color(0XFFA094D0)),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const Promoters()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB3B2D094),
-                                    "Promoters",
-                                    const Color(0XFFB2D094)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const Gustlist2()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB394D0C5),
-                                    "Guestlist",
-                                    const Color(0XFF94D0C5)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const TablePage()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color.fromARGB(255, 148, 159, 208),
-                                    "Tables",
-                                    Color.fromARGB(255, 148, 159, 208)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0xffD094B8),
-                                    "Loyalty",
-                                    const Color(0xffD094B8)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const Gustlist2()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB3D0B194),
-                                    "Bar",
-                                    const Color(0XFFD0B194)),
-                              ),
-                              SizedBox(
-                                width: width / 19.57,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      ScaleTransitionPageRoute(
-                                          child:
-                                              const Walkins()));
-                                },
-                                child: mycard(
-                                    height,
-                                    width,
-                                    const Color(0XB3B2D094),
-                                    "Walkins",
-                                    const Color(0XFFB2D094)),
-                              ),
-                            ],
+                          Center(
+                            child: Wrap(
+                              runSpacing: height / 54.21,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const Tickets()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB3D09494),
+                                      "Reservations",
+                                      const Color(0XFFD09494),
+                                      "assets/images/icons/reservation.png"),
+                                ),
+                                                              SizedBox(width: width/40,),
+
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const Events()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB3A094D0),
+                                      "Events",
+                                      const Color(0XFFA094D0),
+                                      "assets/images/icons/events.png"),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const Promoters()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB3B2D094),
+                                      "Promoters",
+                                      const Color(0XFFB2D094),
+                                      "assets/images/icons/promoters.png"),
+                                ),
+                                                             SizedBox(width: width/40,),
+
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const Gustlist2()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB394D0C5),
+                                      "Guestlist",
+                                      const Color(0XFF94D0C5),
+                                      "assets/images/icons/guest-list.png"),
+                                ),
+                               
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const TablePage()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color.fromARGB(255, 148, 159, 208),
+                                      "Tables",
+                                      Color.fromARGB(255, 148, 159, 208),
+                                      "assets/images/icons/table.png"),
+                                ),
+                                                          SizedBox(width: width/40,),
+
+                                InkWell(
+                                  onTap: () {},
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0xffD094B8),
+                                      "Loyalty",
+                                      const Color(0xffD094B8),
+                                      "assets/images/icons/loyalty.png"),
+                                ),
+                               
+                                InkWell(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             const Gustlist2()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB3D0B194),
+                                      "Bar",
+                                      const Color(0XFFD0B194),
+                                      "assets/images/icons/bar.png"),
+                                ),
+                                                           SizedBox(width: width/40,),
+
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleTransitionPageRoute(
+                                            child: const Walkins()));
+                                  },
+                                  child: mycard(
+                                      height,
+                                      width,
+                                      const Color(0XB3B2D094),
+                                      "Walkins",
+                                      const Color(0XFFB2D094),
+                                      "assets/images/icons/walkins.png"),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       )

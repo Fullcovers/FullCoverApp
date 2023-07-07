@@ -42,10 +42,13 @@ class TicketServices {
       {required BuildContext context, required String? ticketId}) async {
     try {
       var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+      var userprovider = Provider.of<UserProvider>(context, listen: false);
+      await userprovider.loadToken();
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}ticket/t/$ticketId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${userprovider.token}'
         },
       );
       if (res.statusCode == 201) {

@@ -159,19 +159,22 @@ class OrderServices {
 
   static Future<dynamic> getAllOrderhistory({required BuildContext context}) async {
     var orders;
-    try {
+    try {      print("orders");
+
       var userprovider = Provider.of<UserProvider>(context, listen: false);
       var orderProvider = Provider.of<OrderProvider>(context, listen: false);
-      await userprovider.loadToken();
+      await userprovider.loadToken();print(userprovider.token);
       http.Response res = await http.get(
         Uri.parse('${Constants.uri}orders/'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${userprovider.token}'
         },
-      );
-      orderProvider.storeOrders(res.body);
+      );print(res.body);
+      // orderProvider.storeOrders(res.body);
       orders=jsonDecode(res.body);
+      print("orders");
+      print(orders);
 
 // Access the stored orders
     } catch (e) {
