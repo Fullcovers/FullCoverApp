@@ -216,7 +216,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                             if (count > 0) {
                                               ordertickets.add({
                                                 "qty": count,
-                                                "table": ticket.id
+                                                "ticket": ticket.id
                                               });
                                             }
                                           });
