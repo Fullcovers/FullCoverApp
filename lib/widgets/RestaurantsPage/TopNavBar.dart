@@ -82,13 +82,13 @@ class _topnavigationbarState extends State<topnavigationbar> {
               child: FractionalTranslation(
                 translation: Offset(0, -overlapFraction),
                 child: Container(
-                  height: hightofcont,
+                  height: hightofcont,  
                   width: widget.width,
                   decoration: BoxDecoration(
                     color: widget.iscolor ? backgroundColorfigma : Colors.white,
                     borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0),
+                      bottomLeft: Radius.circular(30.0),
+                      bottomRight: Radius.circular(30.0),
                     ),
                   ),
                   child: Padding(
@@ -98,7 +98,13 @@ class _topnavigationbarState extends State<topnavigationbar> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            Image.asset("assets/images/coinlogo.png",width: widget.width/10,),
+                            const SizedBox(
+                              width: 11,
+                            ),
+                            Row(
+                              children: [
+                                Container(
                               width: widget.width / 6.5,
                               decoration: BoxDecoration(
                                 boxShadow: widget.iscolor
@@ -137,8 +143,8 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                 color: widget.iscolor
                                     ? backgroundColorfigma
                                     : Colors.white,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
+                                borderRadius: const BorderRadius.only(topLeft:
+                                  Radius.circular(10),bottomLeft: Radius.circular(10)
                                 ),
                               ),
                               child: FractionalTranslation(
@@ -163,79 +169,77 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 11,
-                            ),
-                            Container(
-                              width: widget.width / 7,
-                              decoration: BoxDecoration(
-                                boxShadow: widget.iscolor
-                                    ? [
-                                        const BoxShadow(
-                                          color:
-                                              Color.fromARGB(255, 88, 88, 88),
-                                          offset: Offset(-4, -4),
-                                          blurRadius: 10,
-                                          spreadRadius: -2,
-                                        ),
-                                        const BoxShadow(
-                                          color: Colors.black,
-                                          offset: Offset(4, 4),
-                                          blurRadius: 15,
-                                          spreadRadius:
-                                              -2, // how far the color effect spreads.
-                                        ),
-                                      ]
-                                    : [
-                                        const BoxShadow(
-                                          color:
-                                              Color.fromARGB(255, 88, 88, 88),
-                                          offset: Offset(4, 4),
-                                          blurRadius: 15,
-                                          spreadRadius: 1,
-                                        ),
-                                        const BoxShadow(
-                                          color: Colors.white,
-                                          offset: Offset(-4, -4),
-                                          blurRadius: 15,
-                                          spreadRadius:
-                                              -2, // how far the color effect spreads.
-                                        ),
-                                      ],
-                                color: widget.iscolor
-                                    ? backgroundColorfigma
-                                    : Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: FractionalTranslation(
-                                translation: widget.height < 700
-                                    ? Offset(0, -overlapFraction)
-                                    : Offset(0, 0),
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.location_on_outlined,
-                                    size: widget.height < 700
-                                        ? widget.width / 25
-                                        : widget.width / 15,
+                                Container(
+                                  width: widget.width / 7,
+                                  decoration: BoxDecoration(
+                                    boxShadow: widget.iscolor
+                                        ? [
+                                            // const BoxShadow(
+                                            //   color:
+                                            //       Color.fromARGB(255, 88, 88, 88),
+                                            //   offset: Offset(-4, -4),
+                                            //   blurRadius: 10,
+                                            //   spreadRadius: -2,
+                                            // ),
+                                            const BoxShadow(
+                                              color: Colors.black,
+                                              offset: Offset(4, 4),
+                                              blurRadius: 15,
+                                              spreadRadius:
+                                                  -2, // how far the color effect spreads.
+                                            ),
+                                          ]
+                                        : [
+                                            const BoxShadow(
+                                              color:
+                                                  Color.fromARGB(255, 88, 88, 88),
+                                              offset: Offset(4, 4),
+                                              blurRadius: 15,
+                                              spreadRadius: 1,
+                                            ),
+                                            // const BoxShadow(
+                                            //   color: Colors.white,
+                                            //   offset: Offset(-4, -4),
+                                            //   blurRadius: 15,
+                                            //   spreadRadius:
+                                            //       -2, // how far the color effect spreads.
+                                            // ),
+                                          ],
+                                    color: widget.iscolor
+                                        ? backgroundColorfigma
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.only(topRight:Radius.circular(10),bottomRight: Radius.circular(10)
+                                    ),
                                   ),
-                                  color: widget.iscolor
-                                      ? Colors.white
-                                      : backgroundColorfigma,
-                                  onPressed: () {
-                                    setState(() {
-                                      isloccontexpn = !isloccontexpn;
-                                      print(isloccontexpn);
-                                      hightofcont = isloccontexpn
-                                          ? widget.height / 5.5
-                                          : 88;
-                                      overlapFraction =
-                                          isloccontexpn ? 0.25 : 0.5;
-                                    });
-                                  },
+                                  child: FractionalTranslation(
+                                    translation: widget.height < 700
+                                        ? Offset(0, -overlapFraction)
+                                        : Offset(0, 0),
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.location_on_outlined,
+                                        size: widget.height < 700
+                                            ? widget.width / 25
+                                            : widget.width / 15,
+                                      ),
+                                      color: widget.iscolor
+                                          ? Colors.white
+                                          : backgroundColorfigma,
+                                      onPressed: () {
+                                        setState(() {
+                                          isloccontexpn = !isloccontexpn;
+                                          print(isloccontexpn);
+                                          hightofcont = isloccontexpn
+                                              ? widget.height / 5.5
+                                              : 88;
+                                          overlapFraction =
+                                              isloccontexpn ? 0.25 : 0.5;
+                                        });
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),

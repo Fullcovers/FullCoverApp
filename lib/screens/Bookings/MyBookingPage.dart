@@ -114,12 +114,12 @@ class _MyBookingPageState extends State<MyBookingPage> {
     porders = await OrderServices.getAllOrderhistory(context: context);
     print(porders);
     if (porders.isNotEmpty) {
-      String ticketId = porders['data'][0]['_id'];
-      print(ticketId);
-      await TicketServices().getTicketById(
-        context: context,
-        ticketId: ticketId,
-      );
+      // String ticketId = porders['data'][0]['_id'];
+      // print(ticketId);
+      // await TicketServices().getTicketById(
+      //   context: context,
+      //   ticketId: ticketId,
+      // );
       setState(() {
         loadedpo = true;
       });
@@ -131,20 +131,26 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
   @override
   Widget build(BuildContext context) {
-    var userprovider = Provider.of<UserProvider>(context, listen: false);
-    var orderprovider = Provider.of<OrderProvider>(context, listen: false);
-    var ordervalprovider =
-        Provider.of<OrderValidationProvider>(context, listen: false);
-    var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
+    // var userprovider = Provider.of<UserProvider>(context, listen: false);
+    // var orderprovider = Provider.of<OrderProvider>(context, listen: false);
+    // var ordervalprovider =
+    //     Provider.of<OrderValidationProvider>(context, listen: false);
+    // var ticketprovider = Provider.of<TicketProvider>(context, listen: false);
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
+    Map<int, String> myticketontop = {};
+    if (loadedpo) {
+      for (var i = 0; i < porders['data'][0]['items'].length; i++) {
+        myticketontop[porders['data'][0]['items'][i]['qty']] =
+            porders['data'][0]['items'][i]['ticket']['name'];
+      }
+    }
     return SafeArea(
       child: Stack(
         children: [
           Image.asset(
-            Constants.backgroundimage,
+            "assets/images/background.png",
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -202,8 +208,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
                               Navigator.push(
                                   context,
-                                  SlideTransitionPageRoute(
-                                      direction: "topright",
+                                  FaidinTransitionPageRoute(
+                                      // direction: "topright",
                                       child: const ProfilePage()));
                             },
                             child: AnimatedContainer(
@@ -212,15 +218,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 BoxShadow(
                                   color: Colors.black,
                                   offset: Offset(4, 4),
-                                  blurRadius: 15,
-                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  spreadRadius: -7,
                                 ),
                                 BoxShadow(
                                   color: Color.fromARGB(255, 88, 88, 88),
                                   offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  blurRadius: 9,
                                   spreadRadius:
-                                      -2, // how far the color effect spreads.
+                                      -10, // how far the color effect spreads.
                                 ),
                               ]),
                               duration: const Duration(
@@ -250,7 +256,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     ),
                   ),
                   SizedBox(
-                    height: height / 50,
+                    height: height / 200,
                   ),
                   Balancecard(height: height),
                   SizedBox(
@@ -355,8 +361,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     ],
                   ),
                 ],
-              ),snapPoint: 0.99,panelSnapping: true,
-
+              ),
+              // snapPoint: 0.99,
+              panelSnapping: true,
               controller: panelController,
               defaultPanelState: PanelState.OPEN,
               panel: load
@@ -550,16 +557,16 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     ),
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(left: 16.0),
+                                           EdgeInsets.only(left: 16.0,bottom: height/9),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    top: 10.0, left: 10.0),
+                                                     left: 10.0),
                                                 child: Container(
-                                                    height: height / 4,
+                                                    height: height / 3,
                                                     width: 2 * width / 3,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -573,241 +580,260 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                       //   width: 2,
                                                       // ),
                                                     ),
-                                                    child: Stack(
-                                                      children: [
-                                                        Center(
-                                                          child: Image.asset(
-                                                            "assets/images/tickets.png",
-                                                            height:
-                                                                height / 3.4,
-                                                          ),
-                                                        ),
-                                                        Center(
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                              bottom:
-                                                                  height / 20,
-                                                            ),
-                                                            child: QrImage(
-                                                              data: porders[
-                                                                      'data'][0]
-                                                                  ['_id'],
-                                                              version:
-                                                                  QrVersions
-                                                                      .auto,
-                                                              size: height / 6,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        //   Text(ticketprovider.ticket!.current.toString(), style: GoogleFonts.bebasNeue(
-                                                        // fontSize: height / 21.675),)
-                                                      ],
-                                                    )
-                                                    // Column(
-                                                    //   mainAxisAlignment:
-                                                    //       MainAxisAlignment.spaceBetween,
-                                                    //   children: [
-
-                                                    //     // Padding(
-                                                    //     //   padding: const EdgeInsets.only(
-                                                    //     //       top: 8.0),
-                                                    //     //   child: Row(
-                                                    //     //     mainAxisAlignment:
-                                                    //     //         MainAxisAlignment.center,
-                                                    //     //     children: [
-                                                    //     //       orderprovider
-                                                    //     //               .orders.isNotEmpty
-                                                    //     //           ? (ordervalprovider
-                                                    //     //                       .order
-                                                    //     //                       ?.id
-                                                    //     //                       .isNotEmpty ??
-                                                    //     //                   false)
-                                                    //     //               ? (ticketprovider
-                                                    //     //                           .ticket
-                                                    //     //                           ?.id
-                                                    //     //                           .isNotEmpty ??
-                                                    //     //                       false)
-                                                    //     //                   ? RepaintBoundary(
-                                                    //     //                       child:
-                                                    //     //                           QrImage(
-                                                    //     //                         data: ticketprovider
-                                                    //     //                             .ticket!
-                                                    //     //                             .id,
-                                                    //     //                         version:
-                                                    //     //                             QrVersions
-                                                    //     //                                 .auto,
-                                                    //     //                         size:
-                                                    //     //                             130.0,
-                                                    //     //                       ),
-                                                    //     //                     )
-                                                    //     //                   : Constants
-                                                    //     //                       .mycircularProgressIndicator()
-                                                    //     //               : Constants
-                                                    //     //                   .mycircularProgressIndicator()
-                                                    //     //           : Constants
-                                                    //     //               .mycircularProgressIndicator()
-                                                    //     //     ],
-                                                    //     //   ),
-                                                    //     // ),
-                                                    //     Padding(
-                                                    //       padding:
-                                                    //           const EdgeInsets.all(0.0),
-                                                    //       child: Center(
-                                                    //         child: Text("",
-                                                    //             style:
-                                                    //                 GoogleFonts.bebasNeue(
-                                                    //               fontSize: 32,
-                                                    //             )),
-                                                    //       ),
-                                                    //     ),
-                                                    //     Padding(
-                                                    //       padding:
-                                                    //           const EdgeInsets.all(0.0),
-                                                    //       child: Row(
-                                                    //         children: [
-                                                    //           Padding(
-                                                    //             padding:
-                                                    //                 const EdgeInsets.all(
-                                                    //                     5.0),
-                                                    //             child: Image.asset(
-                                                    //               "assets/images/ticket.png",
-                                                    //               scale: height *
-                                                    //                   0.0173010380622837,
-                                                    //             ),
-                                                    //           ),
-                                                    //           Padding(
-                                                    //             padding:
-                                                    //                 const EdgeInsets.all(
-                                                    //                     0.0),
-                                                    //             child: Row(
-                                                    //               children: [
-                                                    //                 Column(
-                                                    //                   crossAxisAlignment:
-                                                    //                       CrossAxisAlignment
-                                                    //                           .start,
-                                                    //                   children: [
-                                                    //                     Text(
-                                                    //                       '${ordervalprovider.order?.items[0].quantity ?? ''}x ${ticketprovider.ticket?.name ?? ''}',
-                                                    //                     ),
-                                                    //                   ],
-                                                    //                 ),
-                                                    //                 Padding(
-                                                    //                     padding: EdgeInsets
-                                                    //                         .only(
-                                                    //                             left: width /
-                                                    //                                 13.7),
-                                                    //                     child: Column(
-                                                    //                       crossAxisAlignment:
-                                                    //                           CrossAxisAlignment
-                                                    //                               .start,
-                                                    //                       children: [
-                                                    //                         Row(
-                                                    //                           children: const [
-                                                    //                             Icon(
-                                                    //                               Icons
-                                                    //                                   .access_time,
-                                                    //                               size:
-                                                    //                                   17,
-                                                    //                             ),
-                                                    //                             Text(
-                                                    //                               " 08:00 pm",
-                                                    //                             )
-                                                    //                           ],
-                                                    //                         ),
-                                                    //                         Row(
-                                                    //                           children: const [
-                                                    //                             Icon(
-                                                    //                               Icons
-                                                    //                                   .location_on,
-                                                    //                               size:
-                                                    //                                   17,
-                                                    //                             ),
-                                                    //                             Text(
-                                                    //                               " Take me There",
-                                                    //                             ),
-                                                    //                           ],
-                                                    //                         ),
-                                                    //                       ],
-                                                    //                     ))
-                                                    //               ],
-                                                    //             ),
-                                                    //           )
-                                                    //         ],
-                                                    //       ),
-                                                    //     ),
-                                                    //     SizedBox(
-                                                    //       height: 10,
-                                                    //     )
-                                                    //   ],
-                                                    // ),
-                                                    ),
-                                              ),
-                                              loadedpo
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10.0),
-                                                      child: Container(
-                                                        height: 3 * height / 11,
-                                                        width: width / 5,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                      .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          20.0)),
-                                                          color: Colors.white,
-                                                        ),
-                                                        child: Column(
-                                                          children: [
-                                                            Expanded(
-                                                              child: Center(
+                                                    child: loadedpo
+                                                        ? Stack(
+                                                            children: [
+                                                              Center(
                                                                 child:
-                                                                    FractionalTranslation(
-                                                                  translation:
-                                                                      const Offset(
-                                                                          0,
-                                                                          -.01),
-                                                                  child: ListView
-                                                                      .builder(
-                                                                    itemCount: porders['data'].length >
-                                                                            3
-                                                                        ? 2
-                                                                        : porders['data']
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (BuildContext
-                                                                                context,
-                                                                            int index) {
-                                                                      return Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.all(8.0),
-                                                                        child:
-                                                                            ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(16.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            porders['data'][index]['club']['logo'],
-                                                                            width:
-                                                                                50,
-                                                                            height:
-                                                                                50,
-                                                                            fit:
-                                                                                BoxFit.contain,
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    },
+                                                                    Image.asset(
+                                                                  "assets/images/tickets.png",
+                                                                  height:
+                                                                      height /
+                                                                          3.2,
+                                                                ),
+                                                              ),
+                                                              Center(
+                                                                child: Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                    bottom:
+                                                                        height /
+                                                                            20,
+                                                                  ),
+                                                                  child:
+                                                                      QrImage(
+                                                                    data: porders[
+                                                                            'data']
+                                                                        [
+                                                                        0]['_id'],
+                                                                    version:
+                                                                        QrVersions
+                                                                            .auto,
+                                                                    size:
+                                                                        height /
+                                                                            4.5,
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
+                                                              Padding(
+                                                                padding: EdgeInsets.only(
+                                                                    top:
+                                                                        height /
+                                                                            3.6,
+                                                                    left: width /
+                                                                        5.2),
+                                                                child:
+                                                                    Container(height: 100,
+                                                                  child: Center(
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      itemCount:
+                                                                          myticketontop
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (BuildContext
+                                                                                  context,
+                                                                              int index) {
+                                                                        var entries = myticketontop
+                                                                            .values
+                                                                            .toList();
+                                                                        var keys = myticketontop
+                                                                            .keys
+                                                                            .toList();
+                                                                        return Text(
+                                                                          "${entries[index]} x ${keys[index]}",
+                                                                          style: GoogleFonts.bebasNeue(
+                                                                              color:
+                                                                                  Colors.white,
+                                                                              fontSize: height / 65),
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding: EdgeInsets.only(
+                                                                    top: height /
+                                                                        3.6,
+                                                                    left: width /
+                                                                        2.3),
+                                                                child: Container(
+                                                                    child: Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      porders['data'][0]
+                                                                              [
+                                                                              'date']
+                                                                          .toString()
+                                                                          .substring(
+                                                                              11,
+                                                                              19),
+                                                                      style: GoogleFonts.bebasNeue(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              height / 80),
+                                                                    ),
+                                                                    Text(
+                                                                      porders['data'][0]['club']['d_address']
+                                                                              [
+                                                                              'city']
+                                                                          .toString(),
+                                                                      style: GoogleFonts.bebasNeue(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              height / 65),
+                                                                    ),
+                                                                  ],
+                                                                )),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        // Column(
+                                                        //   mainAxisAlignment:
+                                                        //       MainAxisAlignment.spaceBetween,
+                                                        //   children: [
+
+                                                        //     // Padding(
+                                                        //     //   padding: const EdgeInsets.only(
+                                                        //     //       top: 8.0),
+                                                        //     //   child: Row(
+                                                        //     //     mainAxisAlignment:
+                                                        //     //         MainAxisAlignment.center,
+                                                        //     //     children: [
+                                                        //     //       orderprovider
+                                                        //     //               .orders.isNotEmpty
+                                                        //     //           ? (ordervalprovider
+                                                        //     //                       .order
+                                                        //     //                       ?.id
+                                                        //     //                       .isNotEmpty ??
+                                                        //     //                   false)
+                                                        //     //               ? (ticketprovider
+                                                        //     //                           .ticket
+                                                        //     //                           ?.id
+                                                        //     //                           .isNotEmpty ??
+                                                        //     //                       false)
+                                                        //     //                   ? RepaintBoundary(
+                                                        //     //                       child:
+                                                        //     //                           QrImage(
+                                                        //     //                         data: ticketprovider
+                                                        //     //                             .ticket!
+                                                        //     //                             .id,
+                                                        //     //                         version:
+                                                        //     //                             QrVersions
+                                                        //     //                                 .auto,
+                                                        //     //                         size:
+                                                        //     //                             130.0,
+                                                        //     //                       ),
+                                                        //     //                     )
+                                                        //     //                   : Constants
+                                                        //     //                       .mycircularProgressIndicator()
+                                                        //     //               : Constants
+                                                        //     //                   .mycircularProgressIndicator()
+                                                        //     //           : Constants
+                                                        //     //               .mycircularProgressIndicator()
+                                                        //     //     ],
+                                                        //     //   ),
+                                                        //     // ),
+                                                        //     Padding(
+                                                        //       padding:
+                                                        //           const EdgeInsets.all(0.0),
+                                                        //       child: Center(
+                                                        //         child: Text("",
+                                                        //             style:
+                                                        //                 GoogleFonts.bebasNeue(
+                                                        //               fontSize: 32,
+                                                        //             )),
+                                                        //       ),
+                                                        //     ),
+                                                        //     Padding(
+                                                        //       padding:
+                                                        //           const EdgeInsets.all(0.0),
+                                                        //       child: Row(
+                                                        //         children: [
+                                                        //           Padding(
+                                                        //             padding:
+                                                        //                 const EdgeInsets.all(
+                                                        //                     5.0),
+                                                        //             child: Image.asset(
+                                                        //               "assets/images/ticket.png",
+                                                        //               scale: height *
+                                                        //                   0.0173010380622837,
+                                                        //             ),
+                                                        //           ),
+                                                        //           Padding(
+                                                        //             padding:
+                                                        //                 const EdgeInsets.all(
+                                                        //                     0.0),
+                                                        //             child: Row(
+                                                        //               children: [
+                                                        //                 Column(
+                                                        //                   crossAxisAlignment:
+                                                        //                       CrossAxisAlignment
+                                                        //                           .start,
+                                                        //                   children: [
+                                                        //                     Text(
+                                                        //                       '${ordervalprovider.order?.items[0].quantity ?? ''}x ${ticketprovider.ticket?.name ?? ''}',
+                                                        //                     ),
+                                                        //                   ],
+                                                        //                 ),
+                                                        //                 Padding(
+                                                        //                     padding: EdgeInsets
+                                                        //                         .only(
+                                                        //                             left: width /
+                                                        //                                 13.7),
+                                                        //                     child: Column(
+                                                        //                       crossAxisAlignment:
+                                                        //                           CrossAxisAlignment
+                                                        //                               .start,
+                                                        //                       children: [
+                                                        //                         Row(
+                                                        //                           children: const [
+                                                        //                             Icon(
+                                                        //                               Icons
+                                                        //                                   .access_time,
+                                                        //                               size:
+                                                        //                                   17,
+                                                        //                             ),
+                                                        //                             Text(
+                                                        //                               " 08:00 pm",
+                                                        //                             )
+                                                        //                           ],
+                                                        //                         ),
+                                                        //                         Row(
+                                                        //                           children: const [
+                                                        //                             Icon(
+                                                        //                               Icons
+                                                        //                                   .location_on,
+                                                        //                               size:
+                                                        //                                   17,
+                                                        //                             ),
+                                                        //                             Text(
+                                                        //                               " Take me There",
+                                                        //                             ),
+                                                        //                           ],
+                                                        //                         ),
+                                                        //                       ],
+                                                        //                     ))
+                                                        //               ],
+                                                        //             ),
+                                                        //           )
+                                                        //         ],
+                                                        //       ),
+                                                        //     ),
+                                                        //     SizedBox(
+                                                        //       height: 10,
+                                                        //     )
+                                                        //   ],
+                                                        // ),
+                                                        : Constants
+                                                            .mycircularProgressIndicator()),
+                                              ),
+                                              loadedpo
+                                                  ? InkWell(onTap: () {
                                                                 Navigator.push(
                                                                     context,
                                                                     MaterialPageRoute(
@@ -815,36 +841,108 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                             (context) =>
                                                                                 const BookingHistory()));
                                                               },
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top:
-                                                                            20.0),
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(5.0)),
-                                                                    border: Border.all(
-                                                                        width:
-                                                                            2,
-                                                                        color:
-                                                                            backgroundColorfigma),
-                                                                    color: Colors
-                                                                        .white,
+                                                    child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                               top:11, left: 10.0),
+                                                        child: Container(
+                                                          height: 3 * height / 12,
+                                                          width: width / 5,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            20.0)),
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Expanded(
+                                                                child: Center(
+                                                                  child:
+                                                                      FractionalTranslation(
+                                                                    translation:
+                                                                        const Offset(
+                                                                            0,
+                                                                            -.01),
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      itemCount: porders['data'].length >
+                                                                              3
+                                                                          ? 2
+                                                                          : porders['data']
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (BuildContext
+                                                                                  context,
+                                                                              int index) {
+                                                                        return Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.all(8.0),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(16.0),
+                                                                            child:
+                                                                                Image.network(
+                                                                              porders['data'][index]['club']['logo'],
+                                                                              width:
+                                                                                  50,
+                                                                              height:
+                                                                                  50,
+                                                                              fit:
+                                                                                  BoxFit.contain,
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   ),
-                                                                  child: Icon(Icons
-                                                                      .navigate_next),
                                                                 ),
                                                               ),
-                                                            )
-                                                          ],
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder:
+                                                                              (context) =>
+                                                                                  const BookingHistory()));
+                                                                },
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .only(
+                                                                          top:
+                                                                              20.0),
+                                                                  child:
+                                                                      Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(5.0)),
+                                                                      border: Border.all(
+                                                                          width:
+                                                                              2,
+                                                                          color:
+                                                                              backgroundColorfigma),
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    child: Icon(Icons
+                                                                        .navigate_next),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    )
+                                                  )
                                                   : Container(),
                                             ],
                                           ),
@@ -855,14 +953,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                       height: height / 25,
                                     ),
                                     FractionalTranslation(
-                                      translation: Offset(0, -1.2),
+                                      translation: Offset(0, -1.15),
                                       child: bottomnavbar(
+                                        initialindex: 1,
                                         width: width,
+                                        iscolorchange: iscolorchange,
+                                        height: height,
                                         isclub: false,
                                         isevent: false,
-                                        iscolorchange: iscolorchange,
-                                        initialindex: 1,
-                                        height: height,
                                       ),
                                     )
                                   ])),
@@ -1071,282 +1169,296 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     )
                                   ])),
                         )
-                  : FractionalTranslation(                          translation: Offset(0, 0.15),
-
-                    child: Container(
-                        height: 102,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                  : FractionalTranslation(
+                      translation: Offset(0, 0.15),
+                      child: Container(
+                          height: 102,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
                           ),
-                        ),
-                        // margin: const EdgeInsets.all(24.0),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  panelController.close();
-                  
-                                  setState(() {
-                                    iscolorchange = false;
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: width / 1.7,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(40),
-                                            topLeft: Radius.circular(40),
+                          // margin: const EdgeInsets.all(24.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    panelController.close();
+
+                                    setState(() {
+                                      iscolorchange = false;
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: width / 1.7,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(40),
+                                              topLeft: Radius.circular(40),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 16.0),
+                                            child: Text(
+                                              "MY BOOKINGS",
+                                              style: GoogleFonts.bebasNeue(
+                                                  fontSize: height / 21.675),
+                                            ),
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 16.0),
-                                          child: Text(
-                                            "MY BOOKINGS",
-                                            style: GoogleFonts.bebasNeue(
-                                                fontSize: height / 21.675),
-                                          ),
-                                        ),
-                                      ),
-                                      Stack(
-                                        children: [
-                                          Image.asset(
-                                            Constants.backgroundimage,
-                                            height: height / 12.38571428571429,
-                                            width: width / 13.5,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          Container(
-                                            width: width / 13.5,
-                                            height: height / 12.38571428571429,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: width / 13.6,
-                                            height: height / 12.38571428571429,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(20),
-                                              ),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: width / 13.6,
-                                            height: height / 12.38571428571429,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(20),
-                                              ),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: width / 13.6,
-                                            height: height / 10.2,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(20),
-                                              ),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          panelController.close();
-                                          setState(() {
-                                            iscolorchange = false;
-                                          });
-                                        },
-                                        child: Stack(
+                                        Stack(
                                           children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      const Radius.circular(
-                                                          20.0)),
-                                              child: Image.asset(
-                                                Constants.backgroundimage,
-                                                height: height / 10.1,
-                                                width: width / 3.347,
-                                                fit: BoxFit.cover,
+                                            Image.asset(
+                                              Constants.backgroundimage,
+                                              height:
+                                                  height / 12.38571428571429,
+                                              width: width / 13.5,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Container(
+                                              width: width / 13.5,
+                                              height:
+                                                  height / 12.38571428571429,
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
                                               ),
                                             ),
                                             Container(
-                                              width: width / 3.347,
-                                              height: height / 10.1,
-                                              decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                borderRadius:
-                                                    const BorderRadius.only(
+                                              width: width / 13.6,
+                                              height:
+                                                  height / 12.38571428571429,
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.only(
                                                   topRight: Radius.circular(20),
-                                                  bottomLeft: Radius.circular(20),
                                                 ),
+                                                color: Colors.white,
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: width / 16.44,
-                                                    bottom: height / 86.7,
-                                                    right: width / 16.44,
-                                                    top: height / 108.375),
-                                                child: Container(
-                                                  width: 10,
-                                                  decoration: const BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(20),
-                                                    ),
-                                                  ),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      panelController.close();
-                                                      setState(() {
-                                                        iscolorchange = false;
-                                                      });
-                                                    },
-                                                    child: Image.asset(
-                                                      "assets/images/coinlogo.png",
-                                                      scale: 6,
-                                                    ),
-                                                  ),
+                                            ),
+                                            Container(
+                                              width: width / 13.6,
+                                              height:
+                                                  height / 12.38571428571429,
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
                                                 ),
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: width / 13.6,
+                                              height: height / 10.2,
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
+                                                ),
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16.0, right: 16),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10.0, left: 10.0),
-                                          child: Container(
-                                              height: 3 * height / 11,
-                                              width: width - 52,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(20.0)),
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                  color: Colors.black,
-                                                  width: 2,
+                                        InkWell(
+                                          onTap: () {
+                                            panelController.close();
+                                            setState(() {
+                                              iscolorchange = false;
+                                            });
+                                          },
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                    bottomLeft:
+                                                        const Radius.circular(
+                                                            20.0)),
+                                                child: Image.asset(
+                                                  Constants.backgroundimage,
+                                                  height: height / 10.1,
+                                                  width: width / 3.347,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                      "No Bookings Available Right Now",
-                                                      style:
-                                                          GoogleFonts.bebasNeue(
-                                                        fontSize: 20,
-                                                      )),
-                                                  Text("Lets change that",
-                                                      style:
-                                                          GoogleFonts.bebasNeue(
-                                                        fontSize: 15,
-                                                      )),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      Navigator.of(context)
-                                                          .pushAndRemoveUntil(
-                                                              SlideTransitionPageRoute(
-                                                                  child:
-                                                                      const ClubsScreen(),
-                                                                  direction:
-                                                                      "right"),
-                                                              (route) => false);
-                                                    },
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: width / 13,
-                                                          right: width / 13,
-                                                          top: 10),
-                                                      child: SizedBox(
-                                                        height: height / 20,
-                                                        child: Container(
-                                                          height: height / 10,
-                                                          width: width / 5,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: golden,
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10.0),
+                                              Container(
+                                                width: width / 3.347,
+                                                height: height / 10.1,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20),
+                                                    bottomLeft:
+                                                        Radius.circular(20),
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: width / 16.44,
+                                                      bottom: height / 86.7,
+                                                      right: width / 16.44,
+                                                      top: height / 108.375),
+                                                  child: Container(
+                                                    width: 10,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(20),
+                                                      ),
+                                                    ),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        panelController.close();
+                                                        setState(() {
+                                                          iscolorchange = false;
+                                                        });
+                                                      },
+                                                      child: Image.asset(
+                                                        "assets/images/coinlogo.png",
+                                                        scale: 6,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16.0, right: 16),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10.0, left: 10.0),
+                                            child: Container(
+                                                height: 3 * height / 11,
+                                                width: width - 52,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(
+                                                              20.0)),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 2,
+                                                  ),
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                        "No Bookings Available Right Now",
+                                                        style: GoogleFonts
+                                                            .bebasNeue(
+                                                          fontSize: 20,
+                                                        )),
+                                                    Text("Lets change that",
+                                                        style: GoogleFonts
+                                                            .bebasNeue(
+                                                          fontSize: 15,
+                                                        )),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .pushAndRemoveUntil(
+                                                                SlideTransitionPageRoute(
+                                                                    child:
+                                                                        const ClubsScreen(),
+                                                                    direction:
+                                                                        "right"),
+                                                                (route) =>
+                                                                    false);
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left:
+                                                                    width / 13,
+                                                                right:
+                                                                    width / 13,
+                                                                top: 10),
+                                                        child: SizedBox(
+                                                          height: height / 20,
+                                                          child: Container(
+                                                            height: height / 10,
+                                                            width: width / 5,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: golden,
+                                                              borderRadius:
+                                                                  const BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    10.0),
+                                                              ),
+                                                              border:
+                                                                  Border.all(
+                                                                width: 2,
+                                                                color: const Color(
+                                                                    0xFF979797),
+                                                              ),
                                                             ),
-                                                            border: Border.all(
-                                                              width: 2,
-                                                              color: const Color(
-                                                                  0xFF979797),
-                                                            ),
-                                                          ),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "VIEW CLUBS",
-                                                              style: GoogleFonts
-                                                                  .bebasNeue(
-                                                                fontSize:
-                                                                    width / 30,
-                                                                color:
-                                                                    Colors.black,
+                                                            child: Center(
+                                                              child: Text(
+                                                                "VIEW CLUBS",
+                                                                style: GoogleFonts
+                                                                    .bebasNeue(
+                                                                  fontSize:
+                                                                      width /
+                                                                          30,
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                                  ],
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: height / 25,
-                              ),
-                              FractionalTranslation(                          translation: Offset(0, -1.15),
-
-                                child: bottomnavbar(
-                                  initialindex: 1,
-                                  width: width,
-                                  iscolorchange: iscolorchange,
-                                  height: height,
-                                  isclub: false,
-                                  isevent: false,
+                                SizedBox(
+                                  height: height / 25,
                                 ),
-                              )
-                            ])),
-                  ),
+                                FractionalTranslation(
+                                  translation: Offset(0, -1.15),
+                                  child: bottomnavbar(
+                                    initialindex: 1,
+                                    width: width,
+                                    iscolorchange: iscolorchange,
+                                    height: height,
+                                    isclub: false,
+                                    isevent: false,
+                                  ),
+                                )
+                              ])),
+                    ),
               renderPanelSheet: false,
               collapsed: FractionalTranslation(
                 translation: Offset(0, 0.2),

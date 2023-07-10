@@ -22,95 +22,116 @@ class Balancecard extends StatelessWidget {
       child: Container(
         height: height / 5,
         width: double.maxFinite,
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(255, 202, 196, 196),
+              color: Color.fromARGB(255, 255, 255, 255),
               blurRadius: 10,
-              spreadRadius: -2,
+              spreadRadius: -6,
               offset: Offset(-2, -2),
             ),
             BoxShadow(
+              color: Color.fromARGB(255, 88, 88, 88),
+              blurRadius: 1,
+              spreadRadius: -1,
+              offset: Offset(-1, -2),
+            ),
+            BoxShadow(
               color: Colors.black,
-              blurRadius: 20,
-              spreadRadius: -2,
+              blurRadius: 1,
+              spreadRadius: 1.5,
               offset: Offset(2, 2),
             ),
           ],
-          color: Color(0xff1e1e1e),
+          // color: Colors.red,
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
           ),
         ),
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, right: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "VIP Membership",
-                    style: GoogleFonts.mavenPro(
-                        color: golden,
-                        fontSize: height / 54.1875,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                'assets/images/cardbackground.jpg',
+                width: 450,
+                height: height / 5,
+                fit: BoxFit.fill,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Balance",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 121, 118, 109),
-                        fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("₹ 0",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 30,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
+            // Container(height: height/5,width: 450,
+            //   child: Image.asset("assets/images/cardbackground-2.jpg")),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, right: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Image.asset(
-                        "assets/images/coinlogo.png",
-                        scale: 13,
+                      Text(
+                        "VIP Membership",
+                        style: GoogleFonts.mavenPro(
+                            color: golden,
+                            fontSize: height / 54.1875,
+                            fontWeight: FontWeight.w500),
                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(left:8.0),
-                         child: Text(
-                          Constants.btsprofile.covercoin.toString(),
-                          style: GoogleFonts.sairaCondensed(
-                                        color: golden,
-                                        fontSize: height / 30,
-                                        fontWeight: FontWeight.w600),
-                                             ),
-                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, left: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Balance",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 121, 118, 109),
+                            fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, left: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("₹ 0",
+                          style: GoogleFonts.bebasNeue(
+                            fontSize: 30,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/coinlogo.png",
+                            scale: 13,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              Constants.btsprofile.covercoin.toString(),
+                              style: GoogleFonts.sairaCondensed(
+                                  color: golden,
+                                  fontSize: height / 30,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
