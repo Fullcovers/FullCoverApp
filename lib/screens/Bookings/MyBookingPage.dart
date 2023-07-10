@@ -150,7 +150,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
       child: Stack(
         children: [
           Image.asset(
-            Constants.backgroundimage,
+            "assets/images/background.png",
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -208,8 +208,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
 
                               Navigator.push(
                                   context,
-                                  SlideTransitionPageRoute(
-                                      direction: "topright",
+                                  FaidinTransitionPageRoute(
+                                      // direction: "topright",
                                       child: const ProfilePage()));
                             },
                             child: AnimatedContainer(
@@ -218,15 +218,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 BoxShadow(
                                   color: Colors.black,
                                   offset: Offset(4, 4),
-                                  blurRadius: 15,
-                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  spreadRadius: -7,
                                 ),
                                 BoxShadow(
                                   color: Color.fromARGB(255, 88, 88, 88),
                                   offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  blurRadius: 9,
                                   spreadRadius:
-                                      -2, // how far the color effect spreads.
+                                      -10, // how far the color effect spreads.
                                 ),
                               ]),
                               duration: const Duration(
@@ -256,7 +256,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     ),
                   ),
                   SizedBox(
-                    height: height / 50,
+                    height: height / 200,
                   ),
                   Balancecard(height: height),
                   SizedBox(
@@ -363,7 +363,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 ],
               ),
               // snapPoint: 0.99,
-              panelSnapping: false,
+              panelSnapping: true,
               controller: panelController,
               defaultPanelState: PanelState.OPEN,
               panel: load
@@ -564,7 +564,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    top: 10.0, left: 10.0),
+                                                     left: 10.0),
                                                 child: Container(
                                                     height: height / 3,
                                                     width: 2 * width / 3,
@@ -589,7 +589,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                   "assets/images/tickets.png",
                                                                   height:
                                                                       height /
-                                                                          2,
+                                                                          3.2,
                                                                 ),
                                                               ),
                                                               Center(
@@ -844,9 +844,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                     child: Padding(
                                                         padding:
                                                             const EdgeInsets.only(
-                                                                left: 10.0),
+                                                               top:11, left: 10.0),
                                                         child: Container(
-                                                          height: 3 * height / 9.2,
+                                                          height: 3 * height / 12,
                                                           width: width / 5,
                                                           decoration:
                                                               BoxDecoration(

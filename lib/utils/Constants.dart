@@ -12,7 +12,7 @@ class Constants {
   static late String usertoken;
   static late UserData btsprofile;
   static late ClubModel? myclub;
-  static String backgroundimage = "assets/images/background.png";
+  static String backgroundimage = "assets/images/background2.png";
  static Widget mycircularProgressIndicator() {
     return Center(
         child: Container(

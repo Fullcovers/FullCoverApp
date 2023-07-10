@@ -248,79 +248,132 @@ class _EventsScreenState extends State<EventsScreen> {
             // FractionalTranslation(
             //   translation: Offset(0, -0.5),
             // child:
+            SizedBox(
+              height: height / 20,
+            ),
+            Wrap(
+              spacing: 35,
+              runSpacing: 15,
+              children: [
+                genresbox(width, height, "Techno",'assets/images/geners/Genre-List_01.png'),
+                genresbox(width, height, "Bolly",'assets/images/geners/Genre-List_03.png'),
+                genresbox(width, height, "EDM",'assets/images/geners/Genre-List_04.png'),
+                genresbox(width, height, "Concerts",'assets/images/geners/Genre-List_05.png'),
+                genresbox(width, height, "Hip-Hop",'assets/images/geners/Genre-List_02.png'),
+                genresbox(width, height, "Other",'assets/images/geners/Genre-List_06.png'),
+                // Container(
+                //   height: height / 18.0625,
+                //   width: width / 1.1,
+                //   child: Stack(
+                //     children: [
+                //       ClipRRect(
+                //         borderRadius: BorderRadius.circular(8.0),
+                //         child: Image.asset(
+                //           'assets/images/clubimg.png',
+                //           width: width / 1.1,
+                //           height: height / 18.0625,
+                //           fit: BoxFit.fill,
+                //         ),
+                //       ),
+                //       ClipRRect(
+                //         borderRadius: BorderRadius.circular(8.0),
+                //         child: Opacity(
+                //           opacity: 0.5,
+                //           child: Image.asset(
+                //             'assets/images/black.png',
+                //             width: width / 1.1,
+                //             height: height / 18.0625,
+                //             fit: BoxFit.fill,
+                //           ),
+                //         ),
+                //       ),
+                //       Center(
+                //         child: Text("other",
+                //             style: GoogleFonts.sairaCondensed(
+                //               color: Colors.white,
+                //               fontWeight: FontWeight.w600,
+                //               fontSize: 15,
+                //             )),
+                //       )
+                //     ],
+                //   ),
+                // )
+              ],
+            ),
+            SizedBox(height: height/20,),
             Align(
-              alignment: Alignment.centerLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 8),
-                    child: Text("Events Today",
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 18,
-                          color: backgroundColorfigma,
-                        )),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 20, bottom: 20, left: 60, right: 60),
-                    child: Container(
-                      height: height / 20,
-                      width: width / 2.5,
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(34, 34, 34, 0.37),
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                      ),
-                      child: Row(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top:8.0),
+                child: Container(color:botoncolor,
+                  child: Column(
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20.0,
-                            ),
-                            child: Text(
-                                selectedDate != null
-                                    ? formatDate(selectedDate)
-                                    : "Select Date",
-                                style: GoogleFonts.sairaCondensed(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                            padding: const EdgeInsets.only(left: 16.0, top: 8),
+                            child: Text("Events Today",
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 18,
                                   color: Colors.white,
                                 )),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: IconButton(
-                              onPressed: () {
-                                _selectDate(
-                                    context); // Show the date picker on icon press
-                              },
-                              icon: const Icon(
-                                Icons.calendar_today_outlined,
+                            padding: EdgeInsets.only(
+                                top: 20, bottom: 20, left: 60, right: 10),
+                            child: Container(
+                              height: height / 20,
+                              width: width / 2.5,
+                              decoration: BoxDecoration(
                                 color: Colors.white,
-                                size: 20,
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20.0,
+                                    ),
+                                    child: Text(
+                                        selectedDate != null
+                                            ? formatDate(selectedDate)
+                                            : "Select Date",
+                                        style: GoogleFonts.sairaCondensed(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10.0),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        _selectDate(
+                                            context); // Show the date picker on icon press
+                                      },
+                                      icon: const Icon(
+                                        Icons.calendar_today_outlined,
+                                        color: Colors.black,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // ),
 
-            // FractionalTranslation(
-            //   translation: Offset(0, -0.1),
-            // child:
-            Container(
+                      Container(
                 height: height / 6,
                 width: width,
-                decoration: const BoxDecoration(color: Colors.white),
+                decoration:  BoxDecoration(color: botoncolor),
                 child: FutureBuilder<List<Event>>(
                   future: EventsServices().getAllEvents(context: context),
                   builder: (context, snapshot) {
@@ -352,7 +405,7 @@ class _EventsScreenState extends State<EventsScreen> {
                           final Event event = eventdatabydate[index];
 
                           return Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
+                            padding: const EdgeInsets.only(left: 10.0,bottom: 16),
                             child: GestureDetector(
                               onTap: () async {
                                 await ClubServices().getSingleClub(
@@ -369,6 +422,18 @@ class _EventsScreenState extends State<EventsScreen> {
                     }
                   },
                 )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // ),
+            SizedBox(height: height/20,),
+
+            // FractionalTranslation(
+            //   translation: Offset(0, -0.1),
+            // child:
+            
             // ),
             // FractionalTranslation(
             //   translation: Offset(0, -0.15),
@@ -422,58 +487,7 @@ class _EventsScreenState extends State<EventsScreen> {
             //         )),
             //   ),
             // ),
-            SizedBox(
-              height: height / 60,
-            ),
-            Wrap(
-              spacing: 35,
-              runSpacing: 15,
-              children: [
-                genresbox(width, height, "Techno"),
-                genresbox(width, height, "Bolly"),
-                genresbox(width, height, "EDM"),
-                genresbox(width, height, "Concerts"),
-                genresbox(width, height, "Hip-Hop"),
-                genresbox(width, height, "Other"),
-                // Container(
-                //   height: height / 18.0625,
-                //   width: width / 1.1,
-                //   child: Stack(
-                //     children: [
-                //       ClipRRect(
-                //         borderRadius: BorderRadius.circular(8.0),
-                //         child: Image.asset(
-                //           'assets/images/clubimg.png',
-                //           width: width / 1.1,
-                //           height: height / 18.0625,
-                //           fit: BoxFit.fill,
-                //         ),
-                //       ),
-                //       ClipRRect(
-                //         borderRadius: BorderRadius.circular(8.0),
-                //         child: Opacity(
-                //           opacity: 0.5,
-                //           child: Image.asset(
-                //             'assets/images/black.png',
-                //             width: width / 1.1,
-                //             height: height / 18.0625,
-                //             fit: BoxFit.fill,
-                //           ),
-                //         ),
-                //       ),
-                //       Center(
-                //         child: Text("other",
-                //             style: GoogleFonts.sairaCondensed(
-                //               color: Colors.white,
-                //               fontWeight: FontWeight.w600,
-                //               fontSize: 15,
-                //             )),
-                //       )
-                //     ],
-                //   ),
-                // )
-              ],
-            ),
+            
             SizedBox(
               height: height / 10,
             )
@@ -492,25 +506,25 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 }
 
-Widget genresbox(double width, double height, String text) {
+Widget genresbox(double width, double height, String text,String images ) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(10)),
       color: backgroundColorfigma,
     ),
-    height: height / 18.0625,
-    width: width / 4.18,
+    height: height / 12,
+    width: width / 4,
     child: Stack(
       children: [
-        // ClipRRect(
-        //   borderRadius: BorderRadius.circular(8.0),
-        //   child: Image.asset(
-        //     'assets/images/clubimg.png',
-        //     width: width / 4.18,
-        //     height: height / 18.0625,
-        //     fit: BoxFit.fill,
-        //   ),
-        // ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Image.asset(
+            images,
+            width: width / 4,
+            height: height / 12,
+            fit: BoxFit.fill,
+          ),
+        ),
         // ClipRRect(
         //   borderRadius: BorderRadius.circular(8.0),
         //   child: Opacity(
@@ -524,14 +538,14 @@ Widget genresbox(double width, double height, String text) {
         //   ),
         // ),
 
-        Center(
-          child: Text(text,
-              style: GoogleFonts.sairaCondensed(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-              )),
-        )
+        // Center(
+        //   child: Text(text,
+        //       style: GoogleFonts.sairaCondensed(
+        //         color: Colors.white,
+        //         fontWeight: FontWeight.w600,
+        //         fontSize: 15,
+        //       )),
+        // )
       ],
     ),
   );

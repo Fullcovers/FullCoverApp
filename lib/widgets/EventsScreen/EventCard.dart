@@ -48,7 +48,7 @@ Widget myeventcard(double height, double width, Event event) {
               width: width / 1.4,
               height: height / 20,
               decoration: BoxDecoration(
-                  color: backgroundColorfigma,
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
@@ -69,7 +69,7 @@ Widget myeventcard(double height, double width, Event event) {
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.bold,
                                 fontSize: height/80,
-                                color: offwhite),
+                                color: backgroundColorfigma),
                           ),
                         ),
                        
@@ -90,14 +90,14 @@ Widget myeventcard(double height, double width, Event event) {
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.bold,
                               fontSize: height/100,
-                              color: offwhite),
+                              color: backgroundColorfigma),
                         ),
                         Text(
                           "Rs. 2000",
                           style: GoogleFonts.sairaCondensed(
                               fontWeight: FontWeight.bold,
                               fontSize: height/100,
-                              color: offwhite),
+                              color: backgroundColorfigma),
                         )
                       ],
                     ),

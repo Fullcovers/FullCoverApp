@@ -3,8 +3,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/Events/EventScreenaccgeneres.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -28,10 +30,10 @@ class _FilterPageState extends State<FilterPage> {
     }
     return Colors.white;
   }
-      List<bool> isChecked = [];
 
+  List<bool> isChecked = [];
+  List<String> selectedgeneres = [];
   Widget build(BuildContext context) {
-
     Map<String, List<String>> elements = {};
     elements["Music"] = [
       "Bollywood",
@@ -74,7 +76,7 @@ class _FilterPageState extends State<FilterPage> {
                       child: Row(
                     children: [
                       Container(
-                        color: backgroundColorfigma,
+                        color: Colors.transparent,
                         width: width / 2.2,
                         height: height - (height / 10.5),
                         child: Column(
@@ -85,26 +87,29 @@ class _FilterPageState extends State<FilterPage> {
                                 itemBuilder: (BuildContext context, int index) {
                                   var entryList = elements.entries.toList();
 
-                                  return Column(
+                                  return Column(crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       InkWell(
                                         onTap: () {
                                           setState(() {
                                             elementlidex = index;
                                             isChecked = [];
-
+                                            selectedgeneres = [];
                                             print(elementlidex);
                                           });
                                         },
-                                        child: Text(entryList[index].key,
-                                            style: GoogleFonts.sairaCondensed(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 24,
-                                                color: Colors.white)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left:18.0),
+                                          child: Text(entryList[index].key,
+                                              style: GoogleFonts.sairaCondensed(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 20,
+                                                  color: Colors.white)),
+                                        ),
                                       ),
                                       Divider(
                                         color: Colors.white,
-                                        thickness: 1,
+                                        thickness: 0.5,
                                       )
                                     ],
                                   );
@@ -135,6 +140,9 @@ class _FilterPageState extends State<FilterPage> {
                                         onChanged: (bool? value) {
                                           setState(() {
                                             isChecked[index] = value!;
+                                            selectedgeneres.add(
+                                                elementlist[elementlidex]
+                                                    .value[index]);
                                           });
                                         },
                                       ),
@@ -142,15 +150,15 @@ class _FilterPageState extends State<FilterPage> {
                                           elementlist[elementlidex]
                                               .value[index],
                                           style: GoogleFonts.sairaCondensed(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 24,
+                                              // fontWeight: FontWeight.w600,
+                                              fontSize: 20,
                                               color: Colors.white)),
                                     ],
                                   ),
-                                  Divider(
-                                    color: Colors.white,
-                                    thickness: 1,
-                                  )
+                                  // Divider(
+                                  //   color: Colors.white,
+                                  //   thickness: 1,
+                                  // )
                                 ],
                               );
                             },
@@ -163,46 +171,70 @@ class _FilterPageState extends State<FilterPage> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(color: Colors.black,
+                child: Container(
+                  color: Colors.black,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            //<-- SEE HERE
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, right: 18.0, left: 18.0),
-                            child: Container(width: width/7,height: height/20,
-                              child: Center(
-                                child: Text("Cancel",
-                                    style: GoogleFonts.sairaCondensed(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 24,
-                                        color: golden)),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  right: 18.0,
+                                  left: 18.0),
+                              child: Container(
+                                width: width / 7,
+                                height: height / 20,
+                                child: Center(
+                                  child: Text("Cancel",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 24,
+                                          color: golden)),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            //<-- SEE HERE
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, right: 18.0, left: 18.0),
-                            child: Container(width: width/7,height: height/20,
-                              child: Center(
-                                child: Text("Save",
-                                    style: GoogleFonts.sairaCondensed(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 24,
-                                        color: golden)),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(ScaleTransitionPageRoute(
+                                child: EventScreenaccgeneres(
+                              generes: selectedgeneres,
+                            )));
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  right: 18.0,
+                                  left: 18.0),
+                              child: Container(
+                                width: width / 7,
+                                height: height / 20,
+                                child: Center(
+                                  child: Text("Save",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 24,
+                                          color: golden)),
+                                ),
                               ),
                             ),
                           ),

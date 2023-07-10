@@ -36,7 +36,7 @@ bool onclick = false;
 //     return Container(
 //       decoration: BoxDecoration(
 //         borderRadius: BorderRadius.circular(0),
-//         color: widget.iscolorchange ? Colors.white : backgroundColorfigma,
+//         color: widget.iscolorchange ? Colors.white : botoncolor,
 //       ),
 //       child: Row(
 //         children: [
@@ -58,7 +58,7 @@ bool onclick = false;
 //                       shape: RoundedRectangleBorder(
 //                           borderRadius: BorderRadius.circular(20)),
 //                       color: widget.iscolorchange
-//                           ? backgroundColorfigma
+//                           ? botoncolor
 //                           : offwhite,
 //                       child: Row(
 //                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,7 +80,7 @@ bool onclick = false;
 //                                       scale: 16473 / widget.height,
 //                                       color: widget.iscolorchange
 //                                           ? Colors.white
-//                                           :widget.isclub?null: backgroundColorfigma,
+//                                           :widget.isclub?null: botoncolor,
 //                                     ),
 //                                     Padding(
 //                                       padding: const EdgeInsets.only(top: 5.0),
@@ -92,7 +92,7 @@ bool onclick = false;
 //                                                     45.63157894736842,
 //                                                 color: widget.iscolorchange
 //                                                     ? Colors.white
-//                                                     : widget.isclub?golden: backgroundColorfigma,
+//                                                     : widget.isclub?golden: botoncolor,
 //                                               )),
 //                                         ],
 //                                       ),
@@ -119,7 +119,7 @@ bool onclick = false;
 //                             //           scale: 16473 / widget.height,
 //                             //           color: widget.iscolorchange
 //                             //               ? Colors.white
-//                             //               : backgroundColorfigma,
+//                             //               : botoncolor,
 //                             //         ),
 //                             //         Padding(
 //                             //           padding: const EdgeInsets.only(top: 5.0),
@@ -129,7 +129,7 @@ bool onclick = false;
 //                             //                     45.63157894736842,
 //                             //                 color: widget.iscolorchange
 //                             //                     ? Colors.white
-//                             //                     : backgroundColorfigma,
+//                             //                     : botoncolor,
 //                             //               )),
 //                             //         ),
 //                             //       ],
@@ -154,7 +154,7 @@ bool onclick = false;
 //                                       scale: 16473 / widget.height,
 //                                       color: widget.iscolorchange
 //                                           ? widget.isevent?null:offwhite
-//                                           :  backgroundColorfigma,
+//                                           :  botoncolor,
 //                                     ),
 //                                     Padding(
 //                                       padding: const EdgeInsets.only(top: 5.0),
@@ -166,7 +166,7 @@ bool onclick = false;
 //                                                 ? widget.isevent
 //                                                     ? golden
 //                                                     : offwhite
-//                                                 : backgroundColorfigma,
+//                                                 : botoncolor,
 //                                           )),
 //                                     ),
 //                                   ],
@@ -191,7 +191,7 @@ bool onclick = false;
 //                               borderRadius: BorderRadius.circular(25)),
 //                           color: widget.iscolorchange
 //                               ? Colors.white
-//                               : backgroundColorfigma,
+//                               : botoncolor,
 //                         )),
 //                   ),
 //                 ),
@@ -218,7 +218,7 @@ bool onclick = false;
 //                           child: Card(
 //                             color: widget.iscolorchange
 //                                 ? Colors.white
-//                                 : backgroundColorfigma,
+//                                 : botoncolor,
 //                             // shape: RoundedRectangleBorder(
 //                             //     borderRadius: BorderRadius.circular(5)),
 //                             child: Container(
@@ -267,7 +267,7 @@ bool onclick = false;
 //                                       BorderRadius.all(Radius.circular(15)),
 //                                   color: widget.iscolorchange
 //                                       ? Colors.white
-//                                       : backgroundColorfigma,
+//                                       : botoncolor,
 //                                 ),
 //                                 child: Image.asset(
 //                                   "assets/images/qrcode.png",
@@ -333,8 +333,8 @@ class _bottomnavbarState extends State<bottomnavbar> {
             buttonBackgroundColor: golden,
             index: widget.initialindex,
             backgroundColor: Colors.transparent,
-            // widget.iscolorchange ? Colors.white : backgroundColorfigma,
-            color: !widget.iscolorchange ? Colors.white : backgroundColorfigma,
+            // widget.iscolorchange ? Colors.white : botoncolor,
+            color: !widget.iscolorchange ? Colors.white : botoncolor,
             items: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -351,7 +351,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           ? Colors.white
                           : widget.isclub
                               ? Colors.black
-                              : backgroundColorfigma,
+                              : botoncolor,
                     ),
                     Text("Clubs",
                         style: GoogleFonts.bebasNeue(
@@ -360,7 +360,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                               ? widget.isclub
                                   ? golden
                                   : offwhite
-                              : backgroundColorfigma,
+                              : botoncolor,
                         )),
                   ],
                 ),
@@ -389,7 +389,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                               ? widget.isclub
                                   ? golden
                                   : offwhite
-                              : backgroundColorfigma,
+                              : botoncolor,
                         )),
                   ],
                 ),
@@ -409,7 +409,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           ? widget.isevent
                               ? Colors.black
                               : offwhite
-                          : backgroundColorfigma,
+                          : botoncolor,
                     ),
                     Text("Events",
                         style: GoogleFonts.bebasNeue(
@@ -418,7 +418,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                               ? widget.isevent
                                   ? Colors.black
                                   : offwhite
-                              : backgroundColorfigma,
+                              : botoncolor,
                         )),
                   ],
                 ),
@@ -434,9 +434,13 @@ class _bottomnavbarState extends State<bottomnavbar> {
               }
               if (index == 1) {
                 Future.delayed(Duration(milliseconds: 400), () {
+                  
                   Navigator.of(context).pushAndRemoveUntil(
-                      ScaleTransitionPageRoute(child:MyBookingPage()),
-                      (route) => false);
+          //           MaterialPageRoute(builder: (context) => MyBookingPage()),
+          // (route) => false
+                      FaidinTransitionPageRoute(child:MyBookingPage()),
+                      (route) => false
+                      );
                 });
               }
 
@@ -478,7 +482,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                         child: Container(
                           color: widget.iscolorchange
                               ? Colors.white
-                              : backgroundColorfigma,
+                              : botoncolor,
                           width: 19,
                           height: 76,
                         ),
@@ -492,7 +496,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
                                 ? Colors.white
-                                : backgroundColorfigma,
+                                : botoncolor,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10)),
@@ -543,7 +547,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
                                 ? Colors.white
-                                : backgroundColorfigma,
+                                : botoncolor,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10)),
@@ -589,7 +593,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                           decoration: BoxDecoration(
                             color: !widget.iscolorchange
                                 ? Colors.white
-                                : backgroundColorfigma,
+                                : botoncolor,
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(10),
                                 bottomRight: Radius.circular(10)),
@@ -620,7 +624,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                         padding: const EdgeInsets.only(right: 5.0, bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: backgroundColorfigma,
+                            color: botoncolor,
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(10),
                                 bottomRight: Radius.circular(10)),

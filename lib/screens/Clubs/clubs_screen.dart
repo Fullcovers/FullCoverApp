@@ -54,7 +54,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
           ),
           Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: Color.fromARGB(255, 20, 20, 20),
+            backgroundColor: backgroundColortransperent,
             body: SingleChildScrollView(
               child: Container(
                

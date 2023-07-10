@@ -6,6 +6,7 @@ import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Clubs/ClubPage2.dart';
+import 'package:venq_assessment/screens/Clubs/Clubevents.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
@@ -109,16 +110,43 @@ class _ClubDetailState extends State<ClubDetail> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0, left: 20.0),
-                      child: Text(
-                        widget.club.name,
-                        style: GoogleFonts.bebasNeue(
-                          color: const Color(0XFFF0F0F3),
-                          fontSize: width / 11.41666666666667,
-                          fontWeight: FontWeight.w400,
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+                          child: Text(
+                            widget.club.name,
+                            style: GoogleFonts.bebasNeue(
+                              color: const Color(0XFFF0F0F3),
+                              fontSize: width / 11.41666666666667,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, right: 20.0),
+                          child: InkWell(onTap: (){
+                            Navigator.of(context).push(
+                                  SlideTransitionPageRoute(direction: "left",
+                                      child: Clubevents(clubid: widget.club.id,)),
+                                );
+                          },
+                            child: Card(color: golden,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "View Club Events",
+                                  style: GoogleFonts.bebasNeue(
+                                    color: Colors.white,
+                                    fontSize: width / 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 0.0, left: 20.0),
@@ -634,12 +662,12 @@ class _ClubDetailState extends State<ClubDetail> {
                       height: height / 15,
                       width: width,
                       decoration: BoxDecoration(
-                          color: const Color(0XFF3D4348),
+                          color: Color.fromARGB(115, 231, 168, 8),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(15.0),
                           ),
                           border: Border.all(
-                            color: Colors.white,
+                            color: Colors.white,  
                           )),
                       child: ticketloded && ttloded
                           ? InkWell(
@@ -664,7 +692,7 @@ class _ClubDetailState extends State<ClubDetail> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 20.0),
                                     child: Text(
-                                      "Starts at Rs.999",
+                                      "Reserve",
                                       style: GoogleFonts.sairaCondensed(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,

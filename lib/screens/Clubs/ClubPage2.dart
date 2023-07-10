@@ -1360,37 +1360,115 @@ class _ClubsPage2State extends State<ClubsPage2> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 20),
-                              child: Text(
-                                "Total Amount",
-                                style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFF222222),
-                                    fontSize: width / 25.6875,
-                                    fontWeight: FontWeight.w600),
+                        SizedBox(width: 1,),
+                        InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     SlideTransitionPageRoute(direction:"Up",
+                            //         child: ClubPage3(
+                            //               promopersent: promocodeloded
+                            //                   ? booktable
+                            //                       ? (totaltableamount1 -
+                            //                               totaltableamount)
+                            //                           .toInt()
+                            //                       : (totalorderticketamount1 -
+                            //                               totalorderticketamount)
+                            //                           .toInt()
+                            //                   : 0,
+                            //               orderticketscount:
+                            //                   widget.orderticketscount,
+                            //               thisuser: user,
+                            //               bookingtable: booktable,
+                            //               time: "${endtime.hour}:${endtime.minute}",
+                            //               tableticketscount: widget.tableticketscount,
+                            //               club: widget.club,
+                            //               date: selected,
+                            //               weekday: selectedday,
+                            //               year: date.year,
+                            //               month: cmonth,
+                            //               femalecount: femalecount,
+                            //               femaleentryprice: femaleentryprice,
+                            //               stagcount: stagcount,
+                            //               stagentryprice: stagentryprice,
+                            //               couplecount: couplecount,
+                            //               coupleentrypricce: coupleentrypricce,
+                            //               totalprice: promocodeloded
+                            //                   ? booktable
+                            //                       ? double.parse(
+                            //                           totaltableamount1.toString())
+                            //                       : double.parse(
+                            //                           totalorderticketamount1
+                            //                               .toString())
+                            //                   : booktable
+                            //                       ? double.parse(
+                            //                           totaltableamount.toString())
+                            //                       : double.parse(
+                            //                           totalorderticketamount
+                            //                               .toString()),
+                            //                               totalpricewithoutcode:booktable
+                            //                       ? double.parse(
+                            //                           totaltableamount.toString())
+                            //                       : double.parse(
+                            //                           totalorderticketamount
+                            //                               .toString()) ,
+                            //               stagid: stagid,
+                            //               coupleid: coupleid,
+                            //               femaleid: femaleid,
+                            //               promocode: promocodecontroller.text,
+                            //             )));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Container(
+                              height: height / 20,
+                              width: width / 2.74,
+                              decoration: BoxDecoration(border: Border.all(color: golden,width: 2),
+                                  color: backgroundColorfigma,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              child: Center(
+                                child: Text(
+                                  "Pay Now",
+                                  style: GoogleFonts.sairaCondensed(
+                                      color: Colors.white,
+                                      fontSize: width / 20.55,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                promocodeloded
-                                    ? booktable
-                                        ? totaltableamount1.toString()
-                                        : totalorderticketamount1.toString()
-                                    : booktable
-                                        ? totaltableamount.toString()
-                                        : totalorderticketamount.toString(),
-                                style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFF222222),
-                                    fontSize: width / 16,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 20.0, top: 20),
+                        //       child: Text(
+                        //         "Total Amount",
+                        //         style: GoogleFonts.sairaCondensed(
+                        //             color: const Color(0XFF222222),
+                        //             fontSize: width / 25.6875,
+                        //             fontWeight: FontWeight.w600),
+                        //       ),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 20.0),
+                        //       child: Text(
+                        //         promocodeloded
+                        //             ? booktable
+                        //                 ? totaltableamount1.toString()
+                        //                 : totalorderticketamount1.toString()
+                        //             : booktable
+                        //                 ? totaltableamount.toString()
+                        //                 : totalorderticketamount.toString(),
+                        //         style: GoogleFonts.sairaCondensed(
+                        //             color: const Color(0XFF222222),
+                        //             fontSize: width / 16,
+                        //             fontWeight: FontWeight.w600),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         InkWell(
                           onTap: () {
                             Navigator.push(
@@ -1449,16 +1527,16 @@ class _ClubsPage2State extends State<ClubsPage2> {
                                         )));
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 20.0),
+                            padding: const EdgeInsets.only(right: 20.0,),
                             child: Container(
-                              height: height / 24.77142857142857,
+                              height: height / 20,
                               width: width / 2.74,
                               decoration: BoxDecoration(
                                   color: const Color(0XFFB59F68),
-                                  borderRadius: BorderRadius.circular(20.0)),
+                                  borderRadius: BorderRadius.circular(10.0)),
                               child: Center(
                                 child: Text(
-                                  "Proceed",
+                                  "Pay at Venue",
                                   style: GoogleFonts.sairaCondensed(
                                       color: const Color(0XFF222222),
                                       fontSize: width / 20.55,
