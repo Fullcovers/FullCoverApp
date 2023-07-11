@@ -24,18 +24,18 @@ class Balancecard extends StatelessWidget {
         width: double.maxFinite,
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 255, 255, 255),
-              blurRadius: 10,
-              spreadRadius: -6,
-              offset: Offset(-2, -2),
-            ),
-            BoxShadow(
-              color: Color.fromARGB(255, 88, 88, 88),
-              blurRadius: 1,
-              spreadRadius: -1,
-              offset: Offset(-1, -2),
-            ),
+            // BoxShadow(
+            //   color: Color.fromARGB(255, 255, 255, 255),
+            //   blurRadius: 10,
+            //   spreadRadius: -6,
+            //   offset: Offset(-2, -2),
+            // ),
+            // BoxShadow(
+            //   color: Color.fromARGB(255, 88, 88, 88),
+            //   blurRadius: 1,
+            //   spreadRadius: -1,
+            //   offset: Offset(-1, -2),
+            // ),
             BoxShadow(
               color: Colors.black,
               blurRadius: 1,

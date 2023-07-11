@@ -50,7 +50,7 @@ class _ClubeventsState extends State<Clubevents> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
-                  height: 4.8 * height / 8,
+                  height: 4.8 * height / 7,
                   width: width,
                   decoration: const BoxDecoration(color: Colors.white),
                   child: FutureBuilder<List<Event>>(
@@ -94,16 +94,16 @@ class _ClubeventsState extends State<Clubevents> {
             ),
           ]),
         ),
-        bottomNavigationBar: bottomnavbar(
-          isclub: false,
-          isevent: true,
-          initialindex: 2,
-          height: height,
-          width: width,
-          iscolorchange: true,
-        ),
+        // bottomNavigationBar: bottomnavbar(
+        //   isclub: false,
+        //   isevent: true,
+        //   initialindex: 2,
+        //   height: height,
+        //   width: width,
+        //   iscolorchange: true,
+        // ),
       ),
     );
-;
+
   }
 }

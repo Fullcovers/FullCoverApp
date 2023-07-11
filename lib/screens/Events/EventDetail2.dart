@@ -60,18 +60,23 @@ class _EventDetail2State extends State<EventDetail2> {
 
   late String selectedday = todaysdayOfWeek;
 
-  var cmonth = DateFormat.MMM().format(DateTime.now());
+  var cmonth = DateFormat.MMM().format(DateTime.now());    
+
   @override
   void initState() {
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {double totalorderticketamount = 0;
     int totalprice = (stagcount * stagentryprice) +
         (femalecount * femaleentryprice) +
         (couplecount * coupleentrypricce);
-
+  for (var i = 0; i < widget.orderticketscount.length; i++) {
+      totalorderticketamount = (widget.orderticketscount[widget.etickets[i]]! *
+              widget.etickets[i].current) +
+          totalorderticketamount;
+    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -472,9 +477,7 @@ class _EventDetail2State extends State<EventDetail2> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Text(
-                            ((stagcount * stagentryprice) +
-                                    (femalecount * femaleentryprice) +
-                                    (couplecount * coupleentrypricce))
+                           totalorderticketamount
                                 .toString(),
                             style: GoogleFonts.sairaCondensed(
                                 color: const Color(0xFFE0E0E0),
@@ -501,7 +504,7 @@ class _EventDetail2State extends State<EventDetail2> {
                                       stagentryprice: stagentryprice,
                                       couplecount: couplecount,
                                       coupleentrypricce: coupleentrypricce,
-                                      totalprice: totalprice,
+                                      totalprice: double.parse(totalorderticketamount.toString()),
                                       event: widget.event,
                                       stagid: stagid,
                                       coupleid: coupleid,

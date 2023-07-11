@@ -36,7 +36,7 @@ class EventDetail3 extends StatefulWidget {
   int coupleentrypricce;
   int femalecount;
   int femaleentryprice;
-  int totalprice;
+  double totalprice;
   String weekday;
   int date;
   String month;
@@ -55,9 +55,8 @@ class _EventDetail3State extends State<EventDetail3> {
   final emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double clubpersent = 4;
-    String formattedDate =
-        DateFormat('M/dd/yyyy').format(DateTime.now());
+    double clubpersent = 0;
+    String formattedDate = DateFormat('M/dd/yyyy').format(DateTime.now());
 
     double gst18 = widget.totalprice * clubpersent * 18 / 10000;
 
@@ -73,7 +72,7 @@ class _EventDetail3State extends State<EventDetail3> {
             backgroundColor: eventbackgroundcolor,
             body: SlidingUpPanel(
               borderRadius: radius,
-              minHeight: height / 6,
+              minHeight: height / 10,
               maxHeight: height / 1.65,
               controller: panelController,
               defaultPanelState: PanelState.CLOSED,
@@ -98,43 +97,44 @@ class _EventDetail3State extends State<EventDetail3> {
                         ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20.0, top: 0.0),
-                                child: Text(
-                                  "Pay Using",
-                                  style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontSize: height / 54.1875,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: Text(
-                                  "Google Pay",
-                                  style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontSize: height / 33.34615384615385,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: width / 22.83333333333333,
-                                top: height / 86.7),
-                            child: Container(
-                              height: height / 10,
-                              width: 1.5,
-                              color: Colors.white,
-                            ),
-                          ),
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Padding(
+                          //       padding:
+                          //           const EdgeInsets.only(left: 20.0, top: 0.0),
+                          //       child: Text(
+                          //         "Pay Using",
+                          //         style: GoogleFonts.sairaCondensed(
+                          //             color: Colors.white,
+                          //             fontSize: height / 54.1875,
+                          //             fontWeight: FontWeight.w600),
+                          //       ),
+                          //     ),
+                          //     Padding(
+                          //       padding: const EdgeInsets.only(left: 20.0),
+                          //       child: Text(
+                          //         "Google Pay",
+                          //         style: GoogleFonts.sairaCondensed(
+                          //             color: Colors.white,
+                          //             fontSize: height / 33.34615384615385,
+                          //             fontWeight: FontWeight.w600),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(
+                          //       left: width / 22.83333333333333,
+                          //       top: height / 86.7),
+                          //   child: Container(
+                          //     height: height / 10,
+                          //     width: 1.5,
+                          //     color: Colors.white,
+                          //   ),
+                          // ),
                           Padding(
                             padding: EdgeInsets.only(left: width / 13.7),
                             child: Container(
@@ -167,7 +167,7 @@ class _EventDetail3State extends State<EventDetail3> {
                                       "ticket": widget.femaleid
                                     });
                                   }
-print(formattedDate);
+                                  print(formattedDate);
                                   Map<String, dynamic> requestBody = {
                                     "tickets": tickets,
                                     "send_to": {
@@ -201,7 +201,9 @@ print(formattedDate);
                                       ),
                                       Text(
                                         (widget.totalprice +
-                                                widget.totalprice * 4 / 100 +
+                                                widget.totalprice *
+                                                    clubpersent /
+                                                    100 +
                                                 gst18.floor())
                                             .toString(),
                                         style: GoogleFonts.sairaCondensed(
@@ -347,7 +349,7 @@ print(formattedDate);
                                         fontSize: width / 14.67857142857143,
                                         color: offwhite)),
                                 Text(
-                                    "Rs.${widget.totalprice * 4 / 100 + gst18.floor()}",
+                                    "Rs.${widget.totalprice * clubpersent / 100 + gst18.floor()}",
                                     style: GoogleFonts.sairaCondensed(
                                         fontWeight: FontWeight.w800,
                                         fontSize: width / 14.67857142857143,
@@ -522,7 +524,7 @@ print(formattedDate);
                                               child: Text(
                                                 (widget.totalprice +
                                                         widget.totalprice *
-                                                            4 /
+                                                            clubpersent /
                                                             100 +
                                                         gst18.floor())
                                                     .toString(),
@@ -595,8 +597,10 @@ print(formattedDate);
                               ),
                               FractionalTranslation(
                                 translation: const Offset(0, 0),
-                                child: Container(width: width/1.2,
-                                  child: Text(textAlign: TextAlign.left,
+                                child: Container(
+                                  width: width / 1.2,
+                                  child: Text(
+                                    textAlign: TextAlign.left,
                                     widget.club.address,
                                     style: GoogleFonts.sairaCondensed(
                                       fontSize: height / 61.92857142857143,

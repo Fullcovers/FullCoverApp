@@ -29,8 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Stack(
         children: [
-           Image.asset(
-           Constants.backgroundimage,
+          Image.asset(
+            Constants.backgroundimage,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -89,26 +89,30 @@ class _LoginPageState extends State<LoginPage> {
                                     onChanged: (String value) {},
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide:
                                               BorderSide(color: greenborder),
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 3, color: greenborder),
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         fillColor: Colors.white,
                                         focusColor: Colors.white,
                                         // hintText: "Email",
-                                        label:Text("Email",style: TextStyle(color: Colors.white),) ,
-                                        hintStyle: TextStyle(color: Colors.white)),
+                                        label: Text(
+                                          "Email",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        hintStyle:
+                                            TextStyle(color: Colors.white)),
                                   ),
                                 ),
                               ),
@@ -127,33 +131,39 @@ class _LoginPageState extends State<LoginPage> {
                                     onChanged: (String value) {},
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: greenborder),
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderSide:
+                                              BorderSide(color: greenborder),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 3, color: greenborder),
-                                          borderRadius:
-                                              BorderRadius.circular(circularradius),
+                                          borderRadius: BorderRadius.circular(
+                                              circularradius),
                                         ),
                                         fillColor: Colors.white,
                                         // hintText: "Password",
-                                        label:Text("Password",style: TextStyle(color: Colors.white),) ,
-
-                                        hintStyle: TextStyle(color: Colors.white)),
+                                        label: Text(
+                                          "Password",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        hintStyle:
+                                            TextStyle(color: Colors.white)),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 35, right: 35),
+                                padding:
+                                    const EdgeInsets.only(left: 35, right: 35),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     InkWell(
                                       onTap: () {},
@@ -175,7 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     const SignUp()));
                                       },
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           const Text(
                                             "Don’t have an account?",
@@ -210,23 +221,25 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              InkWell(onTap: () {
-                                
-                              },
+                              InkWell(
+                                onTap: () {},
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                       top: 0.0,
                                       left: width / 10,
                                       right: width / 10,
                                       bottom: 20.0),
-                                  child: InkWell(onTap: (){setState(() {
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
                                         load = !load;
                                         selected = !selected;
                                       });
                                       AuthService().signInUser(
                                           context: context,
                                           email: emailController.text,
-                                          password: passwordController.text);},
+                                          password: passwordController.text);
+                                    },
                                     child: AnimatedContainer(
                                       width: selected ? width : height / 15,
                                       height: height / 20,
@@ -250,23 +263,31 @@ class _LoginPageState extends State<LoginPage> {
                                           Radius.circular(20.0),
                                         ),
                                       ),
-                                      duration: const Duration(milliseconds: 500),
+                                      duration:
+                                          const Duration(milliseconds: 500),
                                       child: Column(
                                         children: [
                                           load
-                                              ? Center(child: Constants.mycircularProgressIndicator())
+                                              ? Container(width: width/1.2,height: 40,
+                                                child: Center(
+                                                    child: Constants
+                                                        .mycircularProgressIndicator()),
+                                              )
                                               : Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: height / 65, right: 20.0),
+                                                      top: height / 65,
+                                                      right: 20.0),
                                                   child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
                                                         "LOG IN", //one8@gmail.com  one812345
-                                                        style: GoogleFonts.bebasNeue(
-                                                            fontSize: 20,
-                                                            color: golden),
+                                                        style: GoogleFonts
+                                                            .bebasNeue(
+                                                                fontSize: 20,
+                                                                color: golden),
                                                       ),
                                                     ],
                                                   ),
