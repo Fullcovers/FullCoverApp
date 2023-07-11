@@ -10,7 +10,7 @@ import '../Providers/ClubProvider.dart';
 import '../utils/Constants.dart';
 
 class ClubServices {
-  Future<List<ClubModel>> getAllClubs({required BuildContext context}) async {
+ static Future<List<ClubModel>> getAllClubs({required BuildContext context}) async {
     final clubProvider = Provider.of<ClubProvider>(context, listen: false);
     try {
       http.Response res = await http.get(
