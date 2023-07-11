@@ -33,7 +33,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     Future.delayed(Duration(milliseconds: 500), () {
-      ClubServices().getAllClubs(context: context);
+      ClubServices.getAllClubs(context: context);
     });
   }
 
@@ -83,7 +83,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                           width: width,
                           decoration: BoxDecoration(color: Colors.transparent),
                           child: FutureBuilder<List<ClubModel>>(
-                            future: ClubServices().getAllClubs(context: context),
+                            future: ClubServices.getAllClubs(context: context),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {

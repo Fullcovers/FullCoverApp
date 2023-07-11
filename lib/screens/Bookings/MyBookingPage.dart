@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
@@ -9,12 +10,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Models/Order.dart';
 import 'package:venq_assessment/Providers/OrderProvider.dart';
 import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
+import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
@@ -22,6 +25,7 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
+import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/profile/ProfilePage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/BookingScreen/Balancecard.dart';
@@ -58,6 +62,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
     _startTimer();
     UserServices.getprofileinfo();
     getpriviousorders();
+    getclubs();
   }
 // var myorder;
 //   getorders()async{
@@ -129,6 +134,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
     });
   }
 
+  bool lodedclub = false;
+  late List<ClubModel> clubs;
+  getclubs() async {
+    clubs = await ClubServices.getAllClubs(context: context);
+    setState(() {
+      lodedclub = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // var userprovider = Provider.of<UserProvider>(context, listen: false);
@@ -164,7 +178,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height: height / 10,
+                    height: !iscolorchange?height / 20:height /10,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(
                         // color: Colors.white,
@@ -255,13 +269,363 @@ class _MyBookingPageState extends State<MyBookingPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: height / 200,
-                  ),
-                  // iscolorchange
-                  //     ?
+                  // SizedBox(
+                  //   height: height / 200,
+                  // ),
+                  !iscolorchange
+                      ? Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  "Our Clubs",
+                                  style: GoogleFonts.bebasNeue(
+                                      color: golden, fontSize: height / 30),
+                                ),
+                              ),
+                            ),
+                            lodedclub
+                                ? Container(
+                                    width: width,
+                                    height: height/6,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      physics: ScrollPhysics(),
+                                      itemCount: min(clubs.length, 3),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Card(
+                                            color: backgroundColortransperent,
+                                            shape: RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    color: golden, width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Stack(
+                                              alignment:
+                                                  AlignmentDirectional.center,
+                                              children: [
+                                                clubs[index]
+                                                        .carouselImages
+                                                        .isNotEmpty
+                                                    ? ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        child: Image.network(
+                                                          clubs[index]
+                                                              .carouselImages[0]
+                                                              .imageUrl,
+                                                          width: width / 1.5,
+                                                          height: height / 6,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      )
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        child: Image.asset(
+                                                          "assets/images/Restaurants.jpg",
+                                                          fit: BoxFit.fill,
+                                                          width: width / 1.5,
+                                                          height: height / 6,
+                                                        ),
+                                                      ),
+                                                Opacity(
+                                                  opacity: 0.5,
+                                                  child: Image.asset(
+                                                    "assets/images/black.png",
+                                                    width: width / 1.5,
+                                                    height: height / 6,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: width / 5,
+                                                      top: height / 20),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        clubs[index].name,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: GoogleFonts
+                                                            .bebasNeue(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize:
+                                                                    height /
+                                                                        25),
+                                                      ),
+                                                      Text(
+                                                        "Starting from INR 999",
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: GoogleFonts
+                                                            .sairaCondensed(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize:
+                                                                    height /
+                                                                        50),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : Constants.mycircularProgressIndicator(),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ClubsScreen()));
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    bottom: 5.0,
+                                    right: 15.0,
+                                    left: 15.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border:
+                                        Border.all(color: golden, width: 1)),
+                                child: Text("See More",
+                                    style: GoogleFonts.sairaCondensed(
+                                        color: golden, fontSize: height / 50)),
+                              ),
+                            ),
+                            Container(
+                                width: width,
+                                height: height / 6.5,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      color: Colors.white,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, left: 8.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Fullcover Events",
+                                                style: GoogleFonts.bebasNeue(
+                                                    color: Colors.black,
+                                                    fontSize: height / 30),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: height / 100,
+                                            ),
+                                            Center(
+                                              child: Container(
+                                                margin:
+                                                    const EdgeInsets.all(15.0),
+                                                padding: const EdgeInsets.only(
+                                                    top: 5.0,
+                                                    bottom: 5.0,
+                                                    right: 15.0,
+                                                    left: 15.0),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        width: 1)),
+                                                child: Text("Coming Soon",
+                                                    style: GoogleFonts
+                                                        .sairaCondensed(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                                height / 40)),
+                                              ),
+                                            ),
+                                            // Padding(
+                                            //   padding:
+                                            //       const EdgeInsets.all(8.0),
+                                            //   child: Card(
+                                            //     color:
+                                            //         Colors.white,
+                                            //     shape: RoundedRectangleBorder(
+                                            //         side: BorderSide(
+                                            //             color: golden,
+                                            //             width: 1),
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 20)),
+                                            //     child: Stack(
+                                            //       alignment:
+                                            //           AlignmentDirectional
+                                            //               .center,
+                                            //       children: [
+                                            //         Image.asset(
+                                            //           "assets/images/clubimg.png",
+                                            //           width: width / 1.2,
+                                            //           height: height / 9,
+                                            //           fit: BoxFit.fill,
+                                            //         ),
+                                            //         Opacity(
+                                            //           opacity: 0.5,
+                                            //           child: Image.asset(
+                                            //             "assets/images/black.png",
+                                            //             width: width / 1.2,
+                                            //             height: height / 9,
+                                            //             fit: BoxFit.fill,
+                                            //           ),
+                                            //         ),
+                                            //         Padding(
+                                            //           padding: EdgeInsets.only(
+                                            //               right: width / 3),
+                                            //           child: Column(
+                                            //             mainAxisAlignment:
+                                            //                 MainAxisAlignment
+                                            //                     .start,
+                                            //             crossAxisAlignment:
+                                            //                 CrossAxisAlignment
+                                            //                     .start,
+                                            //             children: [
+                                            //               Text(
+                                            //                 "WaterZ",
+                                            //                 textAlign:
+                                            //                     TextAlign.left,
+                                            //                 style: GoogleFonts
+                                            //                     .bebasNeue(
+                                            //                         color: Colors
+                                            //                             .white,
+                                            //                         fontSize:
+                                            //                             height /
+                                            //                                 25),
+                                            //               ),
+                                            //               Text(
+                                            //                 "Starting from INR 999",
+                                            //                 textAlign:
+                                            //                     TextAlign.left,
+                                            //                 style: GoogleFonts
+                                            //                     .sairaCondensed(
+                                            //                         color: Colors
+                                            //                             .white,
+                                            //                         fontSize:
+                                            //                             height /
+                                            //                                 50),
+                                            //               ),
+                                            //             ],
+                                            //           ),
+                                            //         )
+                                            //       ],
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                                SizedBox(height: height/50,),
+                                Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  "GENRES",
+                                  style: GoogleFonts.bebasNeue(
+                                      color: golden, fontSize: height / 30),
+                                ),
+                              ),
+                            ),
+                            Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              direction: Axis.horizontal,
+                              spacing: width / 16,
+                              runSpacing: 15,
+                              children: [
+                                genresbox(width, height, "Techno",
+                                    'assets/images/geners/Genre-List_01.png'),
+                                genresbox(width, height, "Bolly",
+                                    'assets/images/geners/Genre-List_03.png'),
+                                genresbox(width, height, "EDM",
+                                    'assets/images/geners/Genre-List_04.png'),
+                                genresbox(width, height, "Concerts",
+                                    'assets/images/geners/Genre-List_05.png'),
+                                genresbox(width, height, "Hip-Hop",
+                                    'assets/images/geners/Genre-List_02.png'),
+                                genresbox(width, height, "Other",
+                                    'assets/images/geners/Genre-List_06.png'),
+                                // Container(
+                                //   height: height / 18.0625,
+                                //   width: width / 1.1,
+                                //   child: Stack(
+                                //     children: [
+                                //       ClipRRect(
+                                //         borderRadius: BorderRadius.circular(8.0),
+                                //         child: Image.asset(
+                                //           'assets/images/clubimg.png',
+                                //           width: width / 1.1,
+                                //           height: height / 18.0625,
+                                //           fit: BoxFit.fill,
+                                //         ),
+                                //       ),
+                                //       ClipRRect(
+                                //         borderRadius: BorderRadius.circular(8.0),
+                                //         child: Opacity(
+                                //           opacity: 0.5,
+                                //           child: Image.asset(
+                                //             'assets/images/black.png',
+                                //             width: width / 1.1,
+                                //             height: height / 18.0625,
+                                //             fit: BoxFit.fill,
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       Center(
+                                //         child: Text("other",
+                                //             style: GoogleFonts.sairaCondensed(
+                                //               color: Colors.white,
+                                //               fontWeight: FontWeight.w600,
+                                //               fontSize: 15,
+                                //             )),
+                                //       )
+                                //     ],
+                                //   ),
+                                // )
+                              ],
+                            ),
+                          ],
+                        )
+                      : Container(),
+
                   Expanded(
-                    
                     child: Stack(
                       children: [
                         Container(
@@ -278,168 +642,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           left: 0,
                           right: 0,
                           child: Container(
-                            height: 400,
-                            width: 400,
+                            height: height / 4.9,
+                            width: width,
                             color: Colors.transparent, // Panel color
                             child: Balancecard(height: height),
-                            // child: Center(
-                            //   child: Text(
-                            //     'Sliding Panel Content',
-                            //     style: TextStyle(fontSize: 20, color: Colors.white),
-                            //   ),
-                            // ),
                           ),
                         ),
-                        // AnimatedPositioned(
-                        //   curve: Curves.fastOutSlowIn,
-
-                        //   left: iscolorchange ? 50 : 0,
-                        //   duration: Duration(seconds: 2),
-                        //   //     child:
-                        //   //               AnimatedContainer(
-                        //   //                   duration: Duration(seconds: 1),height: iscolorchange?height / 4:0,
-                        //   // width: iscolorchange?width:0,
-
-                        //   child: Balancecard(height: height),
-                        // ),
-                        // ),
                       ],
                     ),
-                  ),
-                  // : Container(),
-
-                  // Expanded(
-                  //   child: Stack(
-                  //     children: [
-                  //       Container(
-                  //         height: double.infinity,
-                  //         width: double.infinity,
-                  //         color: Colors.white, // Background color
-                  //       ),
-                  //       AnimatedPositioned(
-                  //         duration: Duration(milliseconds: 500),
-                  //         curve: Curves.easeInOut,
-                  //         top: iscolorchange
-                  //             ? 0
-                  //             : MediaQuery.of(context).size.height,
-                  //         left: 0,
-                  //         right: 0,
-                  //         child: Container(
-                  //           height: 400,
-                  //           width: 400,
-                  //           color: Colors.transparent, // Panel color
-                  //           child: Balancecard(height: height),
-                  //           // child: Center(
-                  //           //   child: Text(
-                  //           //     'Sliding Panel Content',
-                  //           //     style: TextStyle(fontSize: 20, color: Colors.white),
-                  //           //   ),
-                  //           // ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: height / 50,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.all(5.0),
-                      //   child: Container(
-                      //     height: 3 * height / 9.2,
-                      //     width: (width / 7) + (width / 1.68),
-                      //     decoration:
-                      //         BoxDecoration(color: backgroundColorfigma),
-                      //     child: ListView.builder(
-                      //       itemCount: 10,
-                      //       itemBuilder: (context, index) {
-                      //         return Row(
-                      //           children: [
-                      //             Card(
-                      //               color: const Color(0xFFD9D9D9),
-                      //               shape: RoundedRectangleBorder(
-                      //                   borderRadius:
-                      //                       BorderRadius.circular(10.0)),
-                      //               child: Container(
-                      //                 height: height / 18,
-                      //                 width: width / 7.76,
-                      //                 decoration: BoxDecoration(
-                      //                   color: offwhite,
-                      //                   borderRadius: const BorderRadius.all(
-                      //                     Radius.circular(60.0),
-                      //                   ),
-                      //                 ),
-                      //                 child: Row(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.spaceAround,
-                      //                   children: [],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             Card(
-                      //               color: offwhite,
-                      //               shape: RoundedRectangleBorder(
-                      //                   borderRadius:
-                      //                       BorderRadius.circular(10.0)),
-                      //               child: Container(
-                      //                 height: height / 18,
-                      //                 width: width / 1.77,
-                      //                 decoration: const BoxDecoration(
-                      //                   color: Color(0xFFD9D9D9),
-                      //                   borderRadius: BorderRadius.all(
-                      //                     Radius.circular(20.0),
-                      //                   ),
-                      //                 ),
-                      //                 child: Row(
-                      //                   mainAxisAlignment:
-                      //                       MainAxisAlignment.spaceAround,
-                      //                   children: [
-                      //                     Text(
-                      //                       "Event ${index + 1}",
-                      //                       style: GoogleFonts.mavenPro(
-                      //                         fontWeight: FontWeight.w500,
-                      //                         fontSize: height / 54.1875,
-                      //                       ),
-                      //                     ),
-                      //                     Text("300",
-                      //                         style: GoogleFonts.bebasNeue(
-                      //                           fontSize: height / 27.09375,
-                      //                         ))
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         );
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: height / 25,
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 10.0),
-                      //   child: Container(
-                      //     height: height / 23,
-                      //     width: width / 2,
-                      //     decoration: BoxDecoration(
-                      //       color: golden,
-                      //       borderRadius: BorderRadius.circular(10.0),
-                      //     ),
-                      //     child: Center(
-                      //       child: Text("Redeem",
-                      //           style: GoogleFonts.sairaCondensed(
-                      //             fontWeight: FontWeight.w600,
-                      //             fontSize: 24,
-                      //           )),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
                   ),
                 ],
               ),
