@@ -346,7 +346,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       //     ? "assets/images/goldclubs.png"
                       // :
                       "assets/images/clubs.png",
-                      scale: 16473 / widget.height,
+                      scale: 20000 / widget.height,
                       color: widget.iscolorchange
                           ? Colors.white
                           : widget.isclub
@@ -355,7 +355,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     ),
                     Text("Clubs",
                         style: GoogleFonts.bebasNeue(
-                          fontSize: widget.height / 45.63157894736842,
+                          fontSize: widget.height / 60,
                           color: widget.iscolorchange
                               ? widget.isclub
                                   ? golden
@@ -373,24 +373,24 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Image.asset(
-                        "assets/images/qrcode.png",
-                        scale: 1200 / widget.height,
+                        "assets/images/Home.png",
+                        width: 25,fit: BoxFit.fill,
                         color:
                             !widget.iscolorchange ? Colors.black : Colors.white,
                       ),
                     ),
                     SizedBox(
-                      height: 2,
+                      height: 10,
                     ),
-                    Text("Bookings",
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: widget.height / 60,
-                          color: widget.iscolorchange
-                              ? widget.isclub
-                                  ? golden
-                                  : offwhite
-                              : botoncolor,
-                        )),
+                    // Text("Bookings",
+                    //     style: GoogleFonts.bebasNeue(
+                    //       fontSize: widget.height / 60,
+                    //       color: widget.iscolorchange
+                    //           ? widget.isclub
+                    //               ? golden
+                    //               : offwhite
+                    //           : botoncolor,
+                    //     )),
                   ],
                 ),
               ),
@@ -404,7 +404,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       // ? "assets/images/goldEvents.png"
                       // :
                       "assets/images/Events.png",
-                      scale: 16473 / widget.height,
+                      scale: 20000 / widget.height,
                       color: widget.iscolorchange
                           ? widget.isevent
                               ? Colors.black
@@ -413,7 +413,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     ),
                     Text("Events",
                         style: GoogleFonts.bebasNeue(
-                          fontSize: widget.height / 45.63157894736842,
+                          fontSize: widget.height / 60,
                           color: widget.iscolorchange
                               ? widget.isevent
                                   ? Colors.black

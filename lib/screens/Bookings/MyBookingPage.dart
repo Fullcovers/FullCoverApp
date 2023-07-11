@@ -252,13 +252,28 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ),
                           ),
                         ),
-                      ],
+                      ],  
                     ),
                   ),
                   SizedBox(
                     height: height / 200,
                   ),
-                  Balancecard(height: height),
+                  // iscolorchange
+                  //     ?
+                      //  Container(height: 100,width: 400,
+                      //    child: Stack(
+                      //      children: [
+                            //  AnimatedPositioned(curve: Curves.fastOutSlowIn,
+                             
+                            //     left:iscolorchange?50:0 ,
+                            //     duration: Duration(seconds: 2),
+                            //     child: 
+                                Balancecard(height: height),
+                                // ),
+                      //      ],
+                      //    ),
+                      //  ),
+                      // : Container(),
                   SizedBox(
                     height: height / 50,
                   ),
@@ -541,8 +556,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                             });
                                                           },
                                                           child: Image.asset(
-                                                            "assets/images/coinlogo.png",
-                                                            scale: 6,
+                                                            "assets/images/qrcode.png",
+                                                            scale: 1,
                                                           ),
                                                         ),
                                                       ),
@@ -556,15 +571,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                           EdgeInsets.only(left: 16.0,bottom: height/9),
+                                      padding: EdgeInsets.only(
+                                          left: 16.0, bottom: height / 9),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                     left: 10.0),
+                                                    left: 10.0),
                                                 child: Container(
                                                     height: height / 3,
                                                     width: 2 * width / 3,
@@ -624,7 +639,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                     left: width /
                                                                         5.2),
                                                                 child:
-                                                                    Container(height: 100,
+                                                                    Container(
+                                                                  height: 100,
                                                                   child: Center(
                                                                     child: ListView
                                                                         .builder(
@@ -632,8 +648,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                           myticketontop
                                                                               .length,
                                                                       itemBuilder:
-                                                                          (BuildContext
-                                                                                  context,
+                                                                          (BuildContext context,
                                                                               int index) {
                                                                         var entries = myticketontop
                                                                             .values
@@ -644,8 +659,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                         return Text(
                                                                           "${entries[index]} x ${keys[index]}",
                                                                           style: GoogleFonts.bebasNeue(
-                                                                              color:
-                                                                                  Colors.white,
+                                                                              color: Colors.white,
                                                                               fontSize: height / 65),
                                                                         );
                                                                       },
@@ -655,8 +669,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                               ),
                                                               Padding(
                                                                 padding: EdgeInsets.only(
-                                                                    top: height /
-                                                                        3.6,
+                                                                    top:
+                                                                        height /
+                                                                            3.6,
                                                                     left: width /
                                                                         2.3),
                                                                 child: Container(
@@ -833,29 +848,32 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                             .mycircularProgressIndicator()),
                                               ),
                                               loadedpo
-                                                  ? InkWell(onTap: () {
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                const BookingHistory()));
-                                                              },
-                                                    child: Padding(
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const BookingHistory()));
+                                                      },
+                                                      child: Padding(
                                                         padding:
-                                                            const EdgeInsets.only(
-                                                               top:11, left: 10.0),
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 11,
+                                                                left: 10.0),
                                                         child: Container(
-                                                          height: 3 * height / 12,
+                                                          height:
+                                                              3 * height / 12,
                                                           width: width / 5,
                                                           decoration:
                                                               BoxDecoration(
                                                             borderRadius:
                                                                 const BorderRadius
                                                                         .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            20.0)),
+                                                                    Radius.circular(
+                                                                        20.0)),
                                                             color: Colors.white,
                                                           ),
                                                           child: Column(
@@ -876,8 +894,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                           : porders['data']
                                                                               .length,
                                                                       itemBuilder:
-                                                                          (BuildContext
-                                                                                  context,
+                                                                          (BuildContext context,
                                                                               int index) {
                                                                         return Padding(
                                                                           padding:
@@ -889,12 +906,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                             child:
                                                                                 Image.network(
                                                                               porders['data'][index]['club']['logo'],
-                                                                              width:
-                                                                                  50,
-                                                                              height:
-                                                                                  50,
-                                                                              fit:
-                                                                                  BoxFit.contain,
+                                                                              width: 50,
+                                                                              height: 50,
+                                                                              fit: BoxFit.contain,
                                                                             ),
                                                                           ),
                                                                         );
@@ -908,16 +922,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                   Navigator.push(
                                                                       context,
                                                                       MaterialPageRoute(
-                                                                          builder:
-                                                                              (context) =>
-                                                                                  const BookingHistory()));
+                                                                          builder: (context) =>
+                                                                              const BookingHistory()));
                                                                 },
                                                                 child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .only(
-                                                                          top:
-                                                                              20.0),
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          20.0),
                                                                   child:
                                                                       Container(
                                                                     decoration:
@@ -933,8 +945,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                       color: Colors
                                                                           .white,
                                                                     ),
-                                                                    child: Icon(Icons
-                                                                        .navigate_next),
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .navigate_next),
                                                                   ),
                                                                 ),
                                                               )
@@ -942,7 +955,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                           ),
                                                         ),
                                                       ),
-                                                  )
+                                                    )
                                                   : Container(),
                                             ],
                                           ),
@@ -1138,8 +1151,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                             });
                                                           },
                                                           child: Image.asset(
-                                                            "assets/images/coinlogo.png",
-                                                            scale: 6,
+                                                            "assets/images/qrcode.png",
+                                                            scale: 1,
                                                           ),
                                                         ),
                                                       ),
@@ -1324,8 +1337,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                         });
                                                       },
                                                       child: Image.asset(
-                                                        "assets/images/coinlogo.png",
-                                                        scale: 6,
+                                                        "assets/images/qrcode.png",
+                                                        scale: 1,
                                                       ),
                                                     ),
                                                   ),
@@ -1498,8 +1511,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               });
                             },
                             child: Image.asset(
-                              "assets/images/coinlogo.png",
-                              scale: 6,
+                              "assets/images/qrcode.png",
+                              scale: 1,
                             ),
                           ),
                         )

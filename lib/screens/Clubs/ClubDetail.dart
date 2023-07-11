@@ -662,7 +662,7 @@ class _ClubDetailState extends State<ClubDetail> {
                       height: height / 15,
                       width: width,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(115, 231, 168, 8),
+                          color: golden,
                           borderRadius: const BorderRadius.all(
                             Radius.circular(15.0),
                           ),

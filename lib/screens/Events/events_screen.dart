@@ -251,8 +251,9 @@ class _EventsScreenState extends State<EventsScreen> {
             SizedBox(
               height: height / 20,
             ),
-            Wrap(
-              spacing: 35,
+            Wrap(crossAxisAlignment:WrapCrossAlignment.center,direction :Axis.horizontal,
+
+              spacing: width/16,
               runSpacing: 15,
               children: [
                 genresbox(width, height, "Techno",'assets/images/geners/Genre-List_01.png'),
