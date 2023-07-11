@@ -252,7 +252,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ),
                           ),
                         ),
-                      ],  
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -260,20 +260,86 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   ),
                   // iscolorchange
                   //     ?
-                      //  Container(height: 100,width: 400,
-                      //    child: Stack(
-                      //      children: [
-                            //  AnimatedPositioned(curve: Curves.fastOutSlowIn,
-                             
-                            //     left:iscolorchange?50:0 ,
-                            //     duration: Duration(seconds: 2),
-                            //     child: 
-                                Balancecard(height: height),
-                                // ),
-                      //      ],
-                      //    ),
-                      //  ),
-                      // : Container(),
+                  Expanded(
+                    
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: double.infinity,
+                          width: double.infinity,
+                          color: Colors.transparent, // Background color
+                        ),
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                          top: iscolorchange
+                              ? 0
+                              : MediaQuery.of(context).size.height,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: 400,
+                            width: 400,
+                            color: Colors.transparent, // Panel color
+                            child: Balancecard(height: height),
+                            // child: Center(
+                            //   child: Text(
+                            //     'Sliding Panel Content',
+                            //     style: TextStyle(fontSize: 20, color: Colors.white),
+                            //   ),
+                            // ),
+                          ),
+                        ),
+                        // AnimatedPositioned(
+                        //   curve: Curves.fastOutSlowIn,
+
+                        //   left: iscolorchange ? 50 : 0,
+                        //   duration: Duration(seconds: 2),
+                        //   //     child:
+                        //   //               AnimatedContainer(
+                        //   //                   duration: Duration(seconds: 1),height: iscolorchange?height / 4:0,
+                        //   // width: iscolorchange?width:0,
+
+                        //   child: Balancecard(height: height),
+                        // ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  // : Container(),
+
+                  // Expanded(
+                  //   child: Stack(
+                  //     children: [
+                  //       Container(
+                  //         height: double.infinity,
+                  //         width: double.infinity,
+                  //         color: Colors.white, // Background color
+                  //       ),
+                  //       AnimatedPositioned(
+                  //         duration: Duration(milliseconds: 500),
+                  //         curve: Curves.easeInOut,
+                  //         top: iscolorchange
+                  //             ? 0
+                  //             : MediaQuery.of(context).size.height,
+                  //         left: 0,
+                  //         right: 0,
+                  //         child: Container(
+                  //           height: 400,
+                  //           width: 400,
+                  //           color: Colors.transparent, // Panel color
+                  //           child: Balancecard(height: height),
+                  //           // child: Center(
+                  //           //   child: Text(
+                  //           //     'Sliding Panel Content',
+                  //           //     style: TextStyle(fontSize: 20, color: Colors.white),
+                  //           //   ),
+                  //           // ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     height: height / 50,
                   ),
