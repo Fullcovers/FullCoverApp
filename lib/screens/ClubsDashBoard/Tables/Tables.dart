@@ -82,8 +82,8 @@ class _TablePageState extends State<TablePage> {
     return 'Select Date';
   }
 
-  bool ashow = true;
-  bool oshow = false;
+  bool ashow = false;
+  bool oshow = true;
   bool wshow = false;
   bool show = true;
   @override
@@ -178,41 +178,41 @@ class _TablePageState extends State<TablePage> {
                     translation: const Offset(0, 0.5),
                     child: Row(
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 0, left: 20, right: 20),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      ashow = !ashow;
-                                      oshow = false;
-                                      wshow = false;
-                                      show = !show;
-                                    });
-                                  },
-                                  child: Text(
-                                    "All Bookings ",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                      fontFamily:
-                                          FontAwesomeIcons.solidCircle.fontFamily,
-                                    ),
-                                  )),
-                            ),
-                            ashow
-                                ? Container(
-                                    height: 2,
-                                    width: 60,
-                                    color: Colors.amber,
-                                  )
-                                : Container(),
-                          ],
-                        ),
+                        // Column(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(
+                        //           top: 0, left: 20, right: 20),
+                        //       child: GestureDetector(
+                        //           onTap: () {
+                        //             setState(() {
+                        //               ashow = !ashow;
+                        //               oshow = false;
+                        //               wshow = false;
+                        //               show = !show;
+                        //             });
+                        //           },
+                        //           child: Text(
+                        //             "All Bookings ",
+                        //             style: TextStyle(
+                        //               fontSize: 16,
+                        //               fontWeight: FontWeight.w600,
+                        //               color: Colors.white,
+                        //               fontFamily:
+                        //                   FontAwesomeIcons.solidCircle.fontFamily,
+                        //             ),
+                        //           )),
+                        //     ),
+                        //     ashow
+                        //         ? Container(
+                        //             height: 2,
+                        //             width: 60,
+                        //             color: Colors.amber,
+                        //           )
+                        //         : Container(),
+                        //   ],
+                        // ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
