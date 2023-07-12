@@ -125,21 +125,27 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                         ),
                                       ]
                                     : [
-                                        const BoxShadow(
-                                          color:
-                                              Color.fromARGB(255, 88, 88, 88),
-                                          offset: Offset(4, 4),
-                                          blurRadius: 15,
-                                          spreadRadius: 1,
-                                        ),
-                                        const BoxShadow(
-                                          color: Colors.white,
-                                          offset: Offset(-4, -4),
-                                          blurRadius: 15,
-                                          spreadRadius:
-                                              -2, // how far the color effect spreads.
-                                        ),
-                                      ],
+                                        // const BoxShadow(
+                                        //   color:
+                                        //       Color.fromARGB(255, 88, 88, 88),
+                                        //   offset: Offset(4, -4),
+                                        //   blurRadius: 15,
+                                        //   spreadRadius: 1,
+                                        // ),
+                                        // const BoxShadow(
+                                        //   color: Colors.white,
+                                        //   offset: Offset(-4, -4),
+                                        //   blurRadius: 15,
+                                        //   spreadRadius:
+                                        //       -2, // how far the color effect spreads.
+                                        // ),
+ const BoxShadow(
+                                              color:
+                                                  Color.fromARGB(255, 88, 88, 88),
+                                              offset: Offset(-4, 4),
+                                              blurRadius: 15,
+                                              spreadRadius: 1,
+                                            ),                                      ],
                                 color: widget.iscolor
                                     ? backgroundColorfigma
                                     : Colors.white,

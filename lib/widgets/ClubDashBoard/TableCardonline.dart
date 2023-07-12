@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Services/BTS_Services/Table_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 
-bool expanded = false;
+bool expanded = true;
 
 class TableCardonline extends StatefulWidget {
   var thistable;
@@ -47,27 +47,27 @@ class _TableCardonlineState extends State<TableCardonline> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.thistable['name'].toString().isEmpty
+                            widget.thistable['user']['name'].toString().isEmpty
                                 ? " "
-                                : widget.thistable['name'].toString(),
+                                : widget.thistable['user']['name']['firstName'].toString()+" "+widget.thistable['user']['name']['lastName'].toString(),
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 24,
                                 color: Colors.black),
                           ),
                           Text(
-                            widget.thistable['phone'] == null
+                            widget.thistable['send_to']['phoneNumber'] == null
                                 ? " "
-                                : widget.thistable['phone'].toString(),
+                                : widget.thistable['send_to']['phoneNumber'].toString(),
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
                                 color: Colors.black),
                           ),
                           Text(
-                            widget.thistable['email'] == null
+                            widget.thistable['send_to']['email'] == null
                                 ? " "
-                                : widget.thistable['email'].toString(),
+                                : widget.thistable['send_to']['email'].toString(),
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -97,7 +97,7 @@ class _TableCardonlineState extends State<TableCardonline> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            widget.thistable['date'].toString(),
+                            widget.thistable['date'].toString().substring(0,10),
                             style: GoogleFonts.sairaCondensed(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -146,7 +146,7 @@ class _TableCardonlineState extends State<TableCardonline> {
               ]),
             ),
             expanded
-                ? Padding(
+                ?widget.thistable['isValid']=="pending"? Padding(
                     padding: const EdgeInsets.only(top: 4.0, bottom: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -196,7 +196,26 @@ class _TableCardonlineState extends State<TableCardonline> {
                         ),
                       ],
                     ),
-                  )
+                  ):Center(
+                          child: InkWell(
+                            onTap: () {
+                              
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 130,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(child: Text("Accepted")),
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                color: const Color(0xFF7BC598),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                        )
                 : Container()
           ]),
         ),

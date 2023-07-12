@@ -373,7 +373,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Image.asset(
-                        "assets/images/Home.png",
+                        "assets/images/Home1.png",
                         width: 25,fit: BoxFit.fill,
                         color:
                             !widget.iscolorchange ? Colors.black : Colors.white,

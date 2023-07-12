@@ -24,8 +24,10 @@ class _TicketsState extends State<Tickets> {
   @override
   void initState() {
     super.initState();
-    loadorders();
-    loadwalkins();
+        final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    var date = formatter.format(DateTime.now());
+    loadordersbydate(date);
+    loadwalkinsbydate(date);
   }
 
   bool oshow = true;

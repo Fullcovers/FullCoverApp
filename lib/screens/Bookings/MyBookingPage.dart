@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
@@ -43,6 +44,13 @@ class MyBookingPage extends StatefulWidget {
   @override
   State<MyBookingPage> createState() => _MyBookingPageState();
 }
+
+List<String> images = [
+  "assets/images/party1.jpg",
+  "assets/images/party2.jpg",
+  "assets/images/party3.jpg",
+  "assets/images/party4.jpg"
+];
 
 class _MyBookingPageState extends State<MyBookingPage> {
   List<OrderModel> orders = [];
@@ -154,6 +162,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     Map<int, String> myticketontop = {};
+
     if (loadedpo) {
       for (var i = 0; i < porders['data'][0]['items'].length; i++) {
         myticketontop[porders['data'][0]['items'][i]['qty']] =
@@ -178,13 +187,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height: !iscolorchange?height / 20:height /10,
+                    height: !iscolorchange ? height / 20 : height / 10,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(
                         // color: Colors.white,
                         ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Padding(
                         //   padding: const EdgeInsets.all(8.0),
@@ -212,6 +221,15 @@ class _MyBookingPageState extends State<MyBookingPage> {
                         //     ),
                         //   ),
                         // ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Image.asset(
+                            "assets/images/logo.png",
+                            fit: BoxFit.fill,
+                            width: width / 3,
+                            height: height / 6,
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 20.0),
                           child: GestureDetector(
@@ -275,6 +293,17 @@ class _MyBookingPageState extends State<MyBookingPage> {
                   !iscolorchange
                       ? Column(
                           children: [
+                            SizedBox(
+                              height: height / 50,
+                            ),
+                            CarouselSlider(
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                aspectRatio: 2.0,
+                                enlargeCenterPage: true,
+                              ),
+                              items: imageSliders,
+                            ),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
@@ -289,7 +318,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             lodedclub
                                 ? Container(
                                     width: width,
-                                    height: height/6,
+                                    height: height / 6,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
@@ -391,7 +420,11 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                       },
                                     ),
                                   )
-                                : Constants.mycircularProgressIndicator(),
+                                : Container(
+                                    width: width / 1.5,
+                                    height: height / 6,
+                                    child: Constants
+                                        .mycircularProgressIndicator()),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -418,17 +451,17 @@ class _MyBookingPageState extends State<MyBookingPage> {
                             ),
                             Container(
                                 width: width,
-                                height: height / 6.5,
+                                height: height / 5,
                                 child: Stack(
                                   children: [
                                     Container(
-                                      color: Colors.white,
+                                      color: Colors.transparent,
                                     ),
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            top: 10, left: 8.0),
+                                            top: 10, left: 12.0),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -438,13 +471,106 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                               child: Text(
                                                 "Fullcover Events",
                                                 style: GoogleFonts.bebasNeue(
-                                                    color: Colors.black,
+                                                    color: golden,
                                                     fontSize: height / 30),
                                               ),
                                             ),
                                             SizedBox(
                                               height: height / 100,
                                             ),
+                                            // Container(
+                                            //   width: width,
+                                            //   height: height / 8,
+                                            //   child: ListView.builder(
+                                            //     itemCount: 10,
+                                            //     scrollDirection:
+                                            //         Axis.horizontal,
+                                            //     itemBuilder:
+                                            //         (BuildContext context,
+                                            //             int index) {
+                                            //       return Padding(
+                                            //         padding:
+                                            //             const EdgeInsets.all(
+                                            //                 8.0),
+                                            //         child: Container(
+                                            //             width: width / 4,
+                                            //             height: height / 12,
+                                            //             color:
+                                            //                 Colors.transparent,
+                                            //             child: Card(
+                                            //                 shape: RoundedRectangleBorder(
+                                            //                     borderRadius:
+                                            //                         BorderRadius
+                                            //                             .circular(
+                                            //                                 15)),
+                                            //                 child: Stack(
+                                            //                   children: [
+                                            //                     ClipRRect(
+                                            //                       borderRadius:
+                                            //                           BorderRadius
+                                            //                               .circular(
+                                            //                                   15),
+                                            //                       child: Stack(
+                                            //                         alignment:
+                                            //                             AlignmentDirectional
+                                            //                                 .center,
+                                            //                         children: [
+                                            //                           Image
+                                            //                               .asset(
+                                            //                             "assets/images/party3.jpg",
+                                            //                             fit: BoxFit
+                                            //                                 .fill,
+                                            //                             width: width /
+                                            //                                 1.5,
+                                            //                             height:
+                                            //                                 height /
+                                            //                                     6,
+                                            //                           ),
+                                            //                           Opacity(
+                                            //                             opacity:
+                                            //                                 0.5,
+                                            //                             child: Image
+                                            //                                 .asset(
+                                            //                               "assets/images/black.png",
+                                            //                               width:
+                                            //                                   width / 1.5,
+                                            //                               height:
+                                            //                                   height / 6,
+                                            //                               fit: BoxFit
+                                            //                                   .fill,
+                                            //                             ),
+                                            //                           ),
+                                            //                           Text(
+                                            //                             "Coming Soon",
+                                            //                             style: GoogleFonts.bebasNeue(
+                                            //                                 color:
+                                            //                                     Colors.white,
+                                            //                                 fontSize: height / 45),
+                                            //                           )
+                                            //                         ],
+                                            //                       ),
+                                            //                     ),
+                                            //                     Opacity(
+                                            //                       opacity: 0.2,
+                                            //                       child: Image
+                                            //                           .asset(
+                                            //                         "assets/images/black.png",
+                                            //                         width:
+                                            //                             width /
+                                            //                                 1.5,
+                                            //                         height:
+                                            //                             height /
+                                            //                                 6,
+                                            //                         fit: BoxFit
+                                            //                             .fill,
+                                            //                       ),
+                                            //                     ),
+                                            //                   ],
+                                            //                 ))),
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
                                             Center(
                                               child: Container(
                                                 margin:
@@ -459,14 +585,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                         BorderRadius.circular(
                                                             10),
                                                     border: Border.all(
-                                                        color: Colors.black,
+                                                        color: golden,
                                                         width: 1)),
                                                 child: Text("Coming Soon",
                                                     style: GoogleFonts
                                                         .sairaCondensed(
                                                             fontWeight:
                                                                 FontWeight.w600,
-                                                            color: Colors.black,
+                                                            color: golden,
                                                             fontSize:
                                                                 height / 40)),
                                               ),
@@ -552,75 +678,6 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                     ),
                                   ],
                                 )),
-                                SizedBox(height: height/50,),
-                                Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 12.0),
-                                child: Text(
-                                  "GENRES",
-                                  style: GoogleFonts.bebasNeue(
-                                      color: golden, fontSize: height / 30),
-                                ),
-                              ),
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.horizontal,
-                              spacing: width / 16,
-                              runSpacing: 15,
-                              children: [
-                                genresbox(width, height, "Techno",
-                                    'assets/images/geners/Genre-List_01.png'),
-                                genresbox(width, height, "Bolly",
-                                    'assets/images/geners/Genre-List_03.png'),
-                                genresbox(width, height, "EDM",
-                                    'assets/images/geners/Genre-List_04.png'),
-                                genresbox(width, height, "Concerts",
-                                    'assets/images/geners/Genre-List_05.png'),
-                                genresbox(width, height, "Hip-Hop",
-                                    'assets/images/geners/Genre-List_02.png'),
-                                genresbox(width, height, "Other",
-                                    'assets/images/geners/Genre-List_06.png'),
-                                // Container(
-                                //   height: height / 18.0625,
-                                //   width: width / 1.1,
-                                //   child: Stack(
-                                //     children: [
-                                //       ClipRRect(
-                                //         borderRadius: BorderRadius.circular(8.0),
-                                //         child: Image.asset(
-                                //           'assets/images/clubimg.png',
-                                //           width: width / 1.1,
-                                //           height: height / 18.0625,
-                                //           fit: BoxFit.fill,
-                                //         ),
-                                //       ),
-                                //       ClipRRect(
-                                //         borderRadius: BorderRadius.circular(8.0),
-                                //         child: Opacity(
-                                //           opacity: 0.5,
-                                //           child: Image.asset(
-                                //             'assets/images/black.png',
-                                //             width: width / 1.1,
-                                //             height: height / 18.0625,
-                                //             fit: BoxFit.fill,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Center(
-                                //         child: Text("other",
-                                //             style: GoogleFonts.sairaCondensed(
-                                //               color: Colors.white,
-                                //               fontWeight: FontWeight.w600,
-                                //               fontSize: 15,
-                                //             )),
-                                //       )
-                                //     ],
-                                //   ),
-                                // )
-                              ],
-                            ),
                           ],
                         )
                       : Container(),
@@ -656,7 +713,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
               // snapPoint: 0.99,
               panelSnapping: true,
               controller: panelController,
-              defaultPanelState: PanelState.OPEN,
+              defaultPanelState: PanelState.CLOSED,
               panel: load
                   ? loadedpo
                       ? FractionalTranslation(
@@ -1814,3 +1871,50 @@ class _MyBookingPageState extends State<MyBookingPage> {
     );
   }
 }
+
+final List<Widget> imageSliders = images
+    .map((item) => Container(
+          child: Container(
+            margin: EdgeInsets.all(5.0),
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.asset(
+                      item,
+                      fit: BoxFit.fill,
+                      width: 300,
+                      height: 150,
+                    ),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                        // padding: EdgeInsets.symmetric(
+                        //     vertical: 10.0, horizontal: 20.0),
+                        // child: Text(
+                        //   'No. ${images.indexOf(item)} image',
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 20.0,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+        ))
+    .toList();
