@@ -28,7 +28,7 @@ class _FilterPageState extends State<FilterPage> {
     if (states.any(interactiveStates.contains)) {
       return Colors.blue;
     }
-    return Colors.white;
+    return golden;
   }
 
   List<bool> isChecked = [];
@@ -40,7 +40,6 @@ class _FilterPageState extends State<FilterPage> {
       "Commercial",
       "Hip Hop",
       "Electronic",
-      "Price",
       "Progressive",
       "Melodic House",
       "Rap"
@@ -103,13 +102,13 @@ class _FilterPageState extends State<FilterPage> {
                                           child: Text(entryList[index].key,
                                               style: GoogleFonts.sairaCondensed(
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 20,
+                                                  fontSize: 15,
                                                   color: Colors.white)),
                                         ),
                                       ),
                                       Divider(
-                                        color: Colors.white,
-                                        thickness: 0.5,
+                                        color: golden,
+                                        thickness: 0.4,
                                       )
                                     ],
                                   );
@@ -151,7 +150,7 @@ class _FilterPageState extends State<FilterPage> {
                                               .value[index],
                                           style: GoogleFonts.sairaCondensed(
                                               // fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: 15,
                                               color: Colors.white)),
                                     ],
                                   ),

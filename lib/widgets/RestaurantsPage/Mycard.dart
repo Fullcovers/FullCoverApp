@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
+import 'dart:ui';
 
 Widget mycard(double height, double width, ClubModel club) {
   return Card(
@@ -42,7 +43,7 @@ Widget mycard(double height, double width, ClubModel club) {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.only(left: 10,bottom: 10),
+            padding: const EdgeInsets.only(left: 10, bottom: 10),
             child: Text(club.name,
                 style: GoogleFonts.bebasNeue(
                   fontSize: height / 25,
@@ -52,70 +53,85 @@ Widget mycard(double height, double width, ClubModel club) {
         ),
         Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              width: width / 1.2,
-              height: height / 15,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15.0),
-                      bottomRight: Radius.circular(15.0))),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(children: [
-                  SizedBox(
-                    width: width / 40,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Timings",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height / 86.7,
-                            color: Color(0xff545454)),
+            child: Stack(
+              children: [
+               
+                Container(
+                  width: width / 1.2,
+                  height: height / 15,
+                  decoration: BoxDecoration(
+                      color: Colors.blue.shade100.withOpacity(0.4),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15.0),
+                          bottomRight: Radius.circular(15.0))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Row(children: [ 
+                //       BackdropFilter(
+                //   filter: ImageFilter.blur(
+                //     sigmaX: 7,
+                //     sigmaY: 7,
+                //   ),
+                //   child: Container(
+                //     height: 10,
+                //     width: 20,
+                //   ),
+                // ),
+                      SizedBox(
+                        width: width / 40,
                       ),
-                      Text(
-                        "19:00 Hrs - 23:45 Hrs",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height / 61.92857142857143,
-                            color: Color(0xff545454)),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Timings",
+                            style: GoogleFonts.sairaCondensed(
+                                fontWeight: FontWeight.bold,
+                                fontSize: height / 86.7,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "19:00 Hrs - 23:45 Hrs",
+                            style: GoogleFonts.sairaCondensed(
+                                fontWeight: FontWeight.bold,
+                                fontSize: height / 61.92857142857143,
+                                color: Colors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: width / 8,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Dancefloor Entry",
+                            style: GoogleFonts.sairaCondensed(
+                                fontWeight: FontWeight.bold,
+                                fontSize: height / 61.92857142857143,
+                                color: Colors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: width / 40,
+                      ),
+                      Container(
+                        height: height / 43.35,
+                        width: width / 25.05,
+                        decoration: BoxDecoration(
+                            color: club.isClubOpen ? Colors.green : Colors.red,
+                            borderRadius: BorderRadius.circular(100)
+                            //more than 50% of width makes circle
+                            ),
                       )
-                    ],
+                    ]),
                   ),
-                  SizedBox(
-                    width: width / 8,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Dancefloor Entry",
-                        style: GoogleFonts.sairaCondensed(
-                            fontWeight: FontWeight.bold,
-                            fontSize: height / 61.92857142857143,
-                            color: Color(0xff545454)),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    width: width / 40,
-                  ),
-                 Container(
-                    height: height / 43.35,
-                    width: width / 25.05,
-                    decoration: BoxDecoration(
-                        color: club.isClubOpen? Colors.green:Colors.red,
-                        borderRadius: BorderRadius.circular(100)
-                        //more than 50% of width makes circle
-                        ),
-                  )
-                ]),
-              ),
+                ),
+              ],
             ))
       ]),
     ),

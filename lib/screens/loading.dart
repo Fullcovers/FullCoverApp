@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
+import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    load();
+    load();getclubs();
 
     _controller = VideoPlayerController.asset("assets/LogointroApp.mp4")
       ..initialize().then((_) {
@@ -39,7 +40,12 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       });
   }
-
+  getclubs() async {
+   Constants.allclubs  = await ClubServices.getAllClubs(context: context);
+    // setState(() {
+    //   lodedclub = true;
+    // });
+  }
   load() async {
     // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
     if (!widget.user) {

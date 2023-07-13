@@ -17,7 +17,7 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePage> createState() =>  _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -94,13 +94,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 20,
                             color: offwhite),
                       ),
-                      // Text(
-                      //   user.phoneNumber.isNotEmpty?user.phoneNumber:"",
-                      //   style: GoogleFonts.sairaCondensed(
-                      //       fontWeight: FontWeight.w500,
-                      //       fontSize: 20,
-                      //       color: offwhite),
-                      // ),
+                      Text(
+                        user.phoneNumber.isNotEmpty?user.phoneNumber:"",
+                        style: GoogleFonts.sairaCondensed(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: offwhite),
+                      ),
                     ],
                   ),
                   Row(
@@ -113,13 +113,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 20,
                             color: offwhite),
                       ),
-                      // Text(
-                      //   user.email,
-                      //   style: GoogleFonts.sairaCondensed(
-                      //       fontWeight: FontWeight.w500,
-                      //       fontSize: 20,
-                      //       color: offwhite),
-                      // ),
+                      Text(
+                        user.email.isNotEmpty?user.email:"",
+                        style: GoogleFonts.sairaCondensed(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: offwhite),
+                      ),
                     ],
                   ),
                   // InkWell(

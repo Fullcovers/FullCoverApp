@@ -70,7 +70,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
     _startTimer();
     UserServices.getprofileinfo();
     getpriviousorders();
-    getclubs();
+    // getclubs();
   }
 // var myorder;
 //   getorders()async{
@@ -140,16 +140,18 @@ class _MyBookingPageState extends State<MyBookingPage> {
     setState(() {
       load = true;
     });
-  }
+  }   List<ClubModel> clubs=Constants.allclubs;
 
-  bool lodedclub = false;
-  late List<ClubModel> clubs;
-  getclubs() async {
-    clubs = await ClubServices.getAllClubs(context: context);
-    setState(() {
-      lodedclub = true;
-    });
-  }
+    // clubs=Constants.allclubs;
+
+  bool lodedclub = true;
+  // getclubs() async {
+  //   // clubs = await ClubServices.getAllClubs(context: context);
+  //   clubs=Constants.allclubs;
+  //   // setState(() {
+  //   //   lodedclub = true;
+  //   // });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +227,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                           padding: const EdgeInsets.only(left: 18.0),
                           child: Image.asset(
                             "assets/images/logo.png",
-                            fit: BoxFit.fill,
+                            // fit: BoxFit.fill,
                             width: width / 3,
                             height: height / 6,
                           ),
