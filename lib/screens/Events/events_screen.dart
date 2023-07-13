@@ -50,7 +50,8 @@ class _EventsScreenState extends State<EventsScreen> {
       initialDate: selectedDate ??
           DateTime
               .now(), // Use selectedDate if available, else use current date
-      firstDate: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+      firstDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(2100),
     );
 
@@ -74,10 +75,10 @@ class _EventsScreenState extends State<EventsScreen> {
             MediaQuery.of(context).padding.top);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: eventbackgroundcolor,
+        backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            topnavigationbar(height: height, width: width, iscolor: true),
+            topnavigationbar(height: height, width: width, iscolor: false),
             //  Expanded(
             //   child: ListView.builder(shrinkWrap:true,
             //     itemCount: 5,
@@ -98,28 +99,139 @@ class _EventsScreenState extends State<EventsScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Container(
-                          height: height / 20.2,
-                          width: width / 4.28125,
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
                           child: Stack(
                             children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:
-                                      Image.asset("assets/images/clubimg.png")),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Opacity(
-                                      opacity: 0.5,
-                                      child: Image.asset(
-                                          "assets/images/black.png"))),
-                              Center(
-                                child: Text("Apostrophe",
-                                    style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    )),
-                              )
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // CircleAvatar(radius: 100,
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         backgroundImage: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("Apostrophe",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // CircleAvatar(radius: 100,
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         backgroundImage: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("Apostrophe",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // CircleAvatar(radius: 100,
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         backgroundImage: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("Apostrophe",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // CircleAvatar(radius: 100,
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         backgroundImage: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("Apostrophe",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // CircleAvatar(radius: 100,
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         backgroundImage: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("Apostrophe",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
                             ],
                           ),
                         ),
@@ -127,119 +239,119 @@ class _EventsScreenState extends State<EventsScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Container(
-                          height: height / 20.2,
-                          width: width / 4.28125,
+                          // height: height / 20.2,
+                          // width: width / 4.28125,
                           child: Stack(
                             children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:
-                                      Image.asset("assets/images/clubimg.png")),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Opacity(
-                                      opacity: 0.5,
-                                      child: Image.asset(
-                                          "assets/images/black.png"))),
-                              Center(
-                                child: Text("010",
-                                    style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    )),
-                              )
+                              CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage("assets/images/clubimg.png")),
+                              // ClipRRect(
+                              //     borderRadius: BorderRadius.circular(10),
+                              //     child: Opacity(
+                              //         opacity: 0.5,
+                              //         child: Image.asset(
+                              //             "assets/images/black.png"))),
+                              // Center(
+                              //   child: Text("010",
+                              //       style: GoogleFonts.sairaCondensed(
+                              //         color: Colors.white,
+                              //         fontWeight: FontWeight.w600,
+                              //         fontSize: 15,
+                              //       )),
+                              // )
                             ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Container(
-                          height: height / 20.2,
-                          width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:
-                                      Image.asset("assets/images/clubimg.png")),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Opacity(
-                                      opacity: 0.5,
-                                      child: Image.asset(
-                                          "assets/images/black.png"))),
-                              Center(
-                                child: Text("Apostrophe",
-                                    style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Container(
-                          height: height / 20.2,
-                          width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:
-                                      Image.asset("assets/images/clubimg.png")),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Opacity(
-                                      opacity: 0.5,
-                                      child: Image.asset(
-                                          "assets/images/black.png"))),
-                              Center(
-                                child: Text("Apostrophe",
-                                    style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Container(
-                          height: height / 20.2,
-                          width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:
-                                      Image.asset("assets/images/clubimg.png")),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Opacity(
-                                      opacity: 0.5,
-                                      child: Image.asset(
-                                          "assets/images/black.png"))),
-                              Center(
-                                child: Text("Apostrophe",
-                                    style: GoogleFonts.sairaCondensed(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 8.0),
+                      //   child: Container(
+                      //     height: height / 20.2,
+                      //     width: width / 4.28125,
+                      //     child: Stack(
+                      //       children: [
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child:
+                      //                 Image.asset("assets/images/clubimg.png")),
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Opacity(
+                      //                 opacity: 0.5,
+                      //                 child: Image.asset(
+                      //                     "assets/images/black.png"))),
+                      //         Center(
+                      //           child: Text("Apostrophe",
+                      //               style: GoogleFonts.sairaCondensed(
+                      //                 color: Colors.white,
+                      //                 fontWeight: FontWeight.w600,
+                      //                 fontSize: 15,
+                      //               )),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 8.0),
+                      //   child: Container(
+                      //     height: height / 20.2,
+                      //     width: width / 4.28125,
+                      //     child: Stack(
+                      //       children: [
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child:
+                      //                 Image.asset("assets/images/clubimg.png")),
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Opacity(
+                      //                 opacity: 0.5,
+                      //                 child: Image.asset(
+                      //                     "assets/images/black.png"))),
+                      //         Center(
+                      //           child: Text("Apostrophe",
+                      //               style: GoogleFonts.sairaCondensed(
+                      //                 color: Colors.white,
+                      //                 fontWeight: FontWeight.w600,
+                      //                 fontSize: 15,
+                      //               )),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 8.0),
+                      //   child: Container(
+                      //     height: height / 20.2,
+                      //     width: width / 4.28125,
+                      //     child: Stack(
+                      //       children: [
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child:
+                      //                 Image.asset("assets/images/clubimg.png")),
+                      //         ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Opacity(
+                      //                 opacity: 0.5,
+                      //                 child: Image.asset(
+                      //                     "assets/images/black.png"))),
+                      //         Center(
+                      //           child: Text("Apostrophe",
+                      //               style: GoogleFonts.sairaCondensed(
+                      //                 color: Colors.white,
+                      //                 fontWeight: FontWeight.w600,
+                      //                 fontSize: 15,
+                      //               )),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 )),
@@ -251,17 +363,24 @@ class _EventsScreenState extends State<EventsScreen> {
             SizedBox(
               height: height / 20,
             ),
-            Wrap(crossAxisAlignment:WrapCrossAlignment.center,direction :Axis.horizontal,
-
-              spacing: width/16,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              direction: Axis.horizontal,
+              spacing: width / 16,
               runSpacing: 15,
               children: [
-                genresbox(width, height, "Techno",'assets/images/geners/Genre-List_01.png'),
-                genresbox(width, height, "Bolly",'assets/images/geners/Genre-List_03.png'),
-                genresbox(width, height, "EDM",'assets/images/geners/Genre-List_04.png'),
-                genresbox(width, height, "Concerts",'assets/images/geners/Genre-List_05.png'),
-                genresbox(width, height, "Hip-Hop",'assets/images/geners/Genre-List_02.png'),
-                genresbox(width, height, "Other",'assets/images/geners/Genre-List_06.png'),
+                genresbox(width, height, "Techno",
+                    'assets/images/geners/Genre-List_01.png'),
+                genresbox(width, height, "Bolly",
+                    'assets/images/geners/Genre-List_03.png'),
+                genresbox(width, height, "EDM",
+                    'assets/images/geners/Genre-List_04.png'),
+                genresbox(width, height, "Concerts",
+                    'assets/images/geners/Genre-List_05.png'),
+                genresbox(width, height, "Hip-Hop",
+                    'assets/images/geners/Genre-List_02.png'),
+                genresbox(width, height, "Other",
+                    'assets/images/geners/Genre-List_06.png'),
                 // Container(
                 //   height: height / 18.0625,
                 //   width: width / 1.1,
@@ -301,12 +420,17 @@ class _EventsScreenState extends State<EventsScreen> {
                 // )
               ],
             ),
-            SizedBox(height: height/20,),
+            SizedBox(
+              height: height / 20,
+            ),
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(top:8.0),
-                child: Container(color:botoncolor,
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade700 .withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
                       Row(
@@ -327,14 +451,15 @@ class _EventsScreenState extends State<EventsScreen> {
                               height: height / 20,
                               width: width / 2.5,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(15.0),
                                 border: Border.all(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -347,7 +472,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                         style: GoogleFonts.sairaCondensed(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         )),
                                   ),
                                   Padding(
@@ -359,7 +484,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                       },
                                       icon: const Icon(
                                         Icons.calendar_today_outlined,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         size: 20,
                                       ),
                                     ),
@@ -370,71 +495,86 @@ class _EventsScreenState extends State<EventsScreen> {
                           ),
                         ],
                       ),
-
                       Container(
-                height: height / 6,
-                width: width,
-                decoration:  BoxDecoration(color: botoncolor),
-                child: FutureBuilder<List<Event>>(
-                  future: EventsServices().getAllEvents(context: context),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: SizedBox(
-                            height: height / 21.675,
-                            width: width / 10.275,
-                            child: Constants.mycircularProgressIndicator()),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
-                      final eventsData = snapshot.data!;
-                      var eventdatabydate = [];
-                      if (eventsData.isNotEmpty) {
-                        for (var i = 0; i < eventsData.length; i++) {
-                          var date=selectedDate==null?formatDate(DateTime.now()):formatDate(selectedDate);
-                          if (eventsData[i].date.toString().substring(0, 10) ==
-                              date) {  
-                            eventdatabydate.add(eventsData[i]);
-                          }
-                        }
-                      }
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: eventdatabydate.length,
-                        itemBuilder: (context, index) {
-                          final Event event = eventdatabydate[index];
+                          height: height / 6,
+                          width: width,
+                          decoration:  BoxDecoration(
+                      color: Colors.grey.shade900.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(20)),
+                          child: FutureBuilder<List<Event>>(
+                            future:
+                                EventsServices().getAllEvents(context: context),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: SizedBox(
+                                      height: height / 21.675,
+                                      width: width / 10.275,
+                                      child: Constants
+                                          .mycircularProgressIndicator()),
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                final eventsData = snapshot.data!;
+                                var eventdatabydate = [];
+                                if (eventsData.isNotEmpty) {
+                                  for (var i = 0; i < eventsData.length; i++) {
+                                    var date = selectedDate == null
+                                        ? formatDate(DateTime.now())
+                                        : formatDate(selectedDate);
+                                    if (eventsData[i]
+                                            .date
+                                            .toString()
+                                            .substring(0, 10) ==
+                                        date) {
+                                      eventdatabydate.add(eventsData[i]);
+                                    }
+                                  }
+                                }
+                                return ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: eventdatabydate.length,
+                                  itemBuilder: (context, index) {
+                                    final Event event = eventdatabydate[index];
 
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 10.0,bottom: 16),
-                            child: GestureDetector(
-                              onTap: () async {
-                                await ClubServices().getSingleClub(
-                                    clubid: event.clubId, context: context);
-                                Navigator.of(context).push(
-                                    ScaleTransitionPageRoute(
-                                        child: EventDetail(event: event)));
-                              },
-                              child: myeventcard(height, width, event),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                  },
-                )),
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 16),
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          await ClubServices().getSingleClub(
+                                              clubid: event.clubId,
+                                              context: context);
+                                          Navigator.of(context).push(
+                                              ScaleTransitionPageRoute(
+                                                  child: EventDetail(
+                                                      event: event)));
+                                        },
+                                        child:
+                                            myeventcard(height, width, event),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          )),
                     ],
                   ),
                 ),
               ),
             ),
             // ),
-            SizedBox(height: height/20,),
+            SizedBox(
+              height: height / 20,
+            ),
 
             // FractionalTranslation(
             //   translation: Offset(0, -0.1),
             // child:
-            
+
             // ),
             // FractionalTranslation(
             //   translation: Offset(0, -0.15),
@@ -488,7 +628,7 @@ class _EventsScreenState extends State<EventsScreen> {
             //         )),
             //   ),
             // ),
-            
+
             SizedBox(
               height: height / 10,
             )
@@ -500,14 +640,14 @@ class _EventsScreenState extends State<EventsScreen> {
           initialindex: 2,
           height: height,
           width: width,
-          iscolorchange: true,
+          iscolorchange: false,
         ),
       ),
     );
   }
 }
 
-Widget genresbox(double width, double height, String text,String images ) {
+Widget genresbox(double width, double height, String text, String images) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(10)),
