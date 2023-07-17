@@ -32,25 +32,37 @@ class _MyClubState extends State<MyClub> {
     super.initState();
     loadclub();
   }
-
+List<String> elements = [];
   @override
+  
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double ifontsize = 15;
-    double ofontsize = 30;
+    double ofontsize = 30; 
+
+                                  elements= [
+      "Bollywood",
+      "Commercial",
+      "Hip Hop",
+      "Electronic",
+      "Progressive",
+      "Melodic House",
+      "Rap"
+    ];
+
     return SafeArea(
         child: Stack(
-          children: [
-            Image.asset(
-            Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-            Scaffold(
-      backgroundColor: backgroundColortransperent,
-      body: isloded
+      children: [
+        Image.asset(
+          Constants.backgroundimage,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: backgroundColortransperent,
+          body: isloded
               ? SingleChildScrollView(
                   child: Column(
                     children: [
@@ -80,8 +92,8 @@ class _MyClubState extends State<MyClub> {
                           child: Text(
                             textAlign: TextAlign.left,
                             "Address",
-                            style:
-                                GoogleFonts.bebasNeue(fontSize: 30, color: golden),
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30, color: golden),
                           ),
                         ),
                       ),
@@ -175,7 +187,8 @@ class _MyClubState extends State<MyClub> {
                                               "plot": plotController.text,
                                               "postal_code": pcController.text,
                                               "state": stateController.text,
-                                              "landmark": landmarkController.text
+                                              "landmark":
+                                                  landmarkController.text
                                             },
                                           },
                                           myclubid: club!.id);
@@ -223,11 +236,13 @@ class _MyClubState extends State<MyClub> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Plot",
@@ -257,7 +272,8 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         ":",
@@ -287,14 +303,16 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         child: Text(
                                           textAlign: TextAlign.left,
                                           club!.daddress.plot,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -302,7 +320,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.daddress.landmark,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -310,7 +329,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.daddress.city,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -318,7 +338,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.daddress.state,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -326,7 +347,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.daddress.postalcode,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                     ],
@@ -344,8 +366,8 @@ class _MyClubState extends State<MyClub> {
                           child: Text(
                             textAlign: TextAlign.left,
                             "Timings",
-                            style:
-                                GoogleFonts.bebasNeue(fontSize: 30, color: golden),
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30, color: golden),
                           ),
                         ),
                       ),
@@ -410,7 +432,8 @@ class _MyClubState extends State<MyClub> {
                                           context: context,
                                           body: {
                                             "timings": {
-                                              "closesAt": closesAtController.text,
+                                              "closesAt":
+                                                  closesAtController.text,
                                               "opensAt": opensAtController.text
                                             },
                                           },
@@ -459,11 +482,13 @@ class _MyClubState extends State<MyClub> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "opensAt",
@@ -478,7 +503,8 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         ":",
@@ -493,14 +519,16 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         child: Text(
                                           textAlign: TextAlign.left,
                                           club!.timings.opensAt,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -508,7 +536,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.timings.closesAt,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                     ],
@@ -526,13 +555,14 @@ class _MyClubState extends State<MyClub> {
                           child: Text(
                             textAlign: TextAlign.left,
                             "Days Open",
-                            style:
-                                GoogleFonts.bebasNeue(fontSize: 30, color: golden),
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30, color: golden),
                           ),
                         ),
                       ),
-                      InkWell(onTap: (){
-                        final TextEditingController fromController =
+                      InkWell(
+                        onTap: () {
+                          final TextEditingController fromController =
                               TextEditingController();
                           final TextEditingController tillController =
                               TextEditingController();
@@ -629,7 +659,7 @@ class _MyClubState extends State<MyClub> {
                               );
                             },
                           );
-                      },
+                        },
                         child: Container(
                           width: width,
                           height: height / 10,
@@ -640,11 +670,13 @@ class _MyClubState extends State<MyClub> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "From",
@@ -659,7 +691,8 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         ":",
@@ -674,14 +707,16 @@ class _MyClubState extends State<MyClub> {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         child: Text(
                                           textAlign: TextAlign.left,
                                           club!.daysOpen.from,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                       Container(
@@ -689,7 +724,8 @@ class _MyClubState extends State<MyClub> {
                                           textAlign: TextAlign.left,
                                           club!.daysOpen.till,
                                           style: GoogleFonts.sairaCondensed(
-                                              fontSize: ifontsize, color: golden),
+                                              fontSize: ifontsize,
+                                              color: golden),
                                         ),
                                       ),
                                     ],
@@ -707,15 +743,15 @@ class _MyClubState extends State<MyClub> {
                           child: Text(
                             textAlign: TextAlign.left,
                             "terms_and_condition",
-                            style:
-                                GoogleFonts.bebasNeue(fontSize: 30, color: golden),
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30, color: golden),
                           ),
                         ),
                       ),
-                      InkWell(onTap: (){
-                        final TextEditingController tcController =
+                      InkWell(
+                        onTap: () {
+                          final TextEditingController tcController =
                               TextEditingController();
-                          
 
                           tcController.text = club!.termsAndCondition;
 
@@ -736,7 +772,6 @@ class _MyClubState extends State<MyClub> {
                                             labelText: "Opens At",
                                           ),
                                         ),
-                                        
                                       ],
                                     ),
                                   ),
@@ -764,7 +799,135 @@ class _MyClubState extends State<MyClub> {
                                       BTSClubServices.updateclub(
                                           context: context,
                                           body: {
-                                            "terms_and_condition": tcController.text,
+                                            "terms_and_condition":
+                                                tcController.text,
+                                          },
+                                          myclubid: club!.id);
+                                      Navigator.pop(context);
+                                      setState(() {
+                                        isloded = false;
+                                      });
+                                      loadclub();
+                                    },
+                                  ),
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.resolveWith(
+                                              (states) {
+                                        // If the button is pressed, return green, otherwise blue
+                                        if (states
+                                            .contains(MaterialState.pressed)) {
+                                          return Colors.black;
+                                        }
+                                        return Colors.black;
+                                      }),
+                                    ),
+                                    child: Text(
+                                      "Cancel",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontSize: 15, color: golden),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          width: width,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                textAlign: TextAlign.left,
+                                club!.termsAndCondition,
+                                style: GoogleFonts.sairaCondensed(
+                                    fontSize: ifontsize, color: golden),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 10),
+                          child: Text(
+                            textAlign: TextAlign.left,
+                            "Facilities",
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 30, color: golden),
+                          ),
+                        ),
+                      ),
+                      InkWell(onTap: (){
+                        List<String>items=[];
+                        for (var i = 0; i < 10; i++) {
+                         club!.facilities.length>i? items.add(club!.facilities[i]):items.add("");
+                        }
+                        // items=club!.facilities;
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {    
+                              return AlertDialog(
+                                scrollable: true,
+                                title: const Text("Update"),
+                                content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Form(
+                                    child: Column(
+                                      children: [
+                                        Container(height: 200,width: width/1.1,
+                                          child: ListView.builder(
+                                            itemCount: items.length,
+                                            itemBuilder: (BuildContext context, int index) {
+                                              return TextFormField(initialValue:items.length>index? items[index]:"",onChanged: (value) {
+                                                items[index]=value;
+                                              },
+                                              // controller: elements[index],
+                                              decoration: const InputDecoration(
+                                                labelText: "Facilities",
+                                              ),
+                                            );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.resolveWith(
+                                              (states) {
+                                        // If the button is pressed, return green, otherwise blue
+                                        if (states
+                                            .contains(MaterialState.pressed)) {
+                                          return Colors.black;
+                                        }
+                                        return Colors.black;
+                                      }),
+                                    ),
+                                    child: Text(
+                                      "Update",
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontSize: 15, color: golden),
+                                    ),
+                                    onPressed: () {
+                                      BTSClubServices.updateclub(
+                                          context: context,
+                                          body: {
+                                            "facilities":
+                                                items,
                                           },
                                           myclubid: club!.id);
                                       Navigator.pop(context);
@@ -803,56 +966,27 @@ class _MyClubState extends State<MyClub> {
                       },
                         child: Container(
                           width: width,
+                          height: height / 12,
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                             color: Colors.black,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                textAlign: TextAlign.left,
-                                club!.termsAndCondition,
-                                style: GoogleFonts.sairaCondensed(
-                                    fontSize: ifontsize, color: golden),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: club!.facilities.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      club!.facilities[index],
+                                      style: GoogleFonts.sairaCondensed(
+                                          fontSize: ifontsize, color: golden),
+                                    ),
+                                  );
+                                },  
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 10),
-                          child: Text(
-                            textAlign: TextAlign.left,
-                            "Facilities",
-                            style:
-                                GoogleFonts.bebasNeue(fontSize: 30, color: golden),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: width,
-                        height: height / 12,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)),
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: club!.facilities.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    club!.facilities[index],
-                                    style: GoogleFonts.sairaCondensed(
-                                        fontSize: ifontsize, color: golden),
-                                  ),
-                                );
-                              },
                             ),
                           ),
                         ),
@@ -861,8 +995,8 @@ class _MyClubState extends State<MyClub> {
                   ),
                 )
               : Center(child: Constants.mycircularProgressIndicator()),
-    ),
-          ],
-        ));
+        ),
+      ],
+    ));
   }
 }
