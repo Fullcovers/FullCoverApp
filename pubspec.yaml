@@ -58,6 +58,9 @@ dependencies:
   video_player: 2.1.15
   carousel_slider: ^4.2.1
   twilio_flutter: ^0.0.9
+  email_otp: ^2.0.1
+  email_auth: ^1.0.0
+  url_launcher: ^6.1.11
 
 
   
