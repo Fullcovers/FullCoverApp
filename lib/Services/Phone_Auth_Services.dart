@@ -5,7 +5,7 @@ import 'package:twilio_flutter/twilio_flutter.dart';
 
 class Phoneauth {
   static final String accountSid = 'ACd1e6c502846436c7ced396bb4f9fd95f';
-  static final String authToken = '3dc22983092f7a74a68f9b0fd170fdb0';
+  static final String authToken = 'accfa42b64e9c560de46c9a02a01305b';
   static final String twilioNumber = '+19894743947';
   static Random random = new Random();
 

@@ -1,3 +1,5 @@
+import 'package:email_auth/email_auth.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,6 +9,8 @@ import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
 import 'package:venq_assessment/screens/Auth/PhoneAuthVerify.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:email_auth/email_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Bookings/bookings_screen.dart';
 
@@ -28,7 +32,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
   final TextEditingController pnController = TextEditingController();
-
   final TextEditingController confirmpasswordController =
       TextEditingController();
   Color getColor(Set<MaterialState> states) {
@@ -205,9 +208,9 @@ class _SignUpState extends State<SignUp> {
                                         load = true;
                                         selected = false;
                                       });
-                                      bool sended =
-                                          await Phoneauth.verifyPhoneNumber(
-                                              "+91${pnController.text}");
+                                      bool sended = 
+                                      await Phoneauth.verifyPhoneNumber(
+                                          "+91${pnController.text}");
                                       if (sended) {
                                         // ignore: use_build_context_synchronously
                                         Navigator.push(
