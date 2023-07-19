@@ -19,7 +19,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  Color backbuttoncolor = Color.fromARGB(225, 202, 196, 196);
   bool selected = true;
   @override
   bool load = false;
@@ -199,9 +198,9 @@ class _LoginPageState extends State<LoginPage> {
                                           GestureDetector(
                                             onTap: () {
                                               Navigator.of(context)
-                                                  .pushNamedAndRemoveUntil(
+                                                  .pushNamed(
                                                       '/register',
-                                                      (route) => false);
+                                                     );
                                             },
                                             child: const Text(
                                               "Sign Up",

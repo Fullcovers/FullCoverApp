@@ -19,7 +19,7 @@ import '../utils/Constants.dart';
 import '../utils/Utils.dart';
 
 class AuthService {
-  void signUpUser({
+  Future<bool> signUpUser({
     required BuildContext context, //for scaffold
     required String email,
     required String password,
@@ -36,16 +36,20 @@ class AuthService {
     };
     try {
       Dio dio = Dio();
+      print("object");
       var res = await dio.post('${Constants.uri}auth/register',
           data: user,
           options: Options(
-              headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
+              ));
+              print(res.data);
       print("Created");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LoginPage()),
           (route) => false);
-    } catch (e) {
+      return true;
+    } catch (e) {print(e);
       showSnackBar(context, e.toString());
+      return false;
     }
   }
 
@@ -75,8 +79,9 @@ class AuthService {
         userprovider.setToken(jsonDecode(res.body)['token']);
         Constants.usertoken = userprovider.token;
         await UserServices.getprofileinfo();
-            if(Constants.btsprofile.role != "user"){
-        await BTSClubServices.btsgetSingleClub(context: context);}
+        if (Constants.btsprofile.role != "user") {
+          await BTSClubServices.btsgetSingleClub(context: context);
+        }
         if (Constants.btsprofile.role == "user") {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => MyBookingPage()));

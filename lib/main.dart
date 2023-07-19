@@ -11,6 +11,7 @@ import 'package:venq_assessment/Providers/OrderValidationProvider.dart';
 import 'package:venq_assessment/Providers/TicketProvider.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
+import 'package:venq_assessment/screens/Auth/PhoneAuthSend.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
@@ -92,7 +93,9 @@ class _MyAppState extends State<MyApp> {
               '/ticketconfirming': (context) => const TicketConfirming(),
               '/bookingsscreen': (context) => MyBookingPage(),
             },
-            home: SplashScreen(user: userprovider.token.isEmpty)
+            home: 
+            // PhoneAuth()
+            SplashScreen(user: userprovider.token.isEmpty)
 
             // userprovider.token.isEmpty
             //     ? const LoginPage()

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:venq_assessment/Services/Phone_Auth_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
+import 'package:venq_assessment/screens/Auth/PhoneAuthVerify.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 
 import '../Bookings/bookings_screen.dart';
@@ -16,6 +18,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool load = false;
+  bool selected = true;
   bool isChecked = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
@@ -47,7 +51,7 @@ class _SignUpState extends State<SignUp> {
       child: Stack(
         children: [
           Image.asset(
-           Constants.backgroundimage,
+            Constants.backgroundimage,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -187,69 +191,182 @@ class _SignUpState extends State<SignUp> {
                               SizedBox(
                                 height: 20,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  AuthService().signUpUser(
-                                      context: context,
-                                      email: emailController.text.trim(),
-                                      password: passwordController.text.trim(),
-                                      firstName: firstnameController.text,
-                                      lastName: lastnameController.text,
-                                      phoneNumber: pnController.text);
-                                },
+                              InkWell(
+                                onTap: () {},
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
+                                  padding: EdgeInsets.only(
                                       top: 0.0,
-                                      left: 50,
-                                      right: 50,
+                                      left: widthofs / 10,
+                                      right: widthofs / 10,
                                       bottom: 20.0),
-                                  child: Container(
-                                    height: heightofs / 20,
-                                    width: double.maxFinite,
-                                    decoration:  BoxDecoration(
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color.fromARGB(
-                                              255, 202, 196, 196),
-                                          blurRadius: 10,
-                                          spreadRadius: -2,
-                                          offset: Offset(-2, -2),
-                                        ),
-                                        BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: 20,
-                                          spreadRadius: -2,
-                                          offset: Offset(2, 2),
-                                        ),
-                                      ],
-                                      color: botoncolor,
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(20.0),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10.0, right: 20.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Sign Up",
-                                                style: GoogleFonts.bebasNeue(
-                                                    fontSize: 20,
-                                                    color: golden),
-                                              ),
-                                            ],
+                                  child: InkWell(
+                                    onTap: () async {
+                                      setState(() {
+                                        load = true;
+                                        selected = false;
+                                      });
+                                      bool sended =
+                                          await Phoneauth.verifyPhoneNumber(
+                                              "+91${pnController.text}");
+                                      if (sended) {
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PhoneAuthVerify(
+                                                      emailController:
+                                                          emailController,
+                                                      firstnameController:
+                                                          firstnameController,
+                                                      lastnameController:
+                                                          lastnameController,
+                                                      passwordController:
+                                                          passwordController,
+                                                      pnController:
+                                                          pnController,
+                                                    )));
+                                      }
+                                    },
+                                    child: AnimatedContainer(
+                                      width: selected
+                                          ? widthofs / 2
+                                          : heightofs / 15,
+                                      height: heightofs / 20,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.white,
+                                            blurRadius: 10,
+                                            spreadRadius: -2,
+                                            offset: Offset(-2, -2),
                                           ),
+                                          BoxShadow(
+                                            color: Colors.black,
+                                            blurRadius: 20,
+                                            spreadRadius: -2,
+                                            offset: Offset(2, 2),
+                                          ),
+                                        ],
+                                        color: botoncolor,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0),
                                         ),
-                                      ],
+                                      ),
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      child: Column(
+                                        children: [
+                                          load
+                                              ? Container(
+                                                  width: widthofs / 1.2,
+                                                  height: 40,
+                                                  child: Center(
+                                                      child: Constants
+                                                          .mycircularProgressIndicator()),
+                                                )
+                                              : Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: heightofs / 65,
+                                                      right: 20.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Sign Up", //one8@gmail.com  one812345
+                                                        style: GoogleFonts
+                                                            .bebasNeue(
+                                                                fontSize: 20,
+                                                                color: golden),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
+                              // GestureDetector(
+                              //   onTap: () async {
+                              //     bool sended =
+                              //         await Phoneauth.verifyPhoneNumber(
+                              //             "+91${pnController.text}");
+                              //     if (sended) {
+                              //       // ignore: use_build_context_synchronously
+                              //       Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>
+                              //                   PhoneAuthVerify(
+                              //                     emailController:
+                              //                         emailController,
+                              //                     firstnameController:
+                              //                         firstnameController,
+                              //                     lastnameController:
+                              //                         lastnameController,
+                              //                     passwordController:
+                              //                         passwordController,
+                              //                     pnController: pnController,
+                              //                   )));
+                              //     }
+                              //   },
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.only(
+                              //         top: 0.0,
+                              //         left: 50,
+                              //         right: 50,
+                              //         bottom: 20.0),
+                              //     child: Container(
+                              //       height: heightofs / 20,
+                              //       width: double.maxFinite,
+                              //       decoration: BoxDecoration(
+                              //         boxShadow: const [
+                              //           BoxShadow(
+                              //             color: Color.fromARGB(
+                              //                 255, 202, 196, 196),
+                              //             blurRadius: 10,
+                              //             spreadRadius: -2,
+                              //             offset: Offset(-2, -2),
+                              //           ),
+                              //           BoxShadow(
+                              //             color: Colors.black,
+                              //             blurRadius: 20,
+                              //             spreadRadius: -2,
+                              //             offset: Offset(2, 2),
+                              //           ),
+                              //         ],
+                              //         color: botoncolor,
+                              //         borderRadius: const BorderRadius.all(
+                              //           Radius.circular(20.0),
+                              //         ),
+                              //       ),
+                              //       child: Column(
+                              //         children: [
+                              //           Padding(
+                              //             padding: const EdgeInsets.only(
+                              //                 top: 10.0, right: 20.0),
+                              //             child: Row(
+                              //               mainAxisAlignment:
+                              //                   MainAxisAlignment.center,
+                              //               children: [
+                              //                 Text(
+                              //                   "Sign Up",
+                              //                   style: GoogleFonts.bebasNeue(
+                              //                       fontSize: 20,
+                              //                       color: golden),
+                              //                 ),
+                              //               ],
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -269,8 +386,9 @@ class _SignUpState extends State<SignUp> {
 Widget customtextfield(
     TextEditingController cont, String hintText, Color color) {
   return Padding(
-    padding: const EdgeInsets.only(left: 22, right: 22, top:15 ),
-    child: Container(height: 50,
+    padding: const EdgeInsets.only(left: 22, right: 22, top: 15),
+    child: Container(
+      height: 50,
       child: TextField(
         controller: cont,
         style: TextStyle(color: Colors.white),
@@ -278,7 +396,7 @@ Widget customtextfield(
         obscureText: hintText == "Confirm Password" || hintText == "Password"
             ? true
             : false,
-      keyboardType: hintText=="Phone Number"?TextInputType.phone:null,
+        keyboardType: hintText == "Phone Number" ? TextInputType.phone : null,
         decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
