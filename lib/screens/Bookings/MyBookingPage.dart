@@ -127,7 +127,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
     print("porders");
     porders = await OrderServices.getAllOrderhistory(context: context);
     print(porders);
-    if (porders.isNotEmpty) {
+    
+    if (porders['data'].isNotEmpty) {
       // String ticketId = porders['data'][0]['_id'];
       // print(ticketId);
       // await TicketServices().getTicketById(
@@ -314,7 +315,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 12.0),
                                   child: Text(
-                                    "Our Clubs",
+                                    "Clubs",
                                     style: GoogleFonts.bebasNeue(
                                         color: golden, fontSize: height / 30),
                                   ),
@@ -468,7 +469,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 12.0),
                                   child: Text(
-                                    "Our Restro Bar",
+                                    "Restro Bar",
                                     style: GoogleFonts.bebasNeue(
                                         color: golden, fontSize: height / 30),
                                   ),

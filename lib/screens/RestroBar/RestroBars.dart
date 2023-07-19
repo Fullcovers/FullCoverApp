@@ -49,7 +49,7 @@ class _RestrobarsState extends State<Restrobars> {  List<ClubModel> clubsData = 
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Center(
-                          child: Text("Restrobars",
+                          child: Text("Restro-bars",
                               style: GoogleFonts.bebasNeue(
                                 fontSize: width / 10.275,
                                 color: Color(0xFFB59F68),
