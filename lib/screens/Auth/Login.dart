@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
+import 'package:venq_assessment/screens/Auth/PhoneAuthSend.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/bookings_screen.dart';
 import 'package:venq_assessment/utils/Constants.dart';
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                         fillColor: Colors.white,
                                         focusColor: Colors.white,
                                         // hintText: "Email",
-                                        label: Text(
+                                        label: const Text(
                                           "Email",
                                           style: TextStyle(color: Colors.white),
                                         ),
@@ -181,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const SignUp()));
+                                                    const PhoneAuth()));
                                       },
                                       child: Column(
                                         crossAxisAlignment:
@@ -197,10 +198,11 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.of(context)
-                                                  .pushNamed(
-                                                      '/register',
-                                                     );
+                                               Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PhoneAuth()));
                                             },
                                             child: const Text(
                                               "Sign Up",

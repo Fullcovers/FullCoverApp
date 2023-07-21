@@ -176,11 +176,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
     return SafeArea(
       child: Stack(
         children: [
-          Image.asset(
-            "assets/images/background.png",
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
+          Opacity(opacity: 0.5,
+            child: Image.asset(
+              "assets/images/background.png",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
           Scaffold(
             resizeToAvoidBottomInset: false,
@@ -308,7 +310,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                               items: imageSliders,
                             ),
-                            FractionalTranslation(                                      translation: Offset(0, -1.0),
+                            FractionalTranslation(                                      translation: Offset(0, -0.8),
 
                               child: Align(
                                 alignment: Alignment.centerLeft,
@@ -340,8 +342,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             child: Card(
                                               color: backgroundColortransperent,
                                               shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: golden, width: 1),
+                                                  // side: BorderSide(
+                                                  //     color: golden, width: 1),
                                                   borderRadius:
                                                       BorderRadius.circular(20)),
                                               child: Stack(
@@ -494,8 +496,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             child: Card(
                                               color: backgroundColortransperent,
                                               shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: golden, width: 1),
+                                                  // side: BorderSide(
+                                                  //     color: golden, width: 1),
                                                   borderRadius:
                                                       BorderRadius.circular(20)),
                                               child: Stack(
@@ -513,7 +515,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                             clubs[index]
                                                                 .carouselImages[0]
                                                                 .imageUrl,
-                                                            width: width / 1.5,
+                                                            width: width / 2.5,
                                                             height: height / 6,
                                                             fit: BoxFit.fill,
                                                           ),
@@ -525,7 +527,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                           child: Image.asset(
                                                             "assets/images/Restaurants.jpg",
                                                             fit: BoxFit.fill,
-                                                            width: width / 1.5,
+                                                            width: width / 2.5,
                                                             height: height / 6,
                                                           ),
                                                         ),
@@ -533,14 +535,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                     opacity: 0.5,
                                                     child: Image.asset(
                                                       "assets/images/black.png",
-                                                      width: width / 1.5,
+                                                      width: width / 2.5,
                                                       height: height / 6,
                                                       fit: BoxFit.fill,
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding: EdgeInsets.only(
-                                                        right: width / 5,
+                                                        right: width / 20,left: width/20,
                                                         top: height / 20),
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -559,7 +561,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                       .white,
                                                                   fontSize:
                                                                       height /
-                                                                          25),
+                                                                          35),
                                                         ),
                                                         Text(
                                                           "Starting from INR 999",

@@ -69,7 +69,7 @@ class _BookingHistoryState extends State<BookingHistory> {
   @override
   Widget build(BuildContext context) {
     if (loded && tableloded) {
-      for (var i = 0; i < myorders.length; i++) {
+      for (var i = 0; i < myorders['data'].length; i++) {
         expandlist.add(false);
       }
     }
@@ -217,17 +217,17 @@ class _BookingHistoryState extends State<BookingHistory> {
                                           title: Text(
                                         "Date:- " +
                                             myorders['data'][i]['date']
-                                                    
-                                                .toString().substring(0,10),
+                                                .toString()
+                                                .substring(0, 10),
                                         style: TextStyle(color: Colors.white),
                                       )),
                                       ListTile(
                                           title: Text(
-                                       "Tickets",
+                                        "Tickets",
                                         style: TextStyle(color: Colors.white),
                                       )),
                                       Container(
-                                        height: height/10,
+                                        height: height / 10,
                                         child: ListView.builder(
                                           itemCount: myorders['data'][i]
                                                   ['items']
@@ -235,15 +235,20 @@ class _BookingHistoryState extends State<BookingHistory> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Padding(
-                                              padding: const EdgeInsets.only(top:8.0,left: 16),
-                                              child: Text(myorders['data'][i]
-                                                          ['items'][index]
-                                                      ['ticket']['name']
-                                                  .toString()+" x "+myorders['data'][i]
-                                                          ['items'][index]
-                                                      ['qty'].toString(),                                        style: TextStyle(color: Colors.white),
-                                            
-                                                  ),
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0, left: 16),
+                                              child: Text(
+                                                myorders['data'][i]['items']
+                                                                [index]
+                                                            ['ticket']['name']
+                                                        .toString() +
+                                                    " x " +
+                                                    myorders['data'][i]['items']
+                                                            [index]['qty']
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
                                             );
                                           },
                                         ),

@@ -115,7 +115,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                                           InkWell(
                                               onTap: () {
                                                 Navigator.of(context).push(
-                                                  ScaleTransitionPageRoute(
+                                                  FaidinTransitionPageRoute(
                                                       child: ClubDetail(
                                                     club: club,
                                                   )),

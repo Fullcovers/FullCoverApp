@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             routes: {
               '/barmenu': (context) => const BarMenu(),
-              '/register': (context) => const SignUp(),
+              // '/register': (context) => const SignUp(),
               '/login': (context) => const LoginPage(),
               '/qrscanner': (context) => const QrScanner(),
               '/allclubs': (context) => const ClubsScreen(),
@@ -96,7 +96,7 @@ class _MyAppState extends State<MyApp> {
             home: 
             // PhoneAuth()
             SplashScreen(user: userprovider.token.isEmpty)
-
+// const PhoneAuth()
             // userprovider.token.isEmpty
             //     ? const LoginPage()
             //     : Constants.btsprofile.role == "user"

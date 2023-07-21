@@ -611,8 +611,13 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       alignment: Alignment.bottomRight,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 5.0),
-                        child: Container(
-                          color: Colors.white,
+                        child: Container(decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20)),
+                          ),
+                          
                           width: 5,
                           height: 75,
                         ),
@@ -621,16 +626,16 @@ class _bottomnavbarState extends State<bottomnavbar> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 5.0, bottom: 10),
+                        padding: const EdgeInsets.only(right: 5.0),
                         child: Container(
                           decoration: BoxDecoration(
                             color: botoncolor,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
+                                // topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
                           ),
                           width: 6,
-                          height: 59.95,
+                          height: 82,
                         ),
                       ),
                     ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -12,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:async';
 
+import "package:http/http.dart" as http;
 
 class CarouselPage extends StatefulWidget {
   const CarouselPage({super.key});
@@ -43,6 +46,30 @@ class _CarouselPageState extends State<CarouselPage> {
   }
 
   XFile? image;
+  Future<String?> uploadImage(filename) async {
+    http.Response myclub = await http.get(
+      Uri.parse('${Constants.uri}club/my-club'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ${Constants.usertoken}',
+      },
+    );
+    var myclubid = jsonDecode(myclub.body)['data'][0]['_id'];
+    print(myclubid);
+    try {
+      var request = http.MultipartRequest(
+          'POST', Uri.parse('${Constants.uri}club/${myclubid}/carousel-image'));
+      request.files.add(await http.MultipartFile.fromPath('image', filename));
+      request.fields['name'] = 'lounge';
+      var res = await request.send();
+      print("res.reasonPhrase");print(res.reasonPhrase);
+    } catch (e) {
+      print("e.toString()");      print(e.toString());
+
+    }
+
+    return "res.reasonPhrase";
+  }
 
   final ImagePicker picker = ImagePicker();
   Future getImage(ImageSource media) async {
@@ -51,7 +78,11 @@ class _CarouselPageState extends State<CarouselPage> {
     setState(() {
       image = img;
     });
-    BTSClubServices.addCarouselImages(context:context, imageFile: image!,);
+    uploadImage(image!.path);
+    // BTSClubServices.addCarouselImages(
+    //   context: context,
+    //   imageFile: image!,
+    // );
   }
 
   @override
@@ -61,22 +92,26 @@ class _CarouselPageState extends State<CarouselPage> {
 
     return SafeArea(
         child: Stack(
-          children: [
-            Image.asset(
-           Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-            Scaffold(
-      backgroundColor: backgroundColortransperent,
-      body: Column(children: [
-            HeaderContent(title: "Carousel Images",icon: Icon(null),),
+      children: [
+        Image.asset(
+          Constants.backgroundimage,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: backgroundColortransperent,
+          body: Column(children: [
+            HeaderContent(
+              title: "Carousel Images",
+              icon: Icon(null),
+            ),
             loded
                 ? Expanded(
                     child: ListView.builder(
                       itemCount: listofcarouselImage.length,
                       itemBuilder: (BuildContext context, int index) {
+                        print(listofcarouselImage.length);
                         return Container(
                           width: width,
                           height: height / 3.5,
@@ -87,13 +122,16 @@ class _CarouselPageState extends State<CarouselPage> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
-                                      Container(width: width/1.3,
+                                      Container(
+                                        width: width / 1.3,
                                         child: Text(
-                                          listofcarouselImage[index].name,textAlign: TextAlign.left,
+                                          listofcarouselImage[index].name,
+                                          textAlign: TextAlign.left,
                                           style: GoogleFonts.bebasNeue(
                                               fontSize: 30, color: golden),
                                         ),
@@ -104,7 +142,8 @@ class _CarouselPageState extends State<CarouselPage> {
                                       Container(
                                         height: height / 10,
                                         child: Image.network(
-                                            listofcarouselImage[index].imageUrl),
+                                            listofcarouselImage[index]
+                                                .imageUrl),
                                       )
                                     ],
                                   ),
@@ -136,11 +175,9 @@ class _CarouselPageState extends State<CarouselPage> {
                       },
                     ),
                   )
-                : Center(
-                    child: Constants.mycircularProgressIndicator()
-                  ),
-      ]),
-      floatingActionButton: FloatingActionButton(
+                : Center(child: Constants.mycircularProgressIndicator()),
+          ]),
+          floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.black,
             onPressed: () {},
             child: IconButton(
@@ -193,9 +230,9 @@ class _CarouselPageState extends State<CarouselPage> {
                     });
               },
             ),
-      ),
-    ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }
