@@ -25,6 +25,7 @@ import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Styles/Radius.dart';
 import 'package:venq_assessment/screens/Bookings/bookinghistory.dart';
+import 'package:venq_assessment/screens/Clubs/ClubDetail.dart';
 import 'package:venq_assessment/screens/Clubs/clubs_screen.dart';
 import 'package:venq_assessment/screens/Events/events_screen.dart';
 import 'package:venq_assessment/screens/RestroBar/RestroBars.dart';
@@ -176,11 +177,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
     return SafeArea(
       child: Stack(
         children: [
-          Image.asset(
-            "assets/images/background.png",
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
+          Opacity(opacity: 0.5,
+            child: Image.asset(
+              "assets/images/background.png",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
           Scaffold(
             resizeToAvoidBottomInset: false,
@@ -308,7 +311,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                               items: imageSliders,
                             ),
-                            FractionalTranslation(                                      translation: Offset(0, -1.0),
+                            FractionalTranslation(                                      translation: Offset(0, -0.8),
 
                               child: Align(
                                 alignment: Alignment.centerLeft,
@@ -337,92 +340,99 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             (BuildContext context, int index) {
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Card(
-                                              color: backgroundColortransperent,
-                                              shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: golden, width: 1),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20)),
-                                              child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional.center,
-                                                children: [
-                                                  clubs[index]
-                                                          .carouselImages
-                                                          .isNotEmpty
-                                                      ? ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          child: Image.network(
-                                                            clubs[index]
-                                                                .carouselImages[0]
-                                                                .imageUrl,
-                                                            width: width / 1.5,
-                                                            height: height / 6,
-                                                            fit: BoxFit.fill,
+                                            child: InkWell(onTap: (){Navigator.of(context).push(
+                                                  FaidinTransitionPageRoute(
+                                                      child: ClubDetail(
+                                                    club: clubs[index],
+                                                  )),
+                                                );},
+                                              child: Card(
+                                                color: backgroundColortransperent,
+                                                shape: RoundedRectangleBorder(
+                                                    // side: BorderSide(
+                                                    //     color: golden, width: 1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(20)),
+                                                child: Stack(
+                                                  alignment:
+                                                      AlignmentDirectional.center,
+                                                  children: [
+                                                    clubs[index]
+                                                            .carouselImages
+                                                            .isNotEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                            child: Image.network(
+                                                              clubs[index]
+                                                                  .carouselImages[0]
+                                                                  .imageUrl,
+                                                              width: width / 1.5,
+                                                              height: height / 6,
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                          )
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                            child: Image.asset(
+                                                              "assets/images/Restaurants.jpg",
+                                                              fit: BoxFit.fill,
+                                                              width: width / 1.5,
+                                                              height: height / 6,
+                                                            ),
                                                           ),
-                                                        )
-                                                      : ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          child: Image.asset(
-                                                            "assets/images/Restaurants.jpg",
-                                                            fit: BoxFit.fill,
-                                                            width: width / 1.5,
-                                                            height: height / 6,
+                                                    Opacity(
+                                                      opacity: 0.5,
+                                                      child: Image.asset(
+                                                        "assets/images/black.png",
+                                                        width: width / 1.5,
+                                                        height: height / 6,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: width / 5,
+                                                          top: height / 20),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            clubs[index].name,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts
+                                                                .bebasNeue(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        height /
+                                                                            25),
                                                           ),
-                                                        ),
-                                                  Opacity(
-                                                    opacity: 0.5,
-                                                    child: Image.asset(
-                                                      "assets/images/black.png",
-                                                      width: width / 1.5,
-                                                      height: height / 6,
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: width / 5,
-                                                        top: height / 20),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          clubs[index].name,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: GoogleFonts
-                                                              .bebasNeue(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      height /
-                                                                          25),
-                                                        ),
-                                                        Text(
-                                                          "Starting from INR 999",
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      height /
-                                                                          50),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
+                                                          Text(
+                                                            "Starting from INR 999",
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts
+                                                                .sairaCondensed(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        height /
+                                                                            50),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           );
@@ -494,8 +504,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             child: Card(
                                               color: backgroundColortransperent,
                                               shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: golden, width: 1),
+                                                  // side: BorderSide(
+                                                  //     color: golden, width: 1),
                                                   borderRadius:
                                                       BorderRadius.circular(20)),
                                               child: Stack(
@@ -513,7 +523,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                             clubs[index]
                                                                 .carouselImages[0]
                                                                 .imageUrl,
-                                                            width: width / 1.5,
+                                                            width: width / 2.5,
                                                             height: height / 6,
                                                             fit: BoxFit.fill,
                                                           ),
@@ -525,7 +535,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                           child: Image.asset(
                                                             "assets/images/Restaurants.jpg",
                                                             fit: BoxFit.fill,
-                                                            width: width / 1.5,
+                                                            width: width / 2.5,
                                                             height: height / 6,
                                                           ),
                                                         ),
@@ -533,14 +543,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                     opacity: 0.5,
                                                     child: Image.asset(
                                                       "assets/images/black.png",
-                                                      width: width / 1.5,
+                                                      width: width / 2.5,
                                                       height: height / 6,
                                                       fit: BoxFit.fill,
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding: EdgeInsets.only(
-                                                        right: width / 5,
+                                                        right: width / 20,left: width/20,
                                                         top: height / 20),
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -559,7 +569,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                       .white,
                                                                   fontSize:
                                                                       height /
-                                                                          25),
+                                                                          35),
                                                         ),
                                                         Text(
                                                           "Starting from INR 999",

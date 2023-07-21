@@ -16,10 +16,7 @@ class PhoneAuth extends StatefulWidget {
   State<PhoneAuth> createState() => _PhoneAuthState();
 }
 
-
 class _PhoneAuthState extends State<PhoneAuth> {
-  String phoneNumber = "7378880544";
-  String countryCode = "+91";
   int minNumber = 1000;
   final TextEditingController phoneController = TextEditingController();
 
@@ -46,6 +43,22 @@ class _PhoneAuthState extends State<PhoneAuth> {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                "assets/images/phone1.png",
+                height: 150,
+                width: 150,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                height: height / 25,
+              ),
+              Text(
+                "Enter Your Phone Number",
+                style: GoogleFonts.bebasNeue(fontSize: 35, color: golden),
+              ),
+              SizedBox(
+                height: height / 35,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 22, right: 22, bottom: 8, top: 8),
@@ -79,6 +92,9 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: height / 35,
+              ),
               InkWell(
                 onTap: () {},
                 child: Padding(
@@ -93,14 +109,16 @@ class _PhoneAuthState extends State<PhoneAuth> {
                         load = !load;
                         selected = !selected;
                       });
-                      // bool sended = await Phoneauth.verifyPhoneNumber(
-                      //     "+91${phoneController.text}");
-                      // if (sended) {
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const PhoneAuthVerify()));
-                      // }
+                      bool sended = await Phoneauth.verifyPhoneNumber(
+                          "+91${phoneController.text}");
+                      if (sended) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PhoneAuthVerify(
+                                      pnController: phoneController,
+                                    )));
+                      }
                     },
                     child: AnimatedContainer(
                       width: selected ? width / 2 : height / 15,
@@ -156,8 +174,6 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   ),
                 ),
               ),
-          
-              
             ],
           ),
         ),

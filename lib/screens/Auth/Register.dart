@@ -1,5 +1,3 @@
-import 'package:email_auth/email_auth.dart';
-import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,15 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Services/Phone_Auth_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/Services/Auth_Services.dart';
+import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Auth/PhoneAuthVerify.dart';
 import 'package:venq_assessment/utils/Constants.dart';
-import 'package:email_auth/email_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Bookings/bookings_screen.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  SignUp({super.key, required this.pnController});
+  final TextEditingController pnController;
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -31,7 +30,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-  final TextEditingController pnController = TextEditingController();
   final TextEditingController confirmpasswordController =
       TextEditingController();
   Color getColor(Set<MaterialState> states) {
@@ -119,8 +117,8 @@ class _SignUpState extends State<SignUp> {
                                   customtextfieldcolor),
                               customtextfield(emailController, "Email",
                                   customtextfieldcolor),
-                              customtextfield(pnController, "Phone Number",
-                                  customtextfieldcolor),
+                              // customtextfield(pnController, "Phone Number",
+                              //     customtextfieldcolor),
                               customtextfield(passwordController, "Password",
                                   customtextfieldcolor),
                               customtextfield(confirmpasswordController,
@@ -208,28 +206,31 @@ class _SignUpState extends State<SignUp> {
                                         load = true;
                                         selected = false;
                                       });
-                                      bool sended = 
-                                      await Phoneauth.verifyPhoneNumber(
-                                          "+91${pnController.text}");
-                                      if (sended) {
-                                        // ignore: use_build_context_synchronously
+                                      // bool sended =
+                                      // await Phoneauth.verifyPhoneNumber(
+                                      //     "+91${pnController.text}");
+                                      // if (sended) {
+                                      // ignore: use_build_context_synchronously
+                                      bool registered = await AuthService()
+                                          .signUpUser(
+                                              context: context,
+                                              email:
+                                                  emailController.text.trim(),
+                                              password: passwordController.text
+                                                  .trim(),
+                                              firstName:
+                                                  firstnameController.text,
+                                              lastName: lastnameController.text,
+                                              phoneNumber:
+                                                  widget.pnController.text);
+                                      if (registered) {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PhoneAuthVerify(
-                                                      emailController:
-                                                          emailController,
-                                                      firstnameController:
-                                                          firstnameController,
-                                                      lastnameController:
-                                                          lastnameController,
-                                                      passwordController:
-                                                          passwordController,
-                                                      pnController:
-                                                          pnController,
-                                                    )));
+                                                    LoginPage()));
                                       }
+                                      // }
                                     },
                                     child: AnimatedContainer(
                                       width: selected

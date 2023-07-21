@@ -7,23 +7,25 @@ import 'package:venq_assessment/Services/Auth_Services.dart';
 import 'package:venq_assessment/Services/Phone_Auth_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
+import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 
 class PhoneAuthVerify extends StatefulWidget {
   PhoneAuthVerify(
       {super.key,
-      required this.emailController,
-      required this.firstnameController,
-      required this.lastnameController,
-      required this.passwordController,
-      required this.pnController});
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final TextEditingController firstnameController;
-  final TextEditingController lastnameController;
+      // required this.emailController,
+      // required this.firstnameController,
+      // required this.lastnameController,
+      // required this.passwordController,
+      required this.pnController
+      });
+  // final TextEditingController emailController;
+  // final TextEditingController passwordController;
+  // final TextEditingController firstnameController;
+  // final TextEditingController lastnameController;
   final TextEditingController pnController;
-  @override
+  // @override
   State<PhoneAuthVerify> createState() => _PhoneAuthVerifyState();
 }
 
@@ -214,13 +216,11 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                               otp5Controller.text+otp6Controller.text));
                       print(sended);
                       if (sended) {
-                        AuthService().signUpUser(
-                            context: context,
-                            email: widget.emailController.text.trim(),
-                            password: widget.passwordController.text.trim(),
-                            firstName: widget.firstnameController.text,
-                            lastName: widget.lastnameController.text,
-                            phoneNumber: widget.pnController.text);
+                         Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUp(pnController: widget.pnController,)));
                       }
                     },
                     child: AnimatedContainer(

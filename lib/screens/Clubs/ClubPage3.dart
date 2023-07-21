@@ -8,6 +8,7 @@ import 'package:venq_assessment/Models/UserModel.dart';
 import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 
 class ClubPage3 extends StatefulWidget {
@@ -121,7 +122,8 @@ class _ClubPage3State extends State<ClubPage3> {
                           color: const Color(0XFFB59F68),
                         ),
                       ),
-                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Column(
                           //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,8 +178,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                     Future.delayed(Duration(milliseconds: 2000),
                                         () {
                                       setState(() {
-                                      isclickpay = false;
-                                    });
+                                        isclickpay = false;
+                                      });
                                     });
                                     if (widget.bookingtable) {
                                       print(widget.bookingtable);
@@ -662,7 +664,8 @@ class _ClubPage3State extends State<ClubPage3> {
                           ),
                           child: Column(
                             children: [
-                              Row(mainAxisAlignment: MainAxisAlignment.center,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   // Column(
                                   //   crossAxisAlignment:
@@ -704,7 +707,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                   //   ),
                                   // ),
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 10.0),
+                                    padding:
+                                        const EdgeInsets.only(bottom: 10.0),
                                     child: Container(
                                       height: height / 19.26666666666667,
                                       width: width / 2.163157894736842,
@@ -713,142 +717,159 @@ class _ClubPage3State extends State<ClubPage3> {
                                           borderRadius:
                                               BorderRadius.circular(15.0)),
                                       child: Center(
-                                        child: InkWell(onTap: () {
-                                    setState(() {
-                                      isclickpay = true;
-                                    });
-                                    Future.delayed(Duration(milliseconds: 2000),
-                                        () {
-                                      setState(() {
-                                      isclickpay = false;
-                                    });
-                                    });
-                                    if (widget.bookingtable) {
-                                      print(widget.bookingtable);
-                                      List<Map<String, dynamic>> tablestickets =
-                                          [];
-                                      // for (var i = 0; i < widget.tableticketscount.length; i++) {
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              isclickpay = true;
+                                            });
+                                            Future.delayed(
+                                                Duration(milliseconds: 2000),
+                                                () {
+                                              setState(() {
+                                                isclickpay = false;
+                                              });
+                                            });
+                                            if (widget.bookingtable) {
+                                              print(widget.bookingtable);
+                                              List<Map<String, dynamic>>
+                                                  tablestickets = [];
+                                              // for (var i = 0; i < widget.tableticketscount.length; i++) {
 
-                                      //   if (widget.stagcount > 0) {
-                                      //   tickets.add({
-                                      //     "qty": widget.stagcount,
-                                      //     "ticket": widget.stagid
-                                      //   });
-                                      // }
-                                      // }
-                                      widget.tableticketscount
-                                          .forEach((ticket, count) {
-                                        if (count > 0) {
-                                          tablestickets.add({
-                                            "qty": count,
-                                            "table": ticket.id
-                                          });
-                                        }
-                                      });
-                                      Map<String, dynamic> requestBody = {
-                                        "tables": tablestickets,
-                                        "send_to": {
-                                          "phoneNumber": phoneController.text,
-                                          "email": emailController.text
-                                        },
-                                        "club": widget.club.id,
-                                        "date": formattedDate,
-                                        // "promo_code": widget.promocode,
-                                        "amount": 1
-                                        // widget.totalprice +
-                                        //     widget.totalprice * 4 / 100 +
-                                        //     gst18.floor()
-                                      };
-                                      OrderServices.placetableOrder(
-                                          context: context,
-                                          requestbody: requestBody);
-                                    } else {
-                                      List<Map<String, dynamic>> ordertickets =
-                                          [];
-                                      print(widget.stagcount);
-                                      widget.orderticketscount
-                                          .forEach((ticket, count) {
-                                        if (count > 0) {
-                                          ordertickets.add({
-                                            "qty": count,
-                                            "ticket": ticket.id
-                                          });
-                                        }
-                                      });
-                                      // if (widget.stagcount > 0) {
-                                      //   tickets.add({
-                                      //     "qty": widget.stagcount,
-                                      //     "ticket": widget.stagid
-                                      //   });
-                                      // }
+                                              //   if (widget.stagcount > 0) {
+                                              //   tickets.add({
+                                              //     "qty": widget.stagcount,
+                                              //     "ticket": widget.stagid
+                                              //   });
+                                              // }
+                                              // }
+                                              widget.tableticketscount
+                                                  .forEach((ticket, count) {
+                                                if (count > 0) {
+                                                  tablestickets.add({
+                                                    "qty": count,
+                                                    "table": ticket.id
+                                                  });
+                                                }
+                                              });
+                                              Map<String, dynamic> requestBody =
+                                                  {
+                                                "tables": tablestickets,
+                                                "send_to": {
+                                                  "phoneNumber":
+                                                      phoneController.text,
+                                                  "email": emailController.text
+                                                },
+                                                "club": widget.club.id,
+                                                "date": formattedDate,
+                                                // "promo_code": widget.promocode,
+                                                "amount": 1
+                                                // widget.totalprice +
+                                                //     widget.totalprice * 4 / 100 +
+                                                //     gst18.floor()
+                                              };
+                                              OrderServices.placetableOrder(
+                                                  context: context,
+                                                  requestbody: requestBody);
+                                            } else {
+                                              List<Map<String, dynamic>>
+                                                  ordertickets = [];
+                                              print(widget.stagcount);
+                                              widget.orderticketscount
+                                                  .forEach((ticket, count) {
+                                                if (count > 0) {
+                                                  ordertickets.add({
+                                                    "qty": count,
+                                                    "ticket": ticket.id
+                                                  });
+                                                }
+                                              });
+                                              // if (widget.stagcount > 0) {
+                                              //   tickets.add({
+                                              //     "qty": widget.stagcount,
+                                              //     "ticket": widget.stagid
+                                              //   });
+                                              // }
 
-                                      // if (widget.couplecount > 0) {
-                                      //   tickets.add({
-                                      //     "qty": widget.couplecount,
-                                      //     "ticket": widget.coupleid
-                                      //   });
-                                      // }
+                                              // if (widget.couplecount > 0) {
+                                              //   tickets.add({
+                                              //     "qty": widget.couplecount,
+                                              //     "ticket": widget.coupleid
+                                              //   });
+                                              // }
 
-                                      // if (widget.femalecount > 0) {
-                                      //   tickets.add({
-                                      //     "qty": widget.femalecount,
-                                      //     "ticket": widget.femaleid
-                                      //   });
-                                      // }
-                                      print(formattedDate);
-                                      Map<String, dynamic> requestBody = {
-                                        "tickets": ordertickets,
-                                        "send_to": {
-                                          "phoneNumber": phoneController.text,
-                                          "email": emailController.text
-                                        },
-                                        "club": widget.club.id,
-                                        "date": formattedDate,
-                                        // "promo_code": widget.promocode,
-                                        "amount": 1
-                                        // widget.totalprice +
-                                        //     widget.totalprice * 4 / 100 +
-                                        //     gst18.floor()
-                                      };
-                                      OrderServices.placeOrder(
-                                          context: context,
-                                          requestbody: requestBody);
-                                    }
-                                  },
-                                          child:!isclickpay? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                "Pay at Venue",
-                                                style: GoogleFonts.sairaCondensed(
-                                                    color:
-                                                        const Color(0XFF222222),
-                                                    fontSize: height / 43.35,
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                              FractionalTranslation(
-                                                translation: height < 700
-                                                    ? const Offset(0, -0.2)
-                                                    : const Offset(0, 0),
-                                                child: Text(
-                                                  (widget.totalprice +
-                                                          widget.totalpricewithoutcode *
-                                                              clubpersent /
-                                                              100 +
-                                                          gst18.floor())
-                                                      .toString(),
-                                                  style:
-                                                      GoogleFonts.sairaCondensed(
-                                                          color: const Color(
-                                                              0XFF222222),
-                                                          fontSize: width / 13.7,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ):CircularProgressIndicator(),
+                                              // if (widget.femalecount > 0) {
+                                              //   tickets.add({
+                                              //     "qty": widget.femalecount,
+                                              //     "ticket": widget.femaleid
+                                              //   });
+                                              // }
+                                              print(formattedDate);
+                                              Map<String, dynamic> requestBody =
+                                                  {
+                                                "tickets": ordertickets,
+                                                "send_to": {
+                                                  "phoneNumber":
+                                                      phoneController.text,
+                                                  "email": emailController.text
+                                                },
+                                                "club": widget.club.id,
+                                                "date": formattedDate,
+                                                // "promo_code": widget.promocode,
+                                                "amount": 1
+                                                // widget.totalprice +
+                                                //     widget.totalprice * 4 / 100 +
+                                                //     gst18.floor()
+                                              };
+                                              OrderServices.placeOrder(
+                                                  context: context,
+                                                  requestbody: requestBody);
+                                            }
+                                          },
+                                          child: !isclickpay
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Text(
+                                                      "Pay at Venue",
+                                                      style: GoogleFonts
+                                                          .sairaCondensed(
+                                                              color: const Color(
+                                                                  0XFF222222),
+                                                              fontSize: height /
+                                                                  43.35,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
+                                                    FractionalTranslation(
+                                                      translation: height < 700
+                                                          ? const Offset(
+                                                              0, -0.2)
+                                                          : const Offset(0, 0),
+                                                      child: Text(
+                                                        (widget.totalprice +
+                                                                widget.totalpricewithoutcode *
+                                                                    clubpersent /
+                                                                    100 +
+                                                                gst18.floor())
+                                                            .toString(),
+                                                        style: GoogleFonts
+                                                            .sairaCondensed(
+                                                                color: const Color(
+                                                                    0XFF222222),
+                                                                fontSize:
+                                                                    width /
+                                                                        13.7,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : CircularProgressIndicator(),
                                         ),
                                       ),
                                     ),
@@ -872,32 +893,51 @@ class _ClubPage3State extends State<ClubPage3> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: height / 43.35, left: width / 20.55),
-                                child: Text(
-                                  widget.club.name,
-                                  style: GoogleFonts.bebasNeue(
-                                    color: const Color(0XFFF0F0F3),
-                                    fontSize: height / 24.77142857142857,
-                                    fontWeight: FontWeight.w400,
+                              Row(mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: height / 43.35,
+                                        left: width / 20.55),
+                                    child: Text(
+                                      widget.club.name,
+                                      style: GoogleFonts.bebasNeue(
+                                        color: const Color(0XFFF0F0F3),
+                                        fontSize: height / 24.77142857142857,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: height / 43.35, left: width / 20.55),
-                                child: Text(
-                                  "Pune",
-                                  style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFB59F68),
-                                    fontSize: height / 54.1875,
-                                    fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: height / 43.35,
+                                        left: width / 20.55),
+                                    child: Text(
+                                      "Pune",
+                                      style: GoogleFonts.sairaCondensed(
+                                        color: const Color(0XFFB59F68),
+                                        fontSize: height / 54.1875,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
+                             
+                              Align(alignment: Alignment.center,
+                                child: IconButton(
+                                  icon: Icon(Icons.close),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => MyBookingPage()),
+                                        (route) => false);
+                                  },
+                                ),
+                              )
                             ],
                           ),
                           Row(
@@ -1089,6 +1129,7 @@ class _ClubPage3State extends State<ClubPage3> {
                 ),
               ]),
             )),
+            
       ],
     ));
   }
