@@ -119,6 +119,45 @@ class EventsServices {
     }
     return eventProvider.events;
   }
+  static Future<List<Event>> getmyrestoEvents({required BuildContext context}) async {
+    EventProvider eventProvider =
+        Provider.of<EventProvider>(context, listen: false);
+    try {
+      http.Response club = await http.get(
+        Uri.parse('${Constants.uri}resto/my-resto'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}'
+        },
+      );
+      final clubid = json.decode(club.body)['data'][0]['_id'];
+
+      http.Response res = await http.get(
+        Uri.parse('${Constants.uri}club/$clubid/events'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${Constants.usertoken}'
+        },
+      );
+      // print(res.body);
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            EventProvider eventProvider =
+                Provider.of<EventProvider>(context, listen: false);
+            final eventData = jsonDecode(res.body)['data'];
+            eventProvider.fetchEvents(eventData);
+
+            // showSnackBar(context, 'Events data fetched successfully');
+          });
+          print(eventProvider.events);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      print(e.toString());
+    }
+    return eventProvider.events;
+  }
 }
 
 class CreateEventmethod {
@@ -155,4 +194,5 @@ String eventid="";
     }
     return eventid;
   }
+  
 }

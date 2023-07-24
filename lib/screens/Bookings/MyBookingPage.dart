@@ -144,6 +144,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
       load = true;
     });
   }   List<ClubModel> clubs=Constants.allclubs;
+      List<ClubModel> restobars=Constants.allrestobar;
+
 
     // clubs=Constants.allclubs;
 
@@ -496,7 +498,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
                                         physics: ScrollPhysics(),
-                                        itemCount: min(clubs.length, 3),
+                                        itemCount: min(restobars.length, 3),
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
@@ -512,7 +514,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                 alignment:
                                                     AlignmentDirectional.center,
                                                 children: [
-                                                  clubs[index]
+                                                  restobars[index]
                                                           .carouselImages
                                                           .isNotEmpty
                                                       ? ClipRRect(
@@ -520,7 +522,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                               BorderRadius
                                                                   .circular(15),
                                                           child: Image.network(
-                                                            clubs[index]
+                                                            restobars[index]
                                                                 .carouselImages[0]
                                                                 .imageUrl,
                                                             width: width / 2.5,
@@ -560,7 +562,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          clubs[index].name,
+                                                          restobars[index].name,
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: GoogleFonts
