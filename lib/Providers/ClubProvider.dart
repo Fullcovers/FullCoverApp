@@ -63,7 +63,8 @@ class ClubProvider with ChangeNotifier {
   void setClubsData(List<dynamic> data) {
     clubsData = data
         .map((item) => ClubModel(
-            id: item.containsKey('_id') ? item['_id'] : '',
+            id: item.containsKey('_id') ? item['_id'] : '',            type_of: item.containsKey('type_of') ? item['type_of'] : '',
+
             user: item.containsKey('user') ? item['user'] : '',
             name: item.containsKey('name') ? item['name'] : '',
             description:
@@ -174,6 +175,7 @@ class ClubProvider with ChangeNotifier {
   ClubModel getClubDetails(Map<String, dynamic> item) {
     return ClubModel(
       id: item.containsKey('_id') ? item['_id'] : '',
+      type_of: item.containsKey('type_of') ? item['type_of'] : '',
       user: item.containsKey('user') ? item['user'] : '',
       name: item.containsKey('name') ? item['name'] : '',
       description: item.containsKey('description') ? item['description'] : '',

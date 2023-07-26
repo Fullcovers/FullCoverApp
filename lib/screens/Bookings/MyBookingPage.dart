@@ -1147,7 +1147,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                 padding: EdgeInsets.only(
                                                                     top:
                                                                         height /
-                                                                            3.6,
+                                                                            3.7,
                                                                     left: width /
                                                                         5.2),
                                                                 child:
@@ -1183,7 +1183,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                                 padding: EdgeInsets.only(
                                                                     top:
                                                                         height /
-                                                                            3.6,
+                                                                            3.7,
                                                                     left: width /
                                                                         2.3),
                                                                 child: Container(
@@ -1990,24 +1990,25 @@ class _MyBookingPageState extends State<MyBookingPage> {
                 child: Container(
                     child: Stack(
                   children: [
-                    Image.asset(
-                      Constants.backgroundimage,
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
-                    ),
+                    // Image.asset(
+                    //   Constants.backgroundimage,
+                    //   height: MediaQuery.of(context).size.height,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   fit: BoxFit.cover,
+                    // ),
+                    Container(height: 500,width:width ,color: Colors.black,),
                     Row(
                       children: [
                         Container(
                           width: width / 1.325806451612903,
                           height: 500,
                           decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Colors.black,
                           ),
                         ),
                         Container(
-                          width: width / 5.1375,
-                          height: height / 12.38571428571429,
+                          width: width / 5,
+                          height: height / 12,
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(

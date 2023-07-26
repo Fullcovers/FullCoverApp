@@ -332,7 +332,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
             height: 75,
             buttonBackgroundColor: golden,
             index: widget.initialindex,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.black,
             // widget.iscolorchange ? Colors.white : botoncolor,
             color: !widget.iscolorchange ? Colors.white : botoncolor,
             items: <Widget>[
@@ -470,7 +470,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       child: Container(
                         color: widget.iscolorchange
                             ? Colors.white
-                            : Colors.transparent,
+                            : Colors.black,
                         width: 11,
                         height: 80,
                       ),
@@ -523,7 +523,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                       child: Container(
                         color: widget.iscolorchange
                             ? Colors.white
-                            : Colors.transparent,
+                            : Colors.black,
                         width: 10,
                         height: 76,
                       ),
@@ -578,7 +578,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: Container(
                           color: !widget.iscolorchange
-                              ? Colors.transparent
+                              ? Colors.black
                               : Colors.white,
                           width: 20,
                           height: 76,
@@ -658,7 +658,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                 alignment: Alignment.bottomRight,
                 child: Container(
                   color:
-                      widget.iscolorchange ? Colors.white : Colors.transparent,
+                      widget.iscolorchange ? Colors.white : Colors.black,
                   width: widget.initialindex == 2 ? 5.15 : 10,
                   height: 80,
                 ),
@@ -682,7 +682,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   color:
-                      widget.iscolorchange ? Colors.white : Colors.transparent,
+                      widget.iscolorchange ? Colors.white : Colors.black,
                   width: widget.width,
                   height: 10,
                 ),

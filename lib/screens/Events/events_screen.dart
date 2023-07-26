@@ -134,7 +134,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg1.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -162,7 +162,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg2.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -190,7 +190,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg3.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -218,7 +218,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg4.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -246,7 +246,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg5.png")),
                               // ClipRRect(
                               //     borderRadius: BorderRadius.circular(10),
                               //     child: Opacity(
@@ -379,8 +379,16 @@ class _EventsScreenState extends State<EventsScreen> {
                     'assets/images/geners/Genre-List_05.png'),
                 genresbox(width, height, "Hip-Hop",
                     'assets/images/geners/Genre-List_02.png'),
-                genresbox(width, height, "Other",
+                      genresbox(width, height, "Other",
                     'assets/images/geners/Genre-List_06.png'),
+                //     genresbox(width, height, "Concerts",
+                //     'assets/images/geners/Genre-List_07.png'),
+                // genresbox(width, height, "Hip-Hop",
+                //     'assets/images/geners/Genre-List_08.png'),
+                // genresbox(width, height, "Other",
+                //     'assets/images/geners/Genre-List_09.png'),
+                //     genresbox(width, height, "Other",
+                //     'assets/images/geners/Genre-List_06.png'),
                 // Container(
                 //   height: height / 18.0625,
                 //   width: width / 1.1,

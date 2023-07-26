@@ -88,33 +88,33 @@ class _BTSRestoProfileState extends State<BTSRestoProfile> {
                           color: offwhite),
                     ),
 
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BTSEditProfile()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: Container(
-                          width: width / 3,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(),
-                              color: Color.fromARGB(255, 133, 132, 132)),
-                          child: Center(
-                              child: Text(
-                            "Edit Profile",
-                            style: GoogleFonts.sairaCondensed(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
-                                color: backgroundColorfigma),
-                          )),
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => BTSEditProfile()));
+                    //   },
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(top: 18.0),
+                    //     child: Container(
+                    //       width: width / 3,
+                    //       height: 50,
+                    //       decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(25),
+                    //           border: Border.all(),
+                    //           color: Color.fromARGB(255, 133, 132, 132)),
+                    //       child: Center(
+                    //           child: Text(
+                    //         "Edit Profile",
+                    //         style: GoogleFonts.sairaCondensed(
+                    //             fontWeight: FontWeight.w500,
+                    //             fontSize: 20,
+                    //             color: backgroundColorfigma),
+                    //       )),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: height / 20,
                     ),

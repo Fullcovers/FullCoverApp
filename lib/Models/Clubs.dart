@@ -58,7 +58,7 @@ class ClubModel {
   final String termsAndCondition;
   final List<String> events;
   final List<CarouselImageModel> carouselImages;
-  final List<SocialModel> socials;
+  final List<SocialModel> socials;final String type_of;
   final DateTime createdAt;
   final DateTime updatedAt;
   final List<String> tickets;
@@ -74,6 +74,7 @@ class ClubModel {
     required this.user,
     required this.name,
     required this.description,
+    required this.type_of,
     required this.address,
     required this.logo,
     required this.termsAndCondition,

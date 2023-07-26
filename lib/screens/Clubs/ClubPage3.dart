@@ -880,53 +880,247 @@ class _ClubPage3State extends State<ClubPage3> {
                           )),
                     ]),
               ),
-              body: Column(children: [
-                Container(
-                  height: height / 4,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(color: botoncolor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
+              body: Stack(
+                children: [
+                  
+                  Column(children: [
+                    Container(
+                      height: height / 4,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(color: botoncolor),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(mainAxisAlignment: MainAxisAlignment.start,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: height / 43.35,
+                                            left: width / 20.55),
+                                        child: Text(
+                                          widget.club.name,
+                                          style: GoogleFonts.bebasNeue(
+                                            color: const Color(0XFFF0F0F3),
+                                            fontSize: height / 24.77142857142857,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: height / 43.35,
+                                            left: width / 20.55),
+                                        child: Text(
+                                          "Pune",
+                                          style: GoogleFonts.sairaCondensed(
+                                            color: const Color(0XFFB59F68),
+                                            fontSize: height / 54.1875,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                 
+                                  
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.location_on_outlined),
+                                  ),
+                                  Container(
+                                    width: width / 1.2,
+                                    child: Text(
+                                      textAlign: TextAlign.left,
+                                      widget.club.address,
+                                      style: GoogleFonts.sairaCondensed(
+                                        fontSize: height / 61.92857142857143,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color(0XFFBCBCBC),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        top: height / 43.35,
-                                        left: width / 20.55),
+                                        top: 0.0, left: width / 20.55),
                                     child: Text(
-                                      widget.club.name,
-                                      style: GoogleFonts.bebasNeue(
-                                        color: const Color(0XFFF0F0F3),
-                                        fontSize: height / 24.77142857142857,
-                                        fontWeight: FontWeight.w400,
+                                      "${widget.weekday} ${widget.date} ${widget.month}, ${widget.year}",
+                                      style: GoogleFonts.sairaCondensed(
+                                        color: const Color(0XFFB59F68),
+                                        fontSize: width / 20.55,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        top: height / 43.35,
-                                        left: width / 20.55),
+                                        left: width / 20.55, top: 0.0),
                                     child: Text(
-                                      "Pune",
+                                      "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
                                       style: GoogleFonts.sairaCondensed(
-                                        color: const Color(0XFFB59F68),
-                                        fontSize: height / 54.1875,
+                                        color: const Color(0XFFFFFFFF),
+                                        fontSize: height / 61.92857142857143,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                             
-                              Align(alignment: Alignment.center,
+                            ],
+                          ),
+                          // FractionalTranslation(
+                          //   translation: const Offset(1.5, -1),
+                          //   child: IconButton(
+                          //       onPressed: () {},
+                          //       icon: const Icon(
+                          //         Icons.close,
+                          //         size: 24,
+                          //         color: Color(0XFFF0F0F3),
+                          //       )),
+                          // )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 20, left: 40.0, right: 40.0),
+                      child: Container(
+                        height: height / 4,
+                        width: double.maxFinite,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Where should we send you tickets",
+                              style: GoogleFonts.sairaCondensed(
+                                color: const Color(0XFFFFFFFF),
+                                fontSize: height / 43.35,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, bottom: 10),
+                              child: Container(
+                                height: height / 15,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xFF2C2F33),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    )),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 10, bottom: 10),
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      height: height / 15,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF2C2F33),
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          FractionalTranslation(
+                                            translation: const Offset(0, -0.5),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 10),
+                                              child: Text(
+                                                '+91',
+                                                style: GoogleFonts.sairaCondensed(
+                                                  color: const Color(0XFFFFFFFF),
+                                                  fontSize: height / 43.35,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const VerticalDivider(
+                                            color: Color(0XFF494E58),
+                                            thickness: 1,
+                                          ),
+                                          Expanded(
+                                            child: FractionalTranslation(
+                                              translation: const Offset(0, -0.32),
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                child: TextFormField(
+                                                  controller: phoneController,
+                                                  style: GoogleFonts.sairaCondensed(
+                                                    color: const Color(0XFFFFFFFF),
+                                                    fontSize: height / 43.35,
+                                                  ),
+                                                  keyboardType: TextInputType.phone,
+                                                  decoration: InputDecoration(
+                                                    hintText: 'Phone Number',
+                                                    hintStyle:
+                                                        GoogleFonts.sairaCondensed(
+                                                      color:
+                                                          const Color(0XFFFFFFFF),
+                                                    ),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: height / 15,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFF2C2F33),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                  )),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: TextFormField(
+                                  controller: emailController,
+                                  style: GoogleFonts.sairaCondensed(
+                                    color: const Color(0XFFFFFFFF),
+                                    fontSize: height / 43.35,
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    hintText: 'Email',
+                                    hintStyle: GoogleFonts.sairaCondensed(
+                                      color: const Color(0XFFFFFFFF),
+                                    ),
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ]),
+                Align(alignment: Alignment.topRight,
                                 child: IconButton(
                                   icon: Icon(Icons.close),
                                   color: Colors.white,
@@ -937,197 +1131,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                         (route) => false);
                                   },
                                 ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.location_on_outlined),
-                              ),
-                              Container(
-                                width: width / 1.2,
-                                child: Text(
-                                  textAlign: TextAlign.left,
-                                  widget.club.address,
-                                  style: GoogleFonts.sairaCondensed(
-                                    fontSize: height / 61.92857142857143,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0XFFBCBCBC),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 0.0, left: width / 20.55),
-                                child: Text(
-                                  "${widget.weekday} ${widget.date} ${widget.month}, ${widget.year}",
-                                  style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFB59F68),
-                                    fontSize: width / 20.55,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: width / 20.55, top: 0.0),
-                                child: Text(
-                                  "${widget.club.timings.opensAt != '' ? "${widget.club.timings.opensAt} Hrs" : '19:00 Hrs'} - ${widget.club.timings.closesAt != '' ? "${widget.club.timings.closesAt} Hrs" : "23.45 Hrs"}",
-                                  style: GoogleFonts.sairaCondensed(
-                                    color: const Color(0XFFFFFFFF),
-                                    fontSize: height / 61.92857142857143,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      // FractionalTranslation(
-                      //   translation: const Offset(1.5, -1),
-                      //   child: IconButton(
-                      //       onPressed: () {},
-                      //       icon: const Icon(
-                      //         Icons.close,
-                      //         size: 24,
-                      //         color: Color(0XFFF0F0F3),
-                      //       )),
-                      // )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 20, bottom: 20, left: 40.0, right: 40.0),
-                  child: Container(
-                    height: height / 4,
-                    width: double.maxFinite,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Where should we send you tickets",
-                          style: GoogleFonts.sairaCondensed(
-                            color: const Color(0XFFFFFFFF),
-                            fontSize: height / 43.35,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 10),
-                          child: Container(
-                            height: height / 15,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF2C2F33),
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: Colors.white,
-                                )),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
-                              child: SingleChildScrollView(
-                                child: Container(
-                                  height: height / 15,
-                                  width: double.maxFinite,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF2C2F33),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      FractionalTranslation(
-                                        translation: const Offset(0, -0.5),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Text(
-                                            '+91',
-                                            style: GoogleFonts.sairaCondensed(
-                                              color: const Color(0XFFFFFFFF),
-                                              fontSize: height / 43.35,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const VerticalDivider(
-                                        color: Color(0XFF494E58),
-                                        thickness: 1,
-                                      ),
-                                      Expanded(
-                                        child: FractionalTranslation(
-                                          translation: const Offset(0, -0.32),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: TextFormField(
-                                              controller: phoneController,
-                                              style: GoogleFonts.sairaCondensed(
-                                                color: const Color(0XFFFFFFFF),
-                                                fontSize: height / 43.35,
-                                              ),
-                                              keyboardType: TextInputType.phone,
-                                              decoration: InputDecoration(
-                                                hintText: 'Phone Number',
-                                                hintStyle:
-                                                    GoogleFonts.sairaCondensed(
-                                                  color:
-                                                      const Color(0XFFFFFFFF),
-                                                ),
-                                                border: InputBorder.none,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: height / 15,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF2C2F33),
-                              borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: TextFormField(
-                              controller: emailController,
-                              style: GoogleFonts.sairaCondensed(
-                                color: const Color(0XFFFFFFFF),
-                                fontSize: height / 43.35,
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                hintText: 'Email',
-                                hintStyle: GoogleFonts.sairaCondensed(
-                                  color: const Color(0XFFFFFFFF),
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
+                              ),],
+              ),
             )),
             
       ],

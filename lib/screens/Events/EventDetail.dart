@@ -211,7 +211,7 @@ class _EventDetailState extends State<EventDetail> {
                           ),
                         ),
                         FractionalTranslation(
-                          translation: const Offset(0, -0.14),
+                          translation: const Offset(0, -0.35),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -221,27 +221,30 @@ class _EventDetailState extends State<EventDetail> {
                                   clubprovider.club?.name ?? "",
                                   style: GoogleFonts.bebasNeue(
                                     color: const Color(0XFFB59F68),
-                                    fontSize: 32,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 25.0),
-                                child: Container(
-                                  height: 55,
-                                  width: 55,
-                                  decoration: BoxDecoration(
-                                      color: backgroundColorfigma,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.location_on_outlined,
-                                        color: Colors.white,
-                                        size: 40,
-                                      )),
+                              FractionalTranslation(                          translation: const Offset(0, 0.35),
+
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 25.0),
+                                  child: Container(
+                                    height: 55,
+                                    width: 55,
+                                    decoration: BoxDecoration(
+                                        color: backgroundColorfigma,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.location_on_outlined,
+                                          color: Colors.white,
+                                          size: 40,
+                                        )),
+                                  ),
                                 ),
                               )
                             ],
