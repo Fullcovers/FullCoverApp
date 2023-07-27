@@ -565,7 +565,7 @@ class _WalkinsState extends State<Walkins> {
                                 ),
                                 keyboardType: TextInputType.phone,
                                 decoration: InputDecoration(
-                                  hintText: 'Cover Points',
+                                  hintText: 'Cover',
                                   hintStyle: GoogleFonts.sairaCondensed(
                                     color: const Color(0XFFAFAFAF),
                                   ),

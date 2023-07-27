@@ -55,7 +55,7 @@ class _CreateEventState extends State<CreateEvent> {
   TimeOfDay endtime =
       TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
   Map<String, dynamic> EventTickets = {};
-
+String? dropdownvalue = 'Item 1';   
   @override
   Widget build(BuildContext context) {
     final hours = time.hour.toString().padLeft(2, "0");
@@ -66,6 +66,20 @@ class _CreateEventState extends State<CreateEvent> {
 
     var widthofs = MediaQuery.of(context).size.width;
     var heightofs = MediaQuery.of(context).size.height;
+     var items = [    
+    "Bass music",
+"Disco",
+"Drum and Bass",
+"Dubstep",
+"EDM",
+"Jungle",
+"Hardcore",
+"House",
+"Techno",
+"Trance",
+"Garage",
+  ];  
+
     return SafeArea(
         child: Stack(
           children: [
@@ -98,6 +112,58 @@ class _CreateEventState extends State<CreateEvent> {
                             customtextfield(namecontroller, "Name", Colors.green),
                             customtextfield(
                                 desccontroller, "Description", Colors.green),
+                                SizedBox(height: heightofs/20,),
+                                Padding(
+                          padding: const EdgeInsets.only(
+                              top: 0, bottom: 20, left: 60, right: 60),
+                          child: Container(
+                            height: heightofs / 20,
+                            width: double.maxFinite,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(34, 34, 34, 0.37),
+                              borderRadius: BorderRadius.circular(15.0),
+                              border: Border.all(
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                        width: widthofs - widthofs / 2.1,
+                                        child: DropdownButton(
+                                          // Initial Value
+                                          value: dropdownvalue,
+                                          style: GoogleFonts.bebasNeue(
+                                              fontSize: 20, color: Colors.white),
+                                          dropdownColor: Colors.black,
+
+                                          // Down Arrow Icon
+                                          icon:
+                                              const Icon(Icons.keyboard_arrow_down),
+
+                                          // Array list of items
+                                          items: items.map((String entry) {
+                                            return DropdownMenuItem<String>(
+                                              value: entry,
+                                              child: Text(entry),
+                                            );
+                                          }).toList(),
+                                          hint: const Text('Select an item'),
+
+                                          // After selecting the desired option,it will
+                                          // change button value to selected value
+                                          onChanged: (value) {
+                                            setState(() {
+                                              dropdownvalue = value;
+                                            });
+                                          },
+                                        ),
+                                      )
+                              ],
+                            ),
+                          ),
+                        ),
                             Padding(
                               padding: EdgeInsets.only(top: 20),
                               child: Container(
@@ -263,57 +329,57 @@ class _CreateEventState extends State<CreateEvent> {
                             SizedBox(
                               height: 20,
                             ),
-                            GestureDetector(
-                              onTap: () {
+                            // GestureDetector(
+                            //   onTap: () {
                             
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0, left: 50, right: 50, bottom: 20.0),
-                                child: Container(
-                                  height: heightofs / 20,
-                                  width: double.maxFinite,
-                                  decoration: const BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromARGB(255, 202, 196, 196),
-                                        blurRadius: 10,
-                                        spreadRadius: -2,
-                                        offset: Offset(-2, -2),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 20,
-                                        spreadRadius: -2,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                    color: Color(0xFF2D3135),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20.0),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10.0, right: 20.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Add Tickets",
-                                              style: GoogleFonts.bebasNeue(
-                                                  fontSize: 20, color: golden),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            //   },
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.only(
+                            //         top: 0.0, left: 50, right: 50, bottom: 20.0),
+                            //     child: Container(
+                            //       height: heightofs / 20,
+                            //       width: double.maxFinite,
+                            //       decoration: const BoxDecoration(
+                            //         boxShadow: [
+                            //           BoxShadow(
+                            //             color: Color.fromARGB(255, 202, 196, 196),
+                            //             blurRadius: 10,
+                            //             spreadRadius: -2,
+                            //             offset: Offset(-2, -2),
+                            //           ),
+                            //           BoxShadow(
+                            //             color: Colors.black,
+                            //             blurRadius: 20,
+                            //             spreadRadius: -2,
+                            //             offset: Offset(2, 2),
+                            //           ),
+                            //         ],
+                            //         color: Color(0xFF2D3135),
+                            //         borderRadius: BorderRadius.all(
+                            //           Radius.circular(20.0),
+                            //         ),
+                            //       ),
+                            //       child: Column(
+                            //         children: [
+                            //           Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 10.0, right: 20.0),
+                            //             child: Row(
+                            //               mainAxisAlignment: MainAxisAlignment.center,
+                            //               children: [
+                            //                 Text(
+                            //                   "Add Tickets",
+                            //                   style: GoogleFonts.bebasNeue(
+                            //                       fontSize: 20, color: golden),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             GestureDetector(
                               onTap: ()async {
                               String myeventid= await CreateEventmethod.createeventfunction(

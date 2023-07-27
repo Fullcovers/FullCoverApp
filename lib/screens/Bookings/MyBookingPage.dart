@@ -128,7 +128,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
     print("porders");
     porders = await OrderServices.getAllOrderhistory(context: context);
     print(porders);
-    
+
     if (porders['data'].isNotEmpty) {
       // String ticketId = porders['data'][0]['_id'];
       // print(ticketId);
@@ -143,11 +143,12 @@ class _MyBookingPageState extends State<MyBookingPage> {
     setState(() {
       load = true;
     });
-  }   List<ClubModel> clubs=Constants.allclubs;
-      List<ClubModel> restobars=Constants.allrestobar;
+  }
 
+  List<ClubModel> clubs = Constants.allclubs;
+  List<ClubModel> restobars = Constants.allrestobar;
 
-    // clubs=Constants.allclubs;
+  // clubs=Constants.allclubs;
 
   bool lodedclub = true;
   // getclubs() async {
@@ -179,7 +180,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
     return SafeArea(
       child: Stack(
         children: [
-          Opacity(opacity: 0.5,
+          Opacity(
+            opacity: 0.5,
             child: Image.asset(
               "assets/images/background.png",
               height: MediaQuery.of(context).size.height,
@@ -313,8 +315,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                               items: imageSliders,
                             ),
-                            FractionalTranslation(                                      translation: Offset(0, -0.8),
-
+                            FractionalTranslation(
+                              translation: Offset(0, -0.8),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
@@ -328,9 +330,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                             ),
                             lodedclub
-                                ? FractionalTranslation(                                      translation: Offset(0, -0.3),
-
-                                  child: Container(
+                                ? FractionalTranslation(
+                                    translation: Offset(0, -0.3),
+                                    child: Container(
                                       width: width,
                                       height: height / 6,
                                       child: ListView.builder(
@@ -342,22 +344,28 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             (BuildContext context, int index) {
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: InkWell(onTap: (){Navigator.of(context).push(
+                                            child: InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
                                                   FaidinTransitionPageRoute(
                                                       child: ClubDetail(
                                                     club: clubs[index],
                                                   )),
-                                                );},
+                                                );
+                                              },
                                               child: Card(
-                                                color: backgroundColortransperent,
+                                                color:
+                                                    backgroundColortransperent,
                                                 shape: RoundedRectangleBorder(
                                                     // side: BorderSide(
                                                     //     color: golden, width: 1),
                                                     borderRadius:
-                                                        BorderRadius.circular(20)),
+                                                        BorderRadius.circular(
+                                                            20)),
                                                 child: Stack(
                                                   alignment:
-                                                      AlignmentDirectional.center,
+                                                      AlignmentDirectional
+                                                          .center,
                                                   children: [
                                                     clubs[index]
                                                             .carouselImages
@@ -365,25 +373,33 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                         ? ClipRRect(
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(15),
-                                                            child: Image.network(
+                                                                    .circular(
+                                                                        15),
+                                                            child:
+                                                                Image.network(
                                                               clubs[index]
-                                                                  .carouselImages[0]
+                                                                  .carouselImages[
+                                                                      0]
                                                                   .imageUrl,
-                                                              width: width / 1.5,
-                                                              height: height / 6,
+                                                              width:
+                                                                  width / 1.5,
+                                                              height:
+                                                                  height / 6,
                                                               fit: BoxFit.fill,
                                                             ),
                                                           )
                                                         : ClipRRect(
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(15),
+                                                                    .circular(
+                                                                        15),
                                                             child: Image.asset(
                                                               "assets/images/Restaurants.jpg",
                                                               fit: BoxFit.fill,
-                                                              width: width / 1.5,
-                                                              height: height / 6,
+                                                              width:
+                                                                  width / 1.5,
+                                                              height:
+                                                                  height / 6,
                                                             ),
                                                           ),
                                                     Opacity(
@@ -401,7 +417,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                                           top: height / 20),
                                                       child: Column(
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment.start,
+                                                            MainAxisAlignment
+                                                                .start,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
@@ -441,14 +458,14 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                         },
                                       ),
                                     ),
-                                )
+                                  )
                                 : Container(
                                     width: width / 1.5,
                                     height: height / 6,
                                     child: Constants
                                         .mycircularProgressIndicator()),
-                            FractionalTranslation(                                      translation: Offset(0, -0.8),
-
+                            FractionalTranslation(
+                              translation: Offset(0, -0.8),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
@@ -470,12 +487,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           Border.all(color: golden, width: 1)),
                                   child: Text("See More",
                                       style: GoogleFonts.sairaCondensed(
-                                          color: golden, fontSize: height / 50)),
+                                          color: golden,
+                                          fontSize: height / 50)),
                                 ),
                               ),
                             ),
-                            FractionalTranslation(                                      translation: Offset(0, -1.9),
-
+                            FractionalTranslation(
+                              translation: Offset(0, -1.9),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
@@ -489,9 +507,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               ),
                             ),
                             lodedclub
-                                ? FractionalTranslation(                                      translation: Offset(0, -0.5),
-
-                                  child: Container(
+                                ? FractionalTranslation(
+                                    translation: Offset(0, -0.5),
+                                    child: Container(
                                       width: width,
                                       height: height / 6,
                                       child: ListView.builder(
@@ -503,106 +521,119 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                             (BuildContext context, int index) {
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Card(
-                                              color: backgroundColortransperent,
-                                              shape: RoundedRectangleBorder(
-                                                  // side: BorderSide(
-                                                  //     color: golden, width: 1),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20)),
-                                              child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional.center,
-                                                children: [
-                                                  restobars[index]
-                                                          .carouselImages
-                                                          .isNotEmpty
-                                                      ? ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          child: Image.network(
-                                                            restobars[index]
-                                                                .carouselImages[0]
-                                                                .imageUrl,
-                                                            width: width / 2.5,
-                                                            height: height / 6,
-                                                            fit: BoxFit.fill,
+                                            child: InkWell(onTap: () {
+                                                Navigator.of(context).push(
+                                                  FaidinTransitionPageRoute(
+                                                      child: ClubDetail(
+                                                    club: restobars[index],
+                                                  )),
+                                                );
+                                              },
+                                              child: Card(
+                                                color: backgroundColortransperent,
+                                                shape: RoundedRectangleBorder(
+                                                    // side: BorderSide(
+                                                    //     color: golden, width: 1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Stack(
+                                                  alignment:
+                                                      AlignmentDirectional.center,
+                                                  children: [
+                                                    restobars[index]
+                                                            .carouselImages
+                                                            .isNotEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                            child: Image.network(
+                                                              restobars[index]
+                                                                  .carouselImages[
+                                                                      0]
+                                                                  .imageUrl,
+                                                              width: width / 2.5,
+                                                              height: height / 6,
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                          )
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                            child: Image.asset(
+                                                              "assets/images/Restaurants.jpg",
+                                                              fit: BoxFit.fill,
+                                                              width: width / 2.5,
+                                                              height: height / 6,
+                                                            ),
                                                           ),
-                                                        )
-                                                      : ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                          child: Image.asset(
-                                                            "assets/images/Restaurants.jpg",
-                                                            fit: BoxFit.fill,
-                                                            width: width / 2.5,
-                                                            height: height / 6,
+                                                    Opacity(
+                                                      opacity: 0.5,
+                                                      child: Image.asset(
+                                                        "assets/images/black.png",
+                                                        width: width / 2.5,
+                                                        height: height / 6,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: width / 20,
+                                                          left: width / 20,
+                                                          top: height / 20),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            restobars[index].name,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts
+                                                                .bebasNeue(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        height /
+                                                                            35),
                                                           ),
-                                                        ),
-                                                  Opacity(
-                                                    opacity: 0.5,
-                                                    child: Image.asset(
-                                                      "assets/images/black.png",
-                                                      width: width / 2.5,
-                                                      height: height / 6,
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: width / 20,left: width/20,
-                                                        top: height / 20),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          restobars[index].name,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: GoogleFonts
-                                                              .bebasNeue(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      height /
-                                                                          35),
-                                                        ),
-                                                        Text(
-                                                          "Starting from INR 999",
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: GoogleFonts
-                                                              .sairaCondensed(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      height /
-                                                                          50),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
+                                                          Text(
+                                                            "Starting from INR 999",
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts
+                                                                .sairaCondensed(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        height /
+                                                                            50),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           );
                                         },
                                       ),
                                     ),
-                                )
+                                  )
                                 : Container(
                                     width: width / 1.5,
                                     height: height / 6,
                                     child: Constants
                                         .mycircularProgressIndicator()),
-                            FractionalTranslation(                                      translation: Offset(0, -1.3),
-
+                            FractionalTranslation(
+                              translation: Offset(0, -1.3),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
@@ -624,7 +655,8 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                           Border.all(color: golden, width: 1)),
                                   child: Text("See More",
                                       style: GoogleFonts.sairaCondensed(
-                                          color: golden, fontSize: height / 50)),
+                                          color: golden,
+                                          fontSize: height / 50)),
                                 ),
                               ),
                             ),
@@ -1996,7 +2028,11 @@ class _MyBookingPageState extends State<MyBookingPage> {
                     //   width: MediaQuery.of(context).size.width,
                     //   fit: BoxFit.cover,
                     // ),
-                    Container(height: 500,width:width ,color: Colors.black,),
+                    Container(
+                      height: 500,
+                      width: width,
+                      color: Colors.black,
+                    ),
                     Row(
                       children: [
                         Container(
