@@ -8,6 +8,7 @@ import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/screens/Events/StoryView.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/eventcard.dart';
 import 'package:venq_assessment/widgets/CustumPageRoute.dart';
@@ -62,6 +63,7 @@ class _EventsScreenState extends State<EventsScreen> {
     }
   }
 
+List<String> imageurls=[];
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -103,10 +105,18 @@ class _EventsScreenState extends State<EventsScreen> {
                           // width: width / 4.28125,
                           child: Stack(
                             children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                              InkWell(onTap: () {
+                                Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                     MoreStories()));
+                              },
+                                child: CircleAvatar(
+                                    radius: 35,
+                                    backgroundImage:
+                                        AssetImage("assets/images/clubimg.png")),
+                              ),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -134,7 +144,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg1.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -162,7 +172,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg2.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -190,7 +200,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg3.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -218,7 +228,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg4.png")),
                               // CircleAvatar(radius: 100,
                               //     child: Opacity(
                               //         opacity: 0.5,
@@ -246,7 +256,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      AssetImage("assets/images/clubimg.png")),
+                                      AssetImage("assets/images/clubimg5.png")),
                               // ClipRRect(
                               //     borderRadius: BorderRadius.circular(10),
                               //     child: Opacity(
@@ -379,8 +389,16 @@ class _EventsScreenState extends State<EventsScreen> {
                     'assets/images/geners/Genre-List_05.png'),
                 genresbox(width, height, "Hip-Hop",
                     'assets/images/geners/Genre-List_02.png'),
-                genresbox(width, height, "Other",
+                      genresbox(width, height, "Other",
                     'assets/images/geners/Genre-List_06.png'),
+                //     genresbox(width, height, "Concerts",
+                //     'assets/images/geners/Genre-List_07.png'),
+                // genresbox(width, height, "Hip-Hop",
+                //     'assets/images/geners/Genre-List_08.png'),
+                // genresbox(width, height, "Other",
+                //     'assets/images/geners/Genre-List_09.png'),
+                //     genresbox(width, height, "Other",
+                //     'assets/images/geners/Genre-List_06.png'),
                 // Container(
                 //   height: height / 18.0625,
                 //   width: width / 1.1,
@@ -468,7 +486,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                     child: Text(
                                         selectedDate != null
                                             ? formatDate(selectedDate)
-                                            : "Select Date",
+                                            : formatDate(DateTime.now()),
                                         style: GoogleFonts.sairaCondensed(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -544,9 +562,9 @@ class _EventsScreenState extends State<EventsScreen> {
                                           left: 10.0, bottom: 16),
                                       child: GestureDetector(
                                         onTap: () async {
-                                          await ClubServices().getSingleClub(
-                                              clubid: event.clubId,
-                                              context: context);
+                                          // await ClubServices().getSingleClub(
+                                          //     clubid: event.clubId,
+                                          //     context: context);
                                           Navigator.of(context).push(
                                               ScaleTransitionPageRoute(
                                                   child: EventDetail(
@@ -566,6 +584,150 @@ class _EventsScreenState extends State<EventsScreen> {
                 ),
               ),
             ),
+            // SizedBox(height: height/20,),
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top: 8.0),
+            //     child: Container(
+            //       decoration: BoxDecoration(
+            //           color: Colors.grey.shade700 .withOpacity(0.4),
+            //           borderRadius: BorderRadius.circular(20)),
+            //       child: Column(
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.only(left: 16.0, top: 8),
+            //                 child: Text("Upcoming Today",
+            //                     style: GoogleFonts.bebasNeue(
+            //                       fontSize: 18,
+            //                       color: Colors.white,
+            //                     )),
+            //               ),
+            //               // Padding(
+            //               //   padding: EdgeInsets.only(
+            //               //       top: 20, bottom: 20, left: 60, right: 10),
+            //               //   child: Container(
+            //               //     height: height / 20,
+            //               //     width: width / 2.5,
+            //               //     decoration: BoxDecoration(
+            //               //       color: Colors.black,
+            //               //       borderRadius: BorderRadius.circular(15.0),
+            //               //       border: Border.all(
+            //               //         color: Colors.white,
+            //               //       ),
+            //               //     ),
+            //               //     child: Row(
+            //               //       mainAxisAlignment:
+            //               //           MainAxisAlignment.spaceBetween,
+            //               //       children: [
+            //               //         Padding(
+            //               //           padding: const EdgeInsets.only(
+            //               //             left: 20.0,
+            //               //           ),
+            //               //           child: Text(
+            //               //               selectedDate != null
+            //               //                   ? formatDate(selectedDate)
+            //               //                   : "Select Date",
+            //               //               style: GoogleFonts.sairaCondensed(
+            //               //                 fontSize: 16,
+            //               //                 fontWeight: FontWeight.w600,
+            //               //                 color: Colors.white,
+            //               //               )),
+            //               //         ),
+            //               //         Padding(
+            //               //           padding: const EdgeInsets.only(right: 10.0),
+            //               //           child: IconButton(
+            //               //             onPressed: () {
+            //               //               _selectDate(
+            //               //                   context); // Show the date picker on icon press
+            //               //             },
+            //               //             icon: const Icon(
+            //               //               Icons.calendar_today_outlined,
+            //               //               color: Colors.white,
+            //               //               size: 20,
+            //               //             ),
+            //               //           ),
+            //               //         ),
+            //               //       ],
+            //               //     ),
+            //               //   ),
+            //               // ),
+            //             ],
+            //           ),
+            //           Container(
+            //               height: height / 6,
+            //               width: width,
+            //               decoration:  BoxDecoration(
+            //           color: Colors.grey.shade900.withOpacity(0.4),
+            //           borderRadius: BorderRadius.circular(20)),
+            //               child: FutureBuilder<List<Event>>(
+            //                 future:
+            //                     EventsServices().getAllEvents(context: context),
+            //                 builder: (context, snapshot) {
+            //                   if (snapshot.connectionState ==
+            //                       ConnectionState.waiting) {
+            //                     return Center(
+            //                       child: SizedBox(
+            //                           height: height / 21.675,
+            //                           width: width / 10.275,
+            //                           child: Constants
+            //                               .mycircularProgressIndicator()),
+            //                     );
+            //                   } else if (snapshot.hasError) {
+            //                     return Text('Error: ${snapshot.error}');
+            //                   } else {
+            //                     final eventsData = snapshot.data!;
+            //                     var eventdatabydate = [];
+            //                     if (eventsData.isNotEmpty) {
+            //                       for (var i = 0; i < eventsData.length; i++) {
+            //                         var date = selectedDate == null
+            //                             ? formatDate(DateTime.now())
+            //                             : formatDate(selectedDate);
+            //                         if (eventsData[i]
+            //                                 .date
+            //                                 .toString()
+            //                                 .substring(0, 10) ==
+            //                             date) {
+            //                           eventdatabydate.add(eventsData[i]);
+            //                         }
+            //                       }
+            //                     }
+            //                     return ListView.builder(
+            //                       scrollDirection: Axis.horizontal,
+            //                       itemCount: eventdatabydate.length,
+            //                       itemBuilder: (context, index) {
+            //                         final Event event = eventdatabydate[index];
+
+            //                         return Padding(
+            //                           padding: const EdgeInsets.only(
+            //                               left: 10.0, bottom: 16),
+            //                           child: GestureDetector(
+            //                             onTap: () async {
+            //                               await ClubServices().getSingleClub(
+            //                                   clubid: event.clubId,
+            //                                   context: context);
+            //                               Navigator.of(context).push(
+            //                                   ScaleTransitionPageRoute(
+            //                                       child: EventDetail(
+            //                                           event: event)));
+            //                             },
+            //                             child:
+            //                                 myeventcard(height, width, event),
+            //                           ),
+            //                         );
+            //                       },
+            //                     );
+            //                   }
+            //                 },
+            //               )),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             // ),
             SizedBox(
               height: height / 20,

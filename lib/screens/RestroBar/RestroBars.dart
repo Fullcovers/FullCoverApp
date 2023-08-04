@@ -18,11 +18,12 @@ class Restrobars extends StatefulWidget {
   State<Restrobars> createState() => _RestrobarsState();
 }
 
-class _RestrobarsState extends State<Restrobars> {  List<ClubModel> clubsData = Constants.allclubs;
+class _RestrobarsState extends State<Restrobars> {
+  List<ClubModel> restobars = Constants.allrestobar;
 
   @override
   Widget build(BuildContext context) {
-      double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double overlapFraction = 0.5;
     return SafeArea(
@@ -64,7 +65,8 @@ class _RestrobarsState extends State<Restrobars> {  List<ClubModel> clubsData = 
                           height: 4.8 * height / 6,
                           width: width,
                           decoration: BoxDecoration(color: Colors.transparent),
-                          child: ListView.builder(itemCount: 1,
+                          child: ListView.builder(
+                            itemCount: 1,
                             // future: ClubServices.getAllClubs(context: context),
                             itemBuilder: (context, snapshot) {
                               // if (snapshot.connectionState ==
@@ -86,14 +88,15 @@ class _RestrobarsState extends State<Restrobars> {  List<ClubModel> clubsData = 
                                 padding: const EdgeInsets.all(8.0),
                                 child: SizedBox(
                                   width: width / 1.3,
-                                  height: height /1.4,
+                                  height: height / 1.4,
                                   child: ListView.builder(
-                                    itemCount: clubsData.length,
+                                    itemCount: restobars.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      final ClubModel club = clubsData[index];
+                                      final ClubModel club = restobars[index];
                                       return Column(
                                         children: [
+                                          // Text(club.type_of,style: TextStyle(color: Colors.white),),
                                           InkWell(
                                               onTap: () {
                                                 Navigator.of(context).push(
@@ -176,6 +179,7 @@ class _RestrobarsState extends State<Restrobars> {  List<ClubModel> clubsData = 
           ),
         ],
       ),
-    );;
+    );
+    ;
   }
 }

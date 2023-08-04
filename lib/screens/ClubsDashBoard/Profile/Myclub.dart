@@ -19,7 +19,8 @@ class _MyClubState extends State<MyClub> {
   late ClubModel? club;
   bool isloded = false;
   loadclub() async {
-    club = await BTSClubServices.btsgetSingleClub(context: context);
+    await      BTSClubServices.btsgetSingleClub(context: context);
+    club=Constants.myclub;
     setState(() {
       print("object");
       isloded = true;
@@ -66,7 +67,7 @@ List<String> elements = [];
               ? SingleChildScrollView(
                   child: Column(
                     children: [
-                      HeaderContent(title: "My Club"),
+                      HeaderContent(title:club!.type_of=="club"?  "My Club":"My Resto"),
                       Container(
                         width: width,
                         height: height / 15,

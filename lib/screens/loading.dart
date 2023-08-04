@@ -6,14 +6,13 @@ import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
-import 'package:venq_assessment/Services/BTS_Services/Resto_Services.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/RestoBar_Services.dart';
+import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
-import 'package:venq_assessment/screens/RestoBarDashBoard/BehindThe%20Scenes/BehindTheScenes.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:video_player/video_player.dart';
 
@@ -33,8 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    load();
-    getclubs();
+    load();getclubs();
 
     _controller = VideoPlayerController.asset("assets/LogointroApp.mp4")
       ..initialize().then((_) {
@@ -44,27 +42,20 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       });
   }
-
   getclubs() async {
-    Constants.allclubs = await ClubServices.getAllClubs(context: context);
-    Constants.allrestobar =
-        await RestobarServices.getAllRestobar(context: context);
+   Constants.allclubs  = await ClubServices.getAllClubs(context: context);
+      Constants.allrestobar  = await RestobarServices.getAllRestobar(context: context);
+     widget.user?null: UserServices.getprofileinfo();
 
     // setState(() {
     //   lodedclub = true;
     // });
   }
-
   load() async {
     // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
     if (!widget.user) {
       if (Constants.btsprofile.role != "user") {
-        if (Constants.btsprofile.role =="resto") {
-          print("inside resto");
-          await BTSRestoServices.btsgetSingleresto(context: context);
-        } else {
-          await BTSClubServices.btsgetSingleClub(context: context);
-        }
+        await BTSClubServices.btsgetSingleClub(context: context);
       }
     }
 
@@ -75,16 +66,10 @@ class _SplashScreenState extends State<SplashScreen> {
           : Constants.btsprofile.role == "user"
               ? Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MyBookingPage()))
-              : Constants.btsprofile.role == "resto"
-                  ? Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const RestoBehindTheScenesPage()))
-                  : Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BehindTheScenesPage()));
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BehindTheScenesPage()));
     });
   }
 

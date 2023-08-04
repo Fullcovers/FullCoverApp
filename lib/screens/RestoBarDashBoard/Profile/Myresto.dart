@@ -67,7 +67,7 @@ List<String> elements = [];
               ? SingleChildScrollView(
                   child: Column(
                     children: [
-                      HeaderContent(title: "My Club"),
+                      HeaderContent(title: "My Resto-Bar"),
                       Container(
                         width: width,
                         height: height / 15,

@@ -146,7 +146,7 @@ class _ClubDetailState extends State<ClubDetail> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  "View Club Events",
+                                 widget.club.type_of=="club"? "View Club Events": "View RestoBar Events",
                                   style: GoogleFonts.bebasNeue(
                                     color: Colors.white,
                                     fontSize: width / 20,
@@ -499,93 +499,6 @@ class _ClubDetailState extends State<ClubDetail> {
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(width: 10),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4.0),
-                                          child: Container(
-                                            height: 2.5 * height / 100,
-                                            width: 2 * width / 10,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF2C2F33),
-                                              border: Border.all(
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5.0),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Techno",
-                                                style: TextStyle(
-                                                  fontSize: width / 40,
-                                                  color:
-                                                      const Color(0XFFCBC1A8),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4.0),
-                                          child: Container(
-                                            height: 2.5 * height / 100,
-                                            width: 2 * width / 10,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF2C2F33),
-                                              border: Border.all(
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5.0),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Techno",
-                                                style: TextStyle(
-                                                  fontSize: width / 40,
-                                                  color:
-                                                      const Color(0XFFCBC1A8),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4.0),
-                                          child: Container(
-                                            height: 2.5 * height / 100,
-                                            width: 2 * width / 10,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF2C2F33),
-                                              border: Border.all(
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(5.0),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Techno",
-                                                style: TextStyle(
-                                                  fontSize: width / 40,
-                                                  color:
-                                                      const Color(0XFFCBC1A8),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ],
                               ),
                             )),
@@ -723,7 +636,11 @@ class _ClubDetailState extends State<ClubDetail> {
                                   ],
                                 ),
                               )
-                            : Constants.mycircularProgressIndicator()),
+                            : Center(
+                                child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(color: Colors.black,)))),
                   ),
                 ),
               )

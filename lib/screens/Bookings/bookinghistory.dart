@@ -169,101 +169,104 @@ class _BookingHistoryState extends State<BookingHistory> {
                           shrinkWrap: true,
                           itemCount: myorders['data'].length,
                           itemBuilder: (BuildContext context, int i) {
-                            return ExpansionPanelList(
-                              children: [
-                                ExpansionPanel(
-                                  backgroundColor: backgroundColortransperent,
-                                  headerBuilder: (context, isExpanded) {
-                                    return ListTile(
-                                      title: Text(
-                                        myorders['data'][i]['club']['name'],
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      trailing: isExpanded
-                                          ? Icon(
-                                              Icons.keyboard_arrow_up,
-                                              color: Colors.white,
-                                            )
-                                          : Icon(
-                                              Icons.keyboard_arrow_down,
-                                              color: Colors.white,
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ExpansionPanelList(
+                                children: [
+                                  ExpansionPanel(
+                                    backgroundColor: backgroundColortransperent,
+                                    headerBuilder: (context, isExpanded) {
+                                      return ListTile(
+                                        title: Text(
+                                          myorders['data'][i]['club']['name'],
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        trailing: isExpanded
+                                            ? Icon(
+                                                Icons.keyboard_arrow_up,
+                                                color: Colors.white,
+                                              )
+                                            : Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: Colors.white,
+                                              ),
+                                      );
+                                    },
+                                    body: Column(
+                                      children: [
+                                        ListTile(
+                                          title: Center(
+                                            child: QrImage(
+                                              backgroundColor: Colors.white,
+                                              data: myorders['data'][i]['_id'],
+                                              version: QrVersions.auto,
+                                              size: 130.0,
                                             ),
-                                    );
-                                  },
-                                  body: Column(
-                                    children: [
-                                      ListTile(
-                                        title: Center(
-                                          child: QrImage(
-                                            backgroundColor: Colors.white,
-                                            data: myorders['data'][i]['_id'],
-                                            version: QrVersions.auto,
-                                            size: 130.0,
                                           ),
                                         ),
-                                      ),
-                                      ListTile(
-                                          title: Text(
-                                        "Timings:- " +
-                                            myorders['data'][i]['club']
-                                                    ['timings']['opensAt']
-                                                .toString() +
-                                            " - " +
-                                            myorders['data'][i]['club']
-                                                ['timings']['closesAt'],
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                      ListTile(
-                                          title: Text(
-                                        "Date:- " +
-                                            myorders['data'][i]['date']
-                                                .toString()
-                                                .substring(0, 10),
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                      ListTile(
-                                          title: Text(
-                                        "Tickets",
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                      Container(
-                                        height: height / 10,
-                                        child: ListView.builder(
-                                          itemCount: myorders['data'][i]
-                                                  ['items']
-                                              .length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0, left: 16),
-                                              child: Text(
-                                                myorders['data'][i]['items']
-                                                                [index]
-                                                            ['ticket']['name']
-                                                        .toString() +
-                                                    " x " +
-                                                    myorders['data'][i]['items']
-                                                            [index]['qty']
-                                                        .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            );
-                                          },
+                                        ListTile(
+                                            title: Text(
+                                          "Timings:- " +
+                                              myorders['data'][i]['club']
+                                                      ['timings']['opensAt']
+                                                  .toString() +
+                                              " - " +
+                                              myorders['data'][i]['club']
+                                                  ['timings']['closesAt'],
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                        ListTile(
+                                            title: Text(
+                                          "Date:- " +
+                                              myorders['data'][i]['date']
+                                                  .toString()
+                                                  .substring(0, 10),
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                        ListTile(
+                                            title: Text(
+                                          "Tickets",
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                        Container(
+                                          height: height / 10,
+                                          child: ListView.builder(
+                                            itemCount: myorders['data'][i]
+                                                    ['items']
+                                                .length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0, left: 16),
+                                                child: Text(
+                                                  myorders['data'][i]['items']
+                                                                  [index]
+                                                              ['ticket']['name']
+                                                          .toString() +
+                                                      " x " +
+                                                      myorders['data'][i]['items']
+                                                              [index]['qty']
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                    isExpanded: expandlist[i],
+                                    canTapOnHeader: true,
                                   ),
-                                  isExpanded: expandlist[i],
-                                  canTapOnHeader: true,
-                                ),
-                              ],
-                              dividerColor: Colors.grey,
-                              expansionCallback: (panelIndex, isExpanded) {
-                                expandlist[i] = !expandlist[i];
-                                setState(() {});
-                              },
+                                ],
+                                dividerColor: Colors.grey,
+                                expansionCallback: (panelIndex, isExpanded) {
+                                  expandlist[i] = !expandlist[i];
+                                  setState(() {});
+                                },
+                              ),
                             );
                             // FractionalTranslation(
                             //   translation: const Offset(0, -0.01),

@@ -14,7 +14,7 @@ class RestobarServices{
 
     try {
       http.Response res = await http.get(
-        Uri.parse('${Constants.uri}resto/'),
+        Uri.parse('${Constants.uri}club/?type=resto'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

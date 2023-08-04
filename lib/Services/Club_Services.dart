@@ -14,7 +14,7 @@ class ClubServices {
     final clubProvider = Provider.of<ClubProvider>(context, listen: false);
     try {
       http.Response res = await http.get(
-        Uri.parse('${Constants.uri}club/'),
+        Uri.parse('${Constants.uri}club/?type=club'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

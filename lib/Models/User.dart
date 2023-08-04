@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 class User {
   final String id;
   final Map<String, String> name;
@@ -47,4 +49,20 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+}
+
+enum MediaType { image, video }
+
+class Stories {
+  final String url;
+  final MediaType media;
+  final Duration duration;
+  final User user;
+  
+ Stories({
+  required this.url,
+  required this.media,
+  required this.duration,
+  required this.user
+});
 }
