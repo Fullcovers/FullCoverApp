@@ -60,6 +60,9 @@ dependencies:
   twilio_flutter: ^0.0.9
   url_launcher: ^6.1.11
   story_view: ^0.15.0
+  easy_upi_payment: ^0.1.5
+  upi_india: ^3.0.1
+  # pay: ^1.1.2
 
 
   

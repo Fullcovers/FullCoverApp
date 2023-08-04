@@ -43,6 +43,7 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
     });
   }
 
+  bool isclubonbool = false;
   Color textc = golden;
   bool forAndroid = Constants.myclub!.isClubOpen;
   @override
@@ -179,15 +180,19 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                 value: forAndroid,
                                 activeColor: Colors.green,
                                 onChanged: (value) async {
+                                  setState(()  {forAndroid = !forAndroid;isclubonbool = true;});
                                   var club =
                                       await BTSClubServices.clubopenandclose(
-                                          context: context);
+                                          context: context);                                  setState(() {
+                                            isclubonbool = false;
+                                          });
+
                                   print(club['data']['is_club_open']);
-                                  setState(() => forAndroid = club.isNotEmpty
-                                      ? club['data']['is_club_open']
-                                      : value);
                                 },
                               ),
+                              isclubonbool
+                                  ? CircularProgressIndicator()
+                                  : Container(),
                             ],
                           ),
                           Center(
@@ -209,8 +214,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       const Color(0XFFD09494),
                                       "assets/images/icons/reservation.png"),
                                 ),
-                                                              SizedBox(width: width/40,),
-
+                                SizedBox(
+                                  width: width / 40,
+                                ),
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -241,8 +247,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       const Color(0XFFB2D094),
                                       "assets/images/icons/promoters.png"),
                                 ),
-                                                             SizedBox(width: width/40,),
-
+                                SizedBox(
+                                  width: width / 40,
+                                ),
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -258,7 +265,6 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       const Color(0XFF94D0C5),
                                       "assets/images/icons/guest-list.png"),
                                 ),
-                               
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -274,8 +280,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       Color.fromARGB(255, 148, 159, 208),
                                       "assets/images/icons/table.png"),
                                 ),
-                                                          SizedBox(width: width/40,),
-
+                                SizedBox(
+                                  width: width / 40,
+                                ),
                                 InkWell(
                                   onTap: () {},
                                   child: mycard(
@@ -286,7 +293,6 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       const Color(0xffD094B8),
                                       "assets/images/icons/loyalty.png"),
                                 ),
-                               
                                 InkWell(
                                   onTap: () {
                                     // Navigator.push(
@@ -303,8 +309,9 @@ class _BehindTheScenesPageState extends State<BehindTheScenesPage> {
                                       const Color(0XFFD0B194),
                                       "assets/images/icons/bar.png"),
                                 ),
-                                                           SizedBox(width: width/40,),
-
+                                SizedBox(
+                                  width: width / 40,
+                                ),
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(

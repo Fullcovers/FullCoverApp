@@ -46,12 +46,21 @@ class _ClubsScreenState extends State<ClubsScreen> {
     return SafeArea(
       child: Stack(
         children: [
-          Image.asset(
-            Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
+          Opacity(
+            opacity: 0.5,
+            child: Image.asset(
+              "assets/images/background.png",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
+          // Image.asset(
+          //   Constants.backgroundimage,
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   fit: BoxFit.cover,
+          // ),
           Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: backgroundColortransperent,

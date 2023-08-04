@@ -55,7 +55,7 @@ class _CreateEventState extends State<CreateEvent> {
   TimeOfDay endtime =
       TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
   Map<String, dynamic> EventTickets = {};
-String? dropdownvalue = 'Item 1';   
+  String? dropdownvalue = 'Techno';
   @override
   Widget build(BuildContext context) {
     final hours = time.hour.toString().padLeft(2, "0");
@@ -66,32 +66,32 @@ String? dropdownvalue = 'Item 1';
 
     var widthofs = MediaQuery.of(context).size.width;
     var heightofs = MediaQuery.of(context).size.height;
-     var items = [    
-    "Bass music",
-"Disco",
-"Drum and Bass",
-"Dubstep",
-"EDM",
-"Jungle",
-"Hardcore",
-"House",
-"Techno",
-"Trance",
-"Garage",
-  ];  
+    var items = [
+      "Bass music",
+      "Disco",
+      "Drum and Bass",
+      "Dubstep",
+      "EDM",
+      "Jungle",
+      "Hardcore",
+      "House",
+      "Techno",
+      "Trance",
+      "Garage",
+    ];
 
     return SafeArea(
         child: Stack(
-          children: [
-            Image.asset(
-            Constants.backgroundimage,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-            Scaffold(
-      backgroundColor: backgroundColorfigma,
-      body: SingleChildScrollView(
+      children: [
+        Image.asset(
+          Constants.backgroundimage,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: backgroundColorfigma,
+          body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -109,61 +109,64 @@ String? dropdownvalue = 'Item 1';
                         padding: const EdgeInsets.only(left: 25, right: 25),
                         child: Column(
                           children: [
-                            customtextfield(namecontroller, "Name", Colors.green),
+                            customtextfield(
+                                namecontroller, "Name", Colors.green),
                             customtextfield(
                                 desccontroller, "Description", Colors.green),
-                                SizedBox(height: heightofs/20,),
-                                Padding(
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 20, left: 60, right: 60),
-                          child: Container(
-                            height: heightofs / 20,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(34, 34, 34, 0.37),
-                              borderRadius: BorderRadius.circular(15.0),
-                              border: Border.all(
-                                color: Colors.black,
+                            SizedBox(
+                              height: heightofs / 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 0, bottom: 20, left: 60, right: 60),
+                              child: Container(
+                                height: heightofs / 20,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(34, 34, 34, 0.37),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: widthofs - widthofs / 2.1,
+                                      child: DropdownButton(
+                                        // Initial Value
+                                        value: dropdownvalue,
+                                        style: GoogleFonts.bebasNeue(
+                                            fontSize: 20, color: Colors.white),
+                                        dropdownColor: Colors.black,
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: items.map((String entry) {
+                                          return DropdownMenuItem<String>(
+                                            value: entry,
+                                            child: Text(entry),
+                                          );
+                                        }).toList(),
+                                        hint: const Text('Select an item'),
+
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (value) {
+                                          setState(() {
+                                            dropdownvalue = value;
+                                          });
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                        width: widthofs - widthofs / 2.1,
-                                        child: DropdownButton(
-                                          // Initial Value
-                                          value: dropdownvalue,
-                                          style: GoogleFonts.bebasNeue(
-                                              fontSize: 20, color: Colors.white),
-                                          dropdownColor: Colors.black,
-
-                                          // Down Arrow Icon
-                                          icon:
-                                              const Icon(Icons.keyboard_arrow_down),
-
-                                          // Array list of items
-                                          items: items.map((String entry) {
-                                            return DropdownMenuItem<String>(
-                                              value: entry,
-                                              child: Text(entry),
-                                            );
-                                          }).toList(),
-                                          hint: const Text('Select an item'),
-
-                                          // After selecting the desired option,it will
-                                          // change button value to selected value
-                                          onChanged: (value) {
-                                            setState(() {
-                                              dropdownvalue = value;
-                                            });
-                                          },
-                                        ),
-                                      )
-                              ],
-                            ),
-                          ),
-                        ),
                             Padding(
                               padding: EdgeInsets.only(top: 20),
                               child: Container(
@@ -177,7 +180,8 @@ String? dropdownvalue = 'Item 1';
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -194,7 +198,8 @@ String? dropdownvalue = 'Item 1';
                                           )),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
+                                      padding:
+                                          const EdgeInsets.only(right: 10.0),
                                       child: IconButton(
                                         onPressed: () {
                                           _selectDate(
@@ -231,7 +236,8 @@ String? dropdownvalue = 'Item 1';
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -248,8 +254,10 @@ String? dropdownvalue = 'Item 1';
                                     padding: const EdgeInsets.only(right: 10.0),
                                     child: IconButton(
                                       onPressed: () async {
-                                        TimeOfDay? newtime = await showTimePicker(
-                                            context: context, initialTime: time);
+                                        TimeOfDay? newtime =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: time);
                                         if (newtime == null) {
                                           return;
                                         }
@@ -290,7 +298,8 @@ String? dropdownvalue = 'Item 1';
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -307,8 +316,10 @@ String? dropdownvalue = 'Item 1';
                                     padding: const EdgeInsets.only(right: 10.0),
                                     child: IconButton(
                                       onPressed: () async {
-                                        TimeOfDay? newtime = await showTimePicker(
-                                            context: context, initialTime: time);
+                                        TimeOfDay? newtime =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: time);
                                         if (newtime == null) {
                                           return;
                                         }
@@ -331,7 +342,7 @@ String? dropdownvalue = 'Item 1';
                             ),
                             // GestureDetector(
                             //   onTap: () {
-                            
+
                             //   },
                             //   child: Padding(
                             //     padding: const EdgeInsets.only(
@@ -381,30 +392,39 @@ String? dropdownvalue = 'Item 1';
                             //   ),
                             // ),
                             GestureDetector(
-                              onTap: ()async {
-                              String myeventid= await CreateEventmethod.createeventfunction(
-                                    context: context,
-                                    date: formatDate(selectedDate).toString(),
-                                    description: desccontroller.text,
-                                    name: namecontroller.text,
-                                    starttime: "${time.hour}:${time.minute}",
-                                    endtime: "${endtime.hour}:${endtime.minute}");
-                                     Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                       EventAddTickets(eventid: myeventid,)));
+                              onTap: () async {
+                                String myeventid =
+                                    await CreateEventmethod.createeventfunction(
+                                        context: context,
+                                        date:
+                                            formatDate(selectedDate).toString(),
+                                        description: desccontroller.text,
+                                        name: namecontroller.text,
+                                        starttime:
+                                            "${time.hour}:${time.minute}",
+                                        endtime:
+                                            "${endtime.hour}:${endtime.minute}");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EventAddTickets(
+                                              eventid: myeventid,
+                                            )));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 0.0, left: 50, right: 50, bottom: 20.0),
+                                    top: 0.0,
+                                    left: 50,
+                                    right: 50,
+                                    bottom: 20.0),
                                 child: Container(
                                   height: heightofs / 20,
                                   width: double.maxFinite,
                                   decoration: const BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 202, 196, 196),
+                                        color:
+                                            Color.fromARGB(255, 202, 196, 196),
                                         blurRadius: 10,
                                         spreadRadius: -2,
                                         offset: Offset(-2, -2),
@@ -427,7 +447,8 @@ String? dropdownvalue = 'Item 1';
                                         padding: const EdgeInsets.only(
                                             top: 10.0, right: 20.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               "Create",
@@ -450,9 +471,9 @@ String? dropdownvalue = 'Item 1';
                 )
               ],
             ),
-      ),
-    ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }

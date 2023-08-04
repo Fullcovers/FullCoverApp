@@ -1,7 +1,9 @@
+import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:upi_india/upi_india.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Models/Ticket.dart';
 import 'package:venq_assessment/Models/UserModel.dart';
@@ -9,7 +11,10 @@ import 'package:venq_assessment/Services/Order_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Bookings/MyBookingPage.dart';
+import 'package:venq_assessment/screens/Clubs/transtion.dart';
+import 'package:venq_assessment/screens/Clubs/upi.dart';
 import 'package:venq_assessment/utils/Constants.dart';
+import 'package:venq_assessment/widgets/CustumPageRoute.dart';
 
 class ClubPage3 extends StatefulWidget {
   ClubPage3(
@@ -65,9 +70,34 @@ class ClubPage3 extends StatefulWidget {
 }
 
 class _ClubPage3State extends State<ClubPage3> {
+  @override
+  List<UpiApp>? apps;
+  UpiIndia _upiIndia = UpiIndia();
+
+  void initState() {
+    _upiIndia.getAllUpiApps(mandatoryTransactionId: false).then((value) {
+      setState(() {
+        apps = value;
+      });
+    }).catchError((e) {
+      apps = [];
+    });
+    super.initState();
+  }
+
   PanelController panelController = PanelController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
+  Future<UpiResponse> initiateTransaction(UpiApp app) async {
+    return _upiIndia.startTransaction(
+      app: app,
+      receiverUpiId: "sauravsk4@axl",
+      receiverName: 'Saurav Kamtalwar',
+      transactionRefId: 'TestingUpiIndiaPlugin',
+      transactionNote: 'Not actual. Just an example.',
+      amount: 1.00,
+    );
+  }
 
 // Format the date as per your desired format
   String formattedDate = DateFormat('M/dd/yyyy').format(DateTime.now());
@@ -718,7 +748,10 @@ class _ClubPage3State extends State<ClubPage3> {
                                               BorderRadius.circular(15.0)),
                                       child: Center(
                                         child: InkWell(
-                                          onTap: () {
+                                          onTap: () async {
+                                            print(
+                                                "00000000000000000000000000000000000000000000000000000000000000000000000000000");
+
                                             setState(() {
                                               isclickpay = true;
                                             });
@@ -729,101 +762,131 @@ class _ClubPage3State extends State<ClubPage3> {
                                                 isclickpay = false;
                                               });
                                             });
-                                            if (widget.bookingtable) {
-                                              print(widget.bookingtable);
-                                              List<Map<String, dynamic>>
-                                                  tablestickets = [];
-                                              // for (var i = 0; i < widget.tableticketscount.length; i++) {
+                                            dynamic res;
+                                            try {
+                                              res = await EasyUpiPaymentPlatform
+                                                  .instance
+                                                  .startPayment(
+                                                const EasyUpiPaymentModel(
+                                                  payeeVpa:
+                                                      'paytmqres5fxe7fay@paytm',
+                                                  payeeName: 'saurav kamtalwar',
+                                                  amount: 10.0,
+                                                  description: 'club booking',
+                                                ),
+                                              );
 
-                                              //   if (widget.stagcount > 0) {
-                                              //   tickets.add({
-                                              //     "qty": widget.stagcount,
-                                              //     "ticket": widget.stagid
-                                              //   });
-                                              // }
-                                              // }
-                                              widget.tableticketscount
-                                                  .forEach((ticket, count) {
-                                                if (count > 0) {
-                                                  tablestickets.add({
-                                                    "qty": count,
-                                                    "table": ticket.id
-                                                  });
-                                                }
-                                              });
-                                              Map<String, dynamic> requestBody =
-                                                  {
-                                                "tables": tablestickets,
-                                                "send_to": {
-                                                  "phoneNumber":
-                                                      phoneController.text,
-                                                  "email": emailController.text
-                                                },
-                                                "club": widget.club.id,
-                                                "date": formattedDate,
-                                                // "promo_code": widget.promocode,
-                                                "amount": 1
-                                                // widget.totalprice +
-                                                //     widget.totalprice * 4 / 100 +
-                                                //     gst18.floor()
-                                              };
-                                              OrderServices.placetableOrder(
-                                                  context: context,
-                                                  requestbody: requestBody);
-                                            } else {
-                                              List<Map<String, dynamic>>
-                                                  ordertickets = [];
-                                              print(widget.stagcount);
-                                              widget.orderticketscount
-                                                  .forEach((ticket, count) {
-                                                if (count > 0) {
-                                                  ordertickets.add({
-                                                    "qty": count,
-                                                    "ticket": ticket.id
-                                                  });
-                                                }
-                                              });
-                                              // if (widget.stagcount > 0) {
-                                              //   tickets.add({
-                                              //     "qty": widget.stagcount,
-                                              //     "ticket": widget.stagid
-                                              //   });
-                                              // }
-
-                                              // if (widget.couplecount > 0) {
-                                              //   tickets.add({
-                                              //     "qty": widget.couplecount,
-                                              //     "ticket": widget.coupleid
-                                              //   });
-                                              // }
-
-                                              // if (widget.femalecount > 0) {
-                                              //   tickets.add({
-                                              //     "qty": widget.femalecount,
-                                              //     "ticket": widget.femaleid
-                                              //   });
-                                              // }
-                                              print(formattedDate);
-                                              Map<String, dynamic> requestBody =
-                                                  {
-                                                "tickets": ordertickets,
-                                                "send_to": {
-                                                  "phoneNumber":
-                                                      phoneController.text,
-                                                  "email": emailController.text
-                                                },
-                                                "club": widget.club.id,
-                                                "date": formattedDate,
-                                                // "promo_code": widget.promocode,
-                                                "amount": 1
-                                                // widget.totalprice +
-                                                //     widget.totalprice * 4 / 100 +
-                                                //     gst18.floor()
-                                              };
-                                              OrderServices.placeOrder(
-                                                  context: context,
-                                                  requestbody: requestBody);
+                                            } on EasyUpiPaymentException catch (e) {
+                                              print("error");
+                                              print(e.details);
+                                              print(e.message);
+                                              print(e.stacktrace);
+                                              print(e.type);
                                             }
+                                            // Navigator.of(context).push(
+                                            //     ScaleTransitionPageRoute(
+                                            //         child: Upipayf()));
+                                            
+
+                                            // if (res!.responseCode == 00) {
+                                            //   if (widget.bookingtable) {
+                                            //     print(widget.bookingtable);
+                                            //     List<Map<String, dynamic>>
+                                            //         tablestickets = [];
+                                            //     // for (var i = 0; i < widget.tableticketscount.length; i++) {
+
+                                            //     //   if (widget.stagcount > 0) {
+                                            //     //   tickets.add({
+                                            //     //     "qty": widget.stagcount,
+                                            //     //     "ticket": widget.stagid
+                                            //     //   });
+                                            //     // }
+                                            //     // }
+                                            //     widget.tableticketscount
+                                            //         .forEach((ticket, count) {
+                                            //       if (count > 0) {
+                                            //         tablestickets.add({
+                                            //           "qty": count,
+                                            //           "table": ticket.id
+                                            //         });
+                                            //       }
+                                            //     });
+                                            //     Map<String, dynamic>
+                                            //         requestBody = {
+                                            //       "tables": tablestickets,
+                                            //       "send_to": {
+                                            //         "phoneNumber":
+                                            //             phoneController.text,
+                                            //         "email":
+                                            //             emailController.text
+                                            //       },
+                                            //       "club": widget.club.id,
+                                            //       "date": formattedDate,
+                                            //       // "promo_code": widget.promocode,
+                                            //       "amount": 1
+                                            //       // widget.totalprice +
+                                            //       //     widget.totalprice * 4 / 100 +
+                                            //       //     gst18.floor()
+                                            //     };
+                                            //     OrderServices.placetableOrder(
+                                            //         context: context,
+                                            //         requestbody: requestBody);
+                                            //   } else {
+                                            //     List<Map<String, dynamic>>
+                                            //         ordertickets = [];
+                                            //     print(widget.stagcount);
+                                            //     widget.orderticketscount
+                                            //         .forEach((ticket, count) {
+                                            //       if (count > 0) {
+                                            //         ordertickets.add({
+                                            //           "qty": count,
+                                            //           "ticket": ticket.id
+                                            //         });
+                                            //       }
+                                            //     });
+                                            //     // if (widget.stagcount > 0) {
+                                            //     //   tickets.add({
+                                            //     //     "qty": widget.stagcount,
+                                            //     //     "ticket": widget.stagid
+                                            //     //   });
+                                            //     // }
+
+                                            //     // if (widget.couplecount > 0) {
+                                            //     //   tickets.add({
+                                            //     //     "qty": widget.couplecount,
+                                            //     //     "ticket": widget.coupleid
+                                            //     //   });
+                                            //     // }
+
+                                            //     // if (widget.femalecount > 0) {
+                                            //     //   tickets.add({
+                                            //     //     "qty": widget.femalecount,
+                                            //     //     "ticket": widget.femaleid
+                                            //     //   });
+                                            //     // }
+                                            //     print(formattedDate);
+                                            //     Map<String, dynamic>
+                                            //         requestBody = {
+                                            //       "tickets": ordertickets,
+                                            //       "send_to": {
+                                            //         "phoneNumber":
+                                            //             phoneController.text,
+                                            //         "email":
+                                            //             emailController.text
+                                            //       },
+                                            //       "club": widget.club.id,
+                                            //       "date": formattedDate,
+                                            //       // "promo_code": widget.promocode,
+                                            //       "amount": 1
+                                            //       // widget.totalprice +
+                                            //       //     widget.totalprice * 4 / 100 +
+                                            //       //     gst18.floor()
+                                            //     };
+                                            //     OrderServices.placeOrder(
+                                            //         context: context,
+                                            //         requestbody: requestBody);
+                                            //   }
+                                            // }
                                           },
                                           child: !isclickpay
                                               ? Row(
@@ -832,7 +895,7 @@ class _ClubPage3State extends State<ClubPage3> {
                                                           .spaceAround,
                                                   children: [
                                                     Text(
-                                                      "Pay at Venue",
+                                                      "Pay",
                                                       style: GoogleFonts
                                                           .sairaCondensed(
                                                               color: const Color(
@@ -882,7 +945,6 @@ class _ClubPage3State extends State<ClubPage3> {
               ),
               body: Stack(
                 children: [
-                  
                   Column(children: [
                     Container(
                       height: height / 4,
@@ -896,9 +958,12 @@ class _ClubPage3State extends State<ClubPage3> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -908,7 +973,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                           widget.club.name,
                                           style: GoogleFonts.bebasNeue(
                                             color: const Color(0XFFF0F0F3),
-                                            fontSize: height / 24.77142857142857,
+                                            fontSize:
+                                                height / 24.77142857142857,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -928,15 +994,14 @@ class _ClubPage3State extends State<ClubPage3> {
                                       ),
                                     ],
                                   ),
-                                 
-                                  
                                 ],
                               ),
                               Row(
                                 children: [
                                   IconButton(
                                     onPressed: () {},
-                                    icon: const Icon(Icons.location_on_outlined),
+                                    icon:
+                                        const Icon(Icons.location_on_outlined),
                                   ),
                                   Container(
                                     width: width / 1.2,
@@ -1013,7 +1078,8 @@ class _ClubPage3State extends State<ClubPage3> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 10),
                               child: Container(
                                 height: height / 15,
                                 width: double.maxFinite,
@@ -1024,27 +1090,31 @@ class _ClubPage3State extends State<ClubPage3> {
                                       color: Colors.white,
                                     )),
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 10, bottom: 10),
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
                                   child: SingleChildScrollView(
                                     child: Container(
                                       height: height / 15,
                                       width: double.maxFinite,
                                       decoration: BoxDecoration(
                                         color: const Color(0xFF2C2F33),
-                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                       child: Row(
                                         children: [
                                           FractionalTranslation(
                                             translation: const Offset(0, -0.5),
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 10),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
                                               child: Text(
                                                 '+91',
-                                                style: GoogleFonts.sairaCondensed(
-                                                  color: const Color(0XFFFFFFFF),
+                                                style:
+                                                    GoogleFonts.sairaCondensed(
+                                                  color:
+                                                      const Color(0XFFFFFFFF),
                                                   fontSize: height / 43.35,
                                                 ),
                                               ),
@@ -1056,23 +1126,28 @@ class _ClubPage3State extends State<ClubPage3> {
                                           ),
                                           Expanded(
                                             child: FractionalTranslation(
-                                              translation: const Offset(0, -0.32),
+                                              translation:
+                                                  const Offset(0, -0.32),
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
                                                 child: TextFormField(
                                                   controller: phoneController,
-                                                  style: GoogleFonts.sairaCondensed(
-                                                    color: const Color(0XFFFFFFFF),
+                                                  style: GoogleFonts
+                                                      .sairaCondensed(
+                                                    color:
+                                                        const Color(0XFFFFFFFF),
                                                     fontSize: height / 43.35,
                                                   ),
-                                                  keyboardType: TextInputType.phone,
+                                                  keyboardType:
+                                                      TextInputType.phone,
                                                   decoration: InputDecoration(
                                                     hintText: 'Phone Number',
-                                                    hintStyle:
-                                                        GoogleFonts.sairaCondensed(
-                                                      color:
-                                                          const Color(0XFFFFFFFF),
+                                                    hintStyle: GoogleFonts
+                                                        .sairaCondensed(
+                                                      color: const Color(
+                                                          0XFFFFFFFF),
                                                     ),
                                                     border: InputBorder.none,
                                                   ),
@@ -1097,7 +1172,8 @@ class _ClubPage3State extends State<ClubPage3> {
                                     color: Colors.white,
                                   )),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: TextFormField(
                                   controller: emailController,
                                   style: GoogleFonts.sairaCondensed(
@@ -1120,21 +1196,22 @@ class _ClubPage3State extends State<ClubPage3> {
                       ),
                     ),
                   ]),
-                Align(alignment: Alignment.topRight,
-                                child: IconButton(
-                                  icon: Icon(Icons.close),
-                                  color: Colors.white,
-                                  onPressed: () {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) => MyBookingPage()),
-                                        (route) => false);
-                                  },
-                                ),
-                              ),],
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: Icon(Icons.close),
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => MyBookingPage()),
+                            (route) => false);
+                      },
+                    ),
+                  ),
+                ],
               ),
             )),
-            
       ],
     ));
   }

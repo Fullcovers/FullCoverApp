@@ -41,10 +41,10 @@ class _EventDetailState extends State<EventDetail> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();geteventtickets();
+    super.initState();
   }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {geteventtickets();
     final clubprovider = Provider.of<ClubProvider>(context, listen: false);
     print(widget.event.clubId);
     ClubServices().getSingleClub(context: context, clubid: widget.event.clubId);

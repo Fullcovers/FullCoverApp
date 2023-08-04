@@ -84,7 +84,7 @@ class BTSClubServices {
     var body = {"image": imageFile, "name": imageFile.name};
     try {
       http.Response myclub = await http.get(
-        Uri.parse('${Constants.uri}club/my-club'),
+        Uri.parse('${Constants.uri}club/myclub'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${Constants.usertoken}',

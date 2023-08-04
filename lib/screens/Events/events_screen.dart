@@ -562,9 +562,9 @@ List<String> imageurls=[];
                                           left: 10.0, bottom: 16),
                                       child: GestureDetector(
                                         onTap: () async {
-                                          await ClubServices().getSingleClub(
-                                              clubid: event.clubId,
-                                              context: context);
+                                          // await ClubServices().getSingleClub(
+                                          //     clubid: event.clubId,
+                                          //     context: context);
                                           Navigator.of(context).push(
                                               ScaleTransitionPageRoute(
                                                   child: EventDetail(

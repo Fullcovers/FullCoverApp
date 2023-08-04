@@ -298,9 +298,9 @@ class _MyBookingPageState extends State<MyBookingPage> {
                       ],
                     ),
                   ),
-                  // SizedBox(
-                  //   height: height / 200,
-                  // ),
+                  SizedBox(
+                    height: height / 100,
+                  ),
                   !iscolorchange
                       ? Column(
                           children: [
@@ -320,7 +320,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0),
+                                  padding: const EdgeInsets.only(left: 18.0),
                                   child: Text(
                                     "Clubs",
                                     style: GoogleFonts.bebasNeue(
@@ -488,7 +488,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   child: Text("See More",
                                       style: GoogleFonts.sairaCondensed(
                                           color: golden,
-                                          fontSize: height / 50)),
+                                          fontSize: height / 70)),
                                 ),
                               ),
                             ),
@@ -497,7 +497,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 12.0),
+                                  padding: const EdgeInsets.only(left: 18.0),
                                   child: Text(
                                     "Restro Bar",
                                     style: GoogleFonts.bebasNeue(
@@ -656,7 +656,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                                   child: Text("See More",
                                       style: GoogleFonts.sairaCondensed(
                                           color: golden,
-                                          fontSize: height / 50)),
+                                          fontSize: height / 70)),
                                 ),
                               ),
                             ),

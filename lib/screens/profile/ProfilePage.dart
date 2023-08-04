@@ -284,10 +284,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               size: 40,
                             ),
                             Text(
-                              "bookings",
+                              "Bookings",
                               style: GoogleFonts.sairaCondensed(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   color: offwhite),
                             ),
                             // Icon(
@@ -319,7 +319,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               "Log Out",
                               style: GoogleFonts.sairaCondensed(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   color: offwhite),
                             ),
                           ]),

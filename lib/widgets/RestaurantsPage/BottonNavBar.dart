@@ -332,7 +332,7 @@ class _bottomnavbarState extends State<bottomnavbar> {
             height: 75,
             buttonBackgroundColor: golden,
             index: widget.initialindex,
-            backgroundColor: Colors.black,
+            backgroundColor:!widget.iscolorchange? Colors.black:Colors.white,
             // widget.iscolorchange ? Colors.white : botoncolor,
             color: !widget.iscolorchange ? Colors.white : botoncolor,
             items: <Widget>[

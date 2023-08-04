@@ -157,29 +157,41 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                       Radius.circular(10),
                                     ),
                                   ),
-                                  child: Row(
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       FractionalTranslation(
                                         translation: widget.height < 700
                                             ? Offset(0, -overlapFraction)
                                             : Offset(0, 0),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.search,
-                                            size: widget.height < 700
-                                                ? widget.width / 25
-                                                : widget.width / 15,
-                                          ),
-                                          color: widget.iscolor
-                                              ? Colors.white
-                                              : backgroundColorfigma,
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const FilterPage()));
-                                          },
+                                        child: Row(
+                                          children: [
+                                            InkWell(onTap: (){
+                                              Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const FilterPage()));
+                                            },
+                                              child: Image.asset(
+                                                "assets/images/search.png",
+                                                scale: 25,
+                                              ),
+                                            ),
+                                            // IconButton(
+                                            //   icon: Icon(
+                                            //     Icons.search,
+                                            //     size: widget.height < 700
+                                            //         ? widget.width / 25
+                                            //         : widget.width / 15,
+                                            //   ),
+                                            //   color: widget.iscolor
+                                            //       ? Colors.white
+                                            //       : backgroundColorfigma,
+                                            //   onPressed: () {
+                                                
+                                            //   },
+                                            // ),
+                                          ],
                                         ),
                                       ),
                                       FractionalTranslation(
@@ -188,33 +200,53 @@ class _topnavigationbarState extends State<topnavigationbar> {
                                               : Offset(0, 0),
                                           child: Divider(
                                             color: golden,
-                                            thickness: 200,
+                                            thickness: 2000,
                                           )),
                                       FractionalTranslation(
                                         translation: widget.height < 700
                                             ? Offset(0, -overlapFraction)
                                             : Offset(0, 0),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.location_on_outlined,
-                                            size: widget.height < 700
-                                                ? widget.width / 25
-                                                : widget.width / 15,
-                                          ),
-                                          color: widget.iscolor
-                                              ? Colors.white
-                                              : backgroundColorfigma,
-                                          onPressed: () {
-                                            setState(() {
-                                              isloccontexpn = !isloccontexpn;
-                                              print(isloccontexpn);
-                                              hightofcont = isloccontexpn
-                                                  ? widget.height / 5.5
-                                                  : 88;
-                                              overlapFraction =
-                                                  isloccontexpn ? 0.25 : 0.5;
-                                            });
-                                          },
+                                        child: Row(
+                                          children: [
+                                            InkWell(onTap: (){
+                                               setState(() {
+                                                  isloccontexpn = !isloccontexpn;
+                                                  print(isloccontexpn);
+                                                  hightofcont = isloccontexpn
+                                                      ? widget.height / 5.5
+                                                      : 88;
+                                                  overlapFraction =
+                                                      isloccontexpn ? 0.25 : 0.5;
+                                                });
+                                            },
+                                              child: Image.asset(
+                                                "assets/images/map.png",
+                                                scale: 25,
+                                              ),
+                                            ),
+                                            // IconButton(
+                                            //   icon: Icon(
+                                            //     Icons.location_on_outlined,
+                                            //     size: widget.height < 700
+                                            //         ? widget.width / 25
+                                            //         : widget.width / 15,
+                                            //   ),
+                                            //   color: widget.iscolor
+                                            //       ? Colors.white
+                                            //       : backgroundColorfigma,
+                                            //   onPressed: () {
+                                            //     setState(() {
+                                            //       isloccontexpn = !isloccontexpn;
+                                            //       print(isloccontexpn);
+                                            //       hightofcont = isloccontexpn
+                                            //           ? widget.height / 5.5
+                                            //           : 88;
+                                            //       overlapFraction =
+                                            //           isloccontexpn ? 0.25 : 0.5;
+                                            //     });
+                                            //   },
+                                            // ),
+                                          ],
                                         ),
                                       ),
                                     ],
