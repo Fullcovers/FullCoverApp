@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:story_view/controller/story_controller.dart';
+import 'package:story_view/widgets/story_view.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Providers/ClubProvider.dart';
 import 'package:venq_assessment/Providers/EventProvider.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
+import 'package:venq_assessment/Services/Stories_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Events/StoryView.dart';
 import 'package:venq_assessment/utils/Constants.dart';
@@ -31,6 +34,7 @@ class _EventsScreenState extends State<EventsScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+
     Future.delayed(Duration(milliseconds: 500), () {
       EventsServices().getAllEvents(context: context);
     });
@@ -63,9 +67,25 @@ class _EventsScreenState extends State<EventsScreen> {
     }
   }
 
-List<String> imageurls=[];
+  bool islodedstories = false;
+  loadstories() async {
+    await StoriesServicesUser.getstories(context: context);
+    setState(() {
+      islodedstories = true;
+    });
+  }
+
+  @override
+  void initState() {
+    loadstories();
+    super.initState();
+  }
+
+  List<String> imageurls = [];
+
   @override
   Widget build(BuildContext context) {
+    // print(Constants.allclubstories);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double rh = height -
@@ -92,279 +112,357 @@ List<String> imageurls=[];
             // FractionalTranslation(
             //   translation: Offset(0, -0.6),
             // child:
-            Align(
-                alignment: Alignment.centerLeft,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              InkWell(onTap: () {
-                                Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                     MoreStories()));
-                              },
-                                child: CircleAvatar(
-                                    radius: 35,
-                                    backgroundImage:
-                                        AssetImage("assets/images/clubimg.png")),
-                              ),
-                              // CircleAvatar(radius: 100,
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         backgroundImage: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("Apostrophe",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
+            islodedstories
+                ? Container(
+                    height: 100,
+                    width: width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: Constants.allclubstories.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final storyController = StoryController();
+
+                        var allclubs = Constants.allclubstories.keys.toList();
+                        // print(Constants.allclubstories[allclubs[index]]['data']);
+                        List<StoryItem> clubstories = [];
+                        for (var i = 0;
+                            i <
+                                Constants
+                                    .allclubstories[allclubs[index]]['data']
+                                    .length;
+                            i++) {
+                          clubstories.add(
+                            StoryItem.pageImage(
+                              url: Constants.allclubstories[allclubs[index]]
+                                  ['data'][i]['imageUrl'],
+                              caption: "Still sampling",
+                              controller: storyController,
+                            ),
+                          );
+                        }
+                        print(clubstories.length);
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Container(
+                            // height: height / 20.2,
+                            // width: width / 4.28125,
+                            child: Stack(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MoreStories(
+                                                  stories: clubstories,
+                                                )));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: golden, width: 2),
+                                        borderRadius:
+                                            BorderRadius.circular(35)),
+                                    child: CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage:
+                                            NetworkImage(allclubs[index].logo)),
+                                  ),
+                                ),
+                                // CircleAvatar(radius: 100,
+                                //     child: Opacity(
+                                //         opacity: 0.5,
+                                //         backgroundImage: Image.asset(
+                                //             "assets/images/black.png"))),
+                                // Center(
+                                //   child: Text("Apostrophe",
+                                //       style: GoogleFonts.sairaCondensed(
+                                //         color: Colors.white,
+                                //         fontWeight: FontWeight.w600,
+                                //         fontSize: 15,
+                                //       )),
+                                // )
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg1.png")),
-                              // CircleAvatar(radius: 100,
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         backgroundImage: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("Apostrophe",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg2.png")),
-                              // CircleAvatar(radius: 100,
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         backgroundImage: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("Apostrophe",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg3.png")),
-                              // CircleAvatar(radius: 100,
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         backgroundImage: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("Apostrophe",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg4.png")),
-                              // CircleAvatar(radius: 100,
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         backgroundImage: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("Apostrophe",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Container(
-                          // height: height / 20.2,
-                          // width: width / 4.28125,
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage("assets/images/clubimg5.png")),
-                              // ClipRRect(
-                              //     borderRadius: BorderRadius.circular(10),
-                              //     child: Opacity(
-                              //         opacity: 0.5,
-                              //         child: Image.asset(
-                              //             "assets/images/black.png"))),
-                              // Center(
-                              //   child: Text("010",
-                              //       style: GoogleFonts.sairaCondensed(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 15,
-                              //       )),
-                              // )
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 8.0),
-                      //   child: Container(
-                      //     height: height / 20.2,
-                      //     width: width / 4.28125,
-                      //     child: Stack(
-                      //       children: [
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child:
-                      //                 Image.asset("assets/images/clubimg.png")),
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child: Opacity(
-                      //                 opacity: 0.5,
-                      //                 child: Image.asset(
-                      //                     "assets/images/black.png"))),
-                      //         Center(
-                      //           child: Text("Apostrophe",
-                      //               style: GoogleFonts.sairaCondensed(
-                      //                 color: Colors.white,
-                      //                 fontWeight: FontWeight.w600,
-                      //                 fontSize: 15,
-                      //               )),
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 8.0),
-                      //   child: Container(
-                      //     height: height / 20.2,
-                      //     width: width / 4.28125,
-                      //     child: Stack(
-                      //       children: [
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child:
-                      //                 Image.asset("assets/images/clubimg.png")),
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child: Opacity(
-                      //                 opacity: 0.5,
-                      //                 child: Image.asset(
-                      //                     "assets/images/black.png"))),
-                      //         Center(
-                      //           child: Text("Apostrophe",
-                      //               style: GoogleFonts.sairaCondensed(
-                      //                 color: Colors.white,
-                      //                 fontWeight: FontWeight.w600,
-                      //                 fontSize: 15,
-                      //               )),
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 8.0),
-                      //   child: Container(
-                      //     height: height / 20.2,
-                      //     width: width / 4.28125,
-                      //     child: Stack(
-                      //       children: [
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child:
-                      //                 Image.asset("assets/images/clubimg.png")),
-                      //         ClipRRect(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             child: Opacity(
-                      //                 opacity: 0.5,
-                      //                 child: Image.asset(
-                      //                     "assets/images/black.png"))),
-                      //         Center(
-                      //           child: Text("Apostrophe",
-                      //               style: GoogleFonts.sairaCondensed(
-                      //                 color: Colors.white,
-                      //                 fontWeight: FontWeight.w600,
-                      //                 fontSize: 15,
-                      //               )),
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                )),
+                        );
+                      },
+                    ),
+                  )
+                : Constants.mycircularProgressIndicator(),
+            // Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: SingleChildScrollView(
+            //       scrollDirection: Axis.horizontal,
+            //       child: Row(
+            //         children: [
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 16.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   InkWell(
+            //                     onTap: () {
+            //                       Navigator.push(
+            //                           context,
+            //                           MaterialPageRoute(
+            //                               builder: (context) => MoreStories()));
+            //                     },
+            //                     child: CircleAvatar(
+            //                         radius: 35,
+            //                         backgroundImage: AssetImage(
+            //                             "assets/images/clubimg.png")),
+            //                   ),
+            //                   // CircleAvatar(radius: 100,
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         backgroundImage: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("Apostrophe",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 16.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   CircleAvatar(
+            //                       radius: 35,
+            //                       backgroundImage:
+            //                           AssetImage("assets/images/clubimg1.png")),
+            //                   // CircleAvatar(radius: 100,
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         backgroundImage: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("Apostrophe",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 16.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   CircleAvatar(
+            //                       radius: 35,
+            //                       backgroundImage:
+            //                           AssetImage("assets/images/clubimg2.png")),
+            //                   // CircleAvatar(radius: 100,
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         backgroundImage: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("Apostrophe",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 16.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   CircleAvatar(
+            //                       radius: 35,
+            //                       backgroundImage:
+            //                           AssetImage("assets/images/clubimg3.png")),
+            //                   // CircleAvatar(radius: 100,
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         backgroundImage: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("Apostrophe",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 16.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   CircleAvatar(
+            //                       radius: 35,
+            //                       backgroundImage:
+            //                           AssetImage("assets/images/clubimg4.png")),
+            //                   // CircleAvatar(radius: 100,
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         backgroundImage: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("Apostrophe",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(left: 8.0),
+            //             child: Container(
+            //               // height: height / 20.2,
+            //               // width: width / 4.28125,
+            //               child: Stack(
+            //                 children: [
+            //                   CircleAvatar(
+            //                       radius: 35,
+            //                       backgroundImage:
+            //                           AssetImage("assets/images/clubimg5.png")),
+            //                   // ClipRRect(
+            //                   //     borderRadius: BorderRadius.circular(10),
+            //                   //     child: Opacity(
+            //                   //         opacity: 0.5,
+            //                   //         child: Image.asset(
+            //                   //             "assets/images/black.png"))),
+            //                   // Center(
+            //                   //   child: Text("010",
+            //                   //       style: GoogleFonts.sairaCondensed(
+            //                   //         color: Colors.white,
+            //                   //         fontWeight: FontWeight.w600,
+            //                   //         fontSize: 15,
+            //                   //       )),
+            //                   // )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //           // Padding(
+            //           //   padding: const EdgeInsets.only(left: 8.0),
+            //           //   child: Container(
+            //           //     height: height / 20.2,
+            //           //     width: width / 4.28125,
+            //           //     child: Stack(
+            //           //       children: [
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child:
+            //           //                 Image.asset("assets/images/clubimg.png")),
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child: Opacity(
+            //           //                 opacity: 0.5,
+            //           //                 child: Image.asset(
+            //           //                     "assets/images/black.png"))),
+            //           //         Center(
+            //           //           child: Text("Apostrophe",
+            //           //               style: GoogleFonts.sairaCondensed(
+            //           //                 color: Colors.white,
+            //           //                 fontWeight: FontWeight.w600,
+            //           //                 fontSize: 15,
+            //           //               )),
+            //           //         )
+            //           //       ],
+            //           //     ),
+            //           //   ),
+            //           // ),
+            //           // Padding(
+            //           //   padding: const EdgeInsets.only(left: 8.0),
+            //           //   child: Container(
+            //           //     height: height / 20.2,
+            //           //     width: width / 4.28125,
+            //           //     child: Stack(
+            //           //       children: [
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child:
+            //           //                 Image.asset("assets/images/clubimg.png")),
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child: Opacity(
+            //           //                 opacity: 0.5,
+            //           //                 child: Image.asset(
+            //           //                     "assets/images/black.png"))),
+            //           //         Center(
+            //           //           child: Text("Apostrophe",
+            //           //               style: GoogleFonts.sairaCondensed(
+            //           //                 color: Colors.white,
+            //           //                 fontWeight: FontWeight.w600,
+            //           //                 fontSize: 15,
+            //           //               )),
+            //           //         )
+            //           //       ],
+            //           //     ),
+            //           //   ),
+            //           // ),
+            //           // Padding(
+            //           //   padding: const EdgeInsets.only(left: 8.0),
+            //           //   child: Container(
+            //           //     height: height / 20.2,
+            //           //     width: width / 4.28125,
+            //           //     child: Stack(
+            //           //       children: [
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child:
+            //           //                 Image.asset("assets/images/clubimg.png")),
+            //           //         ClipRRect(
+            //           //             borderRadius: BorderRadius.circular(10),
+            //           //             child: Opacity(
+            //           //                 opacity: 0.5,
+            //           //                 child: Image.asset(
+            //           //                     "assets/images/black.png"))),
+            //           //         Center(
+            //           //           child: Text("Apostrophe",
+            //           //               style: GoogleFonts.sairaCondensed(
+            //           //                 color: Colors.white,
+            //           //                 fontWeight: FontWeight.w600,
+            //           //                 fontSize: 15,
+            //           //               )),
+            //           //         )
+            //           //       ],
+            //           //     ),
+            //           //   ),
+            //           // ),
+            //         ],
+            //       ),
+            //     )),
             // ),
 
             // FractionalTranslation(
@@ -389,7 +487,7 @@ List<String> imageurls=[];
                     'assets/images/geners/Genre-List_05.png'),
                 genresbox(width, height, "Hip-Hop",
                     'assets/images/geners/Genre-List_02.png'),
-                      genresbox(width, height, "Other",
+                genresbox(width, height, "Other",
                     'assets/images/geners/Genre-List_06.png'),
                 //     genresbox(width, height, "Concerts",
                 //     'assets/images/geners/Genre-List_07.png'),
@@ -447,7 +545,7 @@ List<String> imageurls=[];
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade700 .withOpacity(0.4),
+                      color: Colors.grey.shade700.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
@@ -516,9 +614,152 @@ List<String> imageurls=[];
                       Container(
                           height: height / 6,
                           width: width,
-                          decoration:  BoxDecoration(
-                      color: Colors.grey.shade900.withOpacity(0.4),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade900.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: FutureBuilder<List<Event>>(
+                            future:
+                                EventsServices().getAllEvents(context: context),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: SizedBox(
+                                      height: height / 21.675,
+                                      width: width / 10.275,
+                                      child: Constants
+                                          .mycircularProgressIndicator()),
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                final eventsData = snapshot.data!;
+                                var eventdatabydate = [];
+                                if (eventsData.isNotEmpty) {
+                                  for (var i = 0; i < eventsData.length; i++) {
+                                    var date = selectedDate == null
+                                        ? formatDate(DateTime.now())
+                                        : formatDate(selectedDate);
+                                    if (eventsData[i]
+                                            .date
+                                            .toString()
+                                            .substring(0, 10) ==
+                                        date) {
+                                      eventdatabydate.add(eventsData[i]);
+                                    }
+                                  }
+                                }
+                                return ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: eventdatabydate.length,
+                                  itemBuilder: (context, index) {
+                                    final Event event = eventdatabydate[index];
+
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 16),
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          // await ClubServices().getSingleClub(
+                                          //     clubid: event.clubId,
+                                          //     context: context);
+                                          Navigator.of(context).push(
+                                              ScaleTransitionPageRoute(
+                                                  child: EventDetail(
+                                                      event: event)));
+                                        },
+                                        child:
+                                            myeventcard(height, width, event),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade700.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0, top: 8),
+                            child: Text("Future Events",
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                )),
+                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(
+                          //       top: 20, bottom: 20, left: 60, right: 10),
+                          //   child: Container(
+                          //     height: height / 20,
+                          //     width: width / 2.5,
+                          //     decoration: BoxDecoration(
+                          //       color: Colors.black,
+                          //       borderRadius: BorderRadius.circular(15.0),
+                          //       border: Border.all(
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //     child: Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceBetween,
+                          //       children: [
+                          //         Padding(
+                          //           padding: const EdgeInsets.only(
+                          //             left: 20.0,
+                          //           ),
+                          //           child: Text(
+                          //               selectedDate != null
+                          //                   ? formatDate(selectedDate)
+                          //                   : formatDate(DateTime.now()),
+                          //               style: GoogleFonts.sairaCondensed(
+                          //                 fontSize: 16,
+                          //                 fontWeight: FontWeight.w600,
+                          //                 color: Colors.white,
+                          //               )),
+                          //         ),
+                          //         Padding(
+                          //           padding: const EdgeInsets.only(right: 10.0),
+                          //           child: IconButton(
+                          //             onPressed: () {
+                          //               _selectDate(
+                          //                   context); // Show the date picker on icon press
+                          //             },
+                          //             icon: const Icon(
+                          //               Icons.calendar_today_outlined,
+                          //               color: Colors.white,
+                          //               size: 20,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                      Container(
+                          height: height / 6,
+                          width: width,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade900.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(20)),
                           child: FutureBuilder<List<Event>>(
                             future:
                                 EventsServices().getAllEvents(context: context),

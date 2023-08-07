@@ -62,6 +62,8 @@ dependencies:
   story_view: ^0.15.0
   easy_upi_payment: ^0.1.5
   upi_india: ^3.0.1
+  cloudinary: 
+  crypto: ^3.0.3
   # pay: ^1.1.2
 
 

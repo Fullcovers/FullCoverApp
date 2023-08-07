@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:venq_assessment/Services/BTS_Services/Stories_Services.dart';
 import 'package:venq_assessment/Services/BTS_Services/Ticket_Services.dart';
 import 'package:venq_assessment/Services/Event_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Register.dart';
 import 'package:venq_assessment/screens/ClubsDashBoard/Events/EventAddTickets.dart';
+import 'package:venq_assessment/Services/uploadimage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 
@@ -20,6 +23,21 @@ class CreateEvent extends StatefulWidget {
 
 class _CreateEventState extends State<CreateEvent> {
   DateTime? selectedDate;
+  final ImagePicker picker = ImagePicker();
+  String? url;
+  Future getImage(ImageSource media) async {
+    var img = await picker.pickImage(source: media);
+    url = await Upload().uploadimage(img!);
+// ignore: use_build_context_synchronously
+    await StoriesServices.uploadstories(context: context, url: url!);
+    // uploadImage(image!.path);
+    // BTSClubServices.addCarouselImages(
+    //   context: context,
+    //   imageFile: image!,
+    // );
+  }
+
+  addstories() {}
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -116,6 +134,63 @@ class _CreateEventState extends State<CreateEvent> {
                             SizedBox(
                               height: heightofs / 20,
                             ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          title: Text(
+                                              'Please choose media to select'),
+                                          content: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                6,
+                                            child: Column(
+                                              children: [
+                                                ElevatedButton(
+                                                  //if user click this button, user can upload image from gallery
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    getImage(
+                                                        ImageSource.gallery);
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.image),
+                                                      Text('From Gallery'),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: ElevatedButton(
+                                                    //if user click this button. user can upload image from camera
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      getImage(
+                                                          ImageSource.camera);
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons.camera),
+                                                        Text('From Camera'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: Text("Upload Image")),
                             Padding(
                               padding: const EdgeInsets.only(
                                   top: 0, bottom: 20, left: 60, right: 60),

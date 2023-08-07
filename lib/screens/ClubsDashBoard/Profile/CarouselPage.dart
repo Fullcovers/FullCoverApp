@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:venq_assessment/Models/Clubs.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
+import 'package:venq_assessment/Services/uploadimage.dart';
 import 'package:venq_assessment/utils/Constants.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/HeaderContent.dart';
 import 'package:venq_assessment/widgets/ClubDashBoard/Tablecard.dart';
@@ -78,7 +79,8 @@ class _CarouselPageState extends State<CarouselPage> {
     setState(() {
       image = img;
     });
-    uploadImage(image!.path);
+   String? url=await Upload().uploadimage(img!);
+    // uploadImage(image!.path);
     // BTSClubServices.addCarouselImages(
     //   context: context,
     //   imageFile: image!,
