@@ -41,7 +41,8 @@ class EventsServices {
     return eventProvider.events;
   }
 
-  static Future<List<Event>> getmyclubEvents({required BuildContext context}) async {
+  static Future<List<Event>> getmyclubEvents(
+      {required BuildContext context}) async {
     EventProvider eventProvider =
         Provider.of<EventProvider>(context, listen: false);
     try {
@@ -73,17 +74,19 @@ class EventsServices {
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
-          print(eventProvider.events);
+      print(eventProvider.events);
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());
     }
     return eventProvider.events;
   }
-   Future<List<Event>> getclubEvents({required BuildContext context, required String clubid }) async {
+
+  Future<List<Event>> getclubEvents(
+      {required BuildContext context, required String clubid}) async {
     EventProvider eventProvider =
         Provider.of<EventProvider>(context, listen: false);
-    try { 
+    try {
       // http.Response club = await http.get(
       //   Uri.parse('${Constants.uri}club/my-club'),
       //   headers: <String, String>{
@@ -112,14 +115,16 @@ class EventsServices {
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
-          print(eventProvider.events);
+      print(eventProvider.events);
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());
     }
     return eventProvider.events;
   }
-  static Future<List<Event>> getmyrestoEvents({required BuildContext context}) async {
+
+  static Future<List<Event>> getmyrestoEvents(
+      {required BuildContext context}) async {
     EventProvider eventProvider =
         Provider.of<EventProvider>(context, listen: false);
     try {
@@ -151,7 +156,7 @@ class EventsServices {
 
             // showSnackBar(context, 'Events data fetched successfully');
           });
-          print(eventProvider.events);
+      print(eventProvider.events);
     } catch (e) {
       showSnackBar(context, e.toString());
       print(e.toString());
@@ -177,15 +182,15 @@ class CreateEventmethod {
       "date": date.toString(),
       "description": description
     };
-String eventid="";
+    String eventid = "";
     try {
       Dio dio = new Dio();
       var res = await dio.post('${Constants.uri}event/',
           data: body,
           options: Options(
               headers: {'Authorization': 'Bearer ${Constants.usertoken}'}));
-               eventid=res.data['data']['_id'];
-              print(eventid);
+      eventid = res.data['data']['_id'];
+      print(eventid);
 
       showSnackBar(context, "Created");
     } catch (e) {
@@ -194,5 +199,6 @@ String eventid="";
     }
     return eventid;
   }
+
   
 }

@@ -13,7 +13,7 @@ class Constants {
   static late UserData btsprofile;
   static late ClubModel? myclub;
   static late List<ClubModel> allclubs;  static late ClubModel? myrestobar;
-
+static late Map<String, List<String>> allclubstories={};
     static late List<ClubModel> allrestobar;
 
   static String backgroundimage = "assets/images/background2.png";

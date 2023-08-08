@@ -8,6 +8,7 @@ import 'package:venq_assessment/Providers/UserProvider.dart';
 import 'package:venq_assessment/Services/BTS_Services/Club_Services.dart';
 import 'package:venq_assessment/Services/Club_Services.dart';
 import 'package:venq_assessment/Services/RestoBar_Services.dart';
+import 'package:venq_assessment/Services/Stories_Services.dart';
 import 'package:venq_assessment/Services/User_Services.dart';
 import 'package:venq_assessment/Styles/Colors.dart';
 import 'package:venq_assessment/screens/Auth/Login.dart';
@@ -32,7 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    load();getclubs();
+    load();
+    getclubs();
 
     _controller = VideoPlayerController.asset("assets/LogointroApp.mp4")
       ..initialize().then((_) {
@@ -42,15 +44,27 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       });
   }
+
   getclubs() async {
-   Constants.allclubs  = await ClubServices.getAllClubs(context: context);
-      Constants.allrestobar  = await RestobarServices.getAllRestobar(context: context);
-     widget.user?null: UserServices.getprofileinfo();
+    Constants.allrestobar =
+        await RestobarServices.getAllRestobar(context: context);
+
+    // ignore: use_build_context_synchronously
+    Constants.allclubs = await ClubServices.getAllClubs(context: context);
+    // Constants.allclubstories =
+    //     // ignore: use_build_context_synchronously
+    //     await StoriesServicesUser.getstories(context: context);
+    // print(Constants.allclubstories);
+    Constants.allclubstories =
+        await StoriesServicesUser.getstories(context: context);
+
+    widget.user ? null : UserServices.getprofileinfo();
 
     // setState(() {
     //   lodedclub = true;
     // });
   }
+
   load() async {
     // print("Constants.btsprofile.role");print(Constants.btsprofile.role);
     if (!widget.user) {
@@ -59,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     }
 
-    await Future.delayed(Duration(milliseconds: 7100), () {
+    await Future.delayed(Duration(milliseconds: 9000), () {
       widget.user
           ? Navigator.push(context,
               MaterialPageRoute(builder: (context) => const LoginPage()))
