@@ -54,7 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // Constants.allclubstories =
     //     // ignore: use_build_context_synchronously
     //     await StoriesServicesUser.getstories(context: context);
-        // print(Constants.allclubstories);
+    // print(Constants.allclubstories);
+    Constants.allclubstories =
+        await StoriesServicesUser.getstories(context: context);
 
     widget.user ? null : UserServices.getprofileinfo();
 

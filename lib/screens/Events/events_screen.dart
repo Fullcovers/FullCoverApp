@@ -67,14 +67,24 @@ class _EventsScreenState extends State<EventsScreen> {
     }
   }
 
+  Map<String, List<String>> allclubstories = {};
   bool islodedstories = false;
   loadstories() async {
-    await StoriesServicesUser.getstories(context: context);
+    allclubstories = Constants.allclubstories;
+    print("allclubstories");
+    print(allclubstories);
     setState(() {
       islodedstories = true;
     });
   }
+ loadstoriesagain() async {
+    allclubstories = await StoriesServicesUser.getstories(context: context);
 
+    print("allclubstories");
+    print(allclubstories);
+    setState(() {
+    });
+  }
   @override
   void initState() {
     loadstories();
@@ -86,6 +96,7 @@ class _EventsScreenState extends State<EventsScreen> {
   @override
   Widget build(BuildContext context) {
     // print(Constants.allclubstories);
+    print(islodedstories);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double rh = height -
@@ -118,29 +129,23 @@ class _EventsScreenState extends State<EventsScreen> {
                     width: width,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: Constants.allclubstories.length,
+                      itemCount: allclubstories.length,
                       itemBuilder: (BuildContext context, int index) {
                         final storyController = StoryController();
 
-                        var allclubs = Constants.allclubstories.keys.toList();
-                        // print(Constants.allclubstories[allclubs[index]]['data']);
+                        var allclubslogo = allclubstories.keys.toList();
                         List<StoryItem> clubstories = [];
                         for (var i = 0;
-                            i <
-                                Constants
-                                    .allclubstories[allclubs[index]]['data']
-                                    .length;
+                            i < allclubstories[allclubslogo[index]]!.length;
                             i++) {
                           clubstories.add(
                             StoryItem.pageImage(
-                              url: Constants.allclubstories[allclubs[index]]
-                                  ['data'][i]['imageUrl'],
+                              url: allclubstories[allclubslogo[index]]![i],
                               caption: "Still sampling",
                               controller: storyController,
                             ),
                           );
                         }
-                        print(clubstories.length);
                         return Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Container(
@@ -166,7 +171,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                     child: CircleAvatar(
                                         radius: 35,
                                         backgroundImage:
-                                            NetworkImage(allclubs[index].logo)),
+                                            NetworkImage(allclubslogo[index])),
                                   ),
                                 ),
                                 // CircleAvatar(radius: 100,
